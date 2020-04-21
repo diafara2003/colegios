@@ -1,0 +1,79 @@
+﻿
+using BaseDatos.Modelos;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Trasversales.Modelo;
+
+namespace BaseDatos.Contexto
+{
+    public class ColegioContext : DbContext
+    {
+        public ColegioContext() : base("name=colegioapp")
+        {
+            Database.SetInitializer<ColegioContext>(new SchoolDBInitializer());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
+
+        public DataTable ExecuteStoreQuery(ProcedureDTO data)
+        {
+
+            var table = new DataTable();
+            using (var ctx = base.Database.Connection)
+            {
+                var cmd = ctx.CreateCommand();
+                cmd.CommandText = data.commandText;
+
+
+                foreach (var item in data.parametros)
+                {
+                    DbParameter _param = cmd.CreateParameter();
+                    _param.ParameterName = "@" + item.Key;
+                    _param.Value = item.Value;
+
+                    cmd.Parameters.Add(_param);
+                }
+
+                cmd.Connection.Open();
+                table.Load(cmd.ExecuteReader());
+            }
+
+            return table;
+        }
+
+
+        public DbSet<Usuarios> usuarios { get; set; }
+        public DbSet<Seccion> seccion { get; set; }
+        public DbSet<Opcion> opcion { get; set; }
+        public DbSet<AreasMaterias> areas_materias { get; set; }
+        public DbSet<BandejaEntrada> bandeja_entrada { get; set; }
+        public DbSet<Clases> clases { get; set; }
+        public DbSet<ClasesEstudiantes> clase_estudiantes { get; set; }
+        public DbSet<CursoEstudiantes> curso_estudiantes { get; set; }
+        public DbSet<Cursos> cursos { get; set; }
+        public DbSet<Empresas> empresas { get; set; }
+        public DbSet<Grados> grados { get; set; }
+        public DbSet<GruposEnvio> grupo_envio { get; set; }
+        public DbSet<GruposEnvioDet> grupo_envio_det { get; set; }
+        public DbSet<Materias> materias { get; set; }
+        public DbSet<Mensajes> mensajes { get; set; }
+        public DbSet<Salones> salones { get; set; }
+        public DbSet<Temporada> temporada { get; set; }
+        public DbSet<UsuarioPerfil> usuario_perfi { get; set; }        
+        public DbSet<Personas> personas { get; set; }
+        public DbSet<Estudiantes> estudiantes { get; set; }
+        public DbSet<Profesores> prefesores { get; set; }
+
+
+    }
+}

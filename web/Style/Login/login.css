@@ -1,0 +1,25 @@
+.form-login {
+    margin-top: 20%;
+    height: 420px;
+    border: 1px solid #ebebeb;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+.avatar {
+    width: 40%;
+    border-radius: 50%;
+    border: 1px solid #ebebeb;
+}
+
+/* SM */
+@media (min-width: 506px) {
+    .form-login {
+        height: 440px;
+        margin-top: 10%;
+    }
+}

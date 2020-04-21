@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link href="../../Style/bootstrap.css" rel="stylesheet">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        a {
+            color: white;
+        }
+
+        .navbar-toggler {
+            border: 1px solid white;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        .nav-item {
+            /*border-bottom: 1px solid #343a40;*/
+        }
+
+            .nav-item:hover {
+                border-bottom: 1px solid white;
+            }
+
+        .imgcontainer {
+            border: 1px solid #6c757d;
+            width: 46px;
+            height: 46px;
+            cursor: pointer;
+            padding-left: 9px;
+            padding-bottom: 5px;
+            border-radius: 50%;
+        }
+
+            .imgcontainer:hover {
+                border: 1px solid #666666;
+            }
+
+                .imgcontainer:hover .fa-user {
+                    color: #666666;
+                }
+
+        .logo-colegio {
+            width: 120px;
+            height: 51px;
+        }
+
+        .avatar {
+        }
+
+        .menu {
+            width: 250px;
+            height: 500px;
+            border: 1px solid #ebebeb;
+            position: absolute;
+            z-index: 9;
+            display: none;
+            background-color: white;
+        }
+
+
+        .opcion {
+            cursor: pointer;
+        }
+
+            .opcion:hover {
+                box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+            }
+
+        .menu-opcion-active {
+            opacity: 0.5;
+            /*background-color: #D8D8D8 !important;*/
+        }
+
+
+        .element-animation-show {
+            animation: animationFramesshow ease 1s;
+            animation-iteration-count: 1;
+            transform-origin: 50% 50%;
+            /* transform: translate(-100px, 0px); */
+        }
+
+        .element-animation-hide {
+            animation: animationFrameshide ease 1s;
+            animation-iteration-count: 1;
+            transform-origin: 50% 50%;
+            /* transform: translate(-100px, 0px); */
+        }
+
+        .fa-user, .fa-bars {
+            color: #666666;
+            font-size: 27px;
+            cursor: pointer;
+            padding-top: 5px;
+        }
+
+        .imgcontainer .fa-user {
+            font-size: 29px;
+        }
+
+        .fixed-top {
+            padding: 0 5px 0 5px;
+        }
+
+
+        @keyframes animationFrameshide {
+            0% {
+                opacity: 1;
+                transform: translate(0px, 0px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-1000px, 0px);
+            }
+        }
+
+        @keyframes animationFramesshow {
+            0% {
+                opacity: 0;
+                transform: translate(-1000px, 0px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(0px, 0px);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+
+            <a class="navbar-brand" href="#"><img class="logo-colegio" src="../../Img/colegio.png" /></a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-5" id="opciones_menu"></ul>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse imgcontainer">
+                    <span class="far fa-user "></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <div class="mr-2">
+                    <button class="navbar-toggler" style="width:56px;" type="button">
+                        <i class="far fa-user" style="padding-left:0"></i>
+                    </button>
+                </div>
+                <div>
+                    <button class="navbar-toggler" style="width:56px;" type="button" onclick="menu()">
+                        <i style="color:white" class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div>
+        <section>
+            <div class="menu shadow-lg p-3" id="menu_movil">
+            </div>
+        </section>
+
+        <section>
+            <div class="opcion-frame">
+                <div class="p-1" style="margin-top:60px">
+
+                    <iframe id="framrePage" width="100%" title="Inline Frame Example" allowfullscreen="true" frameborder="0"
+                            src="../Comunicados/BandejaEntrada.html"></iframe>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+    <script src="../../Script/librerias/jquery-3.4.1.slim.min.js"></script>
+    <script src="../../Script/librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/Login/menu.js"></script>
+</body>
+
+</html>
