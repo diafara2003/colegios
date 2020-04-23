@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />    
+
+    <style>
+        i {
+        cursor:pointer;
+        }
+
+        .fondo-gris {
+            background-color: #ebebeb;
+        }
+
+
+
+        .icon-tab {
+            font-size: 17px;
+            color: #666;
+        }
+
+        .autocomplete {
+            position: relative;
+            box-sizing: border-box;
+        }
+
+            .autocomplete i {
+                position: absolute;
+                z-index: 2;
+                right: 10px;
+                color: #343a40;
+                font-size: 21px;
+                top: 10px;
+            }
+    </style>
+
+</head>
+<body class="fondo-gris">
+
+    <div class="container-fluid mt-2 ">
+
+        <div class="row">
+
+
+            <div class="col-lg-7 col-md-7 col-sm-11 bg-white rounded m-3">
+
+                <div class="row">
+
+                    <div class="col-12 mt-4">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4>
+                                    <i class="fas fa-cog"></i>
+                                    Configuración
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <i class="fas fa-bars"></i>
+                                </h4>
+                            </div>
+                        </div>
+                        
+                        <hr />
+                    </div>
+
+                    <div class="col-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Temporada" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap"></i>Temporada</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Salones" role="tab" aria-controls="profile" aria-selected="false">Salones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Grados" role="tab" aria-controls="contact" aria-selected="false">Grados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Cursos" role="tab" aria-controls="contact" aria-selected="false">Cursos</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-3" id="myTabContent">
+                            <div class="tab-pane fade show active" id="Temporada" role="tabpanel" aria-labelledby="Temporada-tab">
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Año escolar</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Año escolar 2020">
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="Salones" role="tabpanel" aria-labelledby="Salones-tab">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Código del salon</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Código del salón">
+                                            <small id="emailHelp" class="form-text text-muted">
+                                                Campo opcional
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Nombre</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nombre del salón">
+                                            <small id="emailHelp" class="form-text text-muted text-danger">
+                                                *Campo obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="form-group p-3 sleep-email text-right">
+                                        <button type="button" class="btn btn-block btn-outline-dark">
+                                            Guardar
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="Grados" role="tabpanel" aria-labelledby="Grados-tab">
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Código del grado</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Código del grado">
+                                            <small id="emailHelp" class="form-text text-muted">
+                                                Campo opcional
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Nombre</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nombre del grado">
+                                            <small id="emailHelp" class="form-text text-muted text-danger">
+                                                *Campo obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="form-group p-3 sleep-email text-right">
+                                        <button type="button" class="btn btn-block btn-outline-dark">
+                                            Guardar
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="Cursos" role="tabpanel" aria-labelledby="Cursos-tab">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+                                        <label><i class="fas fa-graduation-cap"></i>Temporada:</label>
+                                        <span>2020</span>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Código del curso</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Código del curso">
+                                            <small id="emailHelp" class="form-text text-muted">
+                                                Campo opcional
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Nombre</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nombre del curso">
+                                            <small id="emailHelp" class="form-text text-muted text-danger">
+                                                *Campo obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Tutor a cargo</label>
+                                            <div class="autocomplete">
+                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="buscar tutor a cargo del curso">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+
+                                            <small id="emailHelp" class="form-text text-muted text-danger">
+                                                *Campo obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="form-group p-3 sleep-email text-right">
+                                        <button type="button" class="btn btn-block btn-outline-dark">
+                                            Guardar
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="../../Script/librerias/jquery-3.4.1.slim.min.js"></script>
+    <script src="../../Script/librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+
+</body>
+</html>

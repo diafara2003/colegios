@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        i {
+            cursor: pointer;
+        }
+
+        [contenteditable=true] {
+            outline: none;
+        }
+
+            [contenteditable=true]:focus, [contenteditable=true]:active {
+                border-bottom: 1px solid #369;
+            }
+
+        .table th, .table td {
+            padding: 5px;
+        }
+
+        .btn-icono {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            border-width: 0;
+            outline: none;
+        }
+
+            .btn-icono:hover {
+                background-color: black;
+            }
+
+                .btn-icono:hover i {
+                    color: buttonface;
+                }
+
+            .btn-icono i {
+                font-size: 13px;
+            }
+
+
+        .icon-tab {
+            font-size: 17px;
+            color: #666;
+        }
+
+        .autocomplete {
+            position: relative;
+            box-sizing: border-box;
+        }
+
+            .autocomplete i {
+                position: absolute;
+                z-index: 2;
+                right: 10px;
+                color: #343a40;
+                font-size: 20px;
+                top: 6px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid mt-2 ">
+
+        <div class="row">
+
+
+            <div class="col-xl-10 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
+
+                <div class="row">
+
+
+                    <div class="col-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Temporada" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap"></i>Temporada</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Salones" role="tab" aria-controls="profile" aria-selected="false">Salones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Grados" role="tab" aria-controls="contact" aria-selected="false">Grados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Cursos" role="tab" aria-controls="contact" aria-selected="false">Cursos</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="Temporada" role="tabpanel" aria-labelledby="Temporada-tab">
+                                <div class="row d-flex">
+                                    <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
+                                        <table class="table table-hover mt-4">
+
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Temporada</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col" class="text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"><div contenteditable="true">2019</div></th>
+                                                    <td>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                                            <label class="custom-control-label" for="customSwitch1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                        <!--<button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>-->
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><div contenteditable="true">2020</div></th>
+                                                    <td>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input" checked id="customSwitch2">
+                                                            <label class="custom-control-label" for="customSwitch1"></label>
+
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                        <!--<button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>-->
+
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                            <tbody class="bg-light">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nueva temporada escolar">
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
+                                        <span>Filtro de búsqueda</span>
+                                        <div class="autocomplete input-group-sm">
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar por temporada">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="tab-pane fade show" id="Salones" role="tabpanel" aria-labelledby="Salones-tab">
+
+                                <div class="row d-flex">
+                                    <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
+                                        <table class="table table-hover mt-4">
+
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Código</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col" class="text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"><div contenteditable="true">Sal-K</div></th>
+                                                    <td><div contenteditable="true">Salon kinder</div></td>
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                        <!--<button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>-->
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><div contenteditable="true">Sal-3</div></th>
+                                                    <td><div contenteditable="true">Salon de tercero</div></td>
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                        <!--<button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>-->
+
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                            <tbody class="bg-light">
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Código">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
+                                        <span>Filtro de búsqueda</span>
+                                        <div class="autocomplete input-group-sm">
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar por código o nombre">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade show" id="Grados" role="tabpanel" aria-labelledby="Grados-tab">
+                                <table class="table table-hover mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Código</th>
+                                            <th scope="col">nombre</th>
+                                            <th scope="col" class="text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">12</th>
+                                            <td>Pre Kinder</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">13</th>
+                                            <td>Kinder</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">14</th>
+                                            <td>Transicion</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Primero</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Segundo</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Tercero</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade show" id="Cursos" role="tabpanel" aria-labelledby="Cursos-tab">
+                                <table class="table table-hover mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Código</th>
+                                            <th scope="col">nombre</th>
+                                            <th scope="col" class="text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">PRE-KD</th>
+                                            <td>Pre Kinder</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">KND</th>
+                                            <td>Kinder</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">TR-A</th>
+                                            <td>Transicion A</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">TR-B</th>
+                                            <td>Transicion B</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Segundo</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Tercero</td>
+                                            <td class="text-center">
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-pen"></i></button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../../Script/librerias/jquery-3.4.1.slim.min.js"></script>
+    <script src="../../Script/librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script>
+    
+
+        $('[contenteditable="true"]').click(function () {
+            selectText(this);
+        });
+
+    </script>
+</body>
+</html>
