@@ -54,9 +54,9 @@
   <ItemGroup>
     <Compile Include="Contexto\ColegioContext.cs" />
     <Compile Include="Contexto\SchoolDBInitializer.cs" />
-    <Compile Include="Migrations\202004162328419_initial.cs" />
-    <Compile Include="Migrations\202004162328419_initial.designer.cs">
-      <DependentUpon>202004162328419_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202004232326052_initial.cs" />
+    <Compile Include="Migrations\202004232326052_initial.designer.cs">
+      <DependentUpon>202004232326052_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
@@ -73,8 +73,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004162328419_initial.resx">
-      <DependentUpon>202004162328419_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004232326052_initial.resx">
+      <DependentUpon>202004232326052_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

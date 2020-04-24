@@ -48,17 +48,21 @@
     <Compile Include="Modelo\CursoEstudiantes.cs" />
     <Compile Include="Modelo\Cursos.cs" />
     <Compile Include="Modelo\Empresas.cs" />
+    <Compile Include="Modelo\Estudiantes.cs" />
     <Compile Include="Modelo\Grados.cs" />
     <Compile Include="Modelo\GruposEnvio.cs" />
     <Compile Include="Modelo\GruposEnvioDet.cs" />
     <Compile Include="Modelo\Materias.cs" />
     <Compile Include="Modelo\Mensajes.cs" />
     <Compile Include="Modelo\Opcion.cs" />
+    <Compile Include="Modelo\Personas.cs" />
+    <Compile Include="Modelo\Profesores.cs" />
+    <Compile Include="Modelo\ResponseDTO.cs" />
     <Compile Include="Modelo\Salones.cs" />
     <Compile Include="Modelo\Seccion.cs" />
     <Compile Include="Modelo\Temporada.cs" />
-    <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Modelo\UsuarioPerfil.cs" />
+    <Compile Include="Modelo\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
