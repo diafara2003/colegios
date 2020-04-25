@@ -148,7 +148,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
                                         <span>Filtro de búsqueda</span>
                                         <div class="autocomplete input-group-sm">
-                                            <input type="text" class="form-control" id="buscartemporada" placeholder="Buscar por temporada">
+                                            <input type="text" class="form-control" id="buscartemporada" placeholder="Buscar por temporada" onkeyup="buscar_temporada(this)">
                                             <i class="fas fa-search"></i>
                                         </div>
                                     </div>
@@ -194,7 +194,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
                                         <span>Filtro de búsqueda</span>
                                         <div class="autocomplete input-group-sm">
-                                            <input type="text" class="form-control" id="buscargrado" placeholder="Buscar por código o descripcion">
+                                            <input type="text" class="form-control" id="buscargrado" placeholder="Buscar por código o descripcion" onkeyup="buscar_grados(this)">
                                             <i class="fas fa-search"></i>
                                         </div>
                                     </div>
@@ -249,7 +249,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
                                         <span>Filtro de búsqueda</span>
                                         <div class="autocomplete input-group-sm">
-                                            <input type="text" class="form-control" id="buscarcurso" placeholder="Buscar por codigo o descripción">
+                                            <input type="text" class="form-control" id="buscarcurso" placeholder="Buscar cualquier palabra" onkeyup="buscar_cursos(this)">
                                             <i class="fas fa-search"></i>
                                         </div>
                                     </div>
@@ -291,15 +291,12 @@
                                         </table>
                                     </div>
 
+
                                     <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
-                                        <label>Filtro de búsqueda</label>
-
-                                    </div>
-                                    <div class="input-group input-group-sm mb-3">
-
-                                        <input type="text" placeholder="Buscar por código o nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                        <div class="input-group-prepend text-light">
-                                            <span class="input-group-text  bg-white text-dark" id="inputGroup-sizing-sm"> <i class="fas fa-search"></i></span>
+                                        <span>Filtro de búsqueda</span>
+                                        <div class="autocomplete input-group-sm">
+                                            <input type="text" class="form-control" id="buscarsalones" placeholder="Buscar por codigo o descripción" onkeyup="buscar_salones(this)">
+                                            <i class="fas fa-search"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -319,7 +316,7 @@
     <script src="../../Script/librerias/jquery-3.4.1.slim.min.js"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
-    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>    
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Formularios/Temporada.js"></script>
     <script src="../../Script/Formularios/Grados.js"></script>
@@ -360,7 +357,7 @@
                 match: {
                     enabled: true
                 },
-                
+
             }
         };
         //http://easyautocomplete.com/guide#sec-template-links

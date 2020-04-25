@@ -1,7 +1,7 @@
 ﻿
 
 var _data_termporada = [];
-
+//window.parent.mostrar_mensajes('','<label><i class="fas fa-circle-notch fa-spin"></i> Cargando...</label>');
 function eventos_temporada() {
     $('[contenteditable="true"]').off('click');
     $('[contenteditable="true"]').click(function () {
@@ -49,7 +49,7 @@ function modificar_temporada(id) {
 function agregar_temporada() {
     let nueva_data = obtener_datos(-1);
 
-    if (nueva_data.TempAno!='') {
+    if (nueva_data.TempAno != '') {
         consultarAPI('Temporada', 'POST', function (response) {
             _data_termporada.push(response);
             let nuevo_tr = renderizar_tr_temporada(response);
@@ -61,7 +61,7 @@ function agregar_temporada() {
 
         }, nueva_data);
     }
-  
+
 }
 function eliminar_temporada(_this, _posicion) {
     let data_changed = obtener_datos(-1)
@@ -93,5 +93,16 @@ function limpiar_registro_temporada(posicion) {
     document.getElementById('TempAno_' + posicion).value = "";
 
 }
+function buscar_temporada(_this) {
+    let _text = _this.value;
+    let filtered = [];
 
+    if (_text == '') {
+        filtered = _data_termporada;
+    }
+    else {
+        filtered = _data_termporada.filter(x => x.TempAno.toString().toLowerCase().indexOf(_text) > -1);
+    }
+    renderizar_temporada(filtered);
+}
 consultar_temporadas();

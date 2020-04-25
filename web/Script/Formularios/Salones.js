@@ -25,9 +25,9 @@ function renderizar_salones(source) {
 }
 function renderizar_tr_salones(_item) {
     let _tr = '';
-    _tr += '<tr>';    
+    _tr += '<tr>';
     _tr += '<th scope="row"><div id="SalCodigo_' + _item.SalId + '" contenteditable="true" onblur="modificar_salones(' + _item.SalId + ')">' + _item.SalCodigo + '</th>';
-    _tr += '<td scope="row"><div id="SalDescripcion_' + _item.SalId + '" contenteditable="true" onblur="modificar_salones(' + _item.SalId + ')">' + _item.SalDescripcion + '</td>';    
+    _tr += '<td scope="row"><div id="SalDescripcion_' + _item.SalId + '" contenteditable="true" onblur="modificar_salones(' + _item.SalId + ')">' + _item.SalDescripcion + '</td>';
     _tr += '<td class="text-center"><button onclick="eliminar_salones(this,' + _item.SalId + ')" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>';
     _tr += '</tr>';
 
@@ -91,8 +91,22 @@ function obtener_datos_salon(posicion) {
 }
 function limpiar_registro_salones(posicion) {
     document.getElementById('SalCodigo_' + posicion).value = "";
-    document.getElementById('SalDescripcion_' + posicion).value = "";    
+    document.getElementById('SalDescripcion_' + posicion).value = "";
 
 }
+function buscar_salones(_this) {
+    let _text = _this.value;
+    let filtered = [];
 
+    if (_text == '') {
+        filtered = _data_salones;
+    }
+    else {
+        filtered = _data_salones.filter(
+            x => x.SalCodigo.toString().toLowerCase().indexOf(_text) > -1
+                || x.SalDescripcion.toString().toLowerCase().indexOf(_text) > -1
+        );
+    }
+    renderizar_salones(filtered);
+}
 consultar_salones();

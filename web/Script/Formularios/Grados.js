@@ -94,5 +94,16 @@ function limpiar_registro_grados(posicion) {
     document.getElementById('GraDescripcion_' + posicion).value = "";
 
 }
+function buscar_grados(_this) {
+    let _text = _this.value;
+    let filtered = [];
 
+    if (_text == '') {
+        filtered = _data_grados;
+    }
+    else {
+        filtered = _data_grados.filter(x => x.GraCodigo.toString().toLowerCase().indexOf(_text) > -1 || x.GraDescripcion.toString().toLowerCase().indexOf(_text) > -1);
+    }
+    renderizar_grados(filtered);
+}
 consultar_grados();

@@ -119,9 +119,23 @@ function renderizar_ddl_temporada() {
             $('#CurTemporada_-1').append('<option value="' + t.TempId + '">' + t.TempAno + '</option>');
         })
 }
+function buscar_cursos(_this) {
+    let _text = _this.value;
+    let filtered = [];
 
-consultar_cursos();
-
+    if (_text == '') {
+        filtered = _data_cursos;
+    }
+    else {
+        filtered = _data_cursos.filter(x =>
+            x.NombreTemporada.toString().toLowerCase().indexOf(_text) > -1
+            || x.CurCodigo.toString().toLowerCase().indexOf(_text) > -1
+            || x.CurDescripcion.toString().toLowerCase().indexOf(_text) > -1
+        );
+    }
+    renderizar_cursos(filtered);
+}
 function ver_cursos() {
     renderizar_ddl_temporada();
 }
+consultar_cursos();

@@ -1,7 +1,28 @@
 ﻿/// <reference path="../Librerias/plugin-colegios.js" />
 /// <reference path="../Librerias/jquery-3.4.1.slim.min.js" />
 
-
+function mostrar_mensajes(titulo, mensaje, icono = '',
+    showConfirmButton = false,
+    showCloseButton = false,
+    showCancelButton = false,
+    confirmButtonText = '', confirmButtonAriaLabel='',
+    cancelButtonText = '', cancelButtonAriaLabel = '') {
+    Swal.fire({
+        title: titulo,
+        icon: icono,
+        html: mensaje,
+        showConfirmButton: showConfirmButton,
+        showCloseButton: showCloseButton,
+        showCancelButton: showCancelButton,
+        focusConfirm: false,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: confirmButtonText,
+        confirmButtonAriaLabel: confirmButtonAriaLabel,
+        cancelButtonText: cancelButtonText,
+        cancelButtonAriaLabel: cancelButtonAriaLabel
+    })
+}
 function cargar_opciones() {
     consultarAPI('menu', 'GET', response => {
         renderizar_menu(response)
@@ -9,11 +30,11 @@ function cargar_opciones() {
 }
 function renderizar_menu(response) {
 
-    let _html = '',_html_movil='';
+    let _html = '', _html_movil = '';
 
     for (var i = 0; i < response.length; i++) {
         const element = response[i];
-       
+
         if (element.opcion.length) {
             _html += '<li class="nav-item dropdown">';
             let id = "navbarDropdownMenu_" + element.SeccionId;
@@ -38,9 +59,9 @@ function renderizar_opcion(_source, id) {
     let _opcion = '';
     for (var i = 0; i < _source.length; i++) {
         const _element = _source[i];
-      
+
         _opcion += ' <a class="dropdown-item bg-dark text-white" href="#">' + _element.OpDescripcion + '</a>';
-      
+
     }
 
     return _opcion;
@@ -65,7 +86,7 @@ function menu() {
         setTimeout(function () {
             $('.opcion-frame').removeClass('menu-opcion-active');
             $('.menu').css('display', 'none');
-        },800)
+        }, 800)
     } else {
         $('.opcion-frame').addClass('menu-opcion-active');
         $('.menu').css('display', 'block');
