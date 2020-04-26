@@ -28,6 +28,27 @@ namespace BaseDatos.Contexto
 
             context.seccion.AddRange(defaultStandards);
 
+            IList<UsuarioPerfil> defaultStandardsPerfil = new List<UsuarioPerfil>();
+
+            defaultStandardsPerfil.Add(new UsuarioPerfil()
+            {
+                UsuPerDescripcion= "Profesores"
+            });
+            defaultStandardsPerfil.Add(new UsuarioPerfil()
+            {
+                UsuPerDescripcion = "Estudiantes"
+            });
+            defaultStandardsPerfil.Add(new UsuarioPerfil()
+            {
+                UsuPerDescripcion = "Acudiente"
+            });
+            defaultStandardsPerfil.Add(new UsuarioPerfil()
+            {
+                UsuPerDescripcion = "Tutor"
+            });
+
+            context.usuario_perfi.AddRange(defaultStandardsPerfil);
+
             base.Seed(context);
         }
     }

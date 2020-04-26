@@ -27,5 +27,13 @@ namespace Trasversales.Modelo
         public string PerRH { get; set; }
         [MaxLength(50)]
         public string PerEPS { get; set; }
+
+        [MaxLength(50)]
+        public string PerUsuario { get; set; }
+        [MaxLength(50)]
+        public string PerClave { get; set; }        
+        public bool PerEstado { get; set; }        
+        public int PerTipoPerfil { get; set; }
+
     }
 }

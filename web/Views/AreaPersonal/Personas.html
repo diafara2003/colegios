@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        body, input, select {
+            font-size: 13px !important;
+        }
+
+        .custom-control-label {
+            padding-top: 3px;
+        }
+
+        .estudiante, .profesor {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-sm mt-2 ">
+
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header p-1">
+                        Información personal
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Nombres</label>
+                                    <input type="text" class="form-control " id="PerNombres" placeholder="Nombres">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerApellidos">Apellidos</label>
+                                    <input type="text" class="form-control " id="PerApellidos" placeholder="Apellidos">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerEPS">EPS</label>
+                                    <input type="text" class="form-control " id="PerEPS" placeholder="EPS">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Tipo de documento</label>
+                                    <select type="text" class="form-control " id="PerTipoDoc" placeholder="Tipo de documento">
+                                        <option value="-1">Seleccione</option>
+                                        <option value="RC">Registro civil</option>
+                                        <option value="TI">Tarjeta de identidad</option>
+                                        <option value="CC">Cedula de ciudadania</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerDocumento">Documento</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="PerDocumento" placeholder="Documento">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerEmail">Correo electronico</label>
+                                    <input type="text" class="form-control " id="PerEmail" placeholder="Correo electronico">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Genero</label>
+                                    <div class="d-flex">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" value="M" id="customRadio1" name="customGenero" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Hombre</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-4">
+                                            <input type="radio" value="F" id="customRadio2" name="customGenero" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Mujer</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerTelefono">Telefono / Celular</label>
+                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="PerTelefono" placeholder="Telefono / celular">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerRH">Tipo de sangre</label>
+                                    <input type="text" class="form-control " id="PerRH" placeholder="Tipo de sangre">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+
+                                    <div class="form-group input-group-sm">
+                                        <label for="PerNombres">Fecha de nacimiento</label>
+                                        <input type="text" onkeypress="return only_number(event)" class="form-control " id="PerDocumento" placeholder="Fecha de nacimiento">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerDocumento">Lugar de nacimiento</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="PerDocumento" placeholder="Lugar de nacimiento">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerEmail">Direccion</label>
+                                    <input type="text" class="form-control " id="PerEmail" placeholder="Direccion">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2 estudiante">
+                <div class="card">
+                    <div class="card-header p-1">
+                        Información Academica
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Grado</label>
+                                    <input type="text" disabled readonly="readonly" class="form-control " id="PerNombres" placeholder="Tercero">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Curso</label>
+                                    <input type="text" disabled readonly="readonly" class="form-control " id="PerNombres" placeholder="3-B">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2 estudiante">
+                <div class="card">
+                    <div class="card-header p-1 ">
+                        Datos de acudientes
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstNombresMama">Nombres de la mama</label>
+                                    <input type="text" class="form-control " id="EstNombresMama" placeholder="Nombres de la mama">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstApellidosMama">Apellidos de la mama</label>
+                                    <input type="text" class="form-control " id="EstApellidosMama" placeholder="Apellidos de la mama">
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstTelefonoMama">Telefono / Celular de la mama</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstTelefonoMama" placeholder="Telefono / Celular de la mama">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstNombresPapa">Nombres del papa</label>
+                                    <input type="text" class="form-control " id="EstNombresPapa" placeholder="Nombres del papa">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstApellidosPapa">Apellidos del papa</label>
+                                    <input type="text" class="form-control " id="EstApellidosPapa" placeholder="Apellidos del papa">
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstTelefonoPapa">Telefono / Celular del papa</label>
+                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="EstTelefonoPapa" placeholder="Telefono / Celular de la mama">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2 profesor">
+                <div class="card">
+                    <div class="card-header p-1">
+                        Información Laboral
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Profesión</label>
+                                    <input type="text" disabled readonly="readonly" class="form-control " id="ProfProfesion" placeholder="Profesión">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="PerNombres">Area de especialidad</label>
+                                    <input type="text" disabled readonly="readonly" class="form-control " id="PerNombres" placeholder="Area de especialidad">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
+                <div class="row d-flex justify-content-end">
+                    <div class="form-group p-3 sleep-email text-right">
+                        <button type="button" class="btn btn-block btn-outline-dark" onclick="guardar_cambios()">
+                            Guardar cambios
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/AreaPersonal/Personas.js"></script>
+</body>
+</html>

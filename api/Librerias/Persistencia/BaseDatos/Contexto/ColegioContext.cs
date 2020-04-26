@@ -16,7 +16,8 @@ namespace BaseDatos.Contexto
     {
         public ColegioContext() : base("name=colegioapp")
         {
-            Database.SetInitializer<ColegioContext>(new SchoolDBInitializer());
+            Database.SetInitializer<ColegioContext>(null);
+            //Database.SetInitializer<ColegioContext>(new SchoolDBInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

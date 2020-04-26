@@ -16,10 +16,12 @@ namespace Trasversales.Modelo
         [MaxLength(20)]
         public string MatCodigo { get; set; }
         public int MatEmpId { get; set; }
+        public int MatTemporadaId { get; set; }
         public int MatGradoId { get; set; }
         public int MatAreaId { get; set; }
         [MaxLength(50)]
         public string MatDescripcion { get; set; }
-        public byte MatEstado { get; set; }
+        public Int16 MatEstado { get; set; }
+        public bool MatExtracurricural { get; set; }
     }
 }

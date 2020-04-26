@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\SalonesController.cs" />
     <Compile Include="Controllers\TemporadaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -195,6 +196,10 @@
     <ProjectReference Include="..\..\..\Librerias\Menu\Menu\Menu.csproj">
       <Project>{5e3259f7-7cdf-4f27-99e1-e2e07c9551be}</Project>
       <Name>Menu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Librerias\Personas\Personas\Persona.csproj">
+      <Project>{7f3e5430-df58-4e96-9f8a-f071a59d1af3}</Project>
+      <Name>Persona</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Librerias\Salones\Salones\Salones.csproj">
       <Project>{1a364a8a-c6d0-4cca-ac74-dceaa74fc780}</Project>

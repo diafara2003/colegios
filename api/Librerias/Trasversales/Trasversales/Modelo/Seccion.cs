@@ -15,6 +15,7 @@ namespace Trasversales.Modelo
         public int SeccionId { get; set; }
         public string SecDescripcion { get; set; }
         public string SecIcono { get; set; }
+        public string SecRuta { get; set; }
 
     }
 }

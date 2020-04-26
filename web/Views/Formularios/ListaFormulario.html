@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
     <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
@@ -20,7 +20,9 @@
             cursor: pointer;
         }
 
-
+        .floatThead-table {
+            background: white;
+        }
 
         [contenteditable=true] {
             outline: none;
@@ -72,12 +74,19 @@
 
             .autocomplete i {
                 position: absolute;
-                z-index: 2;
                 LEFT: 10px;
                 color: #343a40;
                 font-size: 20px;
                 top: 6px;
             }
+
+        .easy-autocomplete input {
+            width: 180px;
+        }
+
+        .floatThead-container {
+            z-index: 1 !important;
+        }
     </style>
 </head>
 <body>
@@ -91,20 +100,13 @@
 
                 <div class="row">
 
-
-
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-sm" id="countries" />
-                    </div>
-
-
                     <div class="col-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Temporada" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Temporada</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Grados" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Grados</a>
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Grados" role="tab" aria-controls="contact" aria-selected="false" onclick="ver_grados()"><i class="fas fa-user-graduate mr-2"></i>Grados</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Cursos" role="tab" aria-controls="contact" aria-selected="false" onclick="ver_cursos()"><i class="fas fa-graduation-cap mr-2"></i>Cursos</a>
@@ -158,10 +160,10 @@
 
                             </div>
                             <div class="tab-pane fade show" id="Grados" role="tabpanel" aria-labelledby="Grados-tab">
-                                <div class="row d-flex">
+                                <div class="row d-flex mt-4">
                                     <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
-                                        <table class="table table-hover table-sm mt-4">
-
+                                        <div style="position:fixed" class="table-fized" id="tblDatosGrados_fixed"></div>
+                                        <table class="table table-hover table-sm" id="tblDatosGrados">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Código</th>
@@ -170,7 +172,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tblgrados"></tbody>
-                                            <tbody class="bg-light">
+                                            <tfoot class="bg-light">
                                                 <tr>
                                                     <td>
                                                         <div class="input-group input-group-sm">
@@ -187,7 +189,7 @@
                                                         <button class="btn-icono" onclick="agregar_grados()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
                                                     </td>
                                                 </tr>
-                                            </tbody>
+                                            </tfoot>
                                         </table>
                                     </div>
 
@@ -202,26 +204,27 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="Cursos" role="tabpanel" aria-labelledby="Cursos-tab">
-                                <div class="row d-flex">
+                                <div class="row d-flex mt-4">
                                     <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
-                                        <table class="table table-hover table-sm mt-4">
+                                        <table class="table table-hover table-sm" id="tblDatosCursos">
 
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Temporada</th>
+                                                    <!--<th scope="col">Temporada</th>-->
                                                     <th scope="col">Código</th>
                                                     <th scope="col">Descripción</th>
                                                     <th scope="col">Tutor</th>
+                                                    <th scope="col">Auxiliar</th>
                                                     <th scope="col" class="text-center">Opciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tblcursos"></tbody>
                                             <tbody class="bg-light">
                                                 <tr>
-                                                    <td>
+                                                    <!--<td>
                                                         <select class="form-control form-control-sm" id="CurTemporada_-1"></select>
 
-                                                    </td>
+                                                    </td>-->
                                                     <td>
                                                         <div class="input-group input-group-sm">
                                                             <input type="text" maxlength="20" class="form-control" id="CurCodigo_-1" placeholder="Código a manejar">
@@ -234,7 +237,12 @@
                                                     </td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="text" maxlength="50" class="form-control" id="CurTutor_-1" placeholder="tutor">
+                                                            <input type="text" maxlength="50" class="form-control" id="CurTutor_-1" placeholder="Tutor">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" maxlength="50" class="form-control" id="CurAuxiliar_-1" placeholder="Auxiliar">
                                                         </div>
                                                     </td>
 
@@ -313,56 +321,19 @@
 
 
 
-    <script src="../../Script/librerias/jquery-3.4.1.slim.min.js"></script>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
-    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>    
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Formularios/Temporada.js"></script>
     <script src="../../Script/Formularios/Grados.js"></script>
     <script src="../../Script/Formularios/Cursos.js"></script>
     <script src="../../Script/Formularios/Salones.js"></script>
-    <script>
-        var options = {
-
-            data: [
-                { "name": "Afghanistan", "code": "AF" },
-                { "name": "Aland Islands", "code": "AX" },
-                { "name": "Albania", "code": "AL" },
-                { "name": "Algeria", "code": "DZ" },
-                { "name": "American Samoa", "code": "AS" },
-                { "name": "Afghanistan", "code": "AF" },
-                { "name": "Aland Islands", "code": "AX" },
-                { "name": "Albania", "code": "AL" },
-                { "name": "Algeria", "code": "DZ" },
-                { "name": "American Samoa", "code": "AS" },
-                { "name": "Afghanistan", "code": "AF" },
-                { "name": "Aland Islands", "code": "AX" },
-                { "name": "Albania", "code": "AL" },
-                { "name": "Algeria", "code": "DZ" },
-                { "name": "American Samoa", "code": "AS" },
-                { "name": "Afghanistan", "code": "AF" },
-                { "name": "Aland Islands", "code": "AX" },
-                { "name": "Albania", "code": "AL" },
-                { "name": "Algeria", "code": "DZ" },
-                { "name": "American Samoa", "code": "AS" }
-            ],
-
-            getValue: "name",
-            requestDelay: 500,
-            placeholder: "buscar por a",
-            list: {
-                maxNumberOfElements: 10,
-
-                match: {
-                    enabled: true
-                },
-
-            }
-        };
-        //http://easyautocomplete.com/guide#sec-template-links
-        $("#countries").easyAutocomplete(options);
-
+    <script>        
+      
     </script>
 
 

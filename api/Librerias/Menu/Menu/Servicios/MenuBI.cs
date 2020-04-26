@@ -21,6 +21,7 @@ namespace Menu.Servicios
                               SeccionId = data.SeccionId,
                               SecDescripcion = data.SecDescripcion,
                               SecIcono = data.SecIcono,
+                              SecRuta = data.SecRuta,
                               opcion = (from query in objCnn.opcion where query.OpSeccionId == data.SeccionId select query)
                           });
             return objSeccion;

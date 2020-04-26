@@ -21,6 +21,14 @@ namespace Curso.Servicios
             {
                 objSeccion = (from data in objCnn.cursos
                               join t in objCnn.temporada on data.CurTemporada equals t.TempId
+
+                              join tutor in objCnn.personas on data.CurTutor equals tutor.PerId into CursoTutor
+                              from tutorPersona in CursoTutor.DefaultIfEmpty()
+
+                              join auxiliar in objCnn.personas on data.CurAuxiliar equals auxiliar.PerId into CursoAuxiliar
+                              from auxiliarPersona in CursoAuxiliar.DefaultIfEmpty()
+
+                              
                               select new CursosCustom()
                               {
                                   CurCodigo = data.CurCodigo,
@@ -29,13 +37,23 @@ namespace Curso.Servicios
                                   CurId = data.CurId,
                                   CurTemporada = data.CurTemporada,
                                   CurTutor = data.CurTutor,
-                                  NombreTemporada = t.TempAno.ToString()
+                                  NombreTemporada = t.TempAno.ToString(),                                
+                                  Nombretutor = string.IsNullOrEmpty(tutorPersona.PerNombres) ? string.Empty : tutorPersona.PerNombres,
+                                  NombreAuxiliar = string.IsNullOrEmpty(auxiliarPersona.PerNombres) ? string.Empty : auxiliarPersona.PerNombres,
                               });
             }
             else
             {
                 objSeccion = (from data in objCnn.cursos
+
                               join t in objCnn.temporada on data.CurTemporada equals t.TempId
+
+                              join tutor in objCnn.personas on data.CurTutor equals tutor.PerId into CursoTutor
+                              from tutorPersona in CursoTutor.DefaultIfEmpty()
+
+                              join auxiliar in objCnn.personas on data.CurAuxiliar equals auxiliar.PerId into CursoAuxiliar
+                              from auxiliarPersona in CursoAuxiliar.DefaultIfEmpty()
+
                               where data.CurId == id
                               select new CursosCustom()
                               {
@@ -45,7 +63,9 @@ namespace Curso.Servicios
                                   CurId = data.CurId,
                                   CurTemporada = data.CurTemporada,
                                   CurTutor = data.CurTutor,
-                                  NombreTemporada = t.TempAno.ToString()
+                                  NombreTemporada = t.TempAno.ToString(),
+                                  Nombretutor = string.IsNullOrEmpty(tutorPersona.PerNombres) ? string.Empty : tutorPersona.PerNombres,
+                                  NombreAuxiliar= string.IsNullOrEmpty(auxiliarPersona.PerNombres) ? string.Empty : auxiliarPersona.PerNombres,
                               });
             }
             return objSeccion;

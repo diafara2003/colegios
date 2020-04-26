@@ -5,7 +5,7 @@ function mostrar_mensajes(titulo, mensaje, icono = '',
     showConfirmButton = false,
     showCloseButton = false,
     showCancelButton = false,
-    confirmButtonText = '', confirmButtonAriaLabel='',
+    confirmButtonText = '', confirmButtonAriaLabel = '',
     cancelButtonText = '', cancelButtonAriaLabel = '') {
     Swal.fire({
         title: titulo,
@@ -23,10 +23,11 @@ function mostrar_mensajes(titulo, mensaje, icono = '',
         cancelButtonAriaLabel: cancelButtonAriaLabel
     })
 }
+function cerrar_mensaje() {
+    swal.close()
+}
 function cargar_opciones() {
-    consultarAPI('menu', 'GET', response => {
-        renderizar_menu(response)
-    });
+    consultarAPI('menu', 'GET', response => renderizar_menu(response));
 }
 function renderizar_menu(response) {
 
@@ -38,13 +39,13 @@ function renderizar_menu(response) {
         if (element.opcion.length) {
             _html += '<li class="nav-item dropdown">';
             let id = "navbarDropdownMenu_" + element.SeccionId;
-            _html += '<a class="nav-link  dropdown-toggle" href="#" id="' + id + '" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">' + element.SecDescripcion + '<span class="badge badge-primary ml-1">3</span></a>';
+            _html += '<a class="nav-link  dropdown-toggle" href="#" id="' + id + '" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">' + element.SecDescripcion + '</a>';
             _html += '<div class="dropdown-menu bg-dark" aria-labelledby="' + id + '">';
             _html += renderizar_opcion(element.opcion, id);
             _html += '</div>';
         } else {
-            _html += '<li class="nav-item">';
-            _html += '<a class="nav-link" href="#">' + element.SecDescripcion + ' <span class="badge badge-primary">3</span></a>';
+            _html += '<li class="nav-item" >';
+            _html += '<a class="nav-link" onclick="ver_opcion(this,\'' + element.SecRuta + '\')">' + element.SecDescripcion + '</a>';
         }
 
 
@@ -93,6 +94,12 @@ function menu() {
         $('.menu').removeClass('element-animation-hide')
         $('.menu').addClass('element-animation-show')
     }
+}
+function ver_opcion(_this, _ruta) {
+    
+    $('#framrePage').attr('src', _ruta);
+    $('.active').removeClass('active');
+    $(_this).closest('li').addClass('active');
 }
 $(window).resize(function () {
     calcular_height_frame()

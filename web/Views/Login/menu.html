@@ -13,6 +13,7 @@
     <style>
         a {
             color: white;
+            cursor: pointer;
         }
 
         .navbar-toggler {
@@ -23,15 +24,24 @@
             color: white;
         }
 
-      
+        .swal2-icon {
+            font-size: 12px;
+        }
+        .swal2-title {
+        font-size:22px;
+        }
 
         .nav-item {
-            /*border-bottom: 1px solid #343a40;*/
+            border-bottom: 1px solid #343a40;
         }
 
             .nav-item:hover {
                 border-bottom: 1px solid white;
             }
+
+        .active {
+            border-bottom: 1px solid white;
+        }
 
         .imgcontainer {
             border: 1px solid #6c757d;
@@ -147,7 +157,9 @@
 
             <a class="navbar-brand" href="#"><img class="logo-colegio" src="../../Img/colegio.png" /></a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-5" id="opciones_menu"></ul>
+                <ul class="navbar-nav ml-5" id="opciones_menu">
+                    <li class="nav-item"><span style="color:white"><i style="color:white" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones... </span></li>
+                </ul>
             </div>
             <div>
                 <div class="collapse navbar-collapse imgcontainer">
@@ -177,7 +189,9 @@
         </section>
 
         <section>
+
             <div class="opcion-frame">
+
                 <div class="p-1" style="margin-top:60px">
 
                     <iframe id="framrePage" width="100%" title="Inline Frame Example" allowfullscreen="true" frameborder="0"
@@ -191,7 +205,7 @@
 
 
 
-    <script src="../../Script/librerias/jquery-3.4.1.slim.min.js"></script>
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
 
