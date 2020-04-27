@@ -100,7 +100,11 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
             maxNumberOfElements: 10,
             onClickEvent: function () {
                 let _selected = $(`#${id_input}`).getSelectedItemData()
-                fn_selected(_selected);
+                fn_selected(_selected, `#${id_input}`);
+            },
+            onKeyEnterEvent: function () {
+                let _selected = $(`#${id_input}`).getSelectedItemData()
+                fn_selected(_selected, `#${id_input}`);
             },
             match: {
                 enabled: false
@@ -118,4 +122,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
     }
     //http://easyautocomplete.com/guide#sec-template-links
     $(`#${id_input}`).easyAutocomplete(options);
+}
+function IsNull(data) {
+    return data == null ? "" : data;
 }

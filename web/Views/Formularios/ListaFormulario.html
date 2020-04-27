@@ -20,6 +20,16 @@
             cursor: pointer;
         }
 
+        .input-autocomplete {
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+            .input-autocomplete:focus {
+                border-bottom: 1px solid #369;
+            } 
+
         .floatThead-table {
             background: white;
         }
@@ -33,7 +43,7 @@
             }
 
         .table th, .table td {
-            padding: 5px;
+            padding: 5px 5px 0 5px;
         }
 
         .btn-icono {
@@ -160,7 +170,7 @@
 
                             </div>
                             <div class="tab-pane fade show" id="Grados" role="tabpanel" aria-labelledby="Grados-tab">
-                                <div class="row d-flex mt-4">
+                                <div class="row d-flex">
                                     <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
                                         <div style="position:fixed" class="table-fized" id="tblDatosGrados_fixed"></div>
                                         <table class="table table-hover table-sm" id="tblDatosGrados">
@@ -193,7 +203,7 @@
                                         </table>
                                     </div>
 
-                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4">
                                         <span>Filtro de búsqueda</span>
                                         <div class="autocomplete input-group-sm">
                                             <input type="text" class="form-control" id="buscargrado" placeholder="Buscar por código o descripcion" onkeyup="buscar_grados(this)">
@@ -204,7 +214,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="Cursos" role="tabpanel" aria-labelledby="Cursos-tab">
-                                <div class="row d-flex mt-4">
+                                <div class="row d-flex">
                                     <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
                                         <table class="table table-hover table-sm" id="tblDatosCursos">
 
@@ -254,7 +264,7 @@
                                         </table>
                                     </div>
 
-                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4">
                                         <span>Filtro de búsqueda</span>
                                         <div class="autocomplete input-group-sm">
                                             <input type="text" class="form-control" id="buscarcurso" placeholder="Buscar cualquier palabra" onkeyup="buscar_cursos(this)">
@@ -300,7 +310,7 @@
                                     </div>
 
 
-                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded">
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4">
                                         <span>Filtro de búsqueda</span>
                                         <div class="autocomplete input-group-sm">
                                             <input type="text" class="form-control" id="buscarsalones" placeholder="Buscar por codigo o descripción" onkeyup="buscar_salones(this)">
@@ -332,8 +342,8 @@
     <script src="../../Script/Formularios/Grados.js"></script>
     <script src="../../Script/Formularios/Cursos.js"></script>
     <script src="../../Script/Formularios/Salones.js"></script>
-    <script>        
-      
+    <script>
+
     </script>
 
 

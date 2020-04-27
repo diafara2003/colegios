@@ -1,6 +1,4 @@
-﻿/// <reference path="../login/menu.js" />
-/// <reference path="../librerias/plugin-colegios.js" />
-/// <reference path="../librerias/jquery-3.4.1.slim.min.js" />
+﻿
 let tipo = '', _tipo_perfil = {};
 
 function consltar_tipo_perfil() {
@@ -47,7 +45,8 @@ function obtener_datos_persona() {
         PerId: -1, PerIdEmpresa: 1, PerNombres: '', PerApellidos: '',
         PerTipoDoc: '', PerDocumento: '', PerEmail: '', PerTelefono: '',
         PerGenero: '', PerRH: '', PerEPS: '', PerUsuario: '',
-        PerClave: '', PerEstado: 1, PerTipoPerfil: -1
+        PerClave: '', PerEstado: 1, PerTipoPerfil: -1,
+        PerFechanacimiento: '', PerLugarNacimiento: '', PerDireccion:''
     };
     myobject.PerEstado = _tipo_perfil.UsuPerId;
     myobject.PerNombres = document.getElementById('PerNombres').value;
@@ -65,6 +64,9 @@ function obtener_datos_persona() {
     myobject.PerEPS = document.getElementById('PerEPS').value;
     myobject.PerTipoPerfil = _tipo_perfil.UsuPerId;
 
+    myobject.PerFechanacimiento = document.getElementById('PerFechanacimiento').value;
+    myobject.PerLugarNacimiento = document.getElementById('PerLugarNacimiento').value;
+    myobject.PerDireccion = document.getElementById('PerDireccion').value;
 
     return myobject;
 }

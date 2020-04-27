@@ -1,0 +1,49 @@
+﻿body, input, select {
+    font-size: 13px !important;
+}
+
+i {
+    cursor: pointer;
+}
+
+
+.custom-control-label {
+    padding-top: 3px;
+}
+
+.estudiante, .profesor {
+    display: none;
+}
+
+.floatThead-table {
+    background: white;
+}
+
+
+[contenteditable=true] {
+    outline: none;
+    outline: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid transparent;
+}
+
+    [contenteditable=true]:focus, [contenteditable=true]:active {
+        border-bottom: 1px solid #369;
+    }
+
+.table th, .table td {
+    padding: 2px 5px 0 5px;
+}
+
+
+.easy-autocomplete input {
+    width: 180px;
+}
+
+.floatThead-container {
+    z-index: 1 !important;
+}
+
+

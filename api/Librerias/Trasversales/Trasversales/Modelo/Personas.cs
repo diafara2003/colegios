@@ -34,6 +34,9 @@ namespace Trasversales.Modelo
         public string PerClave { get; set; }        
         public bool PerEstado { get; set; }        
         public int PerTipoPerfil { get; set; }
+        public string PerFechanacimiento { get; set; }
+        public string PerLugarNacimiento { get; set; }
+        public string PerDireccion { get; set; }
 
     }
 }

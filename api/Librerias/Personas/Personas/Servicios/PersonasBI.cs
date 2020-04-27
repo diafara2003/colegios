@@ -28,12 +28,15 @@ namespace Persona.Servicios
             ColegioContext objCnn = new ColegioContext();
 
             if (filter == string.Empty)
-                objSeccion = (from data in objCnn.personas where data.PerEstado select data).Take(10);
+                objSeccion = (from data in objCnn.personas
+                              where data.PerEstado && data.PerTipoPerfil == tipo
+                              select data);
             else
                 objSeccion = (from data in objCnn.personas
                               where data.PerEstado
+                              && data.PerTipoPerfil == tipo
                                 && data.PerNombres.Contains(filter) || data.PerApellidos.Contains(filter)
-                              select data).Take(10);
+                              select data);
             return objSeccion;
         }
 

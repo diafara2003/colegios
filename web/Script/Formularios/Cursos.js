@@ -1,6 +1,6 @@
 ﻿
 
-let _data_cursos = [], temporada_activa = {},tutor_id=-1,auxiliar_id=-1;
+let _data_cursos = [], temporada_activa = {}, tutor_id = -1, auxiliar_id = -1;
 
 function eventos_cursos() {
     $('[contenteditable="true"]').off('click');
@@ -19,18 +19,18 @@ function consultar_cursos() {
 function renderizar_cursos(source) {
     let _html = '';
 
-    source.forEach(item => _html += renderizar_tr_cursos(item));
+    source.forEach((item, _index) => _html += renderizar_tr_cursos(item, _index));
 
     document.getElementById('tblcursos').innerHTML = _html;
 }
-function renderizar_tr_cursos(_item) {
+function renderizar_tr_cursos(_item, _index) {
     let _tr = '';
-    _tr += '<tr>';
+    _tr += '<tr posicion=' + _index + '>';
     //_tr += '<th scope="row"><div id="CurTemporada_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.NombreTemporada + '</th>';
-    _tr += '<td scope="row"><div id="CurCodigo_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurCodigo + '</td>';
+    _tr += '<th scope="row"><div id="CurCodigo_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurCodigo + '</th>';
     _tr += '<td scope="row"><div id="CurDescripcion_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurDescripcion + '</td>';
-    _tr += '<td scope="row"><div id="CurTutor_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.Nombretutor + '</td>';
-    _tr += '<td scope="row"><div id="CurTutor_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.NombreAuxiliar + '</td>';
+    _tr += '<td scope="row"><input type="text" class="input-autocomplete"  onblur="modificar_cursos_ac(this,' + _item.CurId + ',0)"  onclick="iniciar_ac(\'CurTutor_' + _item.CurId + '\')" maxlength="20" id= "CurTutor_' + _item.CurId + '" value="' + _item.Nombretutor + '"/></td>';
+    _tr += '<td scope="row"><input type="text" class="input-autocomplete"  onblur="modificar_cursos_ac(this,' + _item.CurId + ',1)"  onclick="iniciar_ac(\'CurAuxiliar_' + _item.CurId + '\')" maxlength="20" id= "CurAuxiliar_' + _item.CurId + '"  value="' + _item.NombreAuxiliar + '"/></td>';
     _tr += '<td class="text-center"><button onclick="eliminar_cursos(this,' + _item.CurId + ')" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>';
     _tr += '</tr>';
 
@@ -43,6 +43,18 @@ function modificar_cursos(id) {
         _data_cursos[_index] = data_changed;
 
     }, data_changed);
+}
+function modificar_cursos_ac(_this, id,property) {
+    if (_this.value == '') {
+        let posicion = $(_this).closest('tr').attr('posicion');
+        if (property == 0) {
+            tutor_id = _data_cursos[posicion].CurAuxiliar;
+        } else {
+            auxiliar_id = _data_cursos[posicion].CurTutor;
+        }
+
+        modificar_cursos(id);
+    }
 }
 function agregar_curso() {
     let nueva_data = obtener_datos_curso(-1);
@@ -72,7 +84,7 @@ function eliminar_cursos(_this, _posicion) {
 }
 function obtener_datos_curso(posicion) {
 
-    var _data = { CurId: 0, CurCodigo: '', CurDescripcion: 1, CurEmpId: 1, CurTutor: 1, CurAuxiliar:1, CurTemporada: 1 };
+    var _data = { CurId: 0, CurCodigo: '', CurDescripcion: 1, CurEmpId: 1, CurTutor: 1, CurAuxiliar: 1, CurTemporada: 1 };
 
     if (document.getElementById('CurCodigo_' + posicion).tagName.toLowerCase() == 'div') {
         _data.CurCodigo = document.getElementById('CurCodigo_' + posicion).textContent;
@@ -85,7 +97,7 @@ function obtener_datos_curso(posicion) {
     } else {
         _data.CurDescripcion = document.getElementById('CurDescripcion_' + posicion).value;
     }
-  
+
     if (posicion != -1) {
         _data.CurId = posicion;
         _data.CurTemporada = temporada_activa.TempId;
@@ -121,9 +133,10 @@ function buscar_cursos(_this) {
     }
     else {
         filtered = _data_cursos.filter(x =>
-            x.NombreTemporada.toString().toLowerCase().indexOf(_text) > -1
-            || x.CurCodigo.toString().toLowerCase().indexOf(_text) > -1
+            x.CurCodigo.toString().toLowerCase().indexOf(_text) > -1
             || x.CurDescripcion.toString().toLowerCase().indexOf(_text) > -1
+            || x.Nombretutor.toString().toLowerCase().indexOf(_text) > -1
+            || x.NombreAuxiliar.toString().toLowerCase().indexOf(_text) > -1
         );
     }
     renderizar_cursos(filtered);
@@ -132,12 +145,29 @@ function ver_cursos() {
     renderizar_ddl_temporada();
     setTimeout(c => { fixed_table_scroll('tblDatosCursos'); }, 300);
 }
+function iniciar_ac(id, placeholder, property, tipo) {
+    autocomplete(id, 'Personas?tipo=1', 'PerNombres', 'PerApellidos', placeholder, (selected, id_ac) => {
+        tutor_id = -1;
+        auxiliar_id = -1;
+        let posicion = $(id_ac).closest('tr').attr('posicion');
+        let _curso = _data_cursos[posicion];
+
+        if (id_ac.indexOf("CurTutor_") != -1) tutor_id = selected.PerId;
+        else auxiliar_id = selected.PerId;
+
+        modificar_cursos(_curso.CurId);
+
+    });
+    $('#' + id).focus();
+    selectText($('#' + id));
+
+}
 (function () {
     consultar_cursos();
 
     autocomplete('CurTutor_-1', 'Personas?tipo=1', 'PerNombres', 'PerApellidos', 'Buscar tutor', selected => {
         tutor_id = selected.PerId;
-        
+
     });
     autocomplete('CurAuxiliar_-1', 'Personas?tipo=1', 'PerNombres', 'PerApellidos', 'Buscar tutor', selected => {
         auxiliar_id = selected.PerId;
