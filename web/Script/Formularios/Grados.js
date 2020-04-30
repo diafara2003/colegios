@@ -42,6 +42,8 @@ function modificar_grados(id) {
     }, data_changed);
 }
 function agregar_grados() {
+    window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
+
     let nueva_data = obtener_datos_grado(-1);
 
     if (nueva_data.TempAno != '') {
@@ -53,18 +55,20 @@ function agregar_grados() {
             limpiar_registro_grados(-1);
             $('#GraCodigo_-1').focus();
             eventos_grados();
-
+            window.parent.cerrar_mensaje();
         }, nueva_data);
     }
 
 }
 function eliminar_grados(_this, _posicion) {
+    window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
+
     let data_changed = obtener_datos_grado(-1)
     consultarAPI('Grados/' + _posicion, 'DELETE', function (response) {
         let _index = _data_grados.findIndex(c => c.GraId == data_changed.GraId);
         _data_grados.splice(_index, 1);
         $(_this).closest('tr').remove();
-
+        window.parent.cerrar_mensaje();
     }, data_changed);
 }
 function obtener_datos_grado(posicion) {

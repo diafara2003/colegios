@@ -81,6 +81,7 @@ function modificar_cursos_ac(_this, id, property) {
     }
 }
 function agregar_curso() {
+    window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
     let nueva_data = obtener_datos_curso(-1);
 
     if (nueva_data.TempAno != '') {
@@ -92,18 +93,20 @@ function agregar_curso() {
             limpiar_registro_cursos(-1);
             $('#CurCodigo_-1').focus();
             eventos_cursos();
-
+            window.parent.cerrar_mensaje();
         }, nueva_data);
     }
 
 }
 function eliminar_cursos(_this, _posicion) {
+    window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
+
     let data_changed = obtener_datos_curso(-1)
     consultarAPI('cursos/' + _posicion, 'DELETE', function (response) {
         let _index = _data_cursos.findIndex(c => c.CurId == data_changed.CurId);
         _data_cursos.splice(_index, 1);
         $(_this).closest('tr').remove();
-
+        window.parent.cerrar_mensaje();
     }, data_changed);
 }
 function obtener_datos_curso(posicion) {

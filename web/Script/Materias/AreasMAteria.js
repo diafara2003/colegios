@@ -42,6 +42,7 @@ function modificar_area_materia(id) {
     }, data_changed);
 }
 function agregar_area_materia() {
+    window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
     let nueva_data = obtener_datos_area_materia(-1);
 
     if (nueva_data.TempAno != '') {
@@ -53,19 +54,21 @@ function agregar_area_materia() {
             limpiar_registro_area_materia(-1);
             $('#ArMaCodigo_-1').focus();
             eventos_area_materia();
+            window.parent.cerrar_mensaje();
 
         }, nueva_data);
     }
 
 }
 function eliminar_area_materia(_this, _posicion) {
-    let data_changed = obtener_datos_area_materia(-1)
-    consultarAPI('materia/areasmaterias/' + _posicion, 'DELETE', function (response) {
+    window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
+    let data_changed = { ArMaId: _posicion };
+    consultarAPI('materia/areasmaterias/eliminar?id=' + _posicion, 'GET', (response) => {
         let _index = _data_area_materia.findIndex(c => c.ArMaId == data_changed.ArMaId);
         _data_area_materia.splice(_index, 1);
         $(_this).closest('tr').remove();
-
-    }, data_changed);
+        window.parent.cerrar_mensaje();
+    });
 }
 function obtener_datos_area_materia(posicion) {
 

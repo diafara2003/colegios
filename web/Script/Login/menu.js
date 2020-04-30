@@ -55,6 +55,7 @@ function renderizar_menu(response) {
 
     document.getElementById('menu_movil').innerHTML = _html_movil;
     document.getElementById('opciones_menu').innerHTML = _html;
+   // cerrar_mensaje();
 }
 function renderizar_opcion(_source, id) {
     let _opcion = '';
@@ -105,6 +106,8 @@ $(window).resize(function () {
     calcular_height_frame()
 });
 (function () {
+    //mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones...</span>');
+
     calcular_height_frame();
     cargar_opciones();
 })();

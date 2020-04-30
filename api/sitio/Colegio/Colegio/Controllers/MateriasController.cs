@@ -73,9 +73,9 @@ namespace Colegio.Controllers
         }
 
 
-        [Route("areasmaterias")]
-        [HttpDelete]
-        public ResponseDTO DeleteAreaMAteria(int id)
+        [Route("areasmaterias/eliminar")]
+        [HttpGet]
+        public ResponseDTO GetEliminarAreaMAteria(int id)
         {
             return new Materia.Servicios.AreaMateria().Remove(id);
         }
