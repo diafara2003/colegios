@@ -7,13 +7,31 @@
     <title>Inicio</title>
     <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
-    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />    
+    <link href="../../Style/bootstrap-datepicker3.min.css" rel="stylesheet" />
     <link href="../../Style/estandar.css" rel="stylesheet" />
 
     <style>
-        /*tbody input {
-            width: 180px !important;
-        }*/
+        .btn-icono {
+            background-color: transparent;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            border-width: 0;
+            outline: none;
+        }
+
+            .btn-icono:hover {
+                background-color: black;
+            }
+
+                .btn-icono:hover i {
+                    color: buttonface;
+                }
+
+            .btn-icono i {
+                font-size: 13px;
+            }
     </style>
 </head>
 <body>
@@ -26,16 +44,17 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Tipo documento</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Correo electronico</th>
                         <th scope="col">Telefono / Celular</th>
                         <th scope="col">Genero</th>
-                        <th scope="col">Tipo de sangre</th>
+                        <th scope="col">RH</th>
                         <th scope="col">EPS</th>
                         <th scope="col">Fecha de nacimiento</th>
                         <th scope="col">Lugar de nacimiento</th>
                         <th scope="col">Direccion</th>
+                        <th class="text-center" scope="col"><i class="fas fa-cog"></i></th>
                     </tr>
                 </thead>
                 <tbody id="tbodyDatos"></tbody>
@@ -43,63 +62,78 @@
                     <tr>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="50" class="form-control" id="PerNombres_-1" placeholder="Nombres">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="50" class="form-control" id="PerApellidos_-1" placeholder="Apellidos">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <select  class="form-control" id="PerTipoDoc_-1">
+                                    <option value="-1">Seleccione</option>
+                                    <option value="RC">Registro civil</option>
+                                    <option value="TI">Tarjeta de identidad</option>
+                                    <option value="CC">Cedula de ciudadania</option>
+                                </select>
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="20" class="form-control" id="PerDocumento_-1" placeholder="Documento" onkeypress="return only_number(event)">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="50" class="form-control" id="PerEmail_-1" placeholder="Correo electronico">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="50" class="form-control" id="PerTelefono_-1" placeholder="Telefono / celular" onkeypress="return only_number(event)">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <select  class="form-control" id="PerGenero_-1">
+                                    <option value="F" selected>Femenino</option>
+                                    <option value="M">Masculino</option>
+                                </select>
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="5" class="form-control" id="PerRH_-1" placeholder="RH">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="50" class="form-control" id="PerEPS_-1" placeholder="EPS">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group  input-group-sm">
+                                <input type="text" maxlength="15" class="form-control" id="PerFechanacimiento_-1" placeholder="Fecha de nacimiento">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <input type="text" maxlength="20" class="form-control" id="PerLugarNacimiento_-1" placeholder="Lugar de ncimiento">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
+                                <input type="text" maxlength="50" class="form-control" id="PerDireccion_-1" placeholder="Dirección">
                             </div>
                         </td>
-                        <td>
-                            <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="GraCodigo_-1" placeholder="Código a manejar">
-                            </div>
+                        <td class="text-center">
+                            <button class="btn-icono" onclick="guardar_cambios()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -111,6 +145,9 @@
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
+
+    <script src="../../Script/Librerias/bootstrap-datepicker.min.js"></script>
+    <script src="../../Script/Librerias/es.js"></script>
     <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
     <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>

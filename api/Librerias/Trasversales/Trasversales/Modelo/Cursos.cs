@@ -15,6 +15,7 @@ namespace Trasversales.Modelo
         public int CurId { get; set; }
         public int CurEmpId { get; set; }
         public int CurTemporada { get; set; }
+        public int CurSalon { get; set; }
         public int CurGrado { get; set; }
         [MaxLength(20)]
         public string CurCodigo { get; set; }

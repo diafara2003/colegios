@@ -26,6 +26,8 @@ namespace Colegio.Controllers
         // PUT: api/Grados/5
         public ResponseDTO Put(Grados value)
         {
+            
+
             return new GradosBI().Update(value);
         }
 

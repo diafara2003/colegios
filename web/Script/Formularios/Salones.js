@@ -4,7 +4,7 @@ let _data_salones = [];
 
 function eventos_salones() {
     $('[contenteditable="true"]').off('click');
-    $('[contenteditable="true"]').click(function () {
+    $('[contenteditable="true"]').focusin(function () {
         selectText(this);
     });
 }

@@ -24,8 +24,12 @@ namespace Colegio.Controllers
         }
 
         // PUT: api/Cursos/5
-        public ResponseDTO Put(Cursos value)
+        public ResponseCursoCustom Put(Cursos value)
         {
+            if (value.CurGrado==0)
+            {
+                value.CurGrado = new Curso.Servicios.CursosBI().Get(value.CurId).FirstOrDefault().CurGrado;
+            }
             return new Curso.Servicios.CursosBI().Update(value);
         }
 

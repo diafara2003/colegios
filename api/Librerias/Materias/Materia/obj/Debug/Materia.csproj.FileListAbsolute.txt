@@ -1,0 +1,16 @@
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\Materia.dll
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\Materia.pdb
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\BaseDatos.dll
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\EntityFramework.dll
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\EntityFramework.SqlServer.dll
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\Trasversales.dll
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\BaseDatos.pdb
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\BaseDatos.dll.config
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\Trasversales.pdb
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\EntityFramework.xml
+C:\Colegios\api\Librerias\Materias\Materia\bin\Debug\EntityFramework.SqlServer.xml
+C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache
+C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CoreCompileInputs.cache
+C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CopyComplete
+C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.dll
+C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.pdb

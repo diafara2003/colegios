@@ -21,6 +21,10 @@ namespace Curso.Servicios
             {
                 objSeccion = (from data in objCnn.cursos
                               join t in objCnn.temporada on data.CurTemporada equals t.TempId
+                              join grado in objCnn.grados on data.CurGrado equals grado.GraId
+
+                              join salon in objCnn.salones on data.CurSalon equals salon.SalId into CursoSalon
+                              from cursosalon in CursoSalon.DefaultIfEmpty()
 
                               join tutor in objCnn.personas on data.CurTutor equals tutor.PerId into CursoTutor
                               from tutorPersona in CursoTutor.DefaultIfEmpty()
@@ -28,7 +32,6 @@ namespace Curso.Servicios
                               join auxiliar in objCnn.personas on data.CurAuxiliar equals auxiliar.PerId into CursoAuxiliar
                               from auxiliarPersona in CursoAuxiliar.DefaultIfEmpty()
 
-                              
                               select new CursosCustom()
                               {
                                   CurCodigo = data.CurCodigo,
@@ -37,9 +40,12 @@ namespace Curso.Servicios
                                   CurId = data.CurId,
                                   CurTemporada = data.CurTemporada,
                                   CurTutor = data.CurTutor,
-                                  NombreTemporada = t.TempAno.ToString(),                                
+                                  CurGrado=data.CurGrado,
+                                  NombreTemporada = t.TempAno.ToString(),
                                   Nombretutor = string.IsNullOrEmpty(tutorPersona.PerNombres) ? string.Empty : tutorPersona.PerNombres,
                                   NombreAuxiliar = string.IsNullOrEmpty(auxiliarPersona.PerNombres) ? string.Empty : auxiliarPersona.PerNombres,
+                                  NombreGrado = string.IsNullOrEmpty(grado.GraDescripcion) ? string.Empty : grado.GraDescripcion,
+                                  NombreSalon = string.IsNullOrEmpty(cursosalon.SalDescripcion) ? string.Empty : cursosalon.SalDescripcion,
                               });
             }
             else
@@ -47,6 +53,10 @@ namespace Curso.Servicios
                 objSeccion = (from data in objCnn.cursos
 
                               join t in objCnn.temporada on data.CurTemporada equals t.TempId
+                              join grado in objCnn.grados on data.CurGrado equals grado.GraId
+
+                              join salon in objCnn.salones on data.CurSalon equals salon.SalId into CursoSalon
+                              from cursosalon in CursoSalon.DefaultIfEmpty()
 
                               join tutor in objCnn.personas on data.CurTutor equals tutor.PerId into CursoTutor
                               from tutorPersona in CursoTutor.DefaultIfEmpty()
@@ -61,11 +71,14 @@ namespace Curso.Servicios
                                   CurDescripcion = data.CurDescripcion,
                                   CurEmpId = data.CurEmpId,
                                   CurId = data.CurId,
+                                  CurGrado = data.CurGrado,
                                   CurTemporada = data.CurTemporada,
                                   CurTutor = data.CurTutor,
                                   NombreTemporada = t.TempAno.ToString(),
                                   Nombretutor = string.IsNullOrEmpty(tutorPersona.PerNombres) ? string.Empty : tutorPersona.PerNombres,
-                                  NombreAuxiliar= string.IsNullOrEmpty(auxiliarPersona.PerNombres) ? string.Empty : auxiliarPersona.PerNombres,
+                                  NombreAuxiliar = string.IsNullOrEmpty(auxiliarPersona.PerNombres) ? string.Empty : auxiliarPersona.PerNombres,
+                                  NombreGrado = string.IsNullOrEmpty(grado.GraDescripcion) ? string.Empty : grado.GraDescripcion,
+                                  NombreSalon = string.IsNullOrEmpty(cursosalon.SalDescripcion) ? string.Empty : cursosalon.SalDescripcion,
                               });
             }
             return objSeccion;
@@ -125,9 +138,9 @@ namespace Curso.Servicios
 
         }
 
-        public ResponseDTO Update(Trasversales.Modelo.Cursos modelo)
+        public ResponseCursoCustom Update(Trasversales.Modelo.Cursos modelo)
         {
-            ResponseDTO objresponse = new ResponseDTO();
+            ResponseCursoCustom objresponse = new ResponseCursoCustom();
             ColegioContext objCnn = new ColegioContext();
 
             try
@@ -137,14 +150,16 @@ namespace Curso.Servicios
 
                 objCnn.SaveChanges();
 
-                objresponse.codigo = 1;
-                objresponse.respuesta = "";
+                objresponse.resultado.codigo = 1;
+                objresponse.resultado.respuesta = "";
+
+                objresponse.curso = this.Get(modelo.CurId).FirstOrDefault();
             }
             catch (Exception e)
             {
 
-                objresponse.codigo = -1;
-                objresponse.respuesta = e.Message;
+                objresponse.resultado.codigo = -1;
+                objresponse.resultado.respuesta = e.Message;
             }
             return objresponse;
 

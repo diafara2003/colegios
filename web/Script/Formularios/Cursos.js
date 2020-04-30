@@ -1,10 +1,10 @@
 ﻿
 
-let _data_cursos = [], temporada_activa = {}, tutor_id = -1, auxiliar_id = -1;
+let _data_cursos = [], temporada_activa = {}, grados = [], tutor_id = -1, auxiliar_id = -1;
 
 function eventos_cursos() {
     $('[contenteditable="true"]').off('click');
-    $('[contenteditable="true"]').click(function () {
+    $('[contenteditable="true"]').focusin(function () {
         selectText(this);
     });
 }
@@ -26,8 +26,8 @@ function renderizar_cursos(source) {
 function renderizar_tr_cursos(_item, _index) {
     let _tr = '';
     _tr += '<tr posicion=' + _index + '>';
-    //_tr += '<th scope="row"><div id="CurTemporada_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.NombreTemporada + '</th>';
-    _tr += '<th scope="row"><div id="CurCodigo_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurCodigo + '</th>';
+    _tr += '<th scope="row"><div contenteditable="true" value-initial="' + _item.CurGrado + '" id="div_CurGrado_' + _item.CurId +'" onfocusin="crear_elemento(this,' + _item.CurId + ',' + _item.CurGrado + ')">' + _item.NombreGrado + '</th>';
+    _tr += '<td scope="row"><div id="CurCodigo_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurCodigo + '</td>';
     _tr += '<td scope="row"><div id="CurDescripcion_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurDescripcion + '</td>';
     _tr += '<td scope="row"><input type="text" class="input-autocomplete"  onblur="modificar_cursos_ac(this,' + _item.CurId + ',0)"  onclick="iniciar_ac(\'CurTutor_' + _item.CurId + '\')" maxlength="20" id= "CurTutor_' + _item.CurId + '" value="' + _item.Nombretutor + '"/></td>';
     _tr += '<td scope="row"><input type="text" class="input-autocomplete"  onblur="modificar_cursos_ac(this,' + _item.CurId + ',1)"  onclick="iniciar_ac(\'CurAuxiliar_' + _item.CurId + '\')" maxlength="20" id= "CurAuxiliar_' + _item.CurId + '"  value="' + _item.NombreAuxiliar + '"/></td>';
@@ -36,15 +36,39 @@ function renderizar_tr_cursos(_item, _index) {
 
     return _tr;
 }
-function modificar_cursos(id) {
+function crear_elemento(_this, id, _value) {
+    let _html = '<div style="height:19px">' + renderizar_ddl_grados(true, id, _value) + '</div>';
+    let _th = $(_this).closest('th');
+    _th.empty();
+
+    _th.append(_html);
+    $('#CurGrado_' + id).focus();
+}
+function quitar_elemento(_this) {
+    let _html = '';
+    let posicion = $(_this).closest('tr').attr('posicion');
+    let _th = $(_this).closest('th');
+    _item = _data_cursos[posicion];
+    _th.empty();
+    if (_item != undefined && _item.CurId != undefined) {
+        _html = '<div id="div_CurGrado_' + _item.CurId + '" value-initial="' + _item.CurGrado + '"  contenteditable="true" onfocusin="crear_elemento(this,' + _item.CurId + ',' + _item.CurGrado + ')">' + _item.NombreGrado + '';
+        _th.append(_html);
+
+        _th.next().find('div').focus();
+    }
+    
+}
+function modificar_cursos(id, _this) {
     let data_changed = obtener_datos_curso(id);
     consultarAPI('cursos', 'PUT', function (response) {
         let _index = _data_cursos.findIndex(c => c.CurId == data_changed.CurId);
-        _data_cursos[_index] = data_changed;
+        _data_cursos[_index] = response.curso;
 
+        if (_this != undefined)
+            quitar_elemento(_this);
     }, data_changed);
 }
-function modificar_cursos_ac(_this, id,property) {
+function modificar_cursos_ac(_this, id, property) {
     if (_this.value == '') {
         let posicion = $(_this).closest('tr').attr('posicion');
         if (property == 0) {
@@ -84,7 +108,17 @@ function eliminar_cursos(_this, _posicion) {
 }
 function obtener_datos_curso(posicion) {
 
-    var _data = { CurId: 0, CurCodigo: '', CurDescripcion: 1, CurEmpId: 1, CurTutor: 1, CurAuxiliar: 1, CurTemporada: 1 };
+    var _data = { CurId: 0, CurCodigo: '', CurDescripcion: 1, CurEmpId: 1, CurTutor: 1, CurAuxiliar: 1, CurTemporada: -1, CurGrado: -1 };
+
+    if (posicion == -1) {
+        _data.CurGrado = $('#CurGrado_' + posicion).find('option:selected').val()
+    } else if ($('#CurGrado_' + posicion).length == 0) {
+        //value-initial div_CurGrado_
+        _data.CurGrado = $('#div_CurGrado_' + posicion).attr('value-initial');
+    } else {
+        _data.CurGrado = $('#CurGrado_' + posicion).find('option:selected').val()
+    }
+    
 
     if (document.getElementById('CurCodigo_' + posicion).tagName.toLowerCase() == 'div') {
         _data.CurCodigo = document.getElementById('CurCodigo_' + posicion).textContent;
@@ -100,9 +134,8 @@ function obtener_datos_curso(posicion) {
 
     if (posicion != -1) {
         _data.CurId = posicion;
-        _data.CurTemporada = temporada_activa.TempId;
     }
-
+    _data.CurTemporada = temporada_activa.TempId;
     _data.CurAuxiliar = auxiliar_id;
     _data.CurTutor = tutor_id;
 
@@ -124,6 +157,27 @@ function renderizar_ddl_temporada() {
     //    $('#CurTemporada_-1').append('<option value="' + t.TempId + '">' + t.TempAno + '</option>');
     //})
 }
+function renderizar_ddl_grados(retornar_html, posicion, _value) {
+    //
+
+
+    if (retornar_html == undefined) {
+        $('#CurGrado_-1').empty();
+        _data_grados.forEach(t => {
+            $('#CurGrado_-1').append('<option value="' + t.GraId + '">' + t.GraDescripcion + '</option>');
+        })
+    }
+    else {
+        let _html = '<select onblur="quitar_elemento(this,' + posicion + ')" onchange="modificar_cursos(' + posicion + ',this)" style="margin:0;padding:0;height:19px;font-size:13.5px" class="form-control" id="CurGrado_' + posicion + '">';
+        _data_grados.forEach(t => {
+            _html += '<option value="' + t.GraId + '"  ' + (_value == t.GraId ? 'selected' : '') + '>' + t.GraDescripcion + '</option>';
+        });
+        _html += '</select>';
+
+        return _html;
+    }
+
+}
 function buscar_cursos(_this) {
     let _text = _this.value;
     let filtered = [];
@@ -137,12 +191,15 @@ function buscar_cursos(_this) {
             || x.CurDescripcion.toString().toLowerCase().indexOf(_text) > -1
             || x.Nombretutor.toString().toLowerCase().indexOf(_text) > -1
             || x.NombreAuxiliar.toString().toLowerCase().indexOf(_text) > -1
+            || x.NombreGrado.toString().toLowerCase().indexOf(_text) > -1
         );
     }
     renderizar_cursos(filtered);
+    setTimeout(c => { fixed_table_scroll('tblDatosCursos'); }, 300);
 }
 function ver_cursos() {
     renderizar_ddl_temporada();
+    renderizar_ddl_grados();
     setTimeout(c => { fixed_table_scroll('tblDatosCursos'); }, 300);
 }
 function iniciar_ac(id, placeholder, property, tipo) {

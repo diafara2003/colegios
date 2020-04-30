@@ -79,3 +79,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Persona.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Persona.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Materia.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Materia.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Clases.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Clases.pdb

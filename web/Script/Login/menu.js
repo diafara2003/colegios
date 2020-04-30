@@ -61,7 +61,7 @@ function renderizar_opcion(_source, id) {
     for (var i = 0; i < _source.length; i++) {
         const _element = _source[i];
 
-        _opcion += ' <a class="dropdown-item bg-dark text-white" href="#">' + _element.OpDescripcion + '</a>';
+        _opcion += ' <a class="dropdown-item bg-dark text-white"  onclick="ver_opcion(this,\'' + _element.OpRuta + '\')">' + _element.OpDescripcion + '</a>';
 
     }
 
@@ -96,7 +96,7 @@ function menu() {
     }
 }
 function ver_opcion(_this, _ruta) {
-    
+
     $('#framrePage').attr('src', _ruta);
     $('.active').removeClass('active');
     $(_this).closest('li').addClass('active');

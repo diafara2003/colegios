@@ -1,10 +1,10 @@
 ﻿
 
-let _data_grados = [];
+var _data_grados = [];
 
 function eventos_grados() {
     $('[contenteditable="true"]').off('click');
-    $('[contenteditable="true"]').click(function () {
+    $('[contenteditable="true"]').focusin(function () {
         selectText(this);
     });
 }
@@ -113,7 +113,7 @@ function calcular_height_tblDatosGrados() {
     document.getElementById('tblDatosGrados').style.overflow = "auto";
     ver_grados();
 }
-function ver_grados() {
+function ver_grados() {    
     setTimeout(c => { fixed_table_scroll('tblDatosGrados'); },300);
 }
 consultar_grados();

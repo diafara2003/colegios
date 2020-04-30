@@ -158,8 +158,10 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
+    <Compile Include="Controllers\MateriasController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\SalonesController.cs" />
@@ -185,6 +187,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Librerias\Clases\Clases\Clases.csproj">
+      <Project>{99bbf8b6-33f3-4c13-9f11-b8d6342c007a}</Project>
+      <Name>Clases</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Librerias\Cursos\Cursos\Cursos.csproj">
       <Project>{3ea699e0-b325-43f1-b8b5-15f9643d1351}</Project>
       <Name>Cursos</Name>
@@ -192,6 +198,10 @@
     <ProjectReference Include="..\..\..\Librerias\Grados\Grados\Grados.csproj">
       <Project>{1712087d-919c-47be-b2f0-ee8edd59b4ba}</Project>
       <Name>Grados</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Librerias\Materias\Materia\Materia.csproj">
+      <Project>{2f87c02c-05d5-46a8-8e24-7e21cac8470e}</Project>
+      <Name>Materia</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Librerias\Menu\Menu\Menu.csproj">
       <Project>{5e3259f7-7cdf-4f27-99e1-e2e07c9551be}</Project>

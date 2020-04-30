@@ -43,8 +43,7 @@ function mostrar_panel() {
 }
 function selectText(_this) {
     var doc = document;
-    var element = _this;
-    console.log(_this, element);
+    var element = _this;    
     if (doc.body.createTextRange) {
         var range = document.body.createTextRange();
         range.moveToElementText(element);
@@ -125,4 +124,18 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
 }
 function IsNull(data) {
     return data == null ? "" : data;
+}
+function asignar_control_fecha(id) {
+    $('#' + id).datepicker({
+        format: "dd/mm/yyyy",
+        maxViewMode: 2,
+        todayBtn: "linked",
+        language: "es",
+        autoclose: true,
+        todayHighlight: true,
+        toggleActive: true
+    });
+    $('.input-group-append').click(function () {
+        $(event.target).closest('div.input-group').find('input').focus();
+    });
 }

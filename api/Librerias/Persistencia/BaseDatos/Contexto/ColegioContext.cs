@@ -34,7 +34,7 @@ namespace BaseDatos.Contexto
             {
                 var cmd = ctx.CreateCommand();
                 cmd.CommandText = data.commandText;
-
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 foreach (var item in data.parametros)
                 {

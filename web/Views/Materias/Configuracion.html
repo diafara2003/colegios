@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=none">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+
+    <style>
+        body, input {
+            font-size: 13px !important;
+        }
+
+        i {
+            cursor: pointer;
+        }
+
+        .input-autocomplete {
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+            .input-autocomplete:focus {
+                border-bottom: 1px solid #369;
+            }
+
+        .floatThead-table {
+            background: white;
+        }
+
+        [contenteditable=true] {
+            outline: none;
+        }
+
+            [contenteditable=true]:focus, [contenteditable=true]:active {
+                border-bottom: 1px solid #369;
+            }
+
+        .table th, .table td {
+            padding: 5px 5px 0 5px;
+        }
+
+        .btn-icono {
+            background-color: transparent;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            border-width: 0;
+            outline: none;
+        }
+
+            .btn-icono:hover {
+                background-color: black;
+            }
+
+                .btn-icono:hover i {
+                    color: buttonface;
+                }
+
+            .btn-icono i {
+                font-size: 13px;
+            }
+
+
+        .icon-tab {
+            font-size: 17px;
+            color: #666;
+        }
+
+        .autocomplete {
+            position: relative;
+            box-sizing: border-box;
+        }
+
+            .autocomplete input {
+                padding-left: 35px !important;
+            }
+
+            .autocomplete i {
+                position: absolute;
+                LEFT: 10px;
+                color: #343a40;
+                font-size: 20px;
+                top: 6px;
+            }
+
+        .easy-autocomplete input {
+            width: 180px;
+        }
+
+        .floatThead-container {
+            z-index: 1 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-sm mt-2 ">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#areametaria" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Area materias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#materia" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Materias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cordinadorarea" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-graduation-cap mr-2"></i>Cordinador Area</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade show active" id="areametaria" role="tabpanel" aria-labelledby="areametaria-tab">
+                                <div class="row d-flex">
+                                    <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">                                        
+                                        <table class="table table-hover table-sm" id="tblDatosAreaMateria">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Código</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col" class="text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblAreaMateria"></tbody>
+                                            <tfoot class="bg-light">
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" maxlength="20" class="form-control" id="ArMaCodigo_-1" placeholder="Código a manejar">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" maxlength="50" class="form-control" id="ArMaDescripcion_-1" placeholder="Descripción">
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <button class="btn-icono" onclick="agregar_area_materia()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4">
+                                        <span>Filtro de búsqueda</span>
+                                        <div class="autocomplete input-group-sm">
+                                            <input type="text" class="form-control" id="buscargrado" placeholder="Buscar por código o descripcion" onkeyup="buscar_area_materia(this)">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show active" id="materia" role="tabpanel" aria-labelledby="materia-tab">
+                            </div>
+                            <div class="tab-pane fade show active" id="cordinadorarea" role="tabpanel" aria-labelledby="cordinadorarea-tab">
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/Materias/AreasMateria.js"></script>
+</body>
+</html>

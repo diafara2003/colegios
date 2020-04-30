@@ -4,7 +4,7 @@ var _data_termporada = [];
 //window.parent.mostrar_mensajes('','<label><i class="fas fa-circle-notch fa-spin"></i> Cargando...</label>');
 function eventos_temporada() {
     $('[contenteditable="true"]').off('click');
-    $('[contenteditable="true"]').click(function () {
+    $('[contenteditable="true"]').focusin(function () {
         selectText(this);
     });
 }

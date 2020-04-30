@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelos\CursosCustom.cs" />
+    <Compile Include="Modelos\ResponseCursoCustom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\CursosBI.cs" />
   </ItemGroup>
