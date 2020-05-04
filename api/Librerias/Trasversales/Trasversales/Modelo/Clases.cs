@@ -18,9 +18,9 @@ namespace Trasversales.Modelo
         [MaxLength(20)]
         public string ClaCodigo { get; set; }
         public int ClaMateriaId { get; set; }
-        public int ClaSalonId { get; set; }
+        public int? ClaSalonId { get; set; }
         public int ClaCursoId { get; set; }
-        public int ClaProfesor { get; set; }
+        public int? ClaProfesor { get; set; }
         [MaxLength]
         public string ClaObservacion { get; set; }
     }

@@ -43,7 +43,7 @@ function mostrar_panel() {
 }
 function selectText(_this) {
     var doc = document;
-    var element = _this;    
+    var element = _this;
     if (doc.body.createTextRange) {
         var range = document.body.createTextRange();
         range.moveToElementText(element);
@@ -99,8 +99,20 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
             maxNumberOfElements: 10,
             onClickEvent: function () {
                 let _selected = $(`#${id_input}`).getSelectedItemData()
+                $(`#${id_input}`).attr('result', JSON.stringify(_selected));
+
                 fn_selected(_selected, `#${id_input}`);
             },
+            //onHideListEvent: function () {
+            //    let _selected = $(`#${id_input}`).getSelectedItemData()
+
+            //    if (_selected == -1) {
+            //        $(`#${id_input}`).removeAttr('result');
+
+            //        if (!fn_selected)
+            //            fn_selected(_selected, `#${id_input}`);
+            //    }
+            //},
             onKeyEnterEvent: function () {
                 let _selected = $(`#${id_input}`).getSelectedItemData()
                 fn_selected(_selected, `#${id_input}`);
@@ -120,6 +132,11 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         }
     }
     //http://easyautocomplete.com/guide#sec-template-links
+
+    $(`#${id_input}`).on('focus', function (e) {
+        $(this).removeAttr('result');
+    })
+
     $(`#${id_input}`).easyAutocomplete(options);
 }
 function IsNull(data) {

@@ -1,5 +1,5 @@
 ﻿
-using Clases.Modelos;
+using Clase.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,35 +15,23 @@ namespace Colegio.Controllers
         // GET: api/Clases
         public IEnumerable<string> Get()
         {
+
             return new string[] { "value1", "value2" };
+        }
+
+
+        public AisgnarMateriaClaseCustom Post(Trasversales.Modelo.Clases request)
+        {
+            return new Clases.Servicios.ClasesBI().Save(request);
         }
 
         [Route("materias")]
         [HttpGet]
-        public IEnumerable<AsignarClases> GetAsignarClases(int empresa,int grado=0)
+        public IEnumerable<AsignarClases> GetMateriasGrado(int empresa, int curso = 0)
         {
-            return new Clases.Servicios.ClasesBI().GetAsignarClases(empresa, grado);
+            return new Clases.Servicios.ClasesBI().GetMateriasGrado(empresa, curso);
         }
 
-        // GET: api/Clases/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST: api/Clases
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Clases/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Clases/5
-        public void Delete(int id)
-        {
-        }
     }
 }

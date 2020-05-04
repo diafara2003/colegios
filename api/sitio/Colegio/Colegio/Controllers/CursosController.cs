@@ -9,12 +9,38 @@ using Trasversales.Modelo;
 
 namespace Colegio.Controllers
 {
+    [RoutePrefix("curso")]
     public class CursosController : ApiController
     {
         // GET: api/Cursos
         public IEnumerable<CursosCustom> Get()
         {
             return new Curso.Servicios.CursosBI().Get();
+        }
+
+
+        public IEnumerable<CursosCustom> Get(int id)
+        {
+            return new Curso.Servicios.CursosBI().Get(id);
+        }
+
+        [Route("grado")]
+        public IEnumerable<Cursos> GetGradoCurso(int grado = 0)
+        {
+            return new Curso.Servicios.CursosBI().GetCursosGrados(grado);
+        }
+
+        [Route("asignar/estudiante")]
+        public CursoEstudiantes PostAsignarEsteudiante(CursoEstudiantes request)
+        {
+            return new Curso.Servicios.CursosBI().AsignarEstudianteCurso(request);
+        }
+        [Route("eliminar/estudiante/")]
+        [HttpPost]
+        public ResponseDTO PostQuitarEstudianteCurso(CursoEstudiantes request)
+        {
+
+            return new Curso.Servicios.CursosBI().QuitarEstudianteCurso(request);
         }
 
         // POST: api/Cursos
@@ -26,7 +52,7 @@ namespace Colegio.Controllers
         // PUT: api/Cursos/5
         public ResponseCursoCustom Put(Cursos value)
         {
-            if (value.CurGrado==0)
+            if (value.CurGrado == 0)
             {
                 value.CurGrado = new Curso.Servicios.CursosBI().Get(value.CurId).FirstOrDefault().CurGrado;
             }

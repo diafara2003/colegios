@@ -1,4 +1,5 @@
 ﻿
+using Materia.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,24 @@ namespace Colegio.Controllers
     public class MateriasController : ApiController
     {
         // GET: api/Materias
-        public IEnumerable<string> Get()
+        public IEnumerable<Materias> Get(int empresa, int grado)
         {
-            return new string[] { "value1", "value2" };
+            return new Materia.Servicios.MateriaBL().Get(empresa, grado);
         }
 
-        // GET: api/Materias/5
-        public string Get(int id)
+        public ResponseMateriaCustom Post(Materias materias)
         {
-            return "value";
+            return new Materia.Servicios.MateriaBL().Save(materias);
+        }
+
+        public ResponseDTO Put(Materias materias)
+        {
+            return new Materia.Servicios.MateriaBL().Update(materias);
+        }
+
+        public ResponseDTO Delete(int id)
+        {
+            return new Materia.Servicios.MateriaBL().Remove(id);
         }
 
         [Route("areasmaterias")]
@@ -32,26 +42,11 @@ namespace Colegio.Controllers
         }
 
 
-        // POST: api/Materias
-        public void Post([FromBody]string value)
-        {
-        }
-
-
         [Route("areasmaterias")]
         [HttpPost]
         public AreasMaterias PostAreaMAteria(AreasMaterias request)
         {
-             return new Materia.Servicios.AreaMateria().Save(request);
-        }
-
-
-
-
-
-        // PUT: api/Materias/5
-        public void Put(int id, [FromBody]string value)
-        {
+            return new Materia.Servicios.AreaMateria().Save(request);
         }
 
 
@@ -63,14 +58,6 @@ namespace Colegio.Controllers
             return new Materia.Servicios.AreaMateria().Update(request);
         }
 
-
-      
-
-
-        // DELETE: api/Materias/5
-        public void Delete(int id)
-        {
-        }
 
 
         [Route("areasmaterias/eliminar")]

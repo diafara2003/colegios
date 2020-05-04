@@ -18,11 +18,17 @@ namespace Colegio.Controllers
         {
             if (tipo != 0)
             {
-                return new PersonasBI().Get(filter,tipo);
+                return new PersonasBI().Get(filter, tipo);
             }
             return new PersonasBI().Get(id);
         }
 
+        [Route("estudiantes/sinasignar")]
+        public IEnumerable<Personas> Get(int curso = 0)
+        {
+
+            return new PersonasBI().GetEstudiantesSinAsignar(curso);
+        }
         
 
         [Route("Tipos")]
@@ -30,7 +36,6 @@ namespace Colegio.Controllers
         {
             return new TipoPersona().Get(id);
         }
-
 
         // POST: api/Personas
         public Personas Post(Personas request)

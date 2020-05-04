@@ -14,9 +14,10 @@ namespace Curso.Servicios
     {
         public IEnumerable<CursosCustom> Get(int id = 0)
         {
-
-            IEnumerable<CursosCustom> objSeccion = new List<CursosCustom>();
             ColegioContext objCnn = new ColegioContext();
+            IEnumerable<CursosCustom> objSeccion = new List<CursosCustom>();
+            int temporada_activa = objCnn.temporada.Where(C => C.TempEstado == 1).FirstOrDefault().TempId;
+
             if (id == 0)
             {
                 objSeccion = (from data in objCnn.cursos
@@ -31,7 +32,7 @@ namespace Curso.Servicios
 
                               join auxiliar in objCnn.personas on data.CurAuxiliar equals auxiliar.PerId into CursoAuxiliar
                               from auxiliarPersona in CursoAuxiliar.DefaultIfEmpty()
-
+                              where data.CurTemporada == temporada_activa
                               select new CursosCustom()
                               {
                                   CurCodigo = data.CurCodigo,
@@ -40,7 +41,7 @@ namespace Curso.Servicios
                                   CurId = data.CurId,
                                   CurTemporada = data.CurTemporada,
                                   CurTutor = data.CurTutor,
-                                  CurGrado=data.CurGrado,
+                                  CurGrado = data.CurGrado,
                                   NombreTemporada = t.TempAno.ToString(),
                                   Nombretutor = string.IsNullOrEmpty(tutorPersona.PerNombres) ? string.Empty : tutorPersona.PerNombres,
                                   NombreAuxiliar = string.IsNullOrEmpty(auxiliarPersona.PerNombres) ? string.Empty : auxiliarPersona.PerNombres,
@@ -82,6 +83,57 @@ namespace Curso.Servicios
                               });
             }
             return objSeccion;
+        }
+
+        public IEnumerable<Cursos> GetCursosGrados(int idgrado)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            int temporada_activa = objCnn.temporada.Where(C => C.TempEstado == 1).FirstOrDefault().TempId;
+
+            return (from curso in objCnn.cursos
+                    where curso.CurGrado == idgrado && curso.CurTemporada == temporada_activa
+                    select curso);
+        }
+
+        public CursoEstudiantes AsignarEstudianteCurso(CursoEstudiantes request)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            CursoEstudiantes objInserted = new CursoEstudiantes();
+
+
+            objCnn.curso_estudiantes.Add(request);
+
+            objCnn.SaveChanges();
+
+            return request;
+        }
+
+        public ResponseDTO QuitarEstudianteCurso(CursoEstudiantes request)
+        {
+            ResponseDTO objresponse = new ResponseDTO();
+            ColegioContext objCnn = new ColegioContext();
+
+            try
+            {
+                Trasversales.Modelo.CursoEstudiantes obj = (from data in objCnn.curso_estudiantes
+                                                            where data.CurEstCursoId == request.CurEstCursoId
+                                                            && data.CurEstEstudianteId == request.CurEstEstudianteId
+                                                            select data).FirstOrDefault();
+
+                objCnn.Entry(obj).State = EntityState.Deleted;
+
+                objCnn.SaveChanges();
+
+                objresponse.codigo = 1;
+                objresponse.respuesta = "";
+            }
+            catch (Exception e)
+            {
+
+                objresponse.codigo = -1;
+                objresponse.respuesta = e.Message;
+            }
+            return objresponse;
         }
 
         public CursosCustom Save(Trasversales.Modelo.Cursos modelo)

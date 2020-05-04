@@ -13,3 +13,4 @@ C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csproj.CoreCompileInput
 C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csproj.CopyComplete
 C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.dll
 C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.pdb
+C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csprojAssemblyReference.cache

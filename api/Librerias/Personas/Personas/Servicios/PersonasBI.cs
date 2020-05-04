@@ -16,9 +16,9 @@ namespace Persona.Servicios
             ColegioContext objCnn = new ColegioContext();
 
             if (id == 0)
-                objSeccion = (from data in objCnn.personas select data);
+                objSeccion = (from data in objCnn.personas select data).OrderBy(c => c.PerApellidos);
             else
-                objSeccion = (from data in objCnn.personas where data.PerId == id select data);
+                objSeccion = (from data in objCnn.personas where data.PerId == id select data).OrderBy(c => c.PerApellidos);
             return objSeccion;
         }
 
@@ -30,16 +30,41 @@ namespace Persona.Servicios
             if (filter == string.Empty)
                 objSeccion = (from data in objCnn.personas
                               where data.PerEstado && data.PerTipoPerfil == tipo
-                              select data);
+                              select data).OrderBy(c => c.PerApellidos);
             else
                 objSeccion = (from data in objCnn.personas
                               where data.PerEstado
                               && data.PerTipoPerfil == tipo
                                 && data.PerNombres.Contains(filter) || data.PerApellidos.Contains(filter)
-                              select data);
+                              select data).OrderBy(c => c.PerApellidos); ;
             return objSeccion;
         }
 
+        public IEnumerable<Personas> GetEstudiantesSinAsignar(int curso = 0)
+        {
+            IEnumerable<Personas> objSeccion = new List<Personas>();
+            ColegioContext objCnn = new ColegioContext();
+
+            if (curso == 0)
+            {
+                objSeccion = (from estudiantes in objCnn.personas
+
+                              join cursos in objCnn.curso_estudiantes on estudiantes.PerId equals cursos.CurEstEstudianteId into CursoEstudiante
+                              from cursoest in CursoEstudiante.DefaultIfEmpty()
+
+                              where estudiantes.PerTipoPerfil == 2 && cursoest.CurEstId == null
+                              select estudiantes).OrderBy(c => c.PerApellidos);
+            }
+            else
+            {
+                objSeccion = (from curest in objCnn.curso_estudiantes
+                              join estudiantes in objCnn.personas on curest.CurEstEstudianteId equals estudiantes.PerId
+                              where estudiantes.PerTipoPerfil == 2 && curest.CurEstCursoId == curso
+                              select estudiantes).OrderBy(c => c.PerApellidos);
+            }
+
+            return objSeccion;
+        }
 
         public Personas Save(Personas modelo)
         {

@@ -12,7 +12,7 @@ namespace Trasversales.Modelo
     public class CursoEstudiantes
     {
         [Key]
-        public int CurEstId { get; set; }
+        public int? CurEstId { get; set; }
         public int CurEstCursoId { get; set; }
         public int CurEstEstudianteId { get; set; }
     }

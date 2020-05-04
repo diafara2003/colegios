@@ -13,3 +13,4 @@ C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CoreCompileI
 C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CopyComplete
 C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.dll
 C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.pdb
+C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache

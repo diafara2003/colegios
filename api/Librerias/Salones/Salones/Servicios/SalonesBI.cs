@@ -11,13 +11,24 @@ namespace Salon.Servicios
 {
     public class SalonesBI
     {
-        public IEnumerable<Trasversales.Modelo.Salones> Get()
+        public IEnumerable<Trasversales.Modelo.Salones> Get(string filter = "")
         {
 
             IEnumerable<Trasversales.Modelo.Salones> objSeccion = new List<Trasversales.Modelo.Salones>();
             ColegioContext objCnn = new ColegioContext();
 
-            objSeccion = (from data in objCnn.salones select data);
+            if (filter == "")
+            {
+                objSeccion = (from data in objCnn.salones select data);
+            }
+            else
+            {
+                objSeccion = (from data in objCnn.salones
+                              where data.SalCodigo.Contains(filter) || data.SalDescripcion.Contains(filter)
+                              select data
+                              );
+            }
+
             return objSeccion;
         }
 

@@ -1,6 +1,6 @@
 ﻿
 
-let _data_area_materia = [];
+var _data_area_materia = [];
 
 function eventos_area_materia() {
     $('[contenteditable="true"]').off('click');

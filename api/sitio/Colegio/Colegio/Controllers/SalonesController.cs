@@ -8,12 +8,18 @@ using Trasversales.Modelo;
 
 namespace Colegio.Controllers
 {
+    [RoutePrefix("salon")]
     public class SalonesController : ApiController
     {
         // GET: api/Salones
         public IEnumerable<Salones> Get()
         {
             return new Salon.Servicios.SalonesBI().Get();
+        }
+        [Route("filtro")]
+        public IEnumerable<Salones> GetSalonesfiltro(string id,string filter = "")
+        {
+            return new Salon.Servicios.SalonesBI().Get(filter);
         }
 
         public Salones Post(Salones value)

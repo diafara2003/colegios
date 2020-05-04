@@ -21,7 +21,7 @@ namespace Trasversales.Modelo
         public int MatAreaId { get; set; }
         [MaxLength(50)]
         public string MatDescripcion { get; set; }
-        public Int16 MatEstado { get; set; }
-        public bool MatExtracurricural { get; set; }
+        public byte MatEstado { get; set; }        
+        public bool MatElectiva { get; set; }
     }
 }

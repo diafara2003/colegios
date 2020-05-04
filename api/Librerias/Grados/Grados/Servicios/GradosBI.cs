@@ -16,7 +16,7 @@ namespace Grado.Servicios
             IEnumerable<Grados> objSeccion = new List<Grados>();
             ColegioContext objCnn = new ColegioContext();
 
-            objSeccion = (from data in objCnn.grados select data);
+            objSeccion = (from data in objCnn.grados select data).OrderBy(c=> c.GraOrden);
             return objSeccion;
         }
 

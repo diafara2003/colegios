@@ -47,8 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\MateriasCustom.cs" />
+    <Compile Include="Modelos\ResponseMateriaCustom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\AreasMaterias.cs" />
+    <Compile Include="Servicios\MateriaBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Persistencia\BaseDatos\BaseDatos.csproj">
@@ -60,8 +63,6 @@
       <Name>Trasversales</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modelos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

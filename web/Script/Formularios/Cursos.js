@@ -26,11 +26,12 @@ function renderizar_cursos(source) {
 function renderizar_tr_cursos(_item, _index) {
     let _tr = '';
     _tr += '<tr posicion=' + _index + '>';
-    _tr += '<th scope="row"><div contenteditable="true" value-initial="' + _item.CurGrado + '" id="div_CurGrado_' + _item.CurId +'" onfocusin="crear_elemento(this,' + _item.CurId + ',' + _item.CurGrado + ')">' + _item.NombreGrado + '</th>';
+    _tr += '<th scope="row"><div contenteditable="true" value-initial="' + _item.CurGrado + '" id="div_CurGrado_' + _item.CurId + '" onfocusin="crear_elemento(this,' + _item.CurId + ',' + _item.CurGrado + ')">' + _item.NombreGrado + '</th>';
     _tr += '<td scope="row"><div id="CurCodigo_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurCodigo + '</td>';
     _tr += '<td scope="row"><div id="CurDescripcion_' + _item.CurId + '" contenteditable="true" onblur="modificar_cursos(' + _item.CurId + ')">' + _item.CurDescripcion + '</td>';
     _tr += '<td scope="row"><input type="text" class="input-autocomplete"  onblur="modificar_cursos_ac(this,' + _item.CurId + ',0)"  onclick="iniciar_ac(\'CurTutor_' + _item.CurId + '\')" maxlength="20" id= "CurTutor_' + _item.CurId + '" value="' + _item.Nombretutor + '"/></td>';
     _tr += '<td scope="row"><input type="text" class="input-autocomplete"  onblur="modificar_cursos_ac(this,' + _item.CurId + ',1)"  onclick="iniciar_ac(\'CurAuxiliar_' + _item.CurId + '\')" maxlength="20" id= "CurAuxiliar_' + _item.CurId + '"  value="' + _item.NombreAuxiliar + '"/></td>';
+    _tr += '<td class="text-center"><button onclick="asignar_estudiantes(' + _item.CurId + ',' + _index+')" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-user-graduate"></i></button></td>';
     _tr += '<td class="text-center"><button onclick="eliminar_cursos(this,' + _item.CurId + ')" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>';
     _tr += '</tr>';
 
@@ -56,7 +57,7 @@ function quitar_elemento(_this) {
 
         _th.next().find('div').focus();
     }
-    
+
 }
 function modificar_cursos(id, _this) {
     let data_changed = obtener_datos_curso(id);
@@ -121,7 +122,7 @@ function obtener_datos_curso(posicion) {
     } else {
         _data.CurGrado = $('#CurGrado_' + posicion).find('option:selected').val()
     }
-    
+
 
     if (document.getElementById('CurCodigo_' + posicion).tagName.toLowerCase() == 'div') {
         _data.CurCodigo = document.getElementById('CurCodigo_' + posicion).textContent;
@@ -222,7 +223,22 @@ function iniciar_ac(id, placeholder, property, tipo) {
     selectText($('#' + id));
 
 }
+function asignar_estudiantes(id_curso, index) {
+    let _curso = _data_cursos[index];
+    $('#frameasignacion').attr('src', `../Cursos/CursoEstudiante.html?T=C&curso=${id_curso}`);
+    $('#exampleModal').modal('show');
+    $('#nombrecurso').text(`   ${_curso.CurDescripcion} (${_curso.CurCodigo})`);
+    //  let url = `../Cursos/CursoEstudiante.html?T=C&curso=${id_curso}`;
+    // window.open(url);
+}
+function calcular_height_frame() {
+    let _window = $(this).outerHeight(true);
+  
+    $('#frameasignacion').css('height', (_window - (160)) + 'px');
+
+}
 (function () {
+    calcular_height_frame();
     consultar_cursos();
 
     autocomplete('CurTutor_-1', 'Personas?tipo=1', 'PerNombres', 'PerApellidos', 'Buscar tutor', selected => {

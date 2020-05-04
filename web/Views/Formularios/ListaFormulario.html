@@ -102,7 +102,11 @@
 <body>
 
     <div class="container container-sm mt-2 ">
-
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Configuración de la temporada para el año escolar vigente</header>
+            </div>
+        </div>
         <div class="row">
 
 
@@ -225,6 +229,7 @@
                                                     <th scope="col">Descripción</th>
                                                     <th scope="col">Tutor</th>
                                                     <th scope="col">Auxiliar</th>
+                                                    <th scope="col">Asignar estudiantes</th>
                                                     <th scope="col" class="text-center">Opciones</th>
                                                 </tr>
                                             </thead>
@@ -282,7 +287,7 @@
                                         <table class="table table-hover table-sm mt-4">
 
                                             <thead>
-                                                <tr>                                                    
+                                                <tr>
                                                     <th scope="col">Código</th>
                                                     <th scope="col">Descripción</th>
                                                     <th scope="col" class="text-center">Opciones</th>
@@ -290,7 +295,7 @@
                                             </thead>
                                             <tbody id="tblsalones"></tbody>
                                             <tbody class="bg-light">
-                                                <tr>                                                  
+                                                <tr>
                                                     <td>
                                                         <div class="input-group input-group-sm">
                                                             <input type="text" maxlength="20" class="form-control" id="SalCodigo_-1" placeholder="Código a manejar">
@@ -330,7 +335,26 @@
     </div>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable  modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label class="modal-title">Los estudiantes se asignaran al curso   </label>
+                    <strong>
+                        <label id="nombrecurso"></label>
+                    </strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="frameasignacion" width="100%" allowfullscreen="true" frameborder="0"></iframe>
+                </div>
 
+            </div>
+        </div>
+    </div>
 
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
@@ -343,9 +367,6 @@
     <script src="../../Script/Formularios/Grados.js"></script>
     <script src="../../Script/Formularios/Cursos.js"></script>
     <script src="../../Script/Formularios/Salones.js"></script>
-    <script>
-
-    </script>
 
 
 </body>

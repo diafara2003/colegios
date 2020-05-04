@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
 
-
+    <link href="../../Style/estandar.css" rel="stylesheet" />
     <style>
         body, input {
             font-size: 13px !important;
@@ -97,10 +97,52 @@
         .floatThead-container {
             z-index: 1 !important;
         }
+
+        li {
+            cursor: pointer;
+        }
+
+        #Divcursos input {
+            min-width: 180px;
+            height: 28px !important;
+            max-width: 270px !important;
+        }
+
+        .easy-autocomplete {
+            width: 100% !important;
+        }
+
+        .btn-icono {
+            background-color: transparent;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            border-width: 0;
+            outline: none;
+            cursor: pointer;
+        }
+
+            .btn-icono:hover {
+                background-color: black;
+            }
+
+                .btn-icono:hover i {
+                    color: buttonface;
+                }
+
+            .btn-icono i {
+                font-size: 15px;
+            }
     </style>
 </head>
 <body>
     <div class="container container-sm mt-2 ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Configuración de materias para el año escolar vigente</header>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
                 <div class="row">
@@ -110,17 +152,17 @@
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#areametaria" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Area materias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#materia" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Materias</a>
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#materia" role="tab" aria-controls="contact" aria-selected="false" onclick="ver_materias()"><i class="fas fa-user-graduate mr-2"></i>Materias</a>
                             </li>
-                            <li class="nav-item">
+                            <!--<li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cordinadorarea" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-graduation-cap mr-2"></i>Cordinador Area</a>
-                            </li>
+                            </li>-->
                         </ul>
                         <div class="tab-content" id="myTabContent">
 
                             <div class="tab-pane fade show active" id="areametaria" role="tabpanel" aria-labelledby="areametaria-tab">
                                 <div class="row d-flex">
-                                    <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">                                        
+                                    <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
                                         <table class="table table-hover table-sm" id="tblDatosAreaMateria">
                                             <thead>
                                                 <tr>
@@ -162,12 +204,52 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade show active" id="materia" role="tabpanel" aria-labelledby="materia-tab">
+                            <div class="tab-pane fade show" id="materia" role="tabpanel" aria-labelledby="materia-tab">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
+                                        <div class="d-flex mt-3">
+                                            <label class="pt-1" for="exampleFormControlInput1">Grado</label>
+                                            <div class="col-10">
+                                                <select onchange="selected_grado()" class="form-control form-control-sm" id="ddlGrados"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-md-12 col-sm-12 col-12">
+                                        
+                                        <table class="table table-sm " id="tblPersonas">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Area</th>
+                                                    <th scope="col">Código</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col" class="text-center">Electiva</th>
+                                                    <th scope="col" class="text-center"><i class="fas fa-cog"></i></th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="tbodymaterias"></tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-control form-control-sm" id="MatAreaId_-1"></select>
+                                                    </td>
+                                                    <td><input type="text" maxlength="50" class="form-control form-control-sm" id="MatCodigo_-1" placeholder="Código"></td>
+                                                    <td><input type="text" maxlength="50" class="form-control form-control-sm" id="MatDescripcion_-1" placeholder="Descripción"></td>
+                                                    <td class="text-center"><div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input" id="customSwitch_-1"><label class="custom-control-label" for="customSwitch_-1"></label></div></td>
+                                                    <td class="text-center"><button onclick="agregar_materia()" class="btn-icono"><i class="fas fa-plus text-success"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="tab-pane fade show active" id="cordinadorarea" role="tabpanel" aria-labelledby="cordinadorarea-tab">
+                            <div class="tab-pane fade show " id="cordinadorarea" role="tabpanel" aria-labelledby="cordinadorarea-tab">
                             </div>
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,5 +261,6 @@
     <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Materias/AreasMateria.js"></script>
+    <script src="../../Script/Materias/materias.js"></script>
 </body>
 </html>
