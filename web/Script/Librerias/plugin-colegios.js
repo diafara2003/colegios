@@ -97,7 +97,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         placeholder: placeholder,
         list: {
             maxNumberOfElements: 10,
-            onClickEvent: function () {
+            onChooseEvent: function () {
                 let _selected = $(`#${id_input}`).getSelectedItemData()
                 $(`#${id_input}`).attr('result', JSON.stringify(_selected));
 
@@ -113,10 +113,10 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
             //            fn_selected(_selected, `#${id_input}`);
             //    }
             //},
-            onKeyEnterEvent: function () {
-                let _selected = $(`#${id_input}`).getSelectedItemData()
-                fn_selected(_selected, `#${id_input}`);
-            },
+            //onKeyEnterEvent: function () {
+            //    let _selected = $(`#${id_input}`).getSelectedItemData()
+            //    fn_selected(_selected, `#${id_input}`);
+            //},
             match: {
                 enabled: false
             },
