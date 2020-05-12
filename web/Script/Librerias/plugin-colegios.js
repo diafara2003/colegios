@@ -21,6 +21,10 @@
         .then(res => {
             return res.json();
         })
+        .catch(error => {
+            if (!error)
+                error(error);
+        })
         .then(data => {
             callback(data);
         });

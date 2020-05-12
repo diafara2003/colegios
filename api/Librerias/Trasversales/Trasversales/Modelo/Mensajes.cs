@@ -15,14 +15,17 @@ namespace Trasversales.Modelo
         public int MenId { get; set; }
         public int MenEmpId { get; set; }
         public int MenUsuario { get; set; }
+        public int MenClase { get; set; }
         [MaxLength(2)]
         public string MenTipoMsn { get; set; }
         [MaxLength(100)]
-        public string MenAsuto { get; set; }
+        public string MenAsunto { get; set; }
         [MaxLength(8000)]
         public string MenMensaje { get; set; }
         public DateTime MenFecha { get; set; }
         public int MenReplicaIdMsn { get; set; }
         public byte MenOkRecibido { get; set; }
+        public byte MenBloquearRespuesta { get; set; }
+        public string MenSendTo { get; set; }
     }
 }

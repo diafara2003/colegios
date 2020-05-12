@@ -74,7 +74,7 @@ namespace BaseDatos.Contexto
         public DbSet<Personas> personas { get; set; }
         public DbSet<Estudiantes> estudiantes { get; set; }
         public DbSet<Profesores> prefesores { get; set; }
-
+        public DbSet<GrupoEnvioAsignacion> grupo_envio_asignacion { get; set; }
 
     }
 }

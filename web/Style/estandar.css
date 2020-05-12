@@ -46,4 +46,36 @@ i {
     z-index: 1 !important;
 }
 
+.btn-icono {
+    background-color: transparent;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    border-width: 0;
+    outline: none;
+}
 
+    .btn-icono:focus {
+        outline: none;
+    }
+    .btn-icono:active {
+        outline: none;
+    }
+
+    .btn-icono:hover {
+        background-color: black;
+    }
+
+        .btn-icono:hover i {
+            color: buttonface;
+        }
+
+    .btn-icono i {
+        font-size: 13px;
+    }
+
+
+.icon-tab {
+    font-size: 17px;
+    color: #666;
+}

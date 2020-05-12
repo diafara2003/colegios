@@ -51,6 +51,7 @@
     <Compile Include="Modelo\Empresas.cs" />
     <Compile Include="Modelo\Estudiantes.cs" />
     <Compile Include="Modelo\Grados.cs" />
+    <Compile Include="Modelo\GrupoEnvioAsignacion.cs" />
     <Compile Include="Modelo\GruposEnvio.cs" />
     <Compile Include="Modelo\GruposEnvioDet.cs" />
     <Compile Include="Modelo\Materias.cs" />

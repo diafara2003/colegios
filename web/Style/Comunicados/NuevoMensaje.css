@@ -1,0 +1,189 @@
+﻿.a-btn {
+    padding: 0.375rem 0.75rem;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.custom-checkbox {
+    cursor: pointer;
+}
+
+
+.a-btn:hover {
+    background-color: #ebebeb;
+}
+
+.mensaje {
+    border: 1px solid #ebebeb;
+    height: 500px;
+    /*border-radius: 5px;*/
+}
+
+.cuerpo {
+    height: 380px;
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+}
+
+.para {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #ebebeb;
+    width: 60px;
+    font-weight: 500;
+    text-align: center;
+    height: 30px;
+    min-width: 60px;
+}
+
+[contenteditable=true] {
+    outline: none;
+}
+
+    [contenteditable=true]:empty:before {
+        content: attr(placeholder);
+        pointer-events: none;
+        display: block; /* For Firefox */
+        color: #808080;
+    }
+
+
+.ql-container {
+    height: 228px;
+    max-height: 228px;
+}
+
+
+.list-group-item {
+    display: flex;
+    cursor: pointer;
+    border: none;
+}
+
+    .list-group-item:not(.encabezado-opcion-destinatario):hover {
+        background: #ebebeb;
+    }
+
+.resultado-destinatarios {
+    border: 1px solid #ebebeb;
+    width: 84%;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    background: white;
+}
+
+.text-destinatario {
+    border-bottom: 1px solid #369;
+    width: 200px;
+    line-height: 2;
+    font-size: 14px
+}
+
+.resultado-destinatarios li {
+    padding: 2px;
+}
+
+.encabezado-opcion-destinatario {
+    /*color: #369;*/
+    padding-top: 2px;
+    padding-bottom: 0;
+    color: #369;
+    font-weight: bold !important;
+}
+
+.destinatario-imagen {
+    margin-right: 10px;
+    border: 1px solid #ebebeb;
+    padding: 8px;
+    border-radius: 50%;
+    color: white;
+    width: 35px;
+    height: 35px;
+}
+
+
+.envio-correo-ac {
+    display: flex;
+}
+
+
+.bg-estudiante {
+    background: #30A54A;
+}
+
+.bg-profesor {
+    background: #369;
+}
+
+.color-estudiante {
+    color: #30A54A;
+}
+
+.color-profesor {
+    color: #369;
+}
+
+.icon-close {
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    line-height: 26px;
+}
+
+    .icon-close:hover:hover {
+        color: #ebebeb;
+    }
+
+
+
+.wellItemText-212 {
+    margin-right: 8px;
+    margin-left: 8px;
+    color: #000000;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1em;
+    overflow: hidden;
+}
+
+.desti-cuerpo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+
+
+.desti-nombre {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+
+
+.imageArea {
+    position: relative;
+    text-align: center;
+    height: 32px;
+    width: 32px;
+    flex: 0 0 auto;
+}
+
+.desti-seleccionado {
+    background-color: #F3F3F3;
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 1px 4px 0 4px;
+    border-radius: 16px;
+}

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Trasversales.Modelo
 {
@@ -15,8 +10,11 @@ namespace Trasversales.Modelo
         public int GruEnvId { get; set; }
         public int GruEnvEmpId { get; set; }
         public int GruEnvTemporada { get; set; }
-        public int GruEnvProfesor { get; set; }
+        [StringLength(2)]
+        public string GruEnvTipo { get; set; }        
         [MaxLength(300)]
         public string GruEnvDescripcion { get; set; }
+        public string GruEnvioColor { get; set; }
+        public bool GruEstado { get; set; }
     }
 }
