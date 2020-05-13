@@ -1,4 +1,4 @@
-﻿let id_usuario = 39;
+﻿let id_usuario = 16;//39;
 let _data_source_ac = [], destinatarios = [], _sent_to = '';
 let iniciales = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
@@ -106,9 +106,9 @@ function enviar_mensaje() {
     let mensaje = obtener_datos();
     data.destinatarios = obtener_destinatarios();
     data.mensaje = mensaje;
-    if (validar_datos()) {
+    if (validar_datos(mensaje)) {
         consultarAPI('Mensajes', 'POST', (response) => {
-            alert('bien');
+            window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar');
         }, data, (error) => {
             alert('mal');
         });
@@ -131,10 +131,24 @@ function obtener_datos() {
 
     return myobject;
 }
-function validar_datos() {
-    let _result = false;
+function validar_datos(_data) {
+    let _result = true;
+
+    if (_data.MenAsunto == '') {
+        mostrar_mensaje_validacion_error('Asunto obligatorio.');
+        result = false;
+        return;
+    }
+    if (_data.MenMensaje == '') {
+        mostrar_mensaje_validacion_error('No hay mensaje.');
+        result = false;
+        return;
+    }
 
     return _result;
+}
+function mostrar_mensaje_validacion_error(mensaje) {
+    window.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar');
 }
 (function () {
     $('#DivResultados').css('display', 'none');
