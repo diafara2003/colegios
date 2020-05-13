@@ -92,7 +92,7 @@ function renderizar_seleccionado(_i) {
 function set_sent_to() {
     let _data = [];
 
-    destinatarios.forEach(_item => _data.push({ tipo: '', id: _item.PerId }));
+    destinatarios.forEach(_item => _data.push({ tipo: _item.tipo, id: _item.PerId }));
 
     return JSON.stringify(_data);
 }
@@ -106,12 +106,13 @@ function enviar_mensaje() {
     let mensaje = obtener_datos();
     data.destinatarios = obtener_destinatarios();
     data.mensaje = mensaje;
-
-    consultarAPI('Mensajes', 'POST', (response) => {
-        alert('bien');
-    }, data, (error) => {
-        alert('mal');
-    });
+    if (validar_datos()) {
+        consultarAPI('Mensajes', 'POST', (response) => {
+            alert('bien');
+        }, data, (error) => {
+            alert('mal');
+        });
+    }
 }
 function obtener_destinatarios() {
     return destinatarios.map(_item => { return _item.PerId });
@@ -129,6 +130,11 @@ function obtener_datos() {
     myobject.MenSendTo = set_sent_to();
 
     return myobject;
+}
+function validar_datos() {
+    let _result = false;
+
+    return _result;
 }
 (function () {
     $('#DivResultados').css('display', 'none');
