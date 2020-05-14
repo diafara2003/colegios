@@ -71,6 +71,14 @@ function renderizar_seleccionado(_i) {
     destinatarios.push(persona);
     set_sent_to(persona);
 
+
+    $('#DivBusqueda').before(renderizar_html_seleccionado(persona, true));
+    $('#DivBusqueda').text('');
+    $('#DivBusqueda').focus();
+    $('#DivResultados').empty();
+    $('#DivResultados').css('display', 'none');
+}
+function renderizar_html_seleccionado(persona, _id_deleted) {
     let _html = '';
     _html += '<div class="desti-seleccionado">';
     _html += '<span class="desti-cuerpo">';
@@ -78,21 +86,19 @@ function renderizar_seleccionado(_i) {
     _html += '<div class="desti-nombre bg-estudiante" aria-hidden="true">';
     _html += `<span>${iniciales(persona.PerApellidos, persona.PerNombres)}</span>`;
     _html += '</div></div>';
-    _html += `<span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
-    _html += `<button type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
+    _html += `<div style="display:block"><span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
+    _html += `<small>${persona.CurDescripcion}</small></div>`;
+    if (_id_deleted)
+        _html += `<button style="margin-top:-3px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
     _html += '</span>';
     _html += '</div>';
 
-    $('#DivBusqueda').before(_html);
-    $('#DivBusqueda').text('');
-    $('#DivBusqueda').focus();
-    $('#DivResultados').empty();
-    $('#DivResultados').css('display', 'none');
+    return _html;
 }
 function set_sent_to() {
     let _data = [];
 
-    destinatarios.forEach(_item => _data.push({ tipo: _item.tipo, id: _item.PerId }));
+    destinatarios.forEach(_item => _data.push({ tipo: _item.tipo, id: _item.PerId, ocupacion: _item.CurDescripcion, nombre: _item.PerNombres, apellido: _item.PerApellidos }));
 
     return JSON.stringify(_data);
 }
@@ -150,6 +156,53 @@ function validar_datos(_data) {
 function mostrar_mensaje_validacion_error(mensaje) {
     window.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar');
 }
+function consultar_mensaje(id) {
+    consultarAPI(`mensajes/${id}`, 'GET', response => {
+        read_only();
+        cargar_mensaje(response);
+        $('#bodymensaje').css('display', 'block');
+    });
+}
+function read_only() {
+    $('[contenteditable="true"]').removeAttr('contenteditable');
+
+    $('#botones, .ql-toolbar, #DivBusqueda').css('display', 'none');
+    $('.ql-container.ql-snow').css('border', 'none');
+    quill.disable();
+
+}
+function cargar_mensaje(mensaje) {
+    // $('.ql-editor')[0].innerHTML = mensaje.MenMensaje;
+    quill.clipboard.dangerouslyPasteHTML(0, mensaje.MenMensaje);
+    document.getElementById('MenAsunto').textContent = mensaje.MenAsunto;
+
+
+    let sent_to = JSON.parse(mensaje.MenSendTo);
+
+    sent_to.forEach(_item => {
+        let _persona = {};
+        //_persona = _item;
+        _persona.PerApellidos = _item.nombre;
+        _persona.PerNombres = _item.apellido;
+        _persona.PerId = _item.id;
+        _persona.CurDescripcion = _item.ocupacion;
+
+        $('#DivBusqueda').before(renderizar_html_seleccionado(_persona, false))
+    });
+
+
+}
 (function () {
     $('#DivResultados').css('display', 'none');
+
+    let id = Get_query_string('id');
+
+    if (id != undefined) {
+        $('#bodymensaje').css('display', 'none');
+        consultar_mensaje(id);
+    } else {
+        $('.ql-container').addClass('editor-height');
+    }
 })();
+
+//.ql-container
