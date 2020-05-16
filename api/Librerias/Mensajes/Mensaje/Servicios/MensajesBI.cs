@@ -28,6 +28,7 @@ namespace Mensaje.Servicios
 
             try
             {
+
                 request.mensaje.MenFecha = DateTime.Now;
                 objCnn.mensajes.Add(request.mensaje);
                 objCnn.SaveChanges();
