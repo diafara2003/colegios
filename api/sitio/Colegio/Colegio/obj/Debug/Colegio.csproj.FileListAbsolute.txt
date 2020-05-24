@@ -19,6 +19,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Clases.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Cursos.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Grados.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Materia.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Mensaje.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Menu.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.DependencyCollector.dll
@@ -51,6 +52,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Clases.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Cursos.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Grados.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Materia.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Mensaje.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Menu.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Menu.dll.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Persona.pdb
@@ -83,5 +85,3 @@ C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreCompileInputs
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
-C:\Colegios\api\sitio\Colegio\Colegio\bin\Mensaje.dll
-C:\Colegios\api\sitio\Colegio\Colegio\bin\Mensaje.pdb

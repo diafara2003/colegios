@@ -9,6 +9,7 @@ C:\Colegios\api\Librerias\Cursos\Cursos\bin\Debug\BaseDatos.dll.config
 C:\Colegios\api\Librerias\Cursos\Cursos\bin\Debug\Trasversales.pdb
 C:\Colegios\api\Librerias\Cursos\Cursos\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Cursos\Cursos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csproj.CopyComplete
 C:\Colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.dll
