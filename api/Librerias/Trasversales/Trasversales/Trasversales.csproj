@@ -51,10 +51,15 @@
     <Compile Include="Modelo\Empresas.cs" />
     <Compile Include="Modelo\Estudiantes.cs" />
     <Compile Include="Modelo\Grados.cs" />
-    <Compile Include="Modelo\GrupoEnvioAsignacion.cs" />
     <Compile Include="Modelo\GruposEnvio.cs" />
+    <Compile Include="Modelo\GruposEnvioAsignacion.cs" />
+    <Compile Include="Modelo\GruposEnvioAutorizado.cs" />
+    <Compile Include="Modelo\GruposEnvioAutorizadoAll.cs" />
+    <Compile Include="Modelo\GruposEnvioAutorizadoCursos.cs" />
+    <Compile Include="Modelo\GruposEnvioAutorizadoGrados.cs" />
     <Compile Include="Modelo\GruposEnvioDet.cs" />
     <Compile Include="Modelo\Materias.cs" />
+    <Compile Include="Modelo\GruposEnvioColores.cs" />
     <Compile Include="Modelo\Mensajes.cs" />
     <Compile Include="Modelo\Opcion.cs" />
     <Compile Include="Modelo\Personas.cs" />
@@ -63,6 +68,7 @@
     <Compile Include="Modelo\Salones.cs" />
     <Compile Include="Modelo\Seccion.cs" />
     <Compile Include="Modelo\Temporada.cs" />
+    <Compile Include="Modelo\TipoMensaje.cs" />
     <Compile Include="Modelo\UsuarioPerfil.cs" />
     <Compile Include="Modelo\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

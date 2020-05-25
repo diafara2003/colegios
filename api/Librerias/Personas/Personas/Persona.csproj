@@ -47,12 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modelos\AcEnvioCorreoPersonas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\PersonasBI.cs" />
     <Compile Include="Servicios\TipoPersona.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modelos\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Persistencia\BaseDatos\BaseDatos.csproj">
       <Project>{ceced400-2faa-4086-b5bf-57f55a3941b5}</Project>

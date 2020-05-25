@@ -101,6 +101,9 @@ function obtener_datos_materias(posicion) {
 
     var _data = { MatID: 0, MatEmpId: 1, MatTemporadaId: 0, MatAreaId: 0, MatGradoId: 0, MatCodigo: '', MatDescripcion: '', MatEstado: 1, MatElectiva: false };
 
+    _data.MatEmpId = obtener_session().empresa;
+    _data.MatTemporadaId = obtener_session().temporada;
+
     if (posicion == -1) {
         _data.MatAreaId = $('#MatAreaId_' + posicion).find('option:selected').val()
     } else {
@@ -124,8 +127,7 @@ function obtener_datos_materias(posicion) {
     if (posicion != -1) {
         _data.MatID = posicion;
     }
-    _data.MatGradoId = $('#ddlGrados').find('option:selected').val();
-    _data.MatTemporadaId = temporada_activa.TempId;
+    _data.MatGradoId = $('#ddlGrados').find('option:selected').val();    
     _data.MatElectiva = $('#customSwitch_' + posicion).is(':checked') ? 1 : 0;
 
 
@@ -135,11 +137,6 @@ function limpiar_registro_materias(posicion) {
     document.getElementById('MatCodigo_' + posicion).value = "";
     document.getElementById('MatDescripcion_' + posicion).value = "";
 
-}
-function consultar_temporada_Activa() {
-    consultarAPI('Temporada', 'GET', function (response) {
-        temporada_activa = response.find(f => f.TempEstado == 1)
-    });
 }
 function renderizar_ddl_areas_materias() {
     $('#MatAreaId_-1').empty();
@@ -153,7 +150,7 @@ function ver_materias() {
     setTimeout(c => { fixed_table_scroll('tblDatosGrados'); }, 300);
 }
 (function () {
-    consultar_temporada_Activa();
+    
     consultar_grados();
 })();
 

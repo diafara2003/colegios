@@ -104,6 +104,7 @@ function obtener_datos_persona(posicion) {
         PerClave: '', PerEstado: 1, PerTipoPerfil: -1,
         PerFechanacimiento: '', PerLugarNacimiento: '', PerDireccion: ''
     };
+    _data.PerIdEmpresa = obtener_session().empresa;
     _data.PerId = posicion;
     _data.PerEstado = 1;
     _data.PerTipoPerfil = _tipo_perfil.UsuPerId;

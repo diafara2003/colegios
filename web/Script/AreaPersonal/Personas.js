@@ -48,6 +48,7 @@ function obtener_datos_persona() {
         PerClave: '', PerEstado: 1, PerTipoPerfil: -1,
         PerFechanacimiento: '', PerLugarNacimiento: '', PerDireccion:''
     };
+    myobject.PerIdEmpresa = obtener_session().empresa;
     myobject.PerEstado = _tipo_perfil.UsuPerId;
     myobject.PerNombres = document.getElementById('PerNombres').value;
     myobject.PerApellidos = document.getElementById('PerApellidos').value;

@@ -91,6 +91,7 @@ function obtener_datos_grado(posicion) {
         _data.GraId = posicion;
     }
 
+    _data.GraEmpId = obtener_session().empresa;
     return _data;
 }
 function limpiar_registro_grados(posicion) {

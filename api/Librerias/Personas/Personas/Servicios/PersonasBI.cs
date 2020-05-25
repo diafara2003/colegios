@@ -1,13 +1,9 @@
 ﻿using BaseDatos.Contexto;
-using Persona.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Trasversales.Modelo;
-using BaseDatos.Modelos;
 using System.Data;
 
 namespace Persona.Servicios
@@ -44,6 +40,8 @@ namespace Persona.Servicios
             return objSeccion;
         }
 
+       
+
         public IEnumerable<Personas> GetEstudiantesSinAsignar(int curso = 0)
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();
@@ -70,32 +68,7 @@ namespace Persona.Servicios
             return objSeccion;
         }
 
-        public IEnumerable<AcEnvioCorreoPersonas> GetAcEnvioCorreoPersonas(int idusuario, string filter = "")
-        {
-            ColegioContext objCnn = new ColegioContext();
-            ProcedureDTO ProcedureDTO = new ProcedureDTO();
-            IEnumerable<AcEnvioCorreoPersonas> objlstResultado = new List<AcEnvioCorreoPersonas>();
-
-            ProcedureDTO.commandText = "msn.AcEnvioCorreoPersonas";
-            ProcedureDTO.parametros.Add("filter", filter);
-            ProcedureDTO.parametros.Add("idusuario", idusuario);
-
-            DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
-
-            objlstResultado = (from data in result.AsEnumerable()
-                               select new AcEnvioCorreoPersonas()
-                               {
-                                   PerId = (int)data["PerId"],
-                                   CurDescripcion = (string)data["CurDescripcion"],
-                                   GraDescripcion = (string)data["GraDescripcion"],
-                                   PerApellidos = (string)data["PerApellidos"],
-                                   PerNombres = (string)data["PerNombres"],
-                                   tipo = (string)data["tipo"],
-                               });
-
-            return objlstResultado;
-        }
-
+      
 
         public Personas Save(Personas modelo)
         {

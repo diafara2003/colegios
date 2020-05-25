@@ -1,4 +1,4 @@
-﻿let id_usuario = 16;//39;
+﻿let _sesion = {};//39;
 let _data_source_ac = [], destinatarios = [], _sent_to = '';
 let iniciales = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
@@ -8,14 +8,7 @@ var quill = new Quill('#editor', {
     placeholder: 'Mensaje a enviar',
     theme: 'snow'
 });
-//var _x = '<p><strong>Gerard Arthur Way</strong></p>';
-//$('.ql-editor')[0].innerHTML = _x;
 
-let tipos = [
-    { tipo: 'P', nombre: 'Profesores', color: 'color-profesor', bg: 'bg-profesor' },
-    { tipo: 'E', nombre: 'Estudiantes', color: 'color-estudiante', bg: 'bg-estudiante' },
-    { tipo: 'E', nombre: 'Estudiantes', color: 'color-estudiante', bg: 'bg-estudiante' },
-];
 
 function descartar() {
     let _url = window.location.href.toLowerCase().split('comunicados')[0];
@@ -32,7 +25,7 @@ function buscar_personas(_this) {
             return;
         }
 
-        consultarAPI(`Persona/enviocorreo?idusuario=${id_usuario}&filter=${_value}`, 'GET', (response) => {
+        consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter=${_value}&temporada=${_sesion.temporada}&empresa=${_sesion.empresa}`, 'GET', (response) => {
             $('#DivResultados').css('display', 'block');
             _data_source_ac = response;
             renderizar_resultados_ac(response);
@@ -43,25 +36,28 @@ function buscar_personas(_this) {
 }
 function renderizar_resultados_ac(source) {
 
-
-    let _tipo = tipos.find(c => c.tipo == source[0].tipo);
-
     let _html = '';
 
-    _html += '<ul class="list-group list-group-flush ul-profesores">';
-    _html += ` <li class="list-group-item encabezado-opcion-destinatario ${_tipo.color}">${_tipo.nombre}</li>`;
     source.forEach((item, i) => {
+
+        if (i == 0 || source[i].tipo != source[(i - 1)].tipo) {
+            _html += '<ul class="list-group list-group-flush ul-profesores">';
+            _html += ` <li class="list-group-item encabezado-opcion-destinatario" style="color:${item.GrEnColorRGB}">${item.GrEnColorObs}</li>`;
+        }
+
         _html += `<li class="list-group-item" onclick="renderizar_seleccionado(${i})">`;
-        _html += `<div class="destinatario-imagen ${_tipo.bg}"> ${iniciales(item.PerApellidos, item.PerNombres)}</div>`;
+        _html += `<div class="destinatario-imagen" style="background:${item.GrEnColorBurbuja}"> ${iniciales(item.PerApellidos, item.PerNombres)}</div>`;
         _html += '<div style="display:block">';
         _html += `<div class="nombre-destinatario">${item.PerApellidos} ${item.PerNombres}</div>`;
         _html += `<div class="text-muted">${item.CurDescripcion}</div>`;
         _html += '</div>';
         _html += '</li>';
 
-
+        if (i == 0 || source[i].tipo != source[(i - 1)].tipo) {
+            _html += '</ul>';
+        }
     });
-    _html += '</ul>';
+
 
     document.getElementById('DivResultados').innerHTML = _html;
 }
@@ -121,11 +117,11 @@ function enviar_mensaje() {
     }
 }
 function obtener_destinatarios() {
-    return destinatarios.map(_item => { return _item.PerId });
+    return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
 }
 function obtener_datos() {
     var myobject = {
-        MenId: 0, MenEmpId: 1, MenUsuario: 1, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
+        MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
         MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0
     };
 
@@ -203,6 +199,7 @@ function cargar_mensaje(mensaje) {
     } else {
         $('.ql-container').addClass('editor-height');
     }
+    _sesion = obtener_session();
 })();
 
 //.ql-container

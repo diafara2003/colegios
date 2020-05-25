@@ -16,5 +16,6 @@ namespace Trasversales.Modelo
         public string GruEnvDescripcion { get; set; }
         public string GruEnvioColor { get; set; }
         public bool GruEstado { get; set; }
+        public bool GruAsignaAuto { get; set; }
     }
 }

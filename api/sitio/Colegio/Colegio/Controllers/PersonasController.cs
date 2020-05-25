@@ -1,11 +1,6 @@
 ﻿
-using Persona.Modelos;
 using Persona.Servicios;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Trasversales.Modelo;
 
@@ -31,15 +26,7 @@ namespace Colegio.Controllers
             return new PersonasBI().GetEstudiantesSinAsignar(curso);
         }
 
-
-        [Route("enviocorreo")]
-        public IEnumerable<AcEnvioCorreoPersonas> Get(int idusuario=0,string filter="")
-        {
-            return new PersonasBI().GetAcEnvioCorreoPersonas(idusuario, filter);
-        }
-
-
-
+        
         [Route("Tipos")]
         public IEnumerable<UsuarioPerfil> GetTipoPersona(int id = 0)
         {

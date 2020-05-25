@@ -1,11 +1,6 @@
 ﻿let temporada_activa = {}, datos_clases = [],cursoId=-1;
 
 
-function consultar_temporada_Activa() {
-    consultarAPI('Temporada', 'GET', function (response) {
-        temporada_activa = response.find(f => f.TempEstado == 1)
-    });
-}
 function consultar_grados() {
     consultarAPI('Grados', 'GET', renderizar_grados);
 }
@@ -136,7 +131,7 @@ function obtener_datos(_this, _index) {
     }
     let tr = $(_this).closest('tr');
     myobject.Claid = datos_clases[_index].Claid;
-    myobject.ClaTemporada = temporada_activa.TempId;
+    myobject.ClaTemporada = obtener_session().temporada;
     myobject.ClaCodigo = tr.find('input').eq(0).val();
     myobject.ClaMateriaId = datos_clases[_index].MatID;
     myobject.ClaCursoId = cursoId;
@@ -165,7 +160,6 @@ function obtener_datos(_this, _index) {
     return myobject;
 }
 
-(function () {
-    consultar_temporada_Activa();
+(function () {    
     consultar_grados();
 })();

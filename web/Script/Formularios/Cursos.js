@@ -142,6 +142,7 @@ function obtener_datos_curso(posicion) {
     _data.CurTemporada = temporada_activa.TempId;
     _data.CurAuxiliar = auxiliar_id;
     _data.CurTutor = tutor_id;
+    _data.CurEmpId = obtener_session().empresa;
 
     return _data;
 }

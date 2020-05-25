@@ -160,3 +160,16 @@ function asignar_control_fecha(id) {
         $(event.target).closest('div.input-group').find('input').focus();
     });
 }
+function obtener_session() {
+    var _sesion = {};
+    _sesion.idusuario = 16;
+    _sesion.empresa = 1;
+    _sesion.temporada = 1;
+
+    return _sesion
+}
+function groupBy(arr, prop) {
+    const map = new Map(Array.from(arr, obj => [obj[prop], []]));
+    arr.forEach(obj => map.get(obj[prop]).push(obj));
+    return Array.from(map.values());
+}

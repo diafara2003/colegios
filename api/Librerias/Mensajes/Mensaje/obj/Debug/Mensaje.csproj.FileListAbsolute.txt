@@ -14,3 +14,5 @@ C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CoreCompileI
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CopyComplete
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.dll
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.pdb
+C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.dll
+C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.pdb

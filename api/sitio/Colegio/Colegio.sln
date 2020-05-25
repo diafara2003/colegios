@@ -78,6 +78,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mensajes", "Mensajes", "{98
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mensaje", "..\..\Librerias\Mensajes\Mensaje\Mensaje.csproj", "{C8590C7D-66EA-46BB-A7F8-75724EF81B26}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilidades", "Utilidades", "{5E50679B-EBED-40AD-9E06-99B32FC5E302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "..\..\Librerias\Utilidades\Utilidades\Utilidades.csproj", "{DD385C09-EF67-4BCB-A95B-C600571E6D84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +140,10 @@ Global
 		{C8590C7D-66EA-46BB-A7F8-75724EF81B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8590C7D-66EA-46BB-A7F8-75724EF81B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8590C7D-66EA-46BB-A7F8-75724EF81B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,6 +175,8 @@ Global
 		{99BBF8B6-33F3-4C13-9F11-B8D6342C007A} = {4A33B01C-B2ED-4804-919B-7F68DEB0E226}
 		{98F827B2-C399-441C-A179-06F9E2415A7D} = {173BBF70-E026-461F-9993-A926E381F775}
 		{C8590C7D-66EA-46BB-A7F8-75724EF81B26} = {98F827B2-C399-441C-A179-06F9E2415A7D}
+		{5E50679B-EBED-40AD-9E06-99B32FC5E302} = {173BBF70-E026-461F-9993-A926E381F775}
+		{DD385C09-EF67-4BCB-A95B-C600571E6D84} = {5E50679B-EBED-40AD-9E06-99B32FC5E302}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E548D9F-83CB-4288-A7F1-CF745BE21F23}

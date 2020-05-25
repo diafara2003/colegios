@@ -9,7 +9,12 @@ namespace Mensaje.Modelos
 {
     public class CrearMensajeCustom
     {
-        public List<int> destinatarios { get; set; }
+        public List<Destinarario> destinatarios { get; set; }
         public Mensajes mensaje { get; set; }
+    }
+
+    public class Destinarario {
+        public int id { get; set; }
+        public int tipo { get; set; }
     }
 }
