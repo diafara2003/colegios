@@ -118,17 +118,15 @@
     <div class="container-fluid">
         <div class="row vh-100 d-flex">
             <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 colegio-info d-lg-block d-md-block d-sm-none d-none">
-                <div class="navbar shadow-sm">
+                <div class="navbar shadow-sm ">
                     <a class="navbar-brand" href="#"><img class="logo-colegio" src="../../Img/colegio.png" /></a>
                     <a class="navbar-brand text-dark" href="#">Colegio Autraliano Campestre</a>
                 </div>
 
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 colegio-info rounded shadow-sm p-4 mt-4">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 colegio-info rounded shadow-sm p-4 mt-4 h-75">
                     <h4>Ultimas Noticias</h4>
-                    <hr class="m-1"/>
-                    <section id="g-showcase" class="g-compact">
-                      
-                    </section>
+                    <hr class="m-1" />
+                    <section id="g-showcase" class="g-compact"></section>
                 </div>
 
             </div>
@@ -136,7 +134,7 @@
                 <div class="rounded shadow-sm container-login mt-xl-5 mt-lg-5 mt-md-5 mt-sm-0 mt-0 p-3">
 
                     <div class="imgcontainer">
-                        <img src="../../img/login.png" alt="Avatar" class="avatar">
+                        <img src="../../img/login.png" alt="Avatar" class="rounded-circle w-25">
                     </div>
                     <div class="p-3 text-center">
                         <!--<small id="emailHelp" class="form-text text-muted">
@@ -161,7 +159,11 @@
                         </button>
 
                     </div>
-
+                    <div class="form-group p-2 text-center badge badge-danger text-wrap w-100 fade d-none" id="Div_error">
+                        <div class="">
+                            <label class="">Documento o contraseña no son válidos</label>
+                        </div>
+                    </div>
 
                 </div>
             </div>

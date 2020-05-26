@@ -13,8 +13,7 @@ function validar_nombre_usuario(_this) {
     $(_this).attr('disabled', 'disabled');
     let _documento = document.getElementById('txtusuario').value;
     let _clave = document.getElementById('txtclave').value;
-
-    return;
+    
     consultarAPI(`login/validacion?username=${_documento}&password=${_clave}`, 'GET', response => {
         $(_this).removeAttr('disabled');
         if (response != null) {
@@ -38,7 +37,7 @@ function generar_token() {
     });
 }
 function usuario_no_valido() {
-
+    $('#Div_error').removeClass('d-none').addClass('show');
 }
 function validar_clave() {
     let _clave = document.getElementById('txtclave').value;
