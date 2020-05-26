@@ -8,14 +8,14 @@
     <title>Inicio de sesion</title>
     <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
     <link rel="stylesheet" href="../../Style/bootstrap.css">
-    
+
     <style>
         .form-login {
             margin-top: 20%;
             border: 1px solid #ebebeb;
         }
 
-      
+
 
         .imgcontainer {
             text-align: center;
@@ -84,55 +84,85 @@
         }
     </style>
 
+
+    <style>
+        /*.container-login {
+            margin-top: 40%;
+        }*/
+
+        .navbar {
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        .logo-colegio {
+            width: 120px;
+            height: 51px;
+        }
+
+        .avatar {
+            width: 20%;
+        }
+
+
+        @media (max-width: 806px) {
+            .container-login {
+                margin-top: 5%;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="offset-sm-2 offset-lg-3 offset-md-2 col-sm-8 col-md-7 col-lg-5 ">
-                <div class="">
-                    <div class="form-login shadow-sm p-3 mb-5 bg-white rounded">
-                        <div>
-                            <div class="imgcontainer">
-                                <img src="../../img/login.png" alt="Avatar" class="avatar">
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <span id="lblcorreo" class="badge badge-pill badge-primary"></span>
-                            </div>
-                            <div class="form-group p-3 sleep-email">
-                                <label for="exampleInputEmail1">Correo electronico</label>
-                                <input autocomplete="off" type="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="example@demo.com">
-                                <small id="emailHelp" class="form-text text-muted">
-                                    No compartiremos tu email con nadie
-                                    mas.
-                                </small>
-                            </div>
-                            <div class="form-group p-3 sleep-password">
-                                <label for="exampleInputEmail1">Contraseña</label>
-                                <input autocomplete="off" type="password" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="">
-                                <small id="emailHelp" class="form-text text-muted">
-                                    No compartiremos tu email con nadie mas.
-                                </small>
-                            </div>
 
-                            <div class="form-group p-3 sleep-email">
-                                <button type="button" class="btn btn-block btn-outline-info"
-                                        onclick="next()">
-                                    Continuar
-                                </button>
+    <div class="container-fluid">
+        <div class="row vh-100 d-flex">
+            <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 colegio-info d-lg-block d-md-block d-sm-none d-none">
+                <div class="navbar shadow-sm">
+                    <a class="navbar-brand" href="#"><img class="logo-colegio" src="../../Img/colegio.png" /></a>
+                    <a class="navbar-brand text-dark" href="#">Colegio Autraliano Campestre</a>
+                </div>
 
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 colegio-info rounded shadow-sm p-4 mt-4">
+                    <h4>Ultimas Noticias</h4>
+                    <hr class="m-1"/>
+                    <section id="g-showcase" class="g-compact">
+                      
+                    </section>
+                </div>
 
-                            </div>
-                            <div class="p-3 sleep-password">
-                                <button type="button" class="btn btn-block btn-outline-info" onclick="next()">Ingresar</button>
-                                <button type="button" class="btn btn-block btn-outline-secondary mt-1" onclick="next()">Regresar</button>
-                            </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 bg-light">
+                <div class="rounded shadow-sm container-login mt-xl-5 mt-lg-5 mt-md-5 mt-sm-0 mt-0 p-3">
 
-                        </div>
+                    <div class="imgcontainer">
+                        <img src="../../img/login.png" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="p-3 text-center">
+                        <!--<small id="emailHelp" class="form-text text-muted">
+                            No compartiremos tus datos con nadie.
+                        </small>-->
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="txtusuario">Documento de identidad</label>
+                        <input autocomplete="off" type="text" class="form-control form-control-sm" id="txtusuario"
+                               aria-describedby="emailHelp" placeholder="Documento de identidad">
 
                     </div>
+                    <div class="form-group p-2 mt-0">
+                        <label for="txtclave">Contraseña</label>
+                        <input autocomplete="off" type="password" class="form-control form-control-sm" id="txtclave"
+                               aria-describedby="emailHelp" placeholder="">
+                    </div>
+                    <div class="form-group p-2">
+                        <button type="button" class="btn btn-block btn-outline-info"
+                                onclick="validar_nombre_usuario(this)">
+                            Ingresar
+                        </button>
+
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -141,7 +171,7 @@
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Login/login.js"></script>
-    
+
 </body>
 
 </html>

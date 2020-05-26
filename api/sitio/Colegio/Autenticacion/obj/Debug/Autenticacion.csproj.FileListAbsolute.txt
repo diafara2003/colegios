@@ -1,0 +1,6 @@
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Autenticacion.dll
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Autenticacion.pdb
+C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csprojAssemblyReference.cache
+C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CoreCompileInputs.cache
+C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.dll
+C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.pdb

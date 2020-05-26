@@ -29,10 +29,14 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.Web.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.WindowsServer.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.ApplicationInsights.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Logging.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Tokens.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.Web.Infrastructure.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Newtonsoft.Json.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Persona.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Salones.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IdentityModel.Tokens.Jwt.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\System.Net.Http.Formatting.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\System.Web.Helpers.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.dll
@@ -48,6 +52,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Trasversales.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\WebGrease.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\EntityFramework.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Utilidades.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Clases.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Cursos.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Grados.pdb
@@ -65,6 +70,10 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.Web.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.WindowsServer.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.ApplicationInsights.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Logging.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Newtonsoft.Json.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\System.Net.Http.Formatting.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\System.Web.Helpers.xml
@@ -80,10 +89,9 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Antlr3.Runtime.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.dll.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\EntityFramework.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Utilidades.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csprojAssemblyReference.cache
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreCompileInputs.cache
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
-C:\Colegios\api\sitio\Colegio\Colegio\bin\Utilidades.dll
-C:\Colegios\api\sitio\Colegio\Colegio\bin\Utilidades.pdb

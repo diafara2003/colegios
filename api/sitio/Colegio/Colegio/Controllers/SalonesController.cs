@@ -8,6 +8,7 @@ using Trasversales.Modelo;
 
 namespace Colegio.Controllers
 {
+
     [RoutePrefix("salon")]
     public class SalonesController : ApiController
     {

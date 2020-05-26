@@ -1,14 +1,21 @@
-﻿function consultarAPI(metodo, type, callback, _data, error, ) {
+﻿function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
+    if (localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
+        paginar_sesion();
+        return;
+    }
 
     var Init = {
         method: type,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${localStorage.getItem('sesion')}`
         },
         //mode: 'cors',
         //cache: 'default'
     };
+    if (AllowAnonymous == undefined)
+        Init.headers.Authorization = `Bearer ${localStorage.getItem('sesion')}`
 
     if (_data != undefined) {
         Init.body = JSON.stringify(_data);
@@ -17,9 +24,14 @@
 
     let _url = window.location.href.toLowerCase().split('views')[0];
 
-    fetch(_url + 'api/' + metodo, Init)
+    fetch(`${_url}api/${metodo}`, Init)
         .then(res => {
-            return res.json();
+            if (res.status == 401) {
+                paginar_sesion();
+            }
+            else {
+                return res.json();
+            }
         })
         .catch(error => {
             if (!error)
@@ -28,8 +40,9 @@
         .then(data => {
             callback(data);
         });
-
-
+}
+function paginar_sesion() {
+    alert('no hay sesion');
 }
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");
@@ -167,6 +180,10 @@ function obtener_session() {
     _sesion.temporada = 1;
 
     return _sesion
+}
+function cerrar_session() {
+    localStorage.clear();    
+    window.location.href = window.location.href.toLowerCase().split('menu.html')[0] + 'login.html';
 }
 function groupBy(arr, prop) {
     const map = new Map(Array.from(arr, obj => [obj[prop], []]));

@@ -40,7 +40,6 @@ namespace Persona.Servicios
             return objSeccion;
         }
 
-       
 
         public IEnumerable<Personas> GetEstudiantesSinAsignar(int curso = 0)
         {
@@ -67,8 +66,6 @@ namespace Persona.Servicios
 
             return objSeccion;
         }
-
-      
 
         public Personas Save(Personas modelo)
         {
@@ -145,6 +142,30 @@ namespace Persona.Servicios
             }
             return objresponse;
 
+
+        }
+
+        public Personas GetUser(string documento, string password)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            Personas _persona = new Personas();
+            if (string.IsNullOrEmpty(password))
+            {
+                _persona = (from data in objCnn.personas
+                            where data.PerDocumento == documento
+                            select data).FirstOrDefault();
+            }
+            else
+            {
+
+                _persona = (from data in objCnn.personas
+                            where data.PerDocumento == documento && data.PerClave == password
+                            select data).FirstOrDefault();
+            }
+
+
+
+            return _persona;
 
         }
     }

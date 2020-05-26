@@ -4,9 +4,11 @@ C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\BaseDatos.dll
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.dll
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.SqlServer.dll
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Trasversales.dll
+C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.dll
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\BaseDatos.pdb
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\BaseDatos.dll.config
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Trasversales.pdb
+C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.pdb
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.SqlServer.xml
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csprojAssemblyReference.cache
@@ -14,5 +16,3 @@ C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CoreCompileI
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CopyComplete
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.dll
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.pdb
-C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.dll
-C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.pdb

@@ -82,6 +82,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilidades", "Utilidades", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "..\..\Librerias\Utilidades\Utilidades\Utilidades.csproj", "{DD385C09-EF67-4BCB-A95B-C600571E6D84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacion", "Autenticacion\Autenticacion.csproj", "{9168D962-6581-4CFF-8418-98ECE0718227}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +146,10 @@ Global
 		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD385C09-EF67-4BCB-A95B-C600571E6D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9168D962-6581-4CFF-8418-98ECE0718227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9168D962-6581-4CFF-8418-98ECE0718227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9168D962-6581-4CFF-8418-98ECE0718227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9168D962-6581-4CFF-8418-98ECE0718227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +183,7 @@ Global
 		{C8590C7D-66EA-46BB-A7F8-75724EF81B26} = {98F827B2-C399-441C-A179-06F9E2415A7D}
 		{5E50679B-EBED-40AD-9E06-99B32FC5E302} = {173BBF70-E026-461F-9993-A926E381F775}
 		{DD385C09-EF67-4BCB-A95B-C600571E6D84} = {5E50679B-EBED-40AD-9E06-99B32FC5E302}
+		{9168D962-6581-4CFF-8418-98ECE0718227} = {67E95995-ABE4-4E54-B53A-B28203F7F36E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E548D9F-83CB-4288-A7F1-CF745BE21F23}
