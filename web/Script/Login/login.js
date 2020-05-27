@@ -33,7 +33,7 @@ function generar_token() {
     consultarAPI(`login/token?username=${_documento}&password=${_clave}`, 'GET', response => {
         localStorage.setItem("sesion", response);
         localStorage.setItem("colegio", JSON.stringify(_user));
-        window.location.href = window.location.href.toLowerCase().split('login.html')[0] + 'menu.html';
+        window.location.href = window.location.href.toLowerCase().split('login')[0] + 'login/menu.html';
     });
 }
 function usuario_no_valido() {

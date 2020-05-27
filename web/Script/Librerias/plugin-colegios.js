@@ -1,5 +1,5 @@
 ﻿function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
-    if (localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
+    if (AllowAnonymous == undefined && localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
         paginar_sesion();
         return;
     }
@@ -42,7 +42,7 @@
         });
 }
 function paginar_sesion() {
-    alert('no hay sesion');
+    window.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
 }
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");
@@ -174,15 +174,20 @@ function asignar_control_fecha(id) {
     });
 }
 function obtener_session() {
+    let _usuario = obtener_usuario_sesion();
     var _sesion = {};
-    _sesion.idusuario = 16;
-    _sesion.empresa = 1;
+    _sesion.idusuario = _usuario.PerId;
+    _sesion.empresa = _usuario.PerIdEmpresa;
     _sesion.temporada = 1;
+    _sesion.tipo = _usuario.PerTipoPerfil;
 
     return _sesion
 }
+function obtener_usuario_sesion() {
+    return JSON.parse(localStorage.getItem('colegio'));
+}
 function cerrar_session() {
-    localStorage.clear();    
+    localStorage.clear();
     window.location.href = window.location.href.toLowerCase().split('menu.html')[0] + 'login.html';
 }
 function groupBy(arr, prop) {

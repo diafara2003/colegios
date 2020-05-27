@@ -1,6 +1,4 @@
-﻿/// <reference path="../Librerias/plugin-colegios.js" />
-/// <reference path="../Librerias/jquery-3.4.1.slim.min.js" />
-
+﻿
 function mostrar_mensajes(titulo, mensaje, icono = '',
     showConfirmButton = false,
     showCloseButton = false,
@@ -52,10 +50,11 @@ function renderizar_menu(response) {
         _html_movil += renderizar_opcion_movil(element);
         _html += '</li>';
     }
-
+    _html_movil += '<div class="opcion p-2 text-info" onclick="actualizar_datos()">Actualizar datos</div>';
+    _html_movil += '<div class="opcion p-2 text-info" onclick="cerrar_session()">Cerrar Sesión</div>';
     document.getElementById('menu_movil').innerHTML = _html_movil;
     document.getElementById('opciones_menu').innerHTML = _html;
-   // cerrar_mensaje();
+    // cerrar_mensaje();
 }
 function renderizar_opcion(_source, id) {
     let _opcion = '';
@@ -100,7 +99,18 @@ function ver_opcion(_this, _ruta) {
 
     $('#framrePage').attr('src', _ruta);
     $('.active').removeClass('active');
-    $(_this).closest('li').addClass('active');
+    if (_this != undefined)
+        $(_this).closest('li').addClass('active');
+}
+function cargar_usuario() {
+    let _usuario = obtener_usuario_sesion();
+    $('.spnnombreUsuario').text(`${_usuario.PerNombres} ${_usuario.PerApellidos}`);
+}
+function actualizar_datos() {
+    if (obtener_session().tipo == 1)
+        ver_opcion(undefined, '../areapersonal/Personas.html?T=P');
+    else
+        ver_opcion(undefined, '../areapersonal/Personas.html?T=E');
 }
 $(window).resize(function () {
     calcular_height_frame()
@@ -110,4 +120,5 @@ $(window).resize(function () {
 
     calcular_height_frame();
     cargar_opciones();
+    cargar_usuario();
 })();
