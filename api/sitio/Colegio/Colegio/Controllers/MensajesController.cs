@@ -16,7 +16,7 @@ namespace Colegio.Controllers
 
 
         // GET: api/Mensajes/5
-        public Mensajes Get(int id)
+        public Mensaje_Custom Get(int id)
         {
             return new Mensaje.Servicios.MensajesBI().Get(id);
         }

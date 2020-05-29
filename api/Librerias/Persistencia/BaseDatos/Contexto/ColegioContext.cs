@@ -80,7 +80,7 @@ namespace BaseDatos.Contexto
         public DbSet<GruposEnvioAutorizadoCursos> grupo_envio_autorizacion_cursos { get; set; }
         public DbSet<GruposEnvioAutorizadoGrados> grupo_envio_autorizacion_grados { get; set; }
         public DbSet<GruposEnvioColores> grupo_envio_colores { get; set; }
-        
+        public DbSet<EstadoMensaje> estado_mensaje{ get; set; }
 
     }
 }

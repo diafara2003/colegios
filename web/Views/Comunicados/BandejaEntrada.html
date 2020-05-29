@@ -174,7 +174,7 @@
                 color: #444444 !important;
             }
 
-            /*.mensaje:hover {
+        /*.mensaje:hover {
                 background-color: #ebebeb;
             }*/
 
@@ -194,7 +194,7 @@
 
         .btn-link {
             font-size: 14px !important;
-            font-family:Calibri;
+            font-family: Calibri;
         }
 
         .cuerpo-mensaje {
@@ -216,7 +216,7 @@
         <div class="d-flex">
             <div class="panel border">
                 <ul class="nav">
-                 
+
                     <li class="nav-title" onclick="nuevo_mensaje()">
                         <span><i class="fas fa-plus mr-2"></i>Nuevo Mensaje</span>
                     </li>
@@ -248,151 +248,75 @@
                 </div>
 
 
-                <!--<div style="background-color:#666666;height:30px;color:white" class="pl-1 d-flex justify-content-between">
-                    <div style="line-height:2;cursor:pointer" class="mr-3" onclick="mostrar_panel()"><i style="font-size:24px; line-height:1.3" class="fas fa-bars ml-1"></i></div>
-                    <div style="line-height:2;cursor:pointer" class="">Leido</div>
-                    <div style="line-height:2;cursor:pointer" class="mr-5">No Leido</div>
-                    <div style="line-height:2;cursor:pointer" class=""><i style="font-size:24px; line-height:1.3" class="fas fa-plus mr-2"></i></div>
-
-                </div>-->
-
-
-                <div class="mensaje d-flex p-0 mt-1">
-                    <div class="color-categoria-danger"></div>
-                    <div class="col-12 d-block pl-0">
-                        <div class="d-flex h-50 pl-0">
-                            <div class="col-9 text-truncate">
-                                <strong>Enfermeria</strong>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right">
-                                <i class="fas fa-check mr-1"></i>
-                                <i class="fas fa-reply mr-1"></i>
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                        <div class="d-flex h-50">
-                            <div class="col-9 text-truncate">
-                                <span>La niña manifiesta tener molestias</span>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">9:26 a. m.</a></div>
-                        </div>
-
+                <div id="DivMensajes">
+                    <div class="d-flex justify-content-center mt-5" id="cargando_mensajes">
+                        <span style="color:#212529"><i style="color:#212529" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando mensajes... </span>
                     </div>
+                    <div style="display:none">
+                        <div class="mensaje d-flex p-0 mt-1">
+                            <div class="color-categoria-danger"></div>
+                            <div class="col-12 d-block pl-0">
+                                <div class="d-flex h-50 pl-0">
+                                    <div class="col-9 text-truncate">
+                                        <strong>Enfermeria</strong>
+                                    </div>
+                                    <div class="col-3 p-0 m-0 text-right">
+                                        <i class="fas fa-check mr-1"></i>
+                                        <i class="fas fa-reply mr-1"></i>
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                                <div class="d-flex h-50">
+                                    <div class="col-9 text-truncate">
+                                        <span>La niña manifiesta tener molestias</span>
+                                    </div>
+                                    <div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">9:26 a. m.</a></div>
+                                </div>
 
-                </div>
-                <div class="mensaje d-flex p-0">
-                    <div class="color-categoria-warning"></div>
-                    <div class="col-12 d-block pl-0">
-                        <div class="d-flex h-50 pl-0">
-                            <div class="col-9 text-truncate">
-                                <strong>Agenda diaria</strong>
                             </div>
-                            <div class="col-3 p-0 m-0 text-right">
-                                <i class="fas fa-check mr-1"></i>
-                                <i class="fas fa-reply mr-1"></i>
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                        <div class="d-flex h-50">
-                            <div class="col-9 text-truncate">
-                                <span>se cominica cambios en el horario</span>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">5 de Abr.</a></div>
-                        </div>
 
+                        </div>
+                        <div class="mensaje d-flex p-0 active">
+                            <div class="color-categoria"></div>
+                            <div class="col-12 d-block pl-0">
+                                <div class="d-flex h-50 pl-0">
+                                    <div class="col-9 text-truncate">
+                                        <strong>Jhonnatan Andres Urueña Diaz</strong>
+                                    </div>
+                                    <div class="col-3 p-0 m-0 text-right">
+                                        <i class="fas fa-check mr-1"></i>
+                                        <i class="fas fa-reply mr-1"></i>
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                                <div class="d-flex h-50">
+                                    <div class="col-9 text-truncate">
+                                        <span>Saludo.</span>
+                                    </div>
+                                    <div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">9 de Abr.</a></div>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
-
                 </div>
-                <div class="mensaje d-flex p-0 active">
-                    <div class="color-categoria"></div>
-                    <div class="col-12 d-block pl-0">
-                        <div class="d-flex h-50 pl-0">
-                            <div class="col-9 text-truncate">
-                                <strong>Jhonnatan Andres Urueña Diaz</strong>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right">
-                                <i class="fas fa-check mr-1"></i>
-                                <i class="fas fa-reply mr-1"></i>
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                        <div class="d-flex h-50">
-                            <div class="col-9 text-truncate">
-                                <span>Saludo.</span>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">9 de Abr.</a></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="mensaje d-flex p-0">
-                    <div class="color-categoria"></div>
-                    <div class="col-12 d-block pl-0">
-                        <div class="d-flex h-50 pl-0">
-                            <div class="col-9 text-truncate">
-                                <strong>William Antonio Lopez Martinez</strong>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right">
-                                <i class="fas fa-check mr-1"></i>
-                                <i class="fas fa-reply mr-1"></i>
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                        <div class="d-flex h-50">
-                            <div class="col-9 text-truncate">
-                                <span>Me gustaria conocer porque los</span>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">12/04/2020</a></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="mensaje d-flex p-0 active">
-                    <div class="color-categoria-danger"></div>
-                    <div class="col-12 d-block pl-0">
-                        <div class="d-flex h-50 pl-0">
-                            <div class="col-9 text-truncate">
-                                <strong>Enfermeria</strong>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right">
-                                <i class="fas fa-check mr-1"></i>
-                                <i class="fas fa-reply mr-1"></i>
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                        <div class="d-flex h-50">
-                            <div class="col-9 text-truncate">
-                                <span>El estudiante manifiesta que </span>
-                            </div>
-                            <div class="col-3 p-0 m-0 text-right"><a class="btn-link">12/04/2020</a></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
 
 
-            <div class="col-lg-7 ml-2 pr-0 border" style="border:1px solid #ebebeb;border-radius:5px;background-color:white">
-
+            <div class="col-lg-7 ml-2 pr-0 border" style="border:1px solid #ebebeb;border-radius:5px;background-color:white;display:none" id="mostrarMensaje">
                 <div class="d-flex">
                     <div class="col-9 pl-2">
                         <div class="d-flex">
                             <dl class="row mt-2">
                                 <dt class="col-sm-2 pl-0">Asunto</dt>
-                                <dd class="col-sm-10">Saludo</dd>
+                                <dd class="col-sm-10" id="MenAsunto">Saludo</dd>
 
                                 <dt class="col-sm-2 pl-0">Fecha</dt>
-                                <dd class="col-sm-10"> 11/04/2020 17:00</dd>
+                                <dd class="col-sm-10" id="MenFecha"></dd>
 
                                 <dt class="col-sm-2 pl-0">De</dt>
-                                <dd class="col-sm-10"><strong>Jhonnatan Andres Urueña Diaz</strong></dd>
+                                <dd class="col-sm-10"><strong id="MenUsuario"></strong></dd>
                             </dl>
                         </div>
 
@@ -407,24 +331,8 @@
                 </div>
 
                 <div class="mt-1 pr-2" style="border-top:1px solid #666666">
-                    <div class="cuerpo-mensaje">
-                        <strong>    Estimados padres/madres o tutores:<br /></strong>
-                        El Profesorado de este Centro, se dirige a Ustedes para
-                        informarles de algunos aspectos importantes para el buen funcionamiento
-                        del curso que comenzamos.
-                        La labor educativa no sólo corresponde al profesorado, por lo que
-                        esperamos contar con la colaboración familiar para conseguir los
-                        objetivos fijados en el Proyecto Educativo de Centro.
-                        Según se establece en la Ley Orgánica de Educación, hay dos
-                        principios fundamentales:
-                        El primero consiste en la exigencia de proporcionar una
-                        educación de calidad a todos los ciudadanos de ambos sexos, en todos los
-                        niveles del sistema educativo. .
-                        El segundo principio consiste en la necesidad de que todos los
-                        componentes de la comunidad educativa colaboren para conseguir ese
-                        objetivo tan ambicioso.
-                        A continuación pasamos a comunicarles una serie de
-                        normas de funcionamiento.
+                    <div class="cuerpo-mensaje" id="MenMensaje">
+                       
                     </div>
                 </div>
             </div>

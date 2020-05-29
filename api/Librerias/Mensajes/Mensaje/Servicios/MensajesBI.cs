@@ -13,14 +13,31 @@ namespace Mensaje.Servicios
     public class MensajesBI
     {
 
-        public Mensajes Get(int id)
+        public Mensaje_Custom Get(int id)
         {
             ColegioContext objCnn = new ColegioContext();
 
 
             return (from mensaje in objCnn.mensajes
+                    join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
                     where mensaje.MenId == id
-                    select mensaje).FirstOrDefault();
+                    select new Mensaje_Custom
+                    {
+                        MenAsunto = mensaje.MenAsunto,
+                        MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
+                        MenUsuario = mensaje.MenUsuario,
+                        MenClase = mensaje.MenClase,
+                        MenEmpId = mensaje.MenEmpId,
+                        MenFecha = mensaje.MenFecha,
+                        MenId = mensaje.MenId,
+                        MenMensaje = mensaje.MenMensaje,
+                        MenOkRecibido = mensaje.MenOkRecibido,
+                        MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
+                        MenSendTo = mensaje.MenSendTo,
+                        MenTipoMsn = mensaje.MenTipoMsn,
+                        usuario = _usuario
+
+                    }).FirstOrDefault();
         }
 
         public Mensajes Save(CrearMensajeCustom request)
@@ -29,7 +46,7 @@ namespace Mensaje.Servicios
 
             try
             {
-
+                int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;
                 request.mensaje.MenFecha = DateTime.Now;
                 objCnn.mensajes.Add(request.mensaje);
                 objCnn.SaveChanges();
@@ -41,11 +58,12 @@ namespace Mensaje.Servicios
 
                 ProcedureDTO.commandText = "MSN.CrearMensaje_Bandeja_Entrada";
                 ProcedureDTO.parametros.Add("idMensaje", request.mensaje.MenId);
+                ProcedureDTO.parametros.Add("empresa", empresa);
                 ProcedureDTO.parametros.Add("destinatarios", _xml_destinatarios);
 
                 DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
                 //por cada destinatario se inserta en la tabla bandeja de entrada
-                
+
 
             }
             catch (Exception e)
@@ -85,5 +103,7 @@ namespace Mensaje.Servicios
                                });
             return objlstResultado;
         }
+        
+
     }
 }

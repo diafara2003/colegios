@@ -171,6 +171,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Autenticacion\JwtManager.cs" />
     <Compile Include="Autenticacion\TokenValidationHandler.cs" />
+    <Compile Include="Controllers\BandejaEntradaController.cs" />
     <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
