@@ -1,0 +1,16 @@
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\Grados.dll
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\Grados.pdb
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\BaseDatos.dll
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\EntityFramework.dll
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\EntityFramework.SqlServer.dll
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\Trasversales.dll
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\BaseDatos.pdb
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\BaseDatos.dll.config
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\Trasversales.pdb
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\EntityFramework.xml
+C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\EntityFramework.SqlServer.xml
+C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csprojAssemblyReference.cache
+C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CoreCompileInputs.cache
+C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CopyComplete
+C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.dll
+C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.pdb
