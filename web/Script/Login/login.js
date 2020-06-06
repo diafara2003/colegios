@@ -10,7 +10,13 @@ function next() {
 
 }
 function validar_nombre_usuario(_this) {
+    
     $(_this).attr('disabled', 'disabled');
+
+    _this.textContent = "";
+    $(_this).append('<i style="color:#212529;font-size:20px" class="fas fa-circle-notch fa-spin mr-2"></i>');
+
+
     let _documento = document.getElementById('txtusuario').value;
     let _clave = document.getElementById('txtclave').value;
     
@@ -22,7 +28,10 @@ function validar_nombre_usuario(_this) {
             window.location.href = window.location.href.toLowerCase().split('login.html')[0] + 'menu.html';
             
         } else {
+            _this.textContent = "Ingresar";
+            $(_this).find('i').remove();
             usuario_no_valido();
+            
         }
 
     }, undefined, undefined,true);
@@ -45,8 +54,10 @@ function validar_clave() {
     if (_clave == _user.PerClave) return true;
     else return false;
 }
-function ingresar() {
-    if (validar_clave())
-        generar_token();
+function ingresar(_this) {
+    _this.textContent = "";
+    $(_this).append('<i style="color:#212529;font-size:20px" class="fas fa-circle-notch fa-spin mr-2"></i>');
+    //if (validar_clave())
+    //    generar_token();
 }
 //https://bootsnipp.com/snippets/dldxB

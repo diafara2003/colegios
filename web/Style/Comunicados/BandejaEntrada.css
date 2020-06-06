@@ -128,8 +128,8 @@ i {
     .panel .nav-title {
         padding: .95rem 1rem;
         font-size: 80%;
-        /*font-weight: 700;*/
-        /*color: #151b1e;*/
+        font-weight: 100;
+        color: #343a40;
         text-transform: uppercase;
         padding: .6em;
         cursor: pointer;

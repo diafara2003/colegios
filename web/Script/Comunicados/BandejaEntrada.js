@@ -29,9 +29,9 @@ function cargar_bandeja(tipo) {
 function no_hay_mensajes() {
     let _html = '';
 
-    _html += '<div class="text-center mt-5" id="cargando_mensajes">';
-    _html += '<span style="color:#212529" >No hay mensajes</span>';
-    _html += '<br/><i style="font-size:62px" class="far fa-smile-wink"></i>';
+    _html += '<div class="text-center pt-5" id="cargando_mensajes">';
+    _html += '<span style="color:#6c757d" >No hay mensajes</span>';
+    _html += '<br/><i style="font-size:62px;color:#6c757d" class="far fa-envelope-open"></i>';
     _html += '</div>';
 
     return _html;
@@ -45,7 +45,7 @@ function renderizar_bandeja(_mensaje) {
     _html += '<div class="col-12 d-block pl-0">';
     _html += '<div class="d-flex h-50 pl-0">';
     _html += '<div class="col-9 text-truncate">';
-    _html += `<strong>${_mensaje.PerApellidos} ${_mensaje.PerNombres}</strong>`;
+    _html += `<span>${_mensaje.PerApellidos} ${_mensaje.PerNombres}</span>`;
     _html += '</div>';
     _html += '<div class="col-3 p-0 m-0 text-right d-none mensaje-iconos">';
     _html += '<i class="fas fa-check mr-1"></i>';
@@ -54,7 +54,7 @@ function renderizar_bandeja(_mensaje) {
     _html += '</div>';
     _html += '</div>';
     _html += '<div class="d-flex h-50">';
-    _html += '<div class="col-9 text-truncate">';
+    _html += '<div class="col-9 text-truncate desc-menasje">';
     _html += `<span>${_mensaje.MenAsunto}</span>`;
     _html += '</div>';
     _html += `<div class="col-3 p-0 m-0 text-right"><a class="btn-link text-right">${_mensaje.MenFecha.split(' ')[0]}</a></div>`;
@@ -94,10 +94,10 @@ function calcular_height() {
 
     if ($(window).outerWidth(true) > 750) {
         let _height_ul_nuevo_msn = $('#DivencabezadoMsn').outerHeight(true);
-        $('#MenMensaje').css('height', (_window - (_height_ul_nuevo_msn + 50)) + 'px')
+        $('#MenMensaje').css('height', (_window - (_height_ul_nuevo_msn + 25)) + 'px')
         
-        $('#DivMensajes').css('height', (_window - (50)) + 'px')
-        $('.panel ').css('height', (_window - (15)) + 'px')
+        $('#DivMensajes').css('height', (_window - (49)) + 'px')
+        $('.panel ').css('height', (_window - (14)) + 'px')
     } else {
         $('#MenMensaje').css('height', 'auto');
     }
