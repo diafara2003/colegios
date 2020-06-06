@@ -15,6 +15,7 @@ namespace Trasversales.Modelo
         public int MenId { get; set; }
         public int MenEmpId { get; set; }
         public int MenUsuario { get; set; }
+        public int MenCategoriaId { get; set; }
         public int MenClase { get; set; }
         [MaxLength(2)]
         public string MenTipoMsn { get; set; }

@@ -1,5 +1,15 @@
 C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Autenticacion.dll
 C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Autenticacion.pdb
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\BaseDatos.dll
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\EntityFramework.dll
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\EntityFramework.SqlServer.dll
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Trasversales.dll
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\BaseDatos.pdb
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\BaseDatos.dll.config
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Trasversales.pdb
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\EntityFramework.xml
+C:\Colegios\api\sitio\Colegio\Autenticacion\bin\Debug\EntityFramework.SqlServer.xml
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CoreCompileInputs.cache
+C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.dll
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.pdb

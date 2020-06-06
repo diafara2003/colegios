@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using Trasversales.Modelo;
 
@@ -18,12 +19,19 @@ namespace Colegio.Controllers
         // GET: api/Mensajes/5
         public Mensaje_Custom Get(int id)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
+            {
+                IdMensaje = id,
+                OkRecibido = 0
+
+            }, identity);
             return new Mensaje.Servicios.MensajesBI().Get(id);
         }
 
         [Route("destinatarios")]
         [HttpGet]
-        public IEnumerable<AcEnvioCorreoPersonas> Getdestinatarios(int idusuario , string filter, string temporada, string empresa)
+        public IEnumerable<AcEnvioCorreoPersonas> Getdestinatarios(int idusuario, string filter, string temporada, string empresa)
         {
             if (filter == null)
             {

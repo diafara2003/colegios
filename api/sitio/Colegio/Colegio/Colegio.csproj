@@ -172,6 +172,7 @@
     <Compile Include="Autenticacion\JwtManager.cs" />
     <Compile Include="Autenticacion\TokenValidationHandler.cs" />
     <Compile Include="Controllers\BandejaEntradaController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
@@ -243,6 +244,10 @@
     <ProjectReference Include="..\..\..\Librerias\Trasversales\Trasversales\Trasversales.csproj">
       <Project>{7dd3ad82-d326-43dd-bb52-bd504bf84390}</Project>
       <Name>Trasversales</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Autenticacion\Autenticacion.csproj">
+      <Project>{9168d962-6581-4cff-8418-98ece0718227}</Project>
+      <Name>Autenticacion</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

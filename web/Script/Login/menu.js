@@ -4,7 +4,8 @@ function mostrar_mensajes(titulo, mensaje, icono = '',
     showCloseButton = false,
     showCancelButton = false,
     confirmButtonText = '', confirmButtonAriaLabel = '',
-    cancelButtonText = '', cancelButtonAriaLabel = '') {
+    cancelButtonText = '', cancelButtonAriaLabel = '',
+    callBackAceptar = undefined,) {
     Swal.fire({
         title: titulo,
         icon: icono,
@@ -19,6 +20,10 @@ function mostrar_mensajes(titulo, mensaje, icono = '',
         confirmButtonAriaLabel: confirmButtonAriaLabel,
         cancelButtonText: cancelButtonText,
         cancelButtonAriaLabel: cancelButtonAriaLabel
+    }).then((result) => {
+        if (result.value && callBackAceptar != undefined) {
+            callBackAceptar();
+        }
     })
 }
 function cerrar_mensaje() {

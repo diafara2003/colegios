@@ -4,13 +4,15 @@ using BaseDatos.Modelos;
 using System.Data;
 using Mensaje.Modelos;
 using System;
+using Trasversales.Modelo;
+using System.Linq;
 
 namespace Mensaje.Servicios
 {
-    public class BandejaEntrada
+    public class BandejaEntradaBI
     {
 
-        public IEnumerable<BandejaEntradaDTO> Get(int usuario)
+        public IEnumerable<BandejaEntradaDTO> Get(int usuario, int tipo = 0)
         {
 
             ColegioContext objCnn = new ColegioContext();
@@ -19,6 +21,7 @@ namespace Mensaje.Servicios
 
             ProcedureDTO.commandText = "MSN.[ConsultarMensaje]";
             ProcedureDTO.parametros.Add("usuario", usuario);
+            ProcedureDTO.parametros.Add("tipo", tipo);
 
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
 
@@ -33,9 +36,34 @@ namespace Mensaje.Servicios
                                    MenOkRecibido = (byte)data["MenOkRecibido"],
                                    PerApellidos = (string)data["PerApellidos"],
                                    PerNombres = (string)data["PerNombres"],
+                                   MenColor = (string)data["MenColor"],
                                });
 
             return objlstResultado;
+        }
+
+        public ResponseDTO MarcarLeido(LeidoDTO mensaje,int usuario)
+        {
+            ResponseDTO objresponse = new ResponseDTO();
+            ColegioContext objCnn = new ColegioContext();
+
+            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Where(c => c.BanMsnId == mensaje.IdMensaje).FirstOrDefault();
+            if (_mensaje!=null)
+            {
+                if (_mensaje.BanHoraLeido == null)
+                {
+                    _mensaje.BanHoraLeido = DateTime.Now;
+                }
+                if (_mensaje.BanOkRecibido == 0)
+                {
+                    _mensaje.BanOkRecibido = mensaje.OkRecibido;
+                }
+                objCnn.SaveChanges();
+            }
+           
+
+           
+            return objresponse;
         }
 
     }

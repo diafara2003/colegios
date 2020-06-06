@@ -1,0 +1,193 @@
+﻿h5 {
+    margin-bottom: 0;
+}
+
+.tipo-mensaje-activo {
+    background-color: #f6f6f6;
+}
+
+.btn-icono {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border-width: 0;
+    outline: none;
+}
+
+    .btn-icono:hover {
+        background-color: black;
+    }
+
+        .btn-icono:hover i {
+            color: buttonface;
+        }
+
+    .btn-icono i {
+        font-size: 20px;
+    }
+
+
+.nuevo-mensaje {
+    cursor: pointer;
+}
+
+i {
+    cursor: pointer;
+}
+
+.autocomplete {
+    border-bottom: 1px solid #369;
+    padding-bottom: 10px;
+}
+
+.div-bisqueda {
+    outline: none;
+    margin-bottom: 7px !important;
+    width: 100%;
+    position: absolute;
+}
+
+.autocomplete .fa-search {
+    position: relative;
+    left: 96%;
+    top: 6px;
+    font-size: 22px;
+}
+
+[contenteditable=true] {
+    color: black;
+    cursor: text;
+}
+
+    [contenteditable=true]:empty:before {
+        content: attr(placeholder);
+        pointer-events: none;
+        display: block; /* For Firefox */
+        color: #c4c4c4;
+        padding-left: 5px;
+    }
+
+.list-group-item {
+    cursor: pointer;
+}
+
+    .list-group-item:hover {
+        background-color: #ebebeb;
+    }
+
+    .list-group-item.active {
+        z-index: 2;
+        color: #fff;
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+        .list-group-item.active:hover {
+            z-index: 2;
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+
+.a-btn {
+    padding: 0.375rem 0.75rem;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #ebebeb;
+}
+
+    .a-btn:hover {
+        color: white !important;
+    }
+
+
+.panel {
+    position: relative;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 220px;
+    max-width: 220px;
+    /*background-color: #ebebeb;*/
+    height: 500px;
+    margin-right: 3px;
+}
+
+    .panel i {
+        font-size: 17px;
+    }
+
+    .panel .nav {
+        width: 220px;
+        flex-direction: column;
+        min-height: 100%;
+        padding: 0;
+    }
+
+    .panel .nav-title {
+        padding: .95rem 1rem;
+        font-size: 80%;
+        /*font-weight: 700;*/
+        /*color: #151b1e;*/
+        text-transform: uppercase;
+        padding: .6em;
+        cursor: pointer;
+    }
+
+        .panel .nav-title:hover {
+            background-color: #f3f3f3;
+            /*background-color:black;*/
+        }
+
+    .panel .nav-link .nav-icon {
+        display: inline-block;
+        width: 1.09375rem;
+        margin: 0 .89rem 0 0;
+        font-size: 1.2rem;
+        color: #9da0a8;
+        text-align: center;
+    }
+
+
+.mensaje {
+    height: 50px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    margin-top: 2px;
+    font-size: 15px;
+}
+
+    .mensaje .fas {
+        color: #444444 !important;
+    }
+
+/*.mensaje:hover {
+                background-color: #ebebeb;
+            }*/
+
+
+.color-categoria {
+    border: 2px solid #3E4095;
+}
+
+.color-categoria-danger {
+    /*border: 2px solid #dc3545;*/
+    border: 2px solid #A8518A;
+}
+
+.color-categoria-warning {
+    border: 2px solid #28a745;
+}
+
+.btn-link {
+    font-size: 14px !important;
+    font-family: Calibri;
+}
+
+.cuerpo-mensaje {
+}
+
+.active {
+    background-color: white;
+}

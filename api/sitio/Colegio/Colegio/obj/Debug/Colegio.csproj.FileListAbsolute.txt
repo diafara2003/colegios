@@ -1,7 +1,7 @@
+C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ApplicationInsights.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\csc.exe
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CSharp.Core.targets
@@ -15,6 +15,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Colegio.dll.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Colegio.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Colegio.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Antlr3.Runtime.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Autenticacion.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Clases.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Cursos.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Grados.dll
@@ -64,6 +65,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\Persona.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Salones.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Temporada.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Trasversales.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Autenticacion.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.DependencyCollector.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Microsoft.AI.Web.xml

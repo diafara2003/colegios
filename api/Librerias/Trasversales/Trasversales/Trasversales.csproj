@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Modelo\AreasMaterias.cs" />
     <Compile Include="Modelo\BandejaEntrada.cs" />
+    <Compile Include="Modelo\CategoriaPerfil.cs" />
+    <Compile Include="Modelo\Categorias.cs" />
     <Compile Include="Modelo\Clases.cs" />
     <Compile Include="Modelo\ClasesEstudiantes.cs" />
     <Compile Include="Modelo\CordinadorArea.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Modelo\GruposEnvioAutorizadoCursos.cs" />
     <Compile Include="Modelo\GruposEnvioAutorizadoGrados.cs" />
     <Compile Include="Modelo\GruposEnvioDet.cs" />
+    <Compile Include="Modelo\LoginAuditoria.cs" />
     <Compile Include="Modelo\Materias.cs" />
     <Compile Include="Modelo\GruposEnvioColores.cs" />
     <Compile Include="Modelo\Mensajes.cs" />

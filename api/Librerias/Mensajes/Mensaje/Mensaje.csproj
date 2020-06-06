@@ -50,9 +50,11 @@
     <Compile Include="Modelos\AcEnvioCorreoPersonas.cs" />
     <Compile Include="Modelos\BandejaEntradaDTO.cs" />
     <Compile Include="Modelos\CrearMensajeCustom.cs" />
+    <Compile Include="Modelos\Leido.cs" />
     <Compile Include="Modelos\Mensaje_Custom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\BandejaEntrada.cs" />
+    <Compile Include="Servicios\CategoriasBL.cs" />
     <Compile Include="Servicios\MensajesBI.cs" />
   </ItemGroup>
   <ItemGroup>

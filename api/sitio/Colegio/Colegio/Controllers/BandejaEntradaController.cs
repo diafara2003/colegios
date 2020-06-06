@@ -6,39 +6,27 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
+using Trasversales.Modelo;
 
 namespace Colegio.Controllers
 {
+    [RoutePrefix("BandejaEntrada/mensajes")]
     public class BandejaEntradaController : ApiController
     {
         // GET: api/BandejaEntrada
-        public IEnumerable<BandejaEntradaDTO> Get()
+        public IEnumerable<BandejaEntradaDTO> Get(int tipo=0)
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
-            var _usuario = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
-            int usuario = _usuario.PerId;
-            return new Mensaje.Servicios.BandejaEntrada().Get(usuario);
+          
+            return new Mensaje.Servicios.BandejaEntradaBI().Get(identity, tipo);
         }
 
-        // GET: api/BandejaEntrada/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        [Route("Marcarleido")]
+        [HttpPost]
+        public ResponseDTO MarcarLeido(LeidoDTO request) {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
-        // POST: api/BandejaEntrada
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/BandejaEntrada/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/BandejaEntrada/5
-        public void Delete(int id)
-        {
+            return new Mensaje.Servicios.BandejaEntradaBI().MarcarLeido(request, identity);
         }
     }
 }

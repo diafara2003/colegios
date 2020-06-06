@@ -81,6 +81,8 @@ namespace BaseDatos.Contexto
         public DbSet<GruposEnvioAutorizadoGrados> grupo_envio_autorizacion_grados { get; set; }
         public DbSet<GruposEnvioColores> grupo_envio_colores { get; set; }
         public DbSet<EstadoMensaje> estado_mensaje{ get; set; }
-
+        public DbSet<LoginAuditoria> login_auditoria { get; set; }
+        public DbSet<Categorias> categorias { get; set; }
+        public DbSet<CategoriaPerfil> categorias_perfil { get; set; }
     }
 }

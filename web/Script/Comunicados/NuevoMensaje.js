@@ -110,7 +110,10 @@ function enviar_mensaje() {
     data.mensaje = mensaje;
     if (validar_datos(mensaje)) {
         consultarAPI('Mensajes', 'POST', (response) => {
-            window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar');
+            window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+
+                descartar();
+            });
         }, data, (error) => {
             alert('mal');
         });
@@ -122,7 +125,7 @@ function obtener_destinatarios() {
 function obtener_datos() {
     var myobject = {
         MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
-        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0
+        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0
     };
 
     myobject.MenMensaje = quill.root.innerHTML;
@@ -130,6 +133,7 @@ function obtener_datos() {
     myobject.MenOkRecibido = $('#MenOkRecibido').is(':checked') ? 1 : 0;
     myobject.MenBloquearRespuesta = $('#MenOkRecibido').is(':checked') ? 1 : 0;
     myobject.MenSendTo = set_sent_to();
+    myobject.MenCategoriaId = $('#ddlCategoria').find('option:selected').val();
 
     return myobject;
 }
@@ -188,7 +192,30 @@ function cargar_mensaje(mensaje) {
 
 
 }
+function renderizar_categorias(_response) {
+    let _html = '<option value="-1">Seleccione una categoria para el mensaje</option>';
+
+    _response.forEach(c => {
+
+        _html += `<option value="${c.CatId}">${c.CatDescripcion}</option>`;
+    });
+
+    document.getElementById('ddlCategoria').innerHTML = _html;
+}
+function consultar_categoria() {
+
+    consultarAPI('Categorias', 'GET', response => {
+
+        if (response.length > 0) {
+            renderizar_categorias(response);
+            $('#DivCategoria').removeClass('d-none');
+        }
+    })
+
+
+}
 (function () {
+
     $('#DivResultados').css('display', 'none');
 
     let id = Get_query_string('id');
@@ -198,6 +225,7 @@ function cargar_mensaje(mensaje) {
         consultar_mensaje(id);
     } else {
         $('.ql-container').addClass('editor-height');
+        consultar_categoria();
     }
     _sesion = obtener_session();
 })();
