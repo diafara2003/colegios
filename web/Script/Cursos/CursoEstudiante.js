@@ -39,6 +39,24 @@ function asignar_estudiante(idestudiante) {
         cerrar_mensaje();
     }, _data);
 }
+function buscar_Estudiante(_this) {
+    let _text = _this.value;
+    let filtered = [];
+
+    if (_text == '') {
+        filtered = _data_cursos;
+    }
+    else {
+        filtered = data_personas.filter(x =>
+            x.PerApellidos.toString().toLowerCase().indexOf(_text) > -1
+            || x.PerNombres.toString().toLowerCase().indexOf(_text) > -1
+            || x.PerDocumento.toString().toLowerCase().indexOf(_text) > -1            
+        );
+    }
+    let curso = Get_query_string('curso');
+    renderizar_estudiantes(filtered,'estudiantes_sin_asignar', curso);
+    setTimeout(c => { fixed_table_scroll('tblDatosCursos'); }, 300);
+}
 function desasignar_estudiante(idestudiante) {
     mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
     let curso = Get_query_string('curso');

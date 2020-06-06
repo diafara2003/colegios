@@ -139,6 +139,12 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
             },
         }
     };
+    options.ajaxSettings = {
+        dataType: "json",
+        method: "GET",
+        data: { dataType: "json" },
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('sesion')}` }
+    }
 
     if (SecondProperty != undefined) {
         options.template = {
@@ -148,6 +154,11 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
             }
         }
     }
+
+    options.preparePostData = function (data) {
+        data.phrase = $(`#${id_input}`).val();
+        return data;
+    };
     //http://easyautocomplete.com/guide#sec-template-links
 
     $(`#${id_input}`).on('focus', function (e) {

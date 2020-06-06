@@ -47,7 +47,7 @@ namespace Mensaje.Servicios
             ResponseDTO objresponse = new ResponseDTO();
             ColegioContext objCnn = new ColegioContext();
 
-            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Where(c => c.BanMsnId == mensaje.IdMensaje).FirstOrDefault();
+            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Where(c => c.BanMsnId == mensaje.IdMensaje && c.BanUsuario==usuario).FirstOrDefault();
             if (_mensaje!=null)
             {
                 if (_mensaje.BanHoraLeido == null)

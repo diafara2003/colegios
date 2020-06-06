@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
     <link href="../../Style/estandar.css" rel="stylesheet" />
+
+    <style>
+        .input-autocomplete {
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+            .input-autocomplete:focus {
+                border-bottom: 1px solid #369;
+            }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -26,6 +38,13 @@
         <div class="row">
             <div class="col-xl-5 col-lg-6 col-md-6 col-sm-12 col-12">
                 <label>Estudiantes sin asignar</label>
+                <div>
+                    <span>Filtro de búsqueda</span>
+                    <div class="autocomplete input-group-sm">
+                        <input type="text" class="form-control" id="buscargrado" placeholder="Buscar estudiante" onkeyup="buscar_Estudiante(this)">
+                        <!--<i class="fas fa-search"></i>-->
+                    </div>
+                </div>
                 <div class="list-group" id="estudiantes_sin_asignar">
                 </div>
             </div>
