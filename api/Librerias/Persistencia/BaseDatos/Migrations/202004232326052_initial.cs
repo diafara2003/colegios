@@ -7,6 +7,8 @@
     {
         public override void Up()
         {
+            
+
             CreateTable(
                 "dbo.AreasMaterias",
                 c => new
@@ -25,11 +27,32 @@
                         BanMsnId = c.Int(nullable: false),
                         BanEstado = c.Int(nullable: false),
                         BanUsuario = c.Int(nullable: false),
-                        BanHoraLeido = c.DateTime(nullable: false),
+                        BanHoraLeido = c.DateTime(),
                         BanOkRecibido = c.Byte(nullable: false),
-                        BanOkRecibidoFecha = c.DateTime(nullable: false),
+                        BanOkRecibidoFecha = c.DateTime(),
                     })
                 .PrimaryKey(t => t.BanId);
+            
+            CreateTable(
+                "msn.Categorias",
+                c => new
+                    {
+                        CatId = c.Int(nullable: false, identity: true),
+                        CatEmpresaId = c.Int(nullable: false),
+                        CatDescripcion = c.String(maxLength: 50),
+                        CatColor = c.String(maxLength: 50),
+                    })
+                .PrimaryKey(t => t.CatId);
+            
+            CreateTable(
+                "msn.CategoriaPerfil",
+                c => new
+                    {
+                        CatPerId = c.Int(nullable: false, identity: true),
+                        CatPerCategoria = c.Int(nullable: false),
+                        CatPerPerfil = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.CatPerId);
             
             CreateTable(
                 "dbo.ClasesEstudiantes",
@@ -50,9 +73,9 @@
                         ClaTemporada = c.Short(nullable: false),
                         ClaCodigo = c.String(maxLength: 20),
                         ClaMateriaId = c.Int(nullable: false),
-                        ClaSalonId = c.Int(nullable: false),
+                        ClaSalonId = c.Int(),
                         ClaCursoId = c.Int(nullable: false),
-                        ClaProfesor = c.Int(nullable: false),
+                        ClaProfesor = c.Int(),
                         ClaObservacion = c.String(),
                     })
                 .PrimaryKey(t => t.Claid);
@@ -73,10 +96,13 @@
                     {
                         CurId = c.Int(nullable: false, identity: true),
                         CurEmpId = c.Int(nullable: false),
-                        CurTemporada = c.Short(nullable: false),
+                        CurTemporada = c.Int(nullable: false),
+                        CurSalon = c.Int(),
+                        CurGrado = c.Int(),
                         CurCodigo = c.String(maxLength: 20),
                         CurDescripcion = c.String(maxLength: 50),
-                        CurTutor = c.Int(nullable: false),
+                        CurTutor = c.Int(),
+                        CurAuxiliar = c.Int(),
                     })
                 .PrimaryKey(t => t.CurId);
             
@@ -92,6 +118,16 @@
                         EmpEstado = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.EmpId);
+            
+            CreateTable(
+                "msn.EstadoMensaje",
+                c => new
+                    {
+                        EstMenId = c.Int(nullable: false, identity: true),
+                        EstMenDescripcion = c.String(maxLength: 50),
+                        EstMenEstado = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => t.EstMenId);
             
             CreateTable(
                 "DP.Estudiantes",
@@ -130,10 +166,77 @@
                         GruEnvId = c.Int(nullable: false, identity: true),
                         GruEnvEmpId = c.Int(nullable: false),
                         GruEnvTemporada = c.Int(nullable: false),
-                        GruEnvProfesor = c.Int(nullable: false),
+                        GruEnvTipo = c.String(maxLength: 2),
                         GruEnvDescripcion = c.String(maxLength: 300),
+                        GruEnvioColor = c.String(),
+                        GruEstado = c.Boolean(nullable: false),
+                        GruAsignaAuto = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.GruEnvId);
+            
+            CreateTable(
+                "msn.GruposEnvioAsignacion",
+                c => new
+                    {
+                        GrAsigId = c.Int(nullable: false, identity: true),
+                        GrAsigPersonaId = c.Int(nullable: false),
+                        GrAsigGrupoEnvioId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.GrAsigId);
+            
+            CreateTable(
+                "msn.GruposEnvioAutorizado",
+                c => new
+                    {
+                        GruPerId = c.Int(nullable: false, identity: true),
+                        GruPerGrupoId = c.Int(nullable: false),
+                        GruPerPersona = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.GruPerId);
+            
+            CreateTable(
+                "msn.GruposEnvioAutorizadoCursos",
+                c => new
+                    {
+                        GrEnAuCurId = c.Int(nullable: false, identity: true),
+                        GrEnAuCurCursoId = c.Int(nullable: false),
+                        GrEnAuCurPersonaId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.GrEnAuCurId);
+            
+            CreateTable(
+                "msn.GruposEnvioAutorizadoGrados",
+                c => new
+                    {
+                        GrEnAuGraId = c.Int(nullable: false, identity: true),
+                        GrEnAuGraGradoId = c.Int(nullable: false),
+                        GrEnAuGraPersonaId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.GrEnAuGraId);
+            
+            CreateTable(
+                "msn.GruposEnvioAutorizadoAll",
+                c => new
+                    {
+                        GrEnAuAllId = c.Int(nullable: false, identity: true),
+                        GrEnAuAllEmp = c.Int(nullable: false),
+                        GeEnAuAllTemporada = c.Int(nullable: false),
+                        GrEnAuAllPersonaId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.GrEnAuAllId);
+            
+            CreateTable(
+                "msn.GruposEnvioColores",
+                c => new
+                    {
+                        GrEnColorId = c.Int(nullable: false, identity: true),
+                        GrEnColorEmp = c.Int(nullable: false),
+                        GrEnColorTipo = c.Int(nullable: false),
+                        GrEnColorRGB = c.String(maxLength: 50),
+                        GrEnColorObs = c.String(maxLength: 50),
+                        GrEnColorBurbuja = c.String(maxLength: 50),
+                    })
+                .PrimaryKey(t => t.GrEnColorId);
             
             CreateTable(
                 "msn.GruposEnvioDet",
@@ -145,16 +248,28 @@
                 .PrimaryKey(t => t.GruEnvDetId);
             
             CreateTable(
+                "dbo.LoginAuditoria",
+                c => new
+                    {
+                        LogId = c.Int(nullable: false, identity: true),
+                        LogPersonaId = c.Int(nullable: false),
+                        LogFecha = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.LogId);
+            
+            CreateTable(
                 "dbo.Materias",
                 c => new
                     {
                         MatID = c.Int(nullable: false, identity: true),
                         MatCodigo = c.String(maxLength: 20),
                         MatEmpId = c.Int(nullable: false),
+                        MatTemporadaId = c.Int(nullable: false),
                         MatGradoId = c.Int(nullable: false),
                         MatAreaId = c.Int(nullable: false),
                         MatDescripcion = c.String(maxLength: 50),
                         MatEstado = c.Byte(nullable: false),
+                        MatElectiva = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MatID);
             
@@ -165,12 +280,16 @@
                         MenId = c.Int(nullable: false, identity: true),
                         MenEmpId = c.Int(nullable: false),
                         MenUsuario = c.Int(nullable: false),
+                        MenCategoriaId = c.Int(nullable: false),
+                        MenClase = c.Int(nullable: false),
                         MenTipoMsn = c.String(maxLength: 2),
-                        MenAsuto = c.String(maxLength: 100),
+                        MenAsunto = c.String(maxLength: 100),
                         MenMensaje = c.String(),
                         MenFecha = c.DateTime(nullable: false),
                         MenReplicaIdMsn = c.Int(nullable: false),
                         MenOkRecibido = c.Byte(nullable: false),
+                        MenBloquearRespuesta = c.Byte(nullable: false),
+                        MenSendTo = c.String(),
                     })
                 .PrimaryKey(t => t.MenId);
             
@@ -201,6 +320,13 @@
                         PerGenero = c.String(maxLength: 2),
                         PerRH = c.String(maxLength: 5),
                         PerEPS = c.String(maxLength: 50),
+                        PerUsuario = c.String(maxLength: 50),
+                        PerClave = c.String(maxLength: 50),
+                        PerEstado = c.Boolean(nullable: false),
+                        PerTipoPerfil = c.Int(nullable: false),
+                        PerFechanacimiento = c.String(),
+                        PerLugarNacimiento = c.String(),
+                        PerDireccion = c.String(),
                     })
                 .PrimaryKey(t => t.PerId);
             
@@ -231,6 +357,7 @@
                         SeccionId = c.Int(nullable: false, identity: true),
                         SecDescripcion = c.String(),
                         SecIcono = c.String(),
+                        SecRuta = c.String(),
                     })
                 .PrimaryKey(t => t.SeccionId);
             
@@ -280,15 +407,25 @@
             DropTable("menu.Opcion");
             DropTable("msn.Mensajes");
             DropTable("dbo.Materias");
+            DropTable("dbo.LoginAuditoria");
             DropTable("msn.GruposEnvioDet");
+            DropTable("msn.GruposEnvioColores");
+            DropTable("msn.GruposEnvioAutorizadoAll");
+            DropTable("msn.GruposEnvioAutorizadoGrados");
+            DropTable("msn.GruposEnvioAutorizadoCursos");
+            DropTable("msn.GruposEnvioAutorizado");
+            DropTable("msn.GruposEnvioAsignacion");
             DropTable("msn.GruposEnvio");
             DropTable("dbo.Grados");
             DropTable("DP.Estudiantes");
+            DropTable("msn.EstadoMensaje");
             DropTable("dbo.Empresas");
             DropTable("dbo.Cursos");
             DropTable("dbo.CursoEstudiantes");
             DropTable("dbo.Clases");
             DropTable("dbo.ClasesEstudiantes");
+            DropTable("msn.CategoriaPerfil");
+            DropTable("msn.Categorias");
             DropTable("msn.BandejaEntrada");
             DropTable("dbo.AreasMaterias");
         }

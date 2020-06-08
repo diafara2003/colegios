@@ -1,7 +1,7 @@
-C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ApplicationInsights.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\csc.exe
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.CSharp.Core.targets
