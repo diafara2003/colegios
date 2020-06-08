@@ -21,6 +21,8 @@ function cargar_bandeja(tipo) {
         document.getElementById('DivMensajes').innerHTML = _html;
     });
 
+    window.parent.cargar_mensajes_no_leidos();
+
     $('#UlTipoMensajes').find('li').removeClass('tipo-mensaje-activo');
     $('#UlTipoMensajes').find(`li[tipo="${tipo}"]`).addClass('tipo-mensaje-activo');
 
@@ -40,7 +42,7 @@ function renderizar_bandeja(_mensaje) {
     let _html = '';
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     //border: 2px solid #A8518A
-    _html += `<div class="mensaje d-flex p-0 mt-1 ${_mensaje.BanHoraLeido == '' ? '' : 'mensaje-leido '}" onclick="consultar_mensaje(${_mensaje.MenId})">`;
+    _html += `<div class="mensaje d-flex p-0 mt-1 ${_mensaje.BanHoraLeido == null ? '' : 'mensaje-leido '}" onclick="consultar_mensaje(this,${_mensaje.MenId})">`;
     _html += `<div style="border: 2px solid ${color}"></div>`;
     _html += '<div class="col-12 d-block pl-0">';
     _html += '<div class="d-flex h-50 pl-0">';
@@ -64,11 +66,13 @@ function renderizar_bandeja(_mensaje) {
 
     return _html;
 }
-function consultar_mensaje(_id) {
+function consultar_mensaje(_this,_id) {
     consultarAPI(`Mensajes/${_id}`, 'GET', response => {
+        if (!$(_this).hasClass('mensaje-leido')) $(_this).addClass('mensaje-leido');
         renderizar_mensaje(response);
         document.getElementById('mostrarMensaje').style.display = "block";
         calcular_height();
+        window.parent.cargar_mensajes_no_leidos();
     });
 }
 function renderizar_mensaje(_mensaje) {
@@ -109,6 +113,6 @@ $(window).resize(function () {
 (function () {
     calcular_height();
     $('[data-toggle="tooltip"]').tooltip()
-    //  calcular_height_frame();
+    window.parent.cargar_mensajes_no_leidos();
     cargar_bandeja('bandeja');
 })();

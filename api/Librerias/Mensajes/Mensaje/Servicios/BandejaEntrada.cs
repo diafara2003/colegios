@@ -37,7 +37,7 @@ namespace Mensaje.Servicios
                                    PerApellidos = (string)data["PerApellidos"],
                                    PerNombres = (string)data["PerNombres"],
                                    MenColor = (string)data["MenColor"],
-                                   BanHoraLeido = (DateTime)data["BanHoraLeido"],
+                                   BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() :(DateTime)data["BanHoraLeido"],
                                });
 
             return objlstResultado;
