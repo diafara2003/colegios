@@ -37,9 +37,17 @@ namespace Mensaje.Servicios
                                    PerApellidos = (string)data["PerApellidos"],
                                    PerNombres = (string)data["PerNombres"],
                                    MenColor = (string)data["MenColor"],
+                                   BanHoraLeido = (DateTime)data["BanHoraLeido"],
                                });
 
             return objlstResultado;
+        }
+
+        public int GetCountMensaje(int usuario) {
+            ColegioContext objCnn = new ColegioContext();
+
+            return objCnn.bandeja_entrada.Where(c => c.BanUsuario == usuario && c.BanHoraLeido == null).Count();
+
         }
 
         public ResponseDTO MarcarLeido(LeidoDTO mensaje,int usuario)

@@ -1,6 +1,6 @@
 ﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
 function calcular_height_frame() {
-  
+
 }
 function nuevo_mensaje() {
     let _url = window.location.href.toLowerCase().split('comunicados')[0];
@@ -40,7 +40,7 @@ function renderizar_bandeja(_mensaje) {
     let _html = '';
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     //border: 2px solid #A8518A
-    _html += `<div class="mensaje d-flex p-0 mt-1" onclick="consultar_mensaje(${_mensaje.MenId})">`;
+    _html += `<div class="mensaje d-flex p-0 mt-1 ${_mensaje.BanHoraLeido == '' ? '' : 'mensaje-leido '}" onclick="consultar_mensaje(${_mensaje.MenId})">`;
     _html += `<div style="border: 2px solid ${color}"></div>`;
     _html += '<div class="col-12 d-block pl-0">';
     _html += '<div class="d-flex h-50 pl-0">';
@@ -95,7 +95,7 @@ function calcular_height() {
     if ($(window).outerWidth(true) > 750) {
         let _height_ul_nuevo_msn = $('#DivencabezadoMsn').outerHeight(true);
         $('#MenMensaje').css('height', (_window - (_height_ul_nuevo_msn + 25)) + 'px')
-        
+
         $('#DivMensajes').css('height', (_window - (49)) + 'px')
         $('.panel ').css('height', (_window - (14)) + 'px')
     } else {

@@ -13,5 +13,6 @@ namespace Mensaje.Modelos
         public string PerNombres { get; set; }
         public string PerApellidos { get; set; }
         public string MenColor { get; set; }
+        public DateTime BanHoraLeido { get; set; }
     }
 }

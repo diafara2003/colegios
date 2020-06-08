@@ -162,9 +162,9 @@ i {
         color: #444444 !important;
     }
 
-/*.mensaje:hover {
-                background-color: #ebebeb;
-            }*/
+    .mensaje:hover {
+        background-color: #f3f3f3;
+    }
 
 
 .color-categoria {
@@ -190,4 +190,8 @@ i {
 
 .active {
     background-color: white;
+}
+
+.mensaje-leido {
+    background: white;
 }

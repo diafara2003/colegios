@@ -14,16 +14,25 @@ namespace Colegio.Controllers
     public class BandejaEntradaController : ApiController
     {
         // GET: api/BandejaEntrada
-        public IEnumerable<BandejaEntradaDTO> Get(int tipo=0)
+        public IEnumerable<BandejaEntradaDTO> Get(int tipo = 0)
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
-          
+
             return new Mensaje.Servicios.BandejaEntradaBI().Get(identity, tipo);
+        }
+
+        [Route("NoLeidoCount")]
+        [HttpGet]
+        public int GetCountNoLeido()
+        {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            return new Mensaje.Servicios.BandejaEntradaBI().GetCountMensaje(identity);
         }
 
         [Route("Marcarleido")]
         [HttpPost]
-        public ResponseDTO MarcarLeido(LeidoDTO request) {
+        public ResponseDTO MarcarLeido(LeidoDTO request)
+        {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
             return new Mensaje.Servicios.BandejaEntradaBI().MarcarLeido(request, identity);

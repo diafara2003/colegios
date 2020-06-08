@@ -5,7 +5,7 @@ function mostrar_mensajes(titulo, mensaje, icono = '',
     showCancelButton = false,
     confirmButtonText = '', confirmButtonAriaLabel = '',
     cancelButtonText = '', cancelButtonAriaLabel = '',
-    callBackAceptar = undefined,) {
+    callBackAceptar = undefined, ) {
     Swal.fire({
         title: titulo,
         icon: icono,
@@ -111,6 +111,11 @@ function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
     $('.spnnombreUsuario').text(`${_usuario.PerNombres} ${_usuario.PerApellidos}`);
 }
+function cargar_mensajes_no_leidos() {
+    consultarAPI('BandejaEntrada/mensajes/NoLeidoCount', 'GET', (_count) => {
+        $('.badgeNoLeidos').text(_count);
+    });
+}
 function actualizar_datos() {
     if (obtener_session().tipo == 1)
         ver_opcion(undefined, '../areapersonal/Personas.html?T=P');
@@ -122,8 +127,9 @@ $(window).resize(function () {
 });
 (function () {
     //mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones...</span>');
-
+    cargar_mensajes_no_leidos();
     calcular_height_frame();
     cargar_opciones();
     cargar_usuario();
+    $('[data-toggle="tooltip"]').tooltip();
 })();
