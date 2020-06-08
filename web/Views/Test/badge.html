@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../../Style/bootstrap.css" rel="stylesheet">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <title></title>
+    <style>
+        .alerta-mensaje {
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+        }
+
+        .numero {
+            padding: 2px;
+            position: absolute;
+            top: -6px;
+            left: 22px;
+            background-color: blue;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+            .numero span {
+                position: absolute;
+                top: -2px;
+                font-size: 14px;
+                left: 5px;
+                color: white;
+                font-weight: bold;
+            }
+    </style>
+
+</head>
+<body>
+    <div class="m-2">
+        <div class="dropdown">
+            <div class="rounded-circle bg-light p-1 alerta-mensaje">
+                <div class="bg-danger text-white numero">
+                    <span>4</span>
+                </div>
+
+                <div class="rounded-circle bg-secondary text-white" style="width:30px;height:30px;margin-top: -2px;margin-left: -2px">
+                    <div style="padding-top: 4px;padding-left: 6px;">
+                        <i class="far fa-bell" style="font-size:20px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

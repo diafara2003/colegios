@@ -9,149 +9,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
     <link href="../../Style/bootstrap.css" rel="stylesheet">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
-
+    <link href="../../Style/Login/menu.css" rel="stylesheet" />
     <style>
-        a {
-            color: white;
+        .alerta-mensaje {
+            width: 34px;
+            height: 34px;
             cursor: pointer;
         }
 
-        .dropdown-toggle {
-            cursor: pointer;
-        }
-
-        .navbar-toggler {
-            border: 1px solid white;
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        .swal2-icon {
-            font-size: 12px;
-        }
-
-        .swal2-title {
-            font-size: 22px;
-        }
-
-        .nav-item {
-            border-bottom: 1px solid #343a40;
-        }
-
-            .nav-item:hover {
-                border-bottom: 1px solid white;
-            }
-
-        .active {
-            border-bottom: 1px solid white;
-        }
-
-        .imgcontainer {
-            border: 1px solid #6c757d;
-            width: 46px;
-            height: 46px;
-            cursor: pointer;
-            padding-left: 9px;
-            padding-bottom: 5px;
+        .numero {
+            padding: 2px;
+            position: absolute;
+            top: -6px;
+            left: 22px;
+            background-color: blue;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
         }
 
-            .imgcontainer:hover {
-                border: 1px solid #666666;
+            .numero span {
+                position: absolute;
+                top: -2px;
+                font-size: 14px;
+                left: 5px;
+                color: white;
+                font-weight: bold;
             }
-
-                .imgcontainer:hover .fa-user {
-                    color: #666666;
-                }
-
-        .logo-colegio {
-            width: 120px;
-            height: 51px;
-        }
-
-        .avatar {
-        }
-
-        .menu {
-            width: 250px;
-            height: 500px;
-            border: 1px solid #ebebeb;
-            position: absolute;
-            z-index: 9;
-            display: none;
-            background-color: white;
-        }
-
-
-        .opcion {
-            cursor: pointer;
-        }
-
-            .opcion:hover {
-                box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
-            }
-
-        .menu-opcion-active {
-            opacity: 0.5;
-            /*background-color: #D8D8D8 !important;*/
-        }
-
-
-        .element-animation-show {
-            animation: animationFramesshow ease 1s;
-            animation-iteration-count: 1;
-            transform-origin: 50% 50%;
-            /* transform: translate(-100px, 0px); */
-        }
-
-        .element-animation-hide {
-            animation: animationFrameshide ease 1s;
-            animation-iteration-count: 1;
-            transform-origin: 50% 50%;
-            /* transform: translate(-100px, 0px); */
-        }
-
-        .fa-bars {
-            color: #666666;
-            font-size: 27px;
-            cursor: pointer;
-            padding-top: 5px;
-        }
-
-        .imgcontainer .fa-user {
-            font-size: 29px;
-        }
-
-        .fixed-top {
-            padding: 0 5px 0 5px;
-        }
-
-
-        @keyframes animationFrameshide {
-            0% {
-                opacity: 1;
-                transform: translate(0px, 0px);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translate(-1000px, 0px);
-            }
-        }
-
-        @keyframes animationFramesshow {
-            0% {
-                opacity: 0;
-                transform: translate(-1000px, 0px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translate(0px, 0px);
-            }
-        }
     </style>
 
 </head>
@@ -172,10 +56,17 @@
                 <div class="btn-group d-lg-block d-md-none d-sm-none d-none">
                     <div class="d-flex">
                         <div class="dropdown">
-                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-bell"></i>
-                                <span class="badge badge-light badgeNoLeidos"></span>
-                            </button>
+                            <div class="rounded-circle bg-light p-1 alerta-mensaje">
+                                <div class="bg-danger text-white numero">
+                                    <span class="badgeNoLeidos"></span>
+                                </div>
+
+                                <div class="rounded-circle bg-secondary text-white" style="width:30px;height:30px;margin-top: -2px;margin-left: -2px">
+                                    <div style="padding-top: 4px;padding-left: 6px;">
+                                        <i class="far fa-bell" style="font-size:20px"></i>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" onclick=ver_opcion(this,'../comunicados/bandejaentrada.html')>Mensajes recibidos <span class="badgeNoLeidos"></span> </a>
 
