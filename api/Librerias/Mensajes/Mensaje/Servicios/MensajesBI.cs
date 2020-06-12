@@ -73,6 +73,8 @@ namespace Mensaje.Servicios
 
         }
 
+
+      
         public IEnumerable<AcEnvioCorreoPersonas> GetAcEnvioCorreoPersonas(int idusuario, string filter, string temporada, string empresa)
         {
 
@@ -103,7 +105,7 @@ namespace Mensaje.Servicios
                                });
             return objlstResultado;
         }
-        
+
 
     }
 }

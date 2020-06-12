@@ -1,4 +1,5 @@
 ﻿using Mensaje.Modelos;
+using Mensaje.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace Colegio.Controllers
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
             return new Mensaje.Servicios.BandejaEntradaBI().Get(identity, tipo);
+        }
+
+        [Route("recibido")]
+        [HttpPost]
+        public ResponseDTO PostRecibido(RecibidoDTO request)
+        {
+
+            return new BandejaEntradaBI().Recibido(request.id);
         }
 
         [Route("NoLeidoCount")]

@@ -47,6 +47,8 @@ namespace Colegio.Controllers
             return new Mensaje.Servicios.MensajesBI().Save(request);
         }
 
+       
+
         // PUT: api/Mensajes/5
         public void Put(int id, [FromBody]string value)
         {

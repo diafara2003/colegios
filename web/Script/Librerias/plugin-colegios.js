@@ -1,5 +1,6 @@
 ﻿function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
     if (AllowAnonymous == undefined && localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
+        localStorage.clear();
         paginar_sesion();
         return;
     }
@@ -105,6 +106,14 @@ function validar_correo(str) {
     }
 }
 function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placeholder, fn_selected) {
+
+    if (localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
+        localStorage.clear();
+        paginar_sesion();
+        return;
+    }
+
+
     var options = {
         url: function (whiting) {
             return `http://localhost/colegios/api/${_api}&filter=${whiting}`;

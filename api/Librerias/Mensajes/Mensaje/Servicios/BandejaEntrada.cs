@@ -29,6 +29,7 @@ namespace Mensaje.Servicios
                                select new BandejaEntradaDTO()
                                {
                                    MenId = (int)data["MenId"],
+                                   BanId = (int)data["BanId"],
                                    MenAsunto = (string)data["MenAsunto"],
                                    MenBloquearRespuesta = (byte)data["MenBloquearRespuesta"],
                                    MenFecha = (string)data["MenFecha"],
@@ -37,6 +38,7 @@ namespace Mensaje.Servicios
                                    PerApellidos = (string)data["PerApellidos"],
                                    PerNombres = (string)data["PerNombres"],
                                    MenColor = (string)data["MenColor"],
+                                   BanOkRecibido=(byte)data["BanOkRecibido"],
                                    BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() :(DateTime)data["BanHoraLeido"],
                                });
 
@@ -73,6 +75,29 @@ namespace Mensaje.Servicios
            
             return objresponse;
         }
+
+        public ResponseDTO Recibido(int id)
+        {
+            ResponseDTO obj = new ResponseDTO();
+
+            ColegioContext objCnn = new ColegioContext();
+
+            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Find(id);
+
+            _mensaje.BanOkRecibido = 1;
+            //_mensaje.BanOkRecibidoFecha = DateTime.Now;
+
+            //objCnn.bandeja_entrada.Add(new BandejaEntrada() {
+
+            //    BanEstado=0,
+            //    BanMsnId=_mensaje.BanMsnId,                
+            //});
+
+            objCnn.SaveChanges();
+
+            return obj;
+        }
+
 
     }
 }

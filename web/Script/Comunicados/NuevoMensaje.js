@@ -197,7 +197,7 @@ function renderizar_categorias(_response) {
 
     _response.forEach(c => {
 
-        _html += `<option value="${c.CatId}">${c.CatDescripcion}</option>`;
+        _html += `<option style="color:${c.CatColor}" value="${c.CatId}">${c.CatDescripcion}</option>`;
     });
 
     document.getElementById('ddlCategoria').innerHTML = _html;

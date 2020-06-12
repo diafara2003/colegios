@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
     <link href="../../Style/Comunicados/BandejaEntrada.css" rel="stylesheet" />
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
 
     <style>
 
@@ -22,6 +23,18 @@
 
         .desc-menasje {
             color: #6c757d;
+        }
+        .editor-height {
+            height: 228px;
+            max-height: 228px;
+        }
+
+        #DivRespuesta {
+        display:none;
+        }
+
+        #DivencabezadoMsn {
+        height:90px;
         }
     </style>
 
@@ -142,8 +155,8 @@
                     <div class="col-3 encabezado-iconos pt-1 p-0">
                         <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
                         <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Imprimir"><i class="fas fa-print "></i></button>
-                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enviar respuesta leído"><i class="fas fa-check"></i></button>
-                        <button class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Replicar mensaje"><i class="fas fa-reply"></i></button>
+                        <button class="btn-icono recividook" onclick="recibido_ok()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enviar respuesta leído"><i class="fas fa-check"></i></button>
+                        <button class="btn-icono responder" onclick="replicar_mensaje()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Responder mensaje"><i class="fas fa-reply"></i></button>
                     </div>
 
                 </div>
@@ -151,6 +164,13 @@
                 <div class="mt-1 pr-2 overflow-auto" style="border-top:1px solid #666666" id="MenMensaje">
                     <div class="cuerpo-mensaje">
 
+                    </div>
+                </div>
+                <div id="DivRespuesta">
+                    <div id="editor"></div>
+                    <div class="d-flex justify-content-lg-end">
+                        <div class="mt-1"><a class="a-btn" onclick="enviar_replica_mensaje()"><i class="far fa-paper-plane mr-1"></i>Enviar respuesta</a></div>
+                        <div class="ml-1 mt-1"><a class="a-btn" onclick="ocultar_replica()"><i class="fas fa-trash mr-1"></i>Descartar</a></div>
                     </div>
                 </div>
             </div>
@@ -164,6 +184,7 @@
     <script src="../../Script/Librerias/popper.js"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/quill.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Comunicados/BandejaEntrada.js"></script>
 </body>

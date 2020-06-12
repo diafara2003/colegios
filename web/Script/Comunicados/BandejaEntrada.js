@@ -1,4 +1,8 @@
 ﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
+let _mensaje_context = {};
+let id_bandeja = -1;
+let _is_recibido = 0;
+let _sesion = {};//39;
 function calcular_height_frame() {
 
 }
@@ -42,7 +46,7 @@ function renderizar_bandeja(_mensaje) {
     let _html = '';
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     //border: 2px solid #A8518A
-    _html += `<div class="mensaje d-flex p-0 mt-1 ${_mensaje.BanHoraLeido == null ? '' : 'mensaje-leido '}" onclick="consultar_mensaje(this,${_mensaje.MenId})">`;
+    _html += `<div class="mensaje d-flex p-0 mt-1 ${_mensaje.BanHoraLeido == null ? '' : 'mensaje-leido '}" onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">`;
     _html += `<div style="border: 2px solid ${color}"></div>`;
     _html += '<div class="col-12 d-block pl-0">';
     _html += '<div class="d-flex h-50 pl-0">';
@@ -66,7 +70,17 @@ function renderizar_bandeja(_mensaje) {
 
     return _html;
 }
-function consultar_mensaje(_this,_id) {
+function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
+    id_bandeja = _idBandeja;
+    $('#DivRespuesta').css('display', 'none');
+    calcular_height();
+    _is_recibido = _is_rta_ok;
+    if (_is_rta_ok == 1) {
+        $('.recividook').addClass('bg-success text-white');
+    } else {
+        $('.recividook').removeClass('bg-success text-white');
+    }
+
     consultarAPI(`Mensajes/${_id}`, 'GET', response => {
         if (!$(_this).hasClass('mensaje-leido')) $(_this).addClass('mensaje-leido');
         renderizar_mensaje(response);
@@ -80,6 +94,13 @@ function renderizar_mensaje(_mensaje) {
     document.getElementById('MenUsuario').textContent = _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres;
     document.getElementById('MenFecha').textContent = moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
     document.getElementById('MenMensaje').innerHTML = _mensaje.MenMensaje;
+
+    if (_mensaje.MenBloquearRespuesta == 1) $('.responder').css('display', 'none');
+    else $('.responder').css('display', '');
+
+    if (_mensaje.MenOkRecibido == 1) $('.recividook').css('display', 'none');
+    else $('.recividook').css('display', '');
+    _mensaje_context = _mensaje;
 }
 function limpiar_mensaje_leido() {
     document.getElementById('MenAsunto').textContent = "";
@@ -92,13 +113,16 @@ function marcar_como_leido(id) {
 
     }, { IdMensaje: id, OkRecibido: 0 });
 }
-function calcular_height() {
+function calcular_height(_is_replicar) {
     let _window = $(window).height();
     const minus_height = 0;
 
     if ($(window).outerWidth(true) > 750) {
         let _height_ul_nuevo_msn = $('#DivencabezadoMsn').outerHeight(true);
-        $('#MenMensaje').css('height', (_window - (_height_ul_nuevo_msn + 25)) + 'px')
+        let _replicar = 0;
+        if (_is_replicar == true)
+            _replicar = $('#DivRespuesta').outerHeight(true);
+        $('#MenMensaje').css('height', (_window - (_height_ul_nuevo_msn + 25 + _replicar)) + 'px')
 
         $('#DivMensajes').css('height', (_window - (49)) + 'px')
         $('.panel ').css('height', (_window - (14)) + 'px')
@@ -106,13 +130,72 @@ function calcular_height() {
         $('#MenMensaje').css('height', 'auto');
     }
 }
+function ocultar_replica() {
+    $('#DivRespuesta').css('display', 'none');
+    calcular_height();
+}
+function replicar_mensaje() {
+    calcular_height(true);
+    $('#DivRespuesta').css('display', 'block');
+}
+function enviar_replica_mensaje() {
+    let data = {};
+    let mensaje = obtener_datos_replica();
+    data.destinatarios = obtener_destinatarios();
+    data.mensaje = mensaje;
+
+    consultarAPI('Mensajes', 'POST', (response) => {
+        window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+            ocultar_replica();
+        });
+    }, data, (error) => {
+        alert('mal');
+    });
+
+}
+function recibido_ok() {
+    if (_is_recibido == 0) {
+
+        consultarAPI('BandejaEntrada/mensajes/recibido', 'POST', (response) => {
+            window.parent.mostrar_mensajes('', 'Mensaje de recibido correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+            });
+        }, { id: id_bandeja }, (error) => {
+            alert('mal');
+        });
+    }
+}
+function obtener_destinatarios() {
+    return [{ id: _mensaje_context.MenUsuario, tipo: _mensaje_context.MenTipoMsn }];
+}
+function obtener_datos_replica() {
+    var myobject = {
+        MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
+        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0
+    };
+
+    myobject.MenReplicaIdMsn = _mensaje_context.MenId;
+
+    myobject.MenMensaje = quill.root.innerHTML;
+    myobject.MenAsunto = _mensaje_context.MenAsunto;
+    myobject.MenOkRecibido = 1;
+    myobject.MenBloquearRespuesta = 1;
+    myobject.MenSendTo = _mensaje_context.MenSendTo;
+    myobject.MenCategoriaId = _mensaje_context.MenCategoriaId;
+
+    return myobject;
+}
 $(window).resize(function () {
     calcular_height()
 });
-
+var quill = new Quill('#editor', {
+    placeholder: 'Mensaje a respuesta',
+    theme: 'snow'
+});
 (function () {
     calcular_height();
     $('[data-toggle="tooltip"]').tooltip()
     window.parent.cargar_mensajes_no_leidos();
     cargar_bandeja('bandeja');
+    $('.ql-container').addClass('editor-height');
+    _sesion = obtener_session();
 })();

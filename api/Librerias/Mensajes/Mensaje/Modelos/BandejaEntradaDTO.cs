@@ -5,6 +5,7 @@ namespace Mensaje.Modelos
 
     {
         public int MenId { get; set; }
+        public int BanId { get; set; }
         public string MenAsunto { get; set; }
         public string MenMensaje { get; set; }
         public string MenFecha { get; set; }
@@ -14,5 +15,7 @@ namespace Mensaje.Modelos
         public string PerApellidos { get; set; }
         public string MenColor { get; set; }
         public DateTime? BanHoraLeido { get; set; }
+        public byte BanOkRecibido { get; set; }
+
     }
 }
