@@ -76,7 +76,7 @@ function calcular_height_frame() {
     let _window = $(this).outerHeight(true);
     let _nav = $('header').outerHeight(true);
 
-    $('#framrePage').css('min-height', (_window - (_nav + 100)) + 'px')
+    $('#framrePage').css('min-height', (_window - (_nav + 75)) + 'px')
 
 }
 function renderizar_opcion_movil(opcion) {
