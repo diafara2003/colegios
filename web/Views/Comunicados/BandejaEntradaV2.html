@@ -45,7 +45,7 @@
                 margin: 0 auto;
                 max-width: 954px;
                 padding: 42px 0;
-                min-height: calc(100vh - 120px);
+                min-height: calc(100vh - 30px);
                 width: calc(100% - 60px);
             }
 
@@ -113,10 +113,18 @@
         }
 
         .btn-icono {
-            background-color: #ebebeb;
             width: 30px;
             height: 30px;
         }
+
+            .btn-icono:hover {
+                background: #ebebeb;
+            }
+
+                .btn-icono:hover i {
+                    color: black;
+                }
+
 
             .btn-icono i {
                 font-size: 18px;
@@ -128,6 +136,11 @@
 
         .mensaje {
             min-height: calc(100vh - 210px);
+        }
+
+        .mensaje-detalle {
+            max-height: calc(100vh - 230px);
+            overflow: auto;
         }
 
         .titulo-mensaje {
@@ -143,7 +156,68 @@
             font-family: 'Nunito', sans-serif;
             font-size: 16px;
         }
+
+        .bandeja span {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .categoria-mensaje {
+            cursor: pointer;
+            border-bottom: 1px solid white;
+        }
+
+            .categoria-mensaje:hover {
+                background-color: #ebebeb;
+            }
+
+                .categoria-mensaje:hover button {
+                    background-color: #ebebeb !important;
+                }
     </style>
+
+
+
+    <style>
+        .menu-panel {
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+        }
+
+            .menu-panel i {
+                font-size: 19px !important;
+            }
+
+        .autocomplete input {
+            font-size: 14px !important;
+            height: 40px !important;
+        }
+
+        .autocomplete i {
+            top: 12px;
+        }
+
+        .panel {
+            width: 180px;
+        }
+
+            .panel .categoria-mensaje i {
+                font-size: 20px;
+            }
+
+        .actived {
+            background-color: #f2f2f2;
+        }
+
+        .fa-stack-1x {
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            border-radius: 18px;
+            color: white;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -154,129 +228,179 @@
 
     <div class="container-kids">
         <div class="container-kids__content refactor">
-            <div class="container-kids__content">
-                <!--<div class="d-flex justify-content-center mt-5" id="cargando_mensajes" style="color:#333;font-size:14px;">
-                    <span style="color:#212529"><i style="color:#212529" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando mensajes... </span>
-                </div>-->
+            <div style="border-bottom:1px solid #ebebeb;padding-bottom:15px">
+                <div class="row pl-1">
+                    <div class="col-2">
+                        <div class="d-flex">
+                            <button class="navbar-toggler btn-icono menu-panel" type="button" onclick="mostrar_panel_mensajes()">
+                                <i class="fas fa-bars" style="font-size:19px !important"></i>
+                            </button>
 
-                <div class="d-flex m-1 justify-content-between " id="DivPrincipal">
-                    <div>
-                        <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> Eliminar</button>
+                            <button class="navbar-toggler btn-icono menu-panel" type="button" onclick="nuevo_mensaje()">
+                                <i class="fas fa-plus" style="font-size:19px !important"></i>
+                            </button>
+
+                            <!--<div class="ml-1">
+                                <button style="height:40px;font-size:15px" type="button" class="btn btn-outline-secondary btn-sm rounded-sm"><i class="fas fa-plus"></i> Redactar mensaje</button>
+                            </div>-->
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-end">
 
+                    <div class="col-5">
                         <div class="autocomplete input-group-sm">
-                            <input type="text" class="form-control" id="buscargrado" placeholder="Buscar mensaje">
+                            <input type="text" class="form-control rounded-sm" id="buscargrado" style="background-color:#f2f2f2" placeholder="Buscar mensaje" onkeyup="buscar_mensajes(this)">
                             <i class="fas fa-search"></i>
                         </div>
-                        <div class="ml-1">
-                            <button class="btn-icono">
-                                <i class="fas fa-cog"></i>
-                            </button>
-                        </div>
-                        <div class="ml-1">
-                            <button class="btn-icono">
-                                <i class="fas fa-sliders-h"></i>
-                            </button>
-                        </div>
-
                     </div>
-
+                    <div class="col-3">
+                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                            <i class="fas fa-trash" style="font-size:16px !important"></i>
+                        </button>
+                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                            <i class="fas fa-print" style="font-size:16px !important"></i>
+                        </button>
+                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                            <i class="fas fa-check" style="font-size:16px !important"></i>
+                        </button>
+                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                            <i class="fas fa-reply" style="font-size:16px !important"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="messages-content notifications">
-                    <div class="messages-content__table">
-                        <div class="table-responsive table-responsive-kids">
-                            <table class="table table-hover notifications" id="tblMensajes">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck-1">
-                                                <label class="custom-control-label" for="customCheck-1"></label>
-                                            </div>
-                                        </th>
-                                        <th class="column-header">De</th>
-                                        <th class="column-header">Asunto</th>
-                                        <th class="column-header">Entrega
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="activities-cards-container" id="tbodydatos">
-                                    <tr>
-                                        <td colspan="4" class="text-center">
-                                            <div class="d-flex justify-content-center mt-5" id="cargando_mensajes" style="color:#333;font-size:14px;">
-                                                <span style="color:#212529"><i style="color:#212529" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando mensajes... </span>
-                                            </div>
-                                        </td>
-                                    </tr>                                  
-                                </tbody>
-                            </table>
+            </div>
+            <div class="row">
+                <div class="pl-3">
+                    <!--animate__animated animate__fadeOutLeft-->
+                    <div class="panel p-2">
 
-                            <div class="d-none" id="DivMensaje">
-                                <div>
-                                    <button class="btn-icono" style="background-color:transparent" onclick="mostrar_mensaje()">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
+
+                        <div class="categoria-mensaje actived" onclick="cargar_bandeja('bandeja',this)">
+                            <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                <i class="far fa-envelope" style="font-size:16px !important"></i>
+                            </button>
+                            <span>Recibidos</span>
+                        </div>
+                        <div class="categoria-mensaje" onclick="cargar_bandeja('Enviados',this)">
+                            <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                <i class="fas fa-share" style="font-size:16px !important"></i>
+                            </button>
+                            <span>Enviados</span>
+                        </div>
+                        <div class="categoria-mensaje" onclick="cargar_bandeja('Eliminados',this)">
+                            <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                <i class="fas fa-trash" style="font-size:16px !important"></i>
+                            </button>
+                            <span>Eliminados</span>
+                        </div>
+                        <div class="d-none">
+                            <div class="categoria-mensaje mb-2 p-1 rounded-right">
+                                <i class="far fa-envelope mr-2"></i><span>Enviados</span>
+                            </div>
+                            <div class="categoria-mensaje mb-2 p-1 rounded-right">
+                                <i class="fas fa-share mr-2"></i><span>No enviados</span>
+                            </div>
+                            <div class="categoria-mensaje mb-2 p-1 rounded-right">
+                                <i class="fas fa-trash mr-2"></i><span>Eliminados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="DivTableMsn">
+                        <table class="table table-hover notifications">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck-1">
+                                            <label class="custom-control-label" for="customCheck-1"></label>
+                                        </div>
+                                    </th>
+                                    <th class="column-header">De</th>
+                                    <th class="column-header">Asunto</th>
+                                    <th class="column-header">
+                                        Entrega
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="activities-cards-container" id="tbodydatos">
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        <div class="d-flex justify-content-center mt-5" id="cargando_mensajes" style="color:#333;font-size:14px;">
+                                            <span style="color:#212529"><i style="color:#212529" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando mensajes... </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-none" id="DivMensaje">
+                        <div class="d-none">
+                            <button class="btn-icono" style="background-color:transparent" onclick="mostrar_mensaje()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+
+                        <div class="w-100">
+                            <div class="mensaje-encabezado d-flex ">
+                                <div class="d-flex justify-content-between w-100">
+
+                                    <div class="d-none justify-content-end">
+                                        <div class="titulo-mensaje">
+                                            <span id="MenUsuario">h4</span>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="w-100">
-                                    <div class="mensaje-encabezado d-flex ">
-                                        <div class="d-flex justify-content-between w-100">
-                                            <div>
-                                                <h4>Mensajes</h4>
-                                            </div>
-                                            <div class="d-none justify-content-end">
-                                                <div class="titulo-mensaje">
-                                                    <span id="MenUsuario">h4</span>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        
+                            </div>
+                            <div class="d-block">
+                                <div class="iconos-mensaje d-flex mb-3 mt-3">
+                                    <div class=" mr-1">
+                                        <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> Eliminar</button>
                                     </div>
-                                    <div class="d-block">
-                                        <div class="iconos-mensaje d-flex mb-3 mt-3">
-                                            <div class=" mr-1">
-                                                <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> Eliminar</button>
-                                            </div>
-                                            <div class=" mr-1">
-                                                <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-print"></i> Imprimir</button>
-                                            </div>
-
-                                            <div class=" mr-1">
-                                                <button type="button" class="btn btn-light btn-sm rounded-sm recividook" onclick="recibido_ok()"><i class="fas fa-check"></i> Enviar respuesta leído</button>
-                                            </div>
-
-                                            <div class=" mr-1">
-                                                <button type="button" class="btn btn-light btn-sm rounded-sm responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> Responder mensaje</button>
-                                            </div>
-                                            <!--<button class="btn-icono mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
-                                <button class="btn-icono mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Imprimir"><i class="fas fa-print "></i></button>
-                                <button class="btn-icono mr-1 recividook" onclick="recibido_ok()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enviar respuesta leído"><i class="fas fa-check"></i></button>
-                                <button class="btn-icono mr-1 responder" onclick="replicar_mensaje()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Responder mensaje"><i class="fas fa-reply"></i></button>-->
-                                        </div>
+                                    <div class=" mr-1">
+                                        <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-print"></i> Imprimir</button>
                                     </div>
-                                    <div class="d-block">
-                                        <div class="mensaje-detalle">
-                                            <div class="rounded-lg mensaje p-4" style="background-color:#FFF7DF">
-                                                <div class="titulo-mensaje">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div id="MenAsunto"></div>
-                                                        <div class="mensaje-fecha" id="MenFecha"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="lectura-mensaje" id="MenMensaje"></div>
+
+                                    <div class=" mr-1">
+                                        <button type="button" class="btn btn-light btn-sm rounded-sm recividook" onclick="recibido_ok()"><i class="fas fa-check"></i> Enviar respuesta leído</button>
+                                    </div>
+
+                                    <div class=" mr-1">
+                                        <button type="button" class="btn btn-light btn-sm rounded-sm responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> Responder mensaje</button>
+                                    </div>
+                                    <!--<button class="btn-icono mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
+                                    <button class="btn-icono mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Imprimir"><i class="fas fa-print "></i></button>
+                                    <button class="btn-icono mr-1 recividook" onclick="recibido_ok()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enviar respuesta leído"><i class="fas fa-check"></i></button>
+                                    <button class="btn-icono mr-1 responder" onclick="replicar_mensaje()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Responder mensaje"><i class="fas fa-reply"></i></button>-->
+                                </div>
+                            </div>
+                            <div class="d-block">
+                                <div class="mensaje-detalle">
+                                    <div class="rounded-lg mensaje p-4" style="background-color:#FFF7DF">
+                                        <div class="titulo-mensaje">
+                                            <div class="d-flex justify-content-between">
+                                                <div id="MenAsunto"></div>
+                                                <div class="mensaje-fecha" id="MenFecha"></div>
                                             </div>
                                         </div>
+                                        <div class="lectura-mensaje" id="MenMensaje"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+                 
                 </div>
             </div>
+
+
         </div>
     </div>
+
 
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
@@ -286,6 +410,35 @@
     <script src="../../Script/Librerias/quill.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Comunicados/BandejaEntradaV2.js"></script>
-   
+    <script>
+        let _times = 0;
+        function mostrar_panel_mensajes() {
+            if (_times == 0) {
+                _times = 1;
+                $('.panel').find('span').fadeOut();
+                setTimeout(() => {
+                    $('.panel').css('width', '60px');
+
+                    calcular_width_tabla();
+                }, 400);
+                //
+
+            } else {
+                _times = 0;
+                $('.panel').find('span').fadeIn();
+                $('.panel').css('width', '180px');
+                calcular_width_tabla();
+            }
+
+        }
+
+
+        function calcular_width_tabla() {
+            let _container = $('.container-kids__content').width();
+            let _panel = $('.panel').width();
+            $('#DivTableMsn, #DivMensaje').css('width', (_container - (_panel + 30)) + 'px');
+        }
+        calcular_width_tabla();
+    </script>
 </body>
 </html>

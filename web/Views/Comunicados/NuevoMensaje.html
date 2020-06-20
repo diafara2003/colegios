@@ -16,9 +16,36 @@
         .nombre-destinatario {
             margin-top: 5px;
         }
+
+        .kids-background-image {
+            height: 100%;
+            left: -50%;
+            position: fixed;
+            top: 0;
+            width: 200%;
+            z-index: -9;
+        }
+
+            .kids-background-image img {
+                bottom: 0;
+                left: 50%;
+                min-height: 100%;
+                min-width: 50%;
+                position: absolute;
+                transform: translate(-50%,0%);
+            }
+
+        .mensaje {
+            background-color: white;
+        }
     </style>
 </head>
 <body id="bodymensaje">
+
+    <div class="kids-background-image">
+        <img src="../../Img/background-clouds.jpg" />
+    </div>
+
     <div class="container mt-2">
 
         <div class="mensaje shadow rounded">
@@ -63,11 +90,11 @@
                         </div>
                         <div class="row d-none" id="DivCategoria">
                             <div class="col-12  ml-2 mt-2">
-                               
+
                                 <div class="p-2 d-flex">
                                     <div class="para" style="width:auto">Gategoria</div>
                                     <select class="form-control form-control-sm w-50 ml-2" id="ddlCategoria">
-                                       <option>Seleccione una categoria para el mensaje</option>
+                                        <option>Seleccione una categoria para el mensaje</option>
                                     </select>
                                 </div>
 

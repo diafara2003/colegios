@@ -1,28 +1,59 @@
 ﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
-let _mensaje_context = {};
-let id_bandeja = -1;
-let _is_recibido = 0;
-let _sesion = {};//39;
+let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
 
+
+function buscar_mensajes(_this) {
+    let _text = _this.value;
+    let filtered = [];
+
+    if (_text == '') {
+        filtered = data_mensajes;
+    }
+    else {
+        filtered = data_mensajes.filter(x => x.MenAsunto.toString().toLowerCase().indexOf(_text) > -1
+            || x.PerApellidos.toString().toLowerCase().indexOf(_text) > -1
+            || x.PerNombres.toString().toLowerCase().indexOf(_text) > -1);
+    }
+
+
+    var _html = '';
+    if (filtered.length > 0) {
+        filtered.forEach(_mensaje => {
+            _html += renderizar_bandeja(_mensaje);
+        });
+    } else {
+        _html = no_hay_mensajes();
+    }
+
+    document.getElementById('tbodydatos').innerHTML = _html;
+}
 function mostrar_mensaje() {
     if ($('#DivMensaje').hasClass('d-none')) {
-        $('#DivMensaje').addClass('animate__animated animate__fadeInLeft');
+        $('#DivMensaje').fadeIn();
+        $('#DivTableMsn').css('display', 'none');
         $('#DivMensaje').addClass('d-flex').removeClass('d-none');
-        $('#DivPrincipal').addClass('d-none').removeClass('d-flex');
-        $('#tblMensajes').addClass('d-none');
 
     } else {
         $('#DivMensaje').addClass('d-none').removeClass('d-flex');
-        $('#DivPrincipal').addClass('d-flex').removeClass('d-none');
-        $('#tblMensajes').removeClass('d-none');
+        $('#DivTableMsn').css('display', 'block');
+        $('#DivMensaje').fadeOut();
+
     }
 
 }
-function cargar_bandeja(tipo) {
-    
+function cargar_bandeja(tipo, _this) {
+
     consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
-        _html = no_hay_mensajes();
+
+        if (_this != undefined) {
+            $('.actived').removeClass('actived');
+            $(_this).addClass('actived');
+            $('#DivMensaje').addClass('d-none').removeClass('d-flex');
+            $('#DivTableMsn').css('display', 'block');
+        }
+        
+        data_mensajes = response;
         if (response.length > 0) {
             response.forEach(_mensaje => {
                 _html += renderizar_bandeja(_mensaje);
@@ -35,7 +66,7 @@ function cargar_bandeja(tipo) {
 
     window.parent.cargar_mensajes_no_leidos();
 
-    
+
     limpiar_mensaje_leido();
 }
 function renderizar_bandeja(_mensaje) {
@@ -71,8 +102,8 @@ function limpiar_mensaje_leido() {
     document.getElementById('MenFecha').textContent = "";
     document.getElementById('MenMensaje').innerHTML = "";
 }
-function consultar_mensaje(_this,_id, _idBandeja, _is_rta_ok) {
-    id_bandeja = _idBandeja;    
+function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
+    id_bandeja = _idBandeja;
     _is_recibido = _is_rta_ok;
     if (_is_rta_ok == 1) {
         $('.recividook').addClass('bg-success text-white');
@@ -100,9 +131,30 @@ function renderizar_mensaje(_mensaje) {
     else $('.recividook').css('display', '');
     _mensaje_context = _mensaje;
 }
+function nuevo_mensaje() {
+    let _url = window.location.href.toLowerCase().split('comunicados')[0];
+
+    window.location.href = _url + 'comunicados/nuevomensaje.html'
+}
+function recibido_ok() {
+    if (_is_recibido == 0) {
+
+        consultarAPI('BandejaEntrada/mensajes/recibido', 'POST', (response) => {
+            window.parent.mostrar_mensajes('', 'Mensaje de recibido correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+                mostrar_mensaje();
+            });
+        }, { id: id_bandeja }, (error) => {
+            alert('mal');
+        });
+    }
+}
+//function calcular_height() {
+//    $('.mensaje').css('height','px')
+//}
+//$(window).resize(calcular_height);
 (function () {
-    
+
     window.parent.cargar_mensajes_no_leidos();
-    cargar_bandeja('bandeja');    
+    cargar_bandeja('bandeja');
     _sesion = obtener_session();
 })();
