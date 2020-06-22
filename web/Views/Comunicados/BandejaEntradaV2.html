@@ -11,6 +11,7 @@
     <link href="../../Style/estandar.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
     <style>
 
 
@@ -189,6 +190,10 @@
                 font-size: 19px !important;
             }
 
+        #EncabezadoIconos .menu-panel i {
+            color: #666;
+        }
+
         .autocomplete input {
             font-size: 14px !important;
             height: 40px !important;
@@ -216,6 +221,31 @@
             border-radius: 18px;
             color: white;
         }
+
+        #DivRespuesta {
+            height: calc(100vh - 180px);
+            width: calc(100% );
+        }
+
+
+        .a-btn {
+            padding: 0.375rem 0.75rem;
+            cursor: pointer;
+            font-size: 15px;
+            background-color: #ebebeb;
+        }
+
+            .a-btn:hover {
+                color: white !important;
+            }
+
+        tbody td {
+            cursor: pointer;
+        }
+
+        .sin-leer td {
+            color: black;
+        }
     </style>
 
 </head>
@@ -236,7 +266,7 @@
                                 <i class="fas fa-bars" style="font-size:19px !important"></i>
                             </button>
 
-                            <button class="navbar-toggler btn-icono menu-panel" type="button" onclick="nuevo_mensaje()">
+                            <button class="navbar-toggler btn-icono menu-panel ml-2" type="button" onclick="nuevo_mensaje()" data-toggle="tooltip" title="Nuevo mensaje">
                                 <i class="fas fa-plus" style="font-size:19px !important"></i>
                             </button>
 
@@ -246,23 +276,28 @@
                         </div>
                     </div>
 
-                    <div class="col-5">
+                    <div class="col-5 ml-3">
                         <div class="autocomplete input-group-sm">
                             <input type="text" class="form-control rounded-sm" id="buscargrado" style="background-color:#f2f2f2" placeholder="Buscar mensaje" onkeyup="buscar_mensajes(this)">
                             <i class="fas fa-search"></i>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                    <div class="col-3" id="EncabezadoIconos">
+
+                        <button id="enviarReplicaBtn" class="navbar-toggler btn-icono menu-panel d-none" type="button" data-toggle="tooltip" title="Enviar Mensaje" onclick="enviar_replica_mensaje()">
+                            <i class="far fa-paper-plane mr-1" style="font-size:16px !important"></i>
+                        </button>
+
+                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" title="Eliminar mensaje">
                             <i class="fas fa-trash" style="font-size:16px !important"></i>
                         </button>
-                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" title="Imprimir">
                             <i class="fas fa-print" style="font-size:16px !important"></i>
                         </button>
-                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" title="Marcar como leido">
                             <i class="fas fa-check" style="font-size:16px !important"></i>
                         </button>
-                        <button class="navbar-toggler btn-icono menu-panel" type="button">
+                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" title="Responder mensaje">
                             <i class="fas fa-reply" style="font-size:16px !important"></i>
                         </button>
                     </div>
@@ -312,7 +347,7 @@
                                 <tr>
                                     <th>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck-1">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck-1" onclick="check_All(this)">
                                             <label class="custom-control-label" for="customCheck-1"></label>
                                         </div>
                                     </th>
@@ -370,10 +405,6 @@
                                     <div class=" mr-1">
                                         <button type="button" class="btn btn-light btn-sm rounded-sm responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> Responder mensaje</button>
                                     </div>
-                                    <!--<button class="btn-icono mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button>
-                                    <button class="btn-icono mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Imprimir"><i class="fas fa-print "></i></button>
-                                    <button class="btn-icono mr-1 recividook" onclick="recibido_ok()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enviar respuesta leído"><i class="fas fa-check"></i></button>
-                                    <button class="btn-icono mr-1 responder" onclick="replicar_mensaje()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Responder mensaje"><i class="fas fa-reply"></i></button>-->
                                 </div>
                             </div>
                             <div class="d-block">
@@ -391,9 +422,15 @@
                             </div>
                         </div>
                     </div>
+                    <div id="DivRespuesta" class="d-none">
+                        <div id="editor"></div>
+                        <div class="d-flex justify-content-lg-end">
+                            <!--<div class="mt-1"><a class="a-btn" onclick="enviar_replica_mensaje()"><i class="far fa-paper-plane mr-1"></i>Enviar respuesta</a></div>
+                            <div class="ml-1 mt-1"><a class="a-btn" onclick="ocultar_replica()"><i class="fas fa-trash mr-1"></i>Descartar</a></div>-->
+                        </div>
+                    </div>
 
 
-                 
                 </div>
             </div>
 
@@ -436,7 +473,7 @@
         function calcular_width_tabla() {
             let _container = $('.container-kids__content').width();
             let _panel = $('.panel').width();
-            $('#DivTableMsn, #DivMensaje').css('width', (_container - (_panel + 30)) + 'px');
+            $('#DivTableMsn, #DivMensaje, #DivRespuesta').css('width', (_container - (_panel + 30)) + 'px');
         }
         calcular_width_tabla();
     </script>

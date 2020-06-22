@@ -13,7 +13,7 @@ var quill = new Quill('#editor', {
 function descartar() {
     let _url = window.location.href.toLowerCase().split('comunicados')[0];
 
-    window.location.href = _url + 'comunicados/bandejaentrada.html'
+    window.location.href = _url + 'comunicados/bandejaentradav2.html'
 }
 function buscar_personas(_this) {
     setTimeout(c => {

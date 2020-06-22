@@ -2,6 +2,10 @@
     margin-bottom: 0;
 }
 
+dt, dd {
+    font-size: 14px;
+}
+
 .tipo-mensaje-activo {
     background-color: #f6f6f6;
 }
@@ -194,4 +198,28 @@ i {
 
 .mensaje-leido {
     background: white;
+}
+
+
+
+
+.mensaje:hover .mensaje-iconos {
+    display: block !important;
+}
+
+.desc-menasje {
+    color: #6c757d;
+}
+
+.editor-height {
+    height: 228px;
+    max-height: 228px;
+}
+
+#DivRespuesta {
+    display: none;
+}
+
+#DivencabezadoMsn {
+    height: 90px;
 }

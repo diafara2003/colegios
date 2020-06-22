@@ -1,6 +1,10 @@
 ﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
 
+var quill = new Quill('#editor', {
+    placeholder: 'Responder mensaje',
+    theme: 'snow'
+});
 
 function buscar_mensajes(_this) {
     let _text = _this.value;
@@ -39,10 +43,11 @@ function mostrar_mensaje() {
         $('#DivMensaje').fadeOut();
 
     }
-
+    $('#enviarReplicaBtn').addClass('d-none');
 }
 function cargar_bandeja(tipo, _this) {
-
+    $('#enviarReplicaBtn').addClass('d-none');
+    $('#DivRespuesta').addClass('d-none').removeClass('d-block');
     consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
 
@@ -52,7 +57,7 @@ function cargar_bandeja(tipo, _this) {
             $('#DivMensaje').addClass('d-none').removeClass('d-flex');
             $('#DivTableMsn').css('display', 'block');
         }
-        
+
         data_mensajes = response;
         if (response.length > 0) {
             response.forEach(_mensaje => {
@@ -73,15 +78,15 @@ function renderizar_bandeja(_mensaje) {
     let _html = '';
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     //border: 2px solid #A8518A
-    _html += `<tr class="${_mensaje.BanHoraLeido == null ? '' : 'mensaje-leido '}" onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">`;
+    _html += `<tr class="${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}" >`;
     //_html += `<div style="border: 2px solid ${color}"></div>`;
     _html += '<td><div class="custom-control custom-checkbox">';
-    _html += `<input type="checkbox" class="custom-control-input" id="customCheck${_mensaje.MenId}">`;
+    _html += `<input type="checkbox" class="custom-control-input" onclick="habiitar_btn_encabezado(this)" id="customCheck${_mensaje.MenId}">`;
     _html += `<label class="custom-control-label" for="customCheck${_mensaje.MenId}"></label>`;
     _html += '</td>';
-    _html += `<td>${_mensaje.PerApellidos} ${_mensaje.PerNombres}</td>`;
-    _html += `<td>${_mensaje.MenAsunto}</td>`;
-    _html += `<td>${_mensaje.MenFecha.split(' ')[0]}</td>`;
+    _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.PerApellidos} ${_mensaje.PerNombres}</td>`;
+    _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.MenAsunto}</td>`;
+    _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.MenFecha.split(' ')[0]}</td>`;
     _html += '</tr>';
 
     return _html;
@@ -103,6 +108,7 @@ function limpiar_mensaje_leido() {
     document.getElementById('MenMensaje').innerHTML = "";
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
+    $('#DivRespuesta').css('display', 'none');
     id_bandeja = _idBandeja;
     _is_recibido = _is_rta_ok;
     if (_is_rta_ok == 1) {
@@ -148,13 +154,84 @@ function recibido_ok() {
         });
     }
 }
-//function calcular_height() {
-//    $('.mensaje').css('height','px')
-//}
-//$(window).resize(calcular_height);
+function check_All(_this) {
+    if ($(_this).is(':checked')) {
+        $('#tbodydatos').find('input[type="checkbox"]').attr('checked', 'true');
+        $('.menu-panel i').css('color', 'black');
+    } else {
+        $('#tbodydatos').find('input[type="checkbox"]').removeAttr('checked');
+        $('.menu-panel i').css('color', '#666');
+    }
+    habiitar_btn_encabezado(_this);
+}
+function habiitar_btn_encabezado(_this) {
+    if ($(_this).is(':checked')) {
+        $('#EncabezadoIconos i').css('color', 'black');
+    } else {
+        $('#EncabezadoIconos i').css('color', '#666');
+    }
+}
+function ocultar_replica() {
+    $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+}
+function replicar_mensaje() {
+    $('#DivMensaje').addClass('d-none').removeClass('d-flex');
+    $('#DivRespuesta').addClass('d-block').removeClass('d-none');
+    $('#enviarReplicaBtn').removeClass('d-none');
+}
+function enviar_replica_mensaje() {
+    let data = {};
+    let mensaje = obtener_datos_replica();
+    data.destinatarios = obtener_destinatarios();
+    data.mensaje = mensaje;
+
+    consultarAPI('Mensajes', 'POST', (response) => {
+        window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+            ocultar_replica();
+            $('#DivTableMsn').css('display', 'block');
+            $('#enviarReplicaBtn').addClass('d-none');
+        });
+    }, data, (error) => {
+        alert('mal');
+    });
+
+}
+function recibido_ok() {
+    if (_is_recibido == 0) {
+
+        consultarAPI('BandejaEntrada/mensajes/recibido', 'POST', (response) => {
+            window.parent.mostrar_mensajes('', 'Mensaje de recibido correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+                cargar_bandeja('bandeja');
+            });
+        }, { id: id_bandeja }, (error) => {
+            alert('mal');
+        });
+    }
+}
+function obtener_destinatarios() {
+    return [{ id: _mensaje_context.MenUsuario, tipo: _mensaje_context.MenTipoMsn }];
+}
+function obtener_datos_replica() {
+    var myobject = {
+        MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
+        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0
+    };
+
+    myobject.MenReplicaIdMsn = _mensaje_context.MenId;
+
+    myobject.MenMensaje = quill.root.innerHTML;
+    myobject.MenAsunto = _mensaje_context.MenAsunto;
+    myobject.MenOkRecibido = 1;
+    myobject.MenBloquearRespuesta = 1;
+    myobject.MenSendTo = _mensaje_context.MenSendTo;
+    myobject.MenCategoriaId = _mensaje_context.MenCategoriaId;
+
+    return myobject;
+}
 (function () {
 
     window.parent.cargar_mensajes_no_leidos();
     cargar_bandeja('bandeja');
     _sesion = obtener_session();
+    $('[data-toggle="tooltip"]').tooltip()
 })();
