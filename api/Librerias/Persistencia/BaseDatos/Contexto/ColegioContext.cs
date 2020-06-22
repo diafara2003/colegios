@@ -1,4 +1,5 @@
 ﻿
+using BaseDatos.Migrations;
 using BaseDatos.Modelos;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace BaseDatos.Contexto
     {
         public ColegioContext() : base("name=colegioapp")
         {
-            Database.SetInitializer<ColegioContext>(null);
-            //Database.SetInitializer<ColegioContext>(new SchoolDBInitializer());
+            //Database.SetInitializer<ColegioContext>(null);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

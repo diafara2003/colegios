@@ -58,9 +58,23 @@
     <Compile Include="Migrations\202004232326052_initial.designer.cs">
       <DependentUpon>202004232326052_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006222313237_initial_procedures.cs" />
+    <Compile Include="Migrations\202006222313237_initial_procedures.designer.cs">
+      <DependentUpon>202006222313237_initial_procedures.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\DBO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MSN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSN.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -76,6 +90,26 @@
     <EmbeddedResource Include="Migrations\202004232326052_initial.resx">
       <DependentUpon>202004232326052_initial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006222313237_initial_procedures.resx">
+      <DependentUpon>202006222313237_initial_procedures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DBO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DBO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MSN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SQL\Procedures\dbo\[dbo].[AsignarMateriasClase].sql" />
+    <Content Include="SQL\Procedures\dbo\[dbo].[AsignarMaterriasCurso].sql" />
+    <Content Include="SQL\Procedures\dbo\[dbo].[ConsultarClasesMateria].sql" />
+    <Content Include="SQL\Procedures\msn\[msn].[AcEnvioCorreoPersonas].sql" />
+    <Content Include="SQL\Procedures\msn\[msn].[ConsultarMensaje].sql" />
+    <Content Include="SQL\Procedures\msn\[msn].[CrearMensaje_Bandeja_Entrada].sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

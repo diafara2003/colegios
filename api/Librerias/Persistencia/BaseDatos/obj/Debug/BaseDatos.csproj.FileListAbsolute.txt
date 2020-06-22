@@ -14,3 +14,6 @@ C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.Core
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.CopyComplete
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.dll
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.pdb
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.DBO.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.MSN.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.initial_procedures.resources
