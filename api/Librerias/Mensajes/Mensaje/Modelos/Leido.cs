@@ -5,6 +5,6 @@ namespace Mensaje.Modelos
     {
         public int IdMensaje { get; set; }
         public byte OkRecibido { get; set; }
-
+        public int IdBandeja { get; set; }
     }
 }

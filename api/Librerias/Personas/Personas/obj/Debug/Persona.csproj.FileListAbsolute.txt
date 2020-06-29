@@ -9,7 +9,6 @@ C:\Colegios\api\Librerias\Personas\Personas\bin\Debug\BaseDatos.dll.config
 C:\Colegios\api\Librerias\Personas\Personas\bin\Debug\Trasversales.pdb
 C:\Colegios\api\Librerias\Personas\Personas\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Personas\Personas\bin\Debug\EntityFramework.SqlServer.xml
-C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CopyComplete
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.dll

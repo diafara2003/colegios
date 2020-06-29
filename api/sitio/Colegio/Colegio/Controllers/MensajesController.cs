@@ -17,13 +17,14 @@ namespace Colegio.Controllers
 
 
         // GET: api/Mensajes/5
-        public Mensaje_Custom Get(int id)
+        public Mensaje_Custom Get(int id,int Bandeja)
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
             {
                 IdMensaje = id,
-                OkRecibido = 0
+                OkRecibido = 0,
+                IdBandeja=Bandeja
 
             }, identity);
             return new Mensaje.Servicios.MensajesBI().Get(id);

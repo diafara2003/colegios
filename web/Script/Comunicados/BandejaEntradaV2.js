@@ -5,7 +5,25 @@ var quill = new Quill('#editor', {
     placeholder: 'Responder mensaje',
     theme: 'snow'
 });
+let _times_glasses = 0;
+function Ver_no_leidos(_this) {
+    if (_times_glasses == 0) {
+        _times_glasses = 1;
+        $(_this).css('color', 'black');
+    } else {
+        _times_glasses = 0;
+        $(_this).css('color', '#999');
 
+    }
+    mostrar_no_leidos(_times_glasses == 0 ? false : true);
+}
+function mostrar_no_leidos(_ocultar_leidos) {
+    if (_ocultar_leidos) {
+        $('.mensaje-leido').addClass('d-none');
+    } else {
+        $('.mensaje-leido').removeClass('d-none');
+    }
+}
 function buscar_mensajes(_this) {
     let _text = _this.value;
     let filtered = [];
@@ -47,6 +65,7 @@ function mostrar_mensaje() {
 }
 function cargar_bandeja(tipo, _this) {
     $('#enviarReplicaBtn').addClass('d-none');
+    $('.fa-glasses').css('color', '#999');
     $('#DivRespuesta').addClass('d-none').removeClass('d-block');
     consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
@@ -67,6 +86,7 @@ function cargar_bandeja(tipo, _this) {
             _html = no_hay_mensajes();
         }
         document.getElementById('tbodydatos').innerHTML = _html;
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
     window.parent.cargar_mensajes_no_leidos();
@@ -82,7 +102,11 @@ function renderizar_bandeja(_mensaje) {
     //_html += `<div style="border: 2px solid ${color}"></div>`;
     _html += '<td><div class="custom-control custom-checkbox">';
     _html += `<input type="checkbox" class="custom-control-input" onclick="habiitar_btn_encabezado(this)" id="customCheck${_mensaje.MenId}">`;
+
     _html += `<label class="custom-control-label" for="customCheck${_mensaje.MenId}"></label>`;
+    _html += '<i data-toggle="tooltip" title="Favorito" class="far fa-star"></i>';
+    if (_mensaje.MenColor != '')
+        _html += `<i data-toggle="tooltip" title="Categoria" style="color:${_mensaje.MenColor}" class="far fa-flag"></i>`;
     _html += '</td>';
     _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.PerApellidos} ${_mensaje.PerNombres}</td>`;
     _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.MenAsunto}</td>`;
@@ -117,7 +141,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         $('.recividook').removeClass('bg-success text-white');
     }
 
-    consultarAPI(`Mensajes/${_id}`, 'GET', response => {
+    consultarAPI(`Mensajes/¿?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
         if (!$(_this).hasClass('mensaje-leido')) $(_this).addClass('mensaje-leido');
         renderizar_mensaje(response);
         mostrar_mensaje();
@@ -166,9 +190,9 @@ function check_All(_this) {
 }
 function habiitar_btn_encabezado(_this) {
     if ($(_this).is(':checked')) {
-        $('#EncabezadoIconos i').css('color', 'black');
+        $('#EncabezadoIconos').removeClass('d-none');
     } else {
-        $('#EncabezadoIconos i').css('color', '#666');
+        $('#EncabezadoIconos').addClass('d-none');
     }
 }
 function ocultar_replica() {
@@ -228,8 +252,47 @@ function obtener_datos_replica() {
 
     return myobject;
 }
-(function () {
+let _times = 0;
+function mostrar_panel_mensajes() {
+    if (_times == 0) {
+        _times = 1;
+        $('.panel').find('span').fadeOut();
+        $('.panel').find('.no-btn').fadeOut();
+        setTimeout(() => {
+            $('.panel').css('width', '60px');
 
+            calcular_width_tabla();
+        }, 400);
+        //
+
+    } else {
+        _times = 0;
+        $('.panel').find('span').fadeIn();
+        $('.panel').find('.no-btn').fadeIn();
+        $('.panel').css('width', '180px');
+        calcular_width_tabla();
+    }
+
+}
+function mostrar_ul(_this) {
+    let _attr = $(_this).attr('open');
+    if (_attr == undefined) {
+        $(_this).attr('open', 'open');
+        $(_this).closest('li').find('ul').fadeIn();
+        $(_this).closest('li').find('ul').removeClass('d-none');
+    } else {
+        $(_this).removeAttr('open');
+        $(_this).closest('li').find('ul').fadeOut();
+    }
+}
+function calcular_width_tabla() {
+    let _container = $('.container-kids__content').width();
+    let _panel = $('.panel').width();
+    $('#DivTableMsn, #DivMensaje, #DivRespuesta').css('width', (_container - (_panel + 30)) + 'px');
+}
+
+(function () {
+    calcular_width_tabla();
     window.parent.cargar_mensajes_no_leidos();
     cargar_bandeja('bandeja');
     _sesion = obtener_session();

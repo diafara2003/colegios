@@ -27,7 +27,7 @@
 
     fetch(`${_url}api/${metodo}`, Init)
         .then(res => {
-            if (res.status == 401) {
+            if (res.status == 401 || res.status >= 500) {
                 paginar_sesion();
             }
             else {

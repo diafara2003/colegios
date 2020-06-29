@@ -135,9 +135,9 @@
             margin-top: -2px;
         }
 
-        .mensaje {
-            min-height: calc(100vh - 210px);
-        }
+        /*.mensaje {
+            max-height: calc(100vh - 210px);
+        }*/
 
         .mensaje-detalle {
             max-height: calc(100vh - 230px);
@@ -246,7 +246,75 @@
         .sin-leer td {
             color: black;
         }
+
+        #buscargrado:focus {
+            background-color: white !important;
+        }
+
+        .fa-flag {
+            margin-left: 5px;
+        }
+
+        td i {
+            padding-top: 6px;
+        }
+
+        .dropdown-toggle {
+            color: black;
+            padding-top: 3px;
+        }
+
+
+        .no-btn {
+            border: 0;
+            background-color: transparent;
+        }
+
+            .no-btn:active, .no-btn:focus {
+                outline: none;
+            }
+
+        .dropdown-menu {
+            left: 8px !important;
+        }
+
+
+        .numero-mensajes {
+            /*width: 30px;
+            height: 30px;
+            padding-left: 10px;
+            padding-top: 5px;*/
+            margin-top: 13px;
+            margin-right: 8px;
+            color: #6c757d;
+        }
+
+        li {
+            list-style: none;
+        }
     </style>
+
+
+    <style>
+        .panel li {
+            cursor: pointer;
+            border-bottom: none;
+        }
+
+        .list-group-item {
+            padding: 1px 5px;
+        }
+
+        .list-sub-menu {
+            margin-left: 44px;
+        }
+
+            .list-sub-menu li {
+                padding: 5px 0;
+            }
+    </style>
+
+
 
 </head>
 <body>
@@ -258,7 +326,7 @@
 
     <div class="container-kids">
         <div class="container-kids__content refactor">
-            <div style="border-bottom:1px solid #ebebeb;padding-bottom:15px">
+            <div style="padding-bottom:15px">
                 <div class="row pl-1">
                     <div class="col-2">
                         <div class="d-flex">
@@ -280,9 +348,10 @@
                         <div class="autocomplete input-group-sm">
                             <input type="text" class="form-control rounded-sm" id="buscargrado" style="background-color:#f2f2f2" placeholder="Buscar mensaje" onkeyup="buscar_mensajes(this)">
                             <i class="fas fa-search"></i>
+                            <i style="left:93%;color:#999" class="fas fa-glasses" onclick="Ver_no_leidos(this)"></i>
                         </div>
                     </div>
-                    <div class="col-3" id="EncabezadoIconos">
+                    <div class="col-3 d-none" id="EncabezadoIconos">
 
                         <button id="enviarReplicaBtn" class="navbar-toggler btn-icono menu-panel d-none" type="button" data-toggle="tooltip" title="Enviar Mensaje" onclick="enviar_replica_mensaje()">
                             <i class="far fa-paper-plane mr-1" style="font-size:16px !important"></i>
@@ -306,46 +375,64 @@
             <div class="row">
                 <div class="pl-3">
                     <!--animate__animated animate__fadeOutLeft-->
-                    <div class="panel p-2">
-
-
-                        <div class="categoria-mensaje actived" onclick="cargar_bandeja('bandeja',this)">
-                            <button class="navbar-toggler btn-icono menu-panel" type="button">
-                                <i class="far fa-envelope" style="font-size:16px !important"></i>
-                            </button>
-                            <span>Recibidos</span>
-                        </div>
-                        <div class="categoria-mensaje" onclick="cargar_bandeja('Enviados',this)">
-                            <button class="navbar-toggler btn-icono menu-panel" type="button">
-                                <i class="fas fa-share" style="font-size:16px !important"></i>
-                            </button>
-                            <span>Enviados</span>
-                        </div>
-                        <div class="categoria-mensaje" onclick="cargar_bandeja('Eliminados',this)">
-                            <button class="navbar-toggler btn-icono menu-panel" type="button">
-                                <i class="fas fa-trash" style="font-size:16px !important"></i>
-                            </button>
-                            <span>Eliminados</span>
-                        </div>
-                        <div class="d-none">
-                            <div class="categoria-mensaje mb-2 p-1 rounded-right">
-                                <i class="far fa-envelope mr-2"></i><span>Enviados</span>
-                            </div>
-                            <div class="categoria-mensaje mb-2 p-1 rounded-right">
-                                <i class="fas fa-share mr-2"></i><span>No enviados</span>
-                            </div>
-                            <div class="categoria-mensaje mb-2 p-1 rounded-right">
-                                <i class="fas fa-trash mr-2"></i><span>Eliminados</span>
-                            </div>
-                        </div>
+                    <div class="panel">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item actived" onclick="cargar_bandeja('bandeja',this)">
+                                <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                    <i class="far fa-envelope" style="font-size:16px !important"></i>
+                                </button>
+                                <span>Recibidos</span>
+                            </li>
+                            <li class="list-group-item" onclick="cargar_bandeja('Enviados',this)">
+                                <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                    <i class="fas fa-share" style="font-size:16px !important"></i>
+                                </button>
+                                <span>Enviados</span>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="navbar-toggler btn-icono menu-panel" type="button" style="padding:10px 10px 10px 6px">
+                                    <i class="fas fa-flag" style="font-size:16px !important"></i>
+                                </button>
+                                <button type="button" class="no-btn dropdown-toggle pl-0" onclick="mostrar_ul(this)">
+                                    <span>Categorias</span>
+                                </button>
+                                <ul class="list-group list-group-flush list-sub-menu d-none">
+                                    <li class="list-group-item">
+                                        <span>Evidencia</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span>Comunicado interno</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                    <i class="fas fa-star" style="font-size:16px !important"></i>
+                                </button>
+                                <span>Destacados</span>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                    <i class="fas fa-users" style="font-size:16px !important"></i>
+                                </button>
+                                <span>Clases</span>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="navbar-toggler btn-icono menu-panel" type="button">
+                                    <i class="fas fa-trash" style="font-size:16px !important"></i>
+                                </button>
+                                <span>Eliminados</span>
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
                 <div>
                     <div id="DivTableMsn">
                         <table class="table table-hover notifications">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th style="width:70px">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="customCheck-1" onclick="check_All(this)">
                                             <label class="custom-control-label" for="customCheck-1"></label>
@@ -409,7 +496,7 @@
                             </div>
                             <div class="d-block">
                                 <div class="mensaje-detalle">
-                                    <div class="rounded-lg mensaje p-4" style="background-color:#FFF7DF">
+                                    <div class="rounded-lg mensaje p-4" style="border:1px solid #ebebeb;border-radius:5px">
                                         <div class="titulo-mensaje">
                                             <div class="d-flex justify-content-between">
                                                 <div id="MenAsunto"></div>
@@ -448,34 +535,7 @@
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Comunicados/BandejaEntradaV2.js"></script>
     <script>
-        let _times = 0;
-        function mostrar_panel_mensajes() {
-            if (_times == 0) {
-                _times = 1;
-                $('.panel').find('span').fadeOut();
-                setTimeout(() => {
-                    $('.panel').css('width', '60px');
 
-                    calcular_width_tabla();
-                }, 400);
-                //
-
-            } else {
-                _times = 0;
-                $('.panel').find('span').fadeIn();
-                $('.panel').css('width', '180px');
-                calcular_width_tabla();
-            }
-
-        }
-
-
-        function calcular_width_tabla() {
-            let _container = $('.container-kids__content').width();
-            let _panel = $('.panel').width();
-            $('#DivTableMsn, #DivMensaje, #DivRespuesta').css('width', (_container - (_panel + 30)) + 'px');
-        }
-        calcular_width_tabla();
     </script>
 </body>
 </html>
