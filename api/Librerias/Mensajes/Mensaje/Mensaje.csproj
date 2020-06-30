@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Modelos\AcEnvioCorreoPersonas.cs" />
     <Compile Include="Modelos\BandejaEntradaDTO.cs" />
+    <Compile Include="Modelos\CategoriasBandejaDTO.cs" />
     <Compile Include="Modelos\CrearMensajeCustom.cs" />
     <Compile Include="Modelos\Leido.cs" />
     <Compile Include="Modelos\Mensaje_Custom.cs" />

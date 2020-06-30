@@ -16,6 +16,9 @@ namespace Mensaje.Modelos
         public string MenColor { get; set; }
         public DateTime? BanHoraLeido { get; set; }
         public byte BanOkRecibido { get; set; }
+        public int BanClaseId { get; set; }
+        public int BanDestacado { get; set; }
+        public int MenCategoriaId { get; set; }
 
     }
 }

@@ -14,6 +14,8 @@
             Sql(MSN._msn___AcEnvioCorreoPersonas_);
             Sql(MSN._msn___ConsultarMensaje_);
             Sql(MSN._msn___CrearMensaje_Bandeja_Entrada_);
+            Sql(MSN.msn_BandejaClases);
+            Sql(MSN.msn_CategoriasMensajesRecibido);
         }
         
         public override void Down()

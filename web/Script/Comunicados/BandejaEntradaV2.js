@@ -6,17 +6,7 @@ var quill = new Quill('#editor', {
     theme: 'snow'
 });
 let _times_glasses = 0;
-function Ver_no_leidos(_this) {
-    if (_times_glasses == 0) {
-        _times_glasses = 1;
-        $(_this).css('color', 'black');
-    } else {
-        _times_glasses = 0;
-        $(_this).css('color', '#999');
 
-    }
-    mostrar_no_leidos(_times_glasses == 0 ? false : true);
-}
 function mostrar_no_leidos(_ocultar_leidos) {
     if (_ocultar_leidos) {
         $('.mensaje-leido').addClass('d-none');
@@ -67,6 +57,7 @@ function cargar_bandeja(tipo, _this) {
     $('#enviarReplicaBtn').addClass('d-none');
     $('.fa-glasses').css('color', '#999');
     $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+    $('#buscargrado').val('');
     consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
 
@@ -98,13 +89,13 @@ function renderizar_bandeja(_mensaje) {
     let _html = '';
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     //border: 2px solid #A8518A
-    _html += `<tr class="${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}" >`;
+    _html += `<tr categoria="${_mensaje.MenCategoriaId}" clase="${_mensaje.BanClaseId}" class="${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}" >`;
     //_html += `<div style="border: 2px solid ${color}"></div>`;
     _html += '<td><div class="custom-control custom-checkbox">';
     _html += `<input type="checkbox" class="custom-control-input" onclick="habiitar_btn_encabezado(this)" id="customCheck${_mensaje.MenId}">`;
 
     _html += `<label class="custom-control-label" for="customCheck${_mensaje.MenId}"></label>`;
-    _html += '<i data-toggle="tooltip" title="Favorito" class="far fa-star"></i>';
+    _html += `<i onclick="marcar_destacado(${_mensaje.BanId},this)" data-toggle="tooltip" title="Favorito" class="${(_mensaje.BanDestacado == 0 ? 'far no-favorito' : 'fa favorito')} fa-star"></i>`;
     if (_mensaje.MenColor != '')
         _html += `<i data-toggle="tooltip" title="Categoria" style="color:${_mensaje.MenColor}" class="far fa-flag"></i>`;
     _html += '</td>';
@@ -146,6 +137,9 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         renderizar_mensaje(response);
         mostrar_mensaje();
         window.parent.cargar_mensajes_no_leidos();
+        renderizar_categorias();
+        renderizar_clases_bandeja();
+        actualizar_bandeja_count();
     });
 }
 function renderizar_mensaje(_mensaje) {
@@ -290,11 +284,96 @@ function calcular_width_tabla() {
     let _panel = $('.panel').width();
     $('#DivTableMsn, #DivMensaje, #DivRespuesta').css('width', (_container - (_panel + 30)) + 'px');
 }
+function renderizar_categorias() {
+    consultarAPI('BandejaEntrada/mensajes/NoLeido/categorias', 'GET', (_response) => {
+        document.getElementById('LiOocionesCategorias').innerHTML = renderizar_tipo_bandeja(_response,'categoria');
+    });
+}
+function renderizar_clases_bandeja() {
+    consultarAPI('BandejaEntrada/mensajes/NoLeido/tipo', 'GET', (_response) => {
+        document.getElementById('LiOocionesClases').innerHTML = renderizar_tipo_bandeja(_response,'clase');
+    });
+}
+function renderizar_tipo_bandeja(_response,_attr) {
+    let _html = '';
+    _html = `<ul class="list-group list-group-flush list-sub-menu d-none">`
+    _response.forEach(c => {
 
+        _html += `<li class="list-group-item" onclick=ver_mensajes__tipo(this,${c.id},\"${_attr}"\)>`;
+        _html += `<div class="d-flex justify-content-between">`;
+        _html += `<div class="w-100">${c.Descripcion}</div>`;
+        _html += `<div class="text-danger">${c.Count}</div>`;
+        _html += `<div>`;
+        _html += `</li>`;
+    });
+    _html += `</ul>`;
+
+
+    return _html;
+
+}
+function Ver_mensaje_x_tipo() {
+
+}
+function marcar_destacado(id, _this) {
+    let _estado = 1;
+    if ($(_this).hasClass('favorito')) {
+        _estado = 0;
+        $(_this).removeClass('far').addClass('fa').removeClass('favorito');
+    } else {
+        $(_this).removeClass('far').addClass('fa').addClass('favorito');
+    }
+
+    consultarAPI(`BandejaEntrada/mensajes/favorito?id=${id}&estado=${_estado}`, 'GET', (_r => {
+
+    }));
+}
+function cargar_mensajes() {
+    window.location.reload();
+}
+function actualizar_bandeja_count() {
+    let _inter = setInterval(C => {
+        if (localStorage.getItem('noleidos') != undefined) {
+            clearInterval(_inter);
+            document.getElementById('countNoLeidos').textContent = localStorage.getItem('noleidos');
+        }
+    }, 500)
+}
+
+
+
+
+
+function Ver_no_leidos(_this) {
+    if (_times_glasses == 0) {
+        _times_glasses = 1;
+        $(_this).css('color', 'black');
+    } else {
+        _times_glasses = 0;
+        $(_this).css('color', '#999');
+
+    }
+    mostrar_no_leidos(_times_glasses == 0 ? false : true);
+}
+function ver_destacados(_this) {
+    $('.actived').removeClass('actived');
+    $(_this).addClass('actived');
+    $('#tbodydatos').find('.no-favorito').closest('tr').addClass('d-none');
+}
+function ver_mensajes__tipo(_this, _tipo, _attr) {
+    $('.actived').removeClass('actived');
+    $(_this).addClass('actived');
+    $('#tbodydatos').find('tr').removeClass('d-none');
+    $('#tbodydatos').find('tr').not(`tr[${_attr.trim()}="${_tipo}"]`).addClass('d-none');
+}
 (function () {
     calcular_width_tabla();
     window.parent.cargar_mensajes_no_leidos();
+    renderizar_categorias();
+    renderizar_clases_bandeja();
     cargar_bandeja('bandeja');
     _sesion = obtener_session();
     $('[data-toggle="tooltip"]').tooltip()
+    actualizar_bandeja_count();
+
 })();

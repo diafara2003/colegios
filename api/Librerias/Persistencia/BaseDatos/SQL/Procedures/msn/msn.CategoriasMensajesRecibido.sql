@@ -29,12 +29,12 @@ BEGIN
 
 	--SELECT * FROM MSN.#CuentaNoLeido
 
-	SELECT	CatDescripcion,ISNULL(CtaNoLeido,0) AS CtaNoLeido			
+	SELECT	MenCategoriaId,CatDescripcion,ISNULL(CtaNoLeido,0) AS CtaNoLeido			
 	FROM	msn.BandejaEntrada
 			INNER JOIN MSN.Mensajes ON BanMsnId=MenId
 			INNER JOIN MSN.Categorias ON CatId=MenCategoriaId
 			LEFT JOIN MSN.#CuentaNoLeido ON ID=MenCategoriaId
 	WHERE	BanUsuario=@usuario
-	GROUP BY CatDescripcion,CtaNoLeido
+	GROUP BY CatDescripcion,CtaNoLeido,MenCategoriaId
 END
 GO

@@ -21,6 +21,13 @@ namespace Colegio.Controllers
 
             return new Mensaje.Servicios.BandejaEntradaBI().Get(identity, tipo);
         }
+        [Route("favorito")]
+        [HttpGet]
+        public bool MarcarFavorito(int id, int estado)
+        {
+            new Mensaje.Servicios.BandejaEntradaBI().MarcarFavorito(id, estado);
+            return true;
+        }
 
         [Route("recibido")]
         [HttpPost]
@@ -36,6 +43,21 @@ namespace Colegio.Controllers
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             return new Mensaje.Servicios.BandejaEntradaBI().GetCountMensaje(identity);
+        }
+
+        [Route("NoLeido/tipo")]
+        [HttpGet]
+        public IEnumerable<TipoBandejaDTO> GetCountNoLeidoTipo()
+        {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            return new Mensaje.Servicios.MensajesBI().GetXUsuario(identity);
+        }
+        [Route("NoLeido/categorias")]
+        [HttpGet]
+        public IEnumerable<TipoBandejaDTO> GetCountNoLeidoCategorias()
+        {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            return new Mensaje.Servicios.CategoriasBL().GetXUsuario(identity);
         }
 
         [Route("Marcarleido")]

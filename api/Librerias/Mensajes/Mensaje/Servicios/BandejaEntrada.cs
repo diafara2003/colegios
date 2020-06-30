@@ -30,6 +30,9 @@ namespace Mensaje.Servicios
                                {
                                    MenId = (int)data["MenId"],
                                    BanId = (int)data["BanId"],
+                                   MenCategoriaId = (int)data["MenCategoriaId"],
+                                   BanClaseId = (int)data["BanClaseId"],
+                                   BanDestacado = (int)data["BanDestacado"],
                                    MenAsunto = (string)data["MenAsunto"],
                                    MenBloquearRespuesta = (byte)data["MenBloquearRespuesta"],
                                    MenFecha = (string)data["MenFecha"],
@@ -38,27 +41,28 @@ namespace Mensaje.Servicios
                                    PerApellidos = (string)data["PerApellidos"],
                                    PerNombres = (string)data["PerNombres"],
                                    MenColor = (string)data["MenColor"],
-                                   BanOkRecibido=(byte)data["BanOkRecibido"],
-                                   BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() :(DateTime)data["BanHoraLeido"],
+                                   BanOkRecibido = (byte)data["BanOkRecibido"],
+                                   BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() : (DateTime)data["BanHoraLeido"],
                                });
 
             return objlstResultado;
         }
 
-        public int GetCountMensaje(int usuario) {
+        public int GetCountMensaje(int usuario)
+        {
             ColegioContext objCnn = new ColegioContext();
 
             return objCnn.bandeja_entrada.Where(c => c.BanUsuario == usuario && c.BanHoraLeido == null).Count();
 
         }
 
-        public ResponseDTO MarcarLeido(LeidoDTO mensaje,int usuario)
+        public ResponseDTO MarcarLeido(LeidoDTO mensaje, int usuario)
         {
             ResponseDTO objresponse = new ResponseDTO();
             ColegioContext objCnn = new ColegioContext();
 
-            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Where(c => c.BanId==mensaje.IdBandeja && c.BanUsuario==usuario).FirstOrDefault();
-            if (_mensaje!=null)
+            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Where(c => c.BanId == mensaje.IdBandeja && c.BanUsuario == usuario).FirstOrDefault();
+            if (_mensaje != null)
             {
                 if (_mensaje.BanHoraLeido == null)
                 {
@@ -70,9 +74,9 @@ namespace Mensaje.Servicios
                 }
                 objCnn.SaveChanges();
             }
-           
 
-           
+
+
             return objresponse;
         }
 
@@ -98,6 +102,16 @@ namespace Mensaje.Servicios
             return obj;
         }
 
+        public void MarcarFavorito(int id, int estado)
+        {
+            ColegioContext objCnn = new ColegioContext();
 
+            BandejaEntrada _mensaje = objCnn.bandeja_entrada.Find(id);
+            _mensaje.BanDestacado = estado;
+
+            objCnn.SaveChanges();
+
+
+        }
     }
 }

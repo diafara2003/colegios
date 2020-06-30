@@ -116,19 +116,65 @@ namespace BaseDatos.Resources {
         ///    DROP PROCEDURE [msn].[CrearMensaje_Bandeja_Entrada]
         ///END
         ///go
-        ////*
-        ///exec MSN.CrearMensaje_Bandeja_Entrada @idMensaje=1,@destinatarios=N&apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
-        ///&lt;ArrayOfDestinarario&gt;
-        ///  &lt;Destinarario&gt;
-        ///    &lt;id&gt;1&lt;/id&gt;
-        ///    &lt;tipo&gt;-40&lt;/tipo&gt;
-        ///  &lt;/Destinarario&gt;
-        ///  &lt;Destinarario&gt;
-        ///    &lt;id&gt;5&lt;/id [rest of string was truncated]&quot;;.
+        ///
+        ///-- =============================================
+        ///-- Description:	crea un registro en la taba msn.BandejaEntrada
+        ///--			    por cada destinatario enviado en el xml
+        ///-- =============================================
+        ///CREATE PROCEDURE [msn].[Cr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string _msn___CrearMensaje_Bandeja_Entrada_ {
             get {
                 return ResourceManager.GetString("_msn___CrearMensaje_Bandeja_Entrada_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IF EXISTS ( SELECT * 
+        ///            FROM   sysobjects 
+        ///            WHERE  id = object_id(N&apos;msn.BandejaClases&apos;) 
+        ///                   and OBJECTPROPERTY(id, N&apos;IsProcedure&apos;) = 1 )
+        ///BEGIN
+        ///    DROP PROCEDURE msn.BandejaClases
+        ///END
+        ///go
+        ///
+        ///-- =============================================
+        ///-- Author:		&lt;Author,,Name&gt;
+        ///-- Create date: &lt;Create Date,,&gt;
+        ///-- Description:	&lt;Description,,&gt;
+        ///-- msn.BandejaClases  15
+        ///-- =============================================
+        ///CREATE PROCEDURE msn.BandejaClases
+        ///	-- Add the parameters [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string msn_BandejaClases {
+            get {
+                return ResourceManager.GetString("msn_BandejaClases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IF EXISTS ( SELECT * 
+        ///            FROM   sysobjects 
+        ///            WHERE  id = object_id(N&apos;msn.CategoriasMensajesRecibido&apos;) 
+        ///                   and OBJECTPROPERTY(id, N&apos;IsProcedure&apos;) = 1 )
+        ///BEGIN
+        ///    DROP PROCEDURE msn.CategoriasMensajesRecibido
+        ///END
+        ///go
+        ///
+        ///-- =============================================
+        ///-- Author:		&lt;Author,,Name&gt;
+        ///-- Create date: &lt;Create Date,,&gt;
+        ///-- Description:	&lt;Description,,&gt;
+        ///-- msn.CategoriasMensajesRecibido  15
+        ///-- =============================================
+        ///CREATE PROCEDURE ms [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string msn_CategoriasMensajesRecibido {
+            get {
+                return ResourceManager.GetString("msn_CategoriasMensajesRecibido", resourceCulture);
             }
         }
     }

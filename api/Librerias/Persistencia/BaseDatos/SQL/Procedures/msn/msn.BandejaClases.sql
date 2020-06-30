@@ -27,12 +27,12 @@ BEGIN
 	WHERE	BanUsuario=@usuario and BanHoraLeido IS NULL
 	GROUP BY BanClaseId
 
-	SELECT	MatDescripcion ,ISNULL(CtaNoLeido,0) AS CtaNoLeido	
+	SELECT	BanClaseId,MatDescripcion ,ISNULL(CtaNoLeido,0) AS CtaNoLeido	
 	FROM	MSN.BandejaEntrada
 			INNER JOIN Clases on Claid=BanClaseId
 			INNER JOIN Materias ON MatID=ClaMateriaId
 			LEFT JOIN MSN.#CuentaNoLeido ON ID=BanClaseId 
 	WHERE	BanUsuario=@usuario and BanHoraLeido IS NULL
-	GROUP BY MatDescripcion,CtaNoLeido
+	GROUP BY MatDescripcion,CtaNoLeido,BanClaseId
 END
 GO

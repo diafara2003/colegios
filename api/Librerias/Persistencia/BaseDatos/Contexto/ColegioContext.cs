@@ -17,8 +17,9 @@ namespace BaseDatos.Contexto
     {
         public ColegioContext() : base("name=colegioapp")
         {
-            //Database.SetInitializer<ColegioContext>(null);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
+            Database.SetInitializer<ColegioContext>(null);
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
+            
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -106,6 +106,26 @@ namespace Mensaje.Servicios
             return objlstResultado;
         }
 
+        public IEnumerable<TipoBandejaDTO> GetXUsuario(int usuario)
+        {
+            IEnumerable<TipoBandejaDTO> objResultado = new List<TipoBandejaDTO>();
+            ColegioContext objCnn = new ColegioContext();
+            BaseDatos.Modelos.ProcedureDTO ProcedureDTO = new BaseDatos.Modelos.ProcedureDTO();
 
+            ProcedureDTO.commandText = "msn.BandejaClases";
+            ProcedureDTO.parametros.Add("usuario", usuario);
+
+            DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
+
+            objResultado = (from query in result.AsEnumerable()
+                            select new TipoBandejaDTO()
+                            {
+                                id=(int)query["BanClaseId"],
+                                Count = (int)query["CtaNoLeido"],
+                                Descripcion = (string)query["MatDescripcion"]
+                            });
+
+            return objResultado;
+        }
     }
 }

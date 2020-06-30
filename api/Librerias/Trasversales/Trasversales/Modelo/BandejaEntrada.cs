@@ -19,5 +19,7 @@ namespace Trasversales.Modelo
         public DateTime? BanHoraLeido { get; set; }
         public byte BanOkRecibido { get; set; }
         public DateTime? BanOkRecibidoFecha { get; set; }
+        public int? BanClaseId { get; set; }
+        public int? BanDestacado { get; set; }
     }
 }
