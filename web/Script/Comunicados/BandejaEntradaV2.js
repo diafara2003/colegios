@@ -151,7 +151,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     }
     $('#DivAcBuscarMensajes, #BtnNoLeidos').addClass('d-none');
     consultarAPI(`Mensajes/¿?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
-        if (!$(_this).hasClass('mensaje-leido')) $(_this).addClass('mensaje-leido');
+        $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
         $('#DivRespuesta').addClass('d-none');
         $('#modalverMensaje').modal('show');
         $('.container-kids__content').addClass('d-none');
@@ -312,7 +312,7 @@ function renderizar_tipo_bandeja(_response, _attr) {
         _html += `<li class="list-group-item" onclick=ver_mensajes__tipo(this,${c.id},\"${_attr}"\)>`;
         _html += `<div class="d-flex justify-content-between">`;
         _html += `<div class="w-100">${c.Descripcion}</div>`;
-        _html += `<div class="">${c.Count}</div>`;
+        _html += `<div style="color:#2E8CFF" class="">${c.Count}</div>`;
         _html += `<div>`;
         _html += `</li>`;
     });
@@ -359,11 +359,11 @@ function cerrar_modal() {
     actualizar_bandeja_count();
 }
 function cerrar_modal_mensaje() {
-    $('.container-kids__content').removeClass('d-none');
+    $('.container-kids__content, #DivAcBuscarMensajes').removeClass('d-none');
 }
 function cerrar_modal_nuevo() {
     $('#exampleModal').modal('hide');
-    $('.container-kids__content').removeClass('d-none');
+    $('.container-kids__content, #DivAcBuscarMensajes').removeClass('d-none');
 }
 
 function ocultar_bandeja() {
