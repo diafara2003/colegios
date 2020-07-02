@@ -1,6 +1,14 @@
 ﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
 
+let iniciales_usuario = (nombre, apellidos) => {
+    //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
+    return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
+}
+
+
+
+
 var quill = new Quill('#editor', {
     placeholder: 'Responder mensaje',
     theme: 'snow'
@@ -57,6 +65,7 @@ function cargar_bandeja(tipo, _this) {
     $('#enviarReplicaBtn').addClass('d-none');
     $('.fa-glasses').css('color', '#999');
     $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+    $('#DivAcBuscarMensajes, #BtnNoLeidos').removeClass('d-none');
     $('#buscargrado').val('');
     consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
@@ -121,19 +130,31 @@ function limpiar_mensaje_leido() {
     document.getElementById('MenUsuario').textContent = "";
     document.getElementById('MenFecha').textContent = "";
     document.getElementById('MenMensaje').innerHTML = "";
+    document.getElementById('DivIniciales').textContent = "";
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     $('#DivRespuesta').css('display', 'none');
     id_bandeja = _idBandeja;
-    _is_recibido = _is_rta_ok;
-    if (_is_rta_ok == 1) {
-        $('.recividook').addClass('bg-success text-white');
+
+    if (_idBandeja == 0) {
+        _is_rta_ok = 0;
+        $('.responder').addClass('d-none');
     } else {
-        $('.recividook').removeClass('bg-success text-white');
+        $('.responder').removeClass('d-none');
     }
 
+    _is_recibido = _is_rta_ok;
+    if (_is_rta_ok == 0) {
+        $('.recividook').addClass('d-none');
+    } else {
+        $('.recividook').removeClass('d-none');
+    }
+    $('#DivAcBuscarMensajes, #BtnNoLeidos').addClass('d-none');
     consultarAPI(`Mensajes/¿?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
         if (!$(_this).hasClass('mensaje-leido')) $(_this).addClass('mensaje-leido');
+        $('#DivRespuesta').addClass('d-none');
+        $('#modalverMensaje').modal('show');
+        $('.container-kids__content').addClass('d-none');
         renderizar_mensaje(response);
         mostrar_mensaje();
         window.parent.cargar_mensajes_no_leidos();
@@ -143,9 +164,10 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     });
 }
 function renderizar_mensaje(_mensaje) {
+    document.getElementById('DivIniciales').textContent = iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos);
     document.getElementById('MenAsunto').textContent = _mensaje.MenAsunto;
     document.getElementById('MenUsuario').textContent = _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres;
-    document.getElementById('MenFecha').textContent = moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
+    document.getElementById('MenFecha').textContent = "Fecha de envio: " + moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
     document.getElementById('MenMensaje').innerHTML = _mensaje.MenMensaje;
 
     if (_mensaje.MenBloquearRespuesta == 1) $('.responder').css('display', 'none');
@@ -193,7 +215,7 @@ function ocultar_replica() {
     $('#DivRespuesta').addClass('d-none').removeClass('d-block');
 }
 function replicar_mensaje() {
-    $('#DivMensaje').addClass('d-none').removeClass('d-flex');
+
     $('#DivRespuesta').addClass('d-block').removeClass('d-none');
     $('#enviarReplicaBtn').removeClass('d-none');
 }
@@ -213,18 +235,6 @@ function enviar_replica_mensaje() {
         alert('mal');
     });
 
-}
-function recibido_ok() {
-    if (_is_recibido == 0) {
-
-        consultarAPI('BandejaEntrada/mensajes/recibido', 'POST', (response) => {
-            window.parent.mostrar_mensajes('', 'Mensaje de recibido correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
-                cargar_bandeja('bandeja');
-            });
-        }, { id: id_bandeja }, (error) => {
-            alert('mal');
-        });
-    }
 }
 function obtener_destinatarios() {
     return [{ id: _mensaje_context.MenUsuario, tipo: _mensaje_context.MenTipoMsn }];
@@ -282,19 +292,19 @@ function mostrar_ul(_this) {
 function calcular_width_tabla() {
     let _container = $('.container-kids__content').width();
     let _panel = $('.panel').width();
-    $('#DivTableMsn, #DivMensaje, #DivRespuesta').css('width', (_container - (_panel + 30)) + 'px');
+    $('#DivTableMsn').css('width', (_container - (_panel + 30)) + 'px');
 }
 function renderizar_categorias() {
     consultarAPI('BandejaEntrada/mensajes/NoLeido/categorias', 'GET', (_response) => {
-        document.getElementById('LiOocionesCategorias').innerHTML = renderizar_tipo_bandeja(_response,'categoria');
+        document.getElementById('LiOocionesCategorias').innerHTML = renderizar_tipo_bandeja(_response, 'categoria');
     });
 }
 function renderizar_clases_bandeja() {
     consultarAPI('BandejaEntrada/mensajes/NoLeido/tipo', 'GET', (_response) => {
-        document.getElementById('LiOocionesClases').innerHTML = renderizar_tipo_bandeja(_response,'clase');
+        document.getElementById('LiOocionesClases').innerHTML = renderizar_tipo_bandeja(_response, 'clase');
     });
 }
-function renderizar_tipo_bandeja(_response,_attr) {
+function renderizar_tipo_bandeja(_response, _attr) {
     let _html = '';
     _html = `<ul class="list-group list-group-flush list-sub-menu d-none">`
     _response.forEach(c => {
@@ -302,7 +312,7 @@ function renderizar_tipo_bandeja(_response,_attr) {
         _html += `<li class="list-group-item" onclick=ver_mensajes__tipo(this,${c.id},\"${_attr}"\)>`;
         _html += `<div class="d-flex justify-content-between">`;
         _html += `<div class="w-100">${c.Descripcion}</div>`;
-        _html += `<div class="text-danger">${c.Count}</div>`;
+        _html += `<div class="">${c.Count}</div>`;
         _html += `<div>`;
         _html += `</li>`;
     });
@@ -319,7 +329,7 @@ function marcar_destacado(id, _this) {
     let _estado = 1;
     if ($(_this).hasClass('favorito')) {
         _estado = 0;
-        $(_this).removeClass('far').addClass('fa').removeClass('favorito');
+        $(_this).removeClass('fa').addClass('far').removeClass('favorito');
     } else {
         $(_this).removeClass('far').addClass('fa').addClass('favorito');
     }
@@ -336,21 +346,38 @@ function actualizar_bandeja_count() {
         if (localStorage.getItem('noleidos') != undefined) {
             clearInterval(_inter);
             document.getElementById('countNoLeidos').textContent = localStorage.getItem('noleidos');
+            document.getElementById('numeroMsn').textContent = localStorage.getItem('noleidos');
         }
     }, 500)
 }
+function cerrar_modal() {
+    cerrar_modal_nuevo();
+    $('.panel').find('.actived').click();
+    renderizar_categorias();
+    renderizar_clases_bandeja();
+    window.parent.cargar_mensajes_no_leidos();
+    actualizar_bandeja_count();
+}
+function cerrar_modal_mensaje() {
+    $('.container-kids__content').removeClass('d-none');
+}
+function cerrar_modal_nuevo() {
+    $('#exampleModal').modal('hide');
+    $('.container-kids__content').removeClass('d-none');
+}
 
-
-
-
-
+function ocultar_bandeja() {
+    $('.container-kids__content').addClass('d-none');
+}
 function Ver_no_leidos(_this) {
     if (_times_glasses == 0) {
         _times_glasses = 1;
-        $(_this).css('color', 'black');
+        $(_this).css('color', '#369');
+        $(_this).closest('button').addClass('btn-active-gmail');
     } else {
         _times_glasses = 0;
-        $(_this).css('color', '#999');
+        $(_this).css('color', 'black');
+        $(_this).closest('button').removeClass('btn-active-gmail')
 
     }
     mostrar_no_leidos(_times_glasses == 0 ? false : true);
@@ -366,6 +393,23 @@ function ver_mensajes__tipo(_this, _tipo, _attr) {
     $('#tbodydatos').find('tr').removeClass('d-none');
     $('#tbodydatos').find('tr').not(`tr[${_attr.trim()}="${_tipo}"]`).addClass('d-none');
 }
+function expandar_modal() {
+    $('#modalsize, #modalsize2').addClass('modal-full-view');
+    $('.fa-expand-alt').closest('button').addClass('d-none');
+    $('.fa-compress-alt').closest('button').removeClass('d-none');
+}
+function colapsar_modal() {
+    $('#modalsize, #modalsize2').removeClass('modal-full-view');
+    $('.fa-compress-alt').closest('button').addClass('d-none');
+    $('.fa-expand-alt').closest('button').removeClass('d-none');
+}
+function tamano_frame() {
+    let _w = $('.container-kids__content').width();
+    let _h = $('.container-kids__content').height();
+
+    //$('#exampleModal').css('width', _w + 'px');
+    //$('#exampleModal').css('height', _h + 'px');
+}
 (function () {
     calcular_width_tabla();
     window.parent.cargar_mensajes_no_leidos();
@@ -375,5 +419,6 @@ function ver_mensajes__tipo(_this, _tipo, _attr) {
     _sesion = obtener_session();
     $('[data-toggle="tooltip"]').tooltip()
     actualizar_bandeja_count();
-
+    tamano_frame();
 })();
+$(window).resize(tamano_frame);

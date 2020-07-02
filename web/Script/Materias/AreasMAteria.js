@@ -105,7 +105,9 @@ function buscar_area_materia(_this) {
         filtered = _data_area_materia;
     }
     else {
-        filtered = _data_area_materia.filter(x => x.ArMaCodigo.toString().toLowerCase().indexOf(_text) > -1 || x.ArMaDescripcion.toString().toLowerCase().indexOf(_text) > -1);
+        filtered = _data_area_materia.filter(x =>
+            x.ArMaCodigo.toString().toLowerCase().includes(_text)
+            || x.ArMaDescripcion.toString().toLowerCase().includes(_text));
     }
     renderizar_area_materia(filtered);
 }

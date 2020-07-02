@@ -21,7 +21,7 @@ function renderizar_grados(source) {
 
     source.forEach(item => _html += renderizar_tr_grados(item));
 
-    document.getElementById('tblgrados').innerHTML = _html;    
+    document.getElementById('tblgrados').innerHTML = _html;
 }
 function renderizar_tr_grados(_item) {
     let _tr = '';
@@ -107,7 +107,9 @@ function buscar_grados(_this) {
         filtered = _data_grados;
     }
     else {
-        filtered = _data_grados.filter(x => x.GraCodigo.toString().toLowerCase().indexOf(_text) > -1 || x.GraDescripcion.toString().toLowerCase().indexOf(_text) > -1);
+        filtered = _data_grados.filter(x =>
+            x.GraCodigo.toString().toLowerCase().includes(_text)
+            || x.GraDescripcion.toString().toLowerCase().includes(_text));
     }
     renderizar_grados(filtered);
 }
@@ -118,8 +120,8 @@ function calcular_height_tblDatosGrados() {
     document.getElementById('tblDatosGrados').style.overflow = "auto";
     ver_grados();
 }
-function ver_grados() {    
-    setTimeout(c => { fixed_table_scroll('tblDatosGrados'); },300);
+function ver_grados() {
+    setTimeout(c => { fixed_table_scroll('tblDatosGrados'); }, 300);
 }
 consultar_grados();
 $(window).resize(calcular_height_tblDatosGrados);

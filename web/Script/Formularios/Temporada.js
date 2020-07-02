@@ -101,7 +101,7 @@ function buscar_temporada(_this) {
         filtered = _data_termporada;
     }
     else {
-        filtered = _data_termporada.filter(x => x.TempAno.toString().toLowerCase().indexOf(_text) > -1);
+        filtered = _data_termporada.filter(x => x.TempAno.toString().toLowerCase().includes(_text) );
     }
     renderizar_temporada(filtered);
 }

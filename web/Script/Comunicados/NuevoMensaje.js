@@ -11,9 +11,7 @@ var quill = new Quill('#editor', {
 
 
 function descartar() {
-    let _url = window.location.href.toLowerCase().split('comunicados')[0];
-
-    window.location.href = _url + 'comunicados/bandejaentradav2.html'
+    window.parent.cerrar_modal();
 }
 function buscar_personas(_this) {
     setTimeout(c => {
@@ -110,7 +108,7 @@ function enviar_mensaje() {
     data.mensaje = mensaje;
     if (validar_datos(mensaje)) {
         consultarAPI('Mensajes', 'POST', (response) => {
-            window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+            window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
 
                 descartar();
             });
@@ -157,8 +155,8 @@ function mostrar_mensaje_validacion_error(mensaje) {
     window.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar');
 }
 function consultar_mensaje(id) {
-    consultarAPI(`mensajes/${id}`, 'GET', response => {
-        read_only();
+    consultarAPI(`mensajes?id=${id}&bandeja=1`, 'GET', response => {
+       // read_only();
         cargar_mensaje(response);
         $('#bodymensaje').css('display', 'block');
     });
@@ -213,6 +211,15 @@ function consultar_categoria() {
     })
 
 
+}
+function cerrar_modal_nuevo_mensaje() {
+    window.parent.cerrar_modal_nuevo();
+}
+function expandir_frame() {
+    window.parent.expandar_modal();
+}
+function colapsar_frame() {
+    window.parent.colapsar_modal();
 }
 (function () {
 

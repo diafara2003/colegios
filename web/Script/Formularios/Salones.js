@@ -107,8 +107,8 @@ function buscar_salones(_this) {
     }
     else {
         filtered = _data_salones.filter(
-            x => x.SalCodigo.toString().toLowerCase().indexOf(_text) > -1
-                || x.SalDescripcion.toString().toLowerCase().indexOf(_text) > -1
+            x => x.SalCodigo.toString().toLowerCase().includes(_text)
+                || x.SalDescripcion.toString().toLowerCase().includes(_text) 
         );
     }
     renderizar_salones(filtered);

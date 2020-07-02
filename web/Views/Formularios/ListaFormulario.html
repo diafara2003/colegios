@@ -9,17 +9,11 @@
     <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
 
 
     <style>
-        body, input {
-            font-size: 13px !important;
-        }
-
-        i {
-            cursor: pointer;
-        }
-
+     
         .input-autocomplete {
             outline: none;
             border: none;
@@ -34,10 +28,7 @@
             background: white;
         }
 
-        [contenteditable=true] {
-            outline: none;
-        }
-
+     
             [contenteditable=true]:focus, [contenteditable=true]:active {
                 border-bottom: 1px solid #369;
             }
@@ -46,26 +37,11 @@
             padding: 5px 5px 0 5px;
         }
 
-        .btn-icono {
-            background-color: transparent;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            border-width: 0;
-            outline: none;
+
+
+        .btn-icono i {
+            font-size: 13px;
         }
-
-            .btn-icono:hover {
-                background-color: black;
-            }
-
-                .btn-icono:hover i {
-                    color: buttonface;
-                }
-
-            .btn-icono i {
-                font-size: 13px;
-            }
 
 
         .icon-tab {
@@ -145,7 +121,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tbltemporada"></tbody>
-                                            <tbody class="bg-light">
+                                            <tfoot class="bg-light">
                                                 <tr>
                                                     <td colspan="2">
                                                         <div class="input-group input-group-sm">
@@ -157,7 +133,7 @@
                                                         <button class="btn-icono" onclick="agregar_temporada()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
                                                     </td>
                                                 </tr>
-                                            </tbody>
+                                            </tfoot>
                                         </table>
                                     </div>
 
@@ -234,7 +210,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tblcursos"></tbody>
-                                            <tbody class="bg-light">
+                                            <tfoot class="bg-light">
                                                 <tr>
                                                     <td>
                                                         <div class="input-group input-group-sm">
@@ -266,7 +242,7 @@
                                                         <button class="btn-icono" onclick="agregar_curso()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fas fa-plus text-success"></i></button>
                                                     </td>
                                                 </tr>
-                                            </tbody>
+                                            </tfoot>
                                         </table>
                                     </div>
 

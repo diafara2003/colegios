@@ -112,6 +112,7 @@ function cargar_usuario() {
     $('.spnnombreUsuario').text(`${_usuario.PerNombres} ${_usuario.PerApellidos}`);
 }
 function cargar_mensajes_no_leidos() {
+    localStorage.removeItem('noleidos');
     consultarAPI('BandejaEntrada/mensajes/NoLeidoCount', 'GET', (_count) => {
         localStorage.setItem('noleidos', _count);
         if (_count == 1) $('.badgeNoLeidos').css('left', '7px');

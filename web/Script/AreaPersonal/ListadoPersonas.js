@@ -1,12 +1,30 @@
 ﻿let _tipo_perfil = {}, data_personas = [];
 
+function buscar_personas(_this) {
+    let _text = _this.value;
+    let filtered = [];
+
+    if (_text == '') {
+        filtered = data_personas;
+    }
+    else {
+        var res = data_personas.filter((item) => {
+            return Object.keys(item).some(
+                (key) => item[key] != null && item[key].toString().toLowerCase().includes(_text));
+        });
+        filtered = res;
+    }
+    renderizar_datos(filtered);
+}
 function consltar_tipo_perfil() {
     let tipo = Get_query_string('T');
 
     consultarAPI('Persona/Tipos', 'GET', response => {
-        let filtered = tipo == 'P' ? 'Profesores' : 'Estudiantes';
+        let filtered = tipo == 'P' ? 'Docente' : 'Estudiante';
         _tipo_perfil = response.find(x => x.UsuPerDescripcion == filtered);
         consultar_personas(_tipo_perfil.UsuPerId);
+
+        document.getElementById('HeaderOpcion').textContent = `Registro de ${filtered}s`
     });
 }
 function consultar_personas(_tipo) {

@@ -191,13 +191,10 @@ function buscar_cursos(_this) {
         filtered = _data_cursos;
     }
     else {
-        filtered = _data_cursos.filter(x =>
-            x.CurCodigo.toString().toLowerCase().indexOf(_text) > -1
-            || x.CurDescripcion.toString().toLowerCase().indexOf(_text) > -1
-            || x.Nombretutor.toString().toLowerCase().indexOf(_text) > -1
-            || x.NombreAuxiliar.toString().toLowerCase().indexOf(_text) > -1
-            || x.NombreGrado.toString().toLowerCase().indexOf(_text) > -1
-        );
+         filtered = data_personas.filter((item) => {
+            return Object.keys(item).some(
+                (key) => item[key] != null && item[key].toString().includes(_text));
+        });
     }
     renderizar_cursos(filtered);
     setTimeout(c => { fixed_table_scroll('tblDatosCursos'); }, 300);

@@ -7,7 +7,7 @@
     <title>Inicio</title>
     <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
-    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />    
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
     <link href="../../Style/bootstrap-datepicker3.min.css" rel="stylesheet" />
     <link href="../../Style/estandar.css" rel="stylesheet" />
 
@@ -32,10 +32,52 @@
             .btn-icono i {
                 font-size: 13px;
             }
+
+
+        .autocomplete {
+            position: relative;
+            box-sizing: border-box;
+        }
+
+            .autocomplete input {
+                padding-left: 35px !important;
+            }
+
+            .autocomplete i {
+                position: absolute;
+                LEFT: 10px;
+                color: #343a40;
+                font-size: 20px;
+                top: 6px;
+            }
     </style>
 </head>
 <body>
-    <div class="container-fluid ">
+    <div class="container-fluid ml-0 mr-0">
+
+        <div class="row">
+            <div class="col-12">
+                <header class="mt-1 card-header">
+                    <div class="d-lg-flex d-md-flex d-sm-block d-block">
+                        <div class="col-lg-6 col-md-4 col-sm-12 col-12">
+                            <span class="mt-1" id="HeaderOpcion"></span>
+                        </div>
+                        <div class="col-lg-6 col-md-8 col-sm-12 col-12">
+                            <div class="d-flex  justify-content-end">
+                                <div class="">
+                                    <span class="mt-1 mr-2 d-lg-block d-md-block d-md-block d-none">Filtro de búsqueda</span>
+                                </div>
+                                <div class="autocomplete input-group-sm" style="width:350px">
+                                    <input type="text" class="form-control" id="buscargrado" placeholder="Buscar por cualquier palabra" onkeyup="buscar_personas(this)">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+
 
         <div class="row">
 
@@ -47,7 +89,7 @@
                         <th scope="col">Tipo</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Correo electronico</th>
-                        <th scope="col">Telefono / Celular</th>
+                        <th scope="col">Telefono</th>
                         <th scope="col">Genero</th>
                         <th scope="col">RH</th>
                         <th scope="col">EPS</th>
@@ -72,7 +114,7 @@
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <select  class="form-control" id="PerTipoDoc_-1">
+                                <select class="form-control" id="PerTipoDoc_-1">
                                     <option value="-1">Seleccione</option>
                                     <option value="RC">Registro civil</option>
                                     <option value="TI">Tarjeta de identidad</option>
@@ -97,7 +139,7 @@
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <select  class="form-control" id="PerGenero_-1">
+                                <select class="form-control" id="PerGenero_-1">
                                     <option value="F" selected>Femenino</option>
                                     <option value="M">Masculino</option>
                                 </select>

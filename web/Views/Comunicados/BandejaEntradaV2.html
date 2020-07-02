@@ -14,7 +14,9 @@
     <link href="../../Style/quill.snow.css" rel="stylesheet" />
     <style>
 
-
+        cargando_mensajes {
+            margin-bottom: 15px;
+        }
 
         .kids-background-image {
             height: 100%;
@@ -149,7 +151,7 @@
             font-family: 'Nunito', sans-serif;
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 24px;
+            /*margin-bottom: 24px;*/
         }
 
         .lectura-mensaje, .mensaje-fecha {
@@ -222,10 +224,6 @@
             color: white;
         }
 
-        #DivRespuesta {
-            height: calc(100vh - 180px);
-            width: calc(100% );
-        }
 
 
         .a-btn {
@@ -296,6 +294,17 @@
 
 
     <style>
+
+        .no-leidos-numero {
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            left: 10px;
+            position: absolute;
+            left: 13px;
+            top: -12px;
+        }
+
         .panel li {
             cursor: pointer;
             border-bottom: none;
@@ -315,6 +324,47 @@
 
         .favorito {
             color: #EEC138;
+        }
+
+        .btn-active-gmail {
+            background-color: #2E8CFF;
+        }
+
+            .btn-active-gmail i {
+                color: white !important;
+            }
+
+            .btn-active-gmail:hover {
+                background-color: #2E8CFF !important;
+            }
+
+                .btn-active-gmail:hover i {
+                    color: white !important;
+                }
+
+
+        #containerFrame {
+            height: calc(100% - 2px);
+        }
+
+        #frameNuevoMensaje {
+            height: 100%;
+        }
+
+        .close {
+            margin: -1rem -1rem -1rem 0rem !important;
+        }
+
+
+        .modal-full-view {
+            max-width: 100vw;
+        }
+
+        #DivIniciales {
+            width: 40px;
+            height: 40px;
+            padding-left: 12px;
+            padding-top: 8px;
         }
     </style>
 
@@ -338,32 +388,40 @@
                                 <i class="fas fa-bars" style="font-size:19px !important"></i>
                             </button>
 
-                            <button class="navbar-toggler btn-icono menu-panel ml-2" type="button" onclick="nuevo_mensaje()" data-toggle="tooltip" title="Nuevo mensaje">
+                            <button class="navbar-toggler btn-icono menu-panel ml-2" onclick="ocultar_bandeja()" type="button" data-toggle="modal" data-target="#exampleModal" title="Nuevo mensaje">
                                 <i class="fas fa-plus" style="font-size:19px !important"></i>
                             </button>
 
-                            <button class="navbar-toggler btn-icono menu-panel ml-2" type="button" onclick="cargar_mensajes()" data-toggle="tooltip" title="Refrescar bandeja">
-                                <i class="fas fa-sync" style="font-size:19px !important"></i>
-                            </button>
+                           
 
                             <!--<div class="ml-1">
-        <button style="height:40px;font-size:15px" type="button" class="btn btn-outline-secondary btn-sm rounded-sm"><i class="fas fa-plus"></i> Redactar mensaje</button>
-    </div>-->
+                                <button style="height:40px;font-size:15px" type="button" class="btn btn-outline-secondary btn-sm rounded-sm"><i class="fas fa-plus"></i> Redactar mensaje</button>
+                            </div>-->
                         </div>
                     </div>
 
-                    <div class="col-5 ml-3">
+                    <div class="col-8 ml-3" id="DivAcBuscarMensajes">
                         <div class="autocomplete input-group-sm">
                             <input type="text" class="form-control rounded-sm" id="buscargrado" style="background-color:#f2f2f2" placeholder="Buscar mensaje" onkeyup="buscar_mensajes(this)">
                             <i class="fas fa-search"></i>
-                            <i style="left:93%;color:#999" class="fas fa-glasses" onclick="Ver_no_leidos(this)"></i>
+
                         </div>
                     </div>
-                    <div class="col-3 d-none" id="EncabezadoIconos">
-
-                        <button id="enviarReplicaBtn" class="navbar-toggler btn-icono menu-panel d-none" type="button" data-toggle="tooltip" title="Enviar Mensaje" onclick="enviar_replica_mensaje()">
-                            <i class="far fa-paper-plane mr-1" style="font-size:16px !important"></i>
+                    <div>
+                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" style="margin-left:-12px" title="No leidos" id="BtnNoLeidos">
+                            <div class="position-absolute d-flex" style="margin-top:-10px">
+                                <i style="font-size:21px !important" class="far fa-envelope" onclick="Ver_no_leidos(this)"></i>
+                                <div class="text-white rounded-circle bg-danger pt-1 no-leidos-numero" id="numeroMsn"></div>
+                            </div>
                         </button>
+
+                    </div>
+                    <div>
+                        <button class="navbar-toggler btn-icono menu-panel ml-1" type="button" onclick="cargar_mensajes()" data-toggle="tooltip" title="Refrescar bandeja">
+                            <i class="fas fa-sync" style="font-size:19px !important"></i>
+                        </button>
+                    </div>
+                    <div class="col-3 d-none" id="EncabezadoIconos">
 
                         <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" title="Eliminar mensaje">
                             <i class="fas fa-trash" style="font-size:16px !important"></i>
@@ -410,9 +468,9 @@
                                 <button type="button" class="no-btn dropdown-toggle pl-0" onclick="mostrar_ul(this)">
                                     <span>Categorias</span>
                                 </button>
-                               <div id="LiOocionesCategorias">
+                                <div id="LiOocionesCategorias">
 
-                               </div>
+                                </div>
                             </li>
                             <li class="list-group-item" onclick="ver_destacados(this)">
                                 <button class="navbar-toggler btn-icono menu-panel" type="button">
@@ -462,7 +520,7 @@
                             <tbody class="activities-cards-container" id="tbodydatos">
                                 <tr>
                                     <td colspan="4" class="text-center">
-                                        <div class="d-flex justify-content-center mt-5" id="cargando_mensajes" style="color:#333;font-size:14px;">
+                                        <div class="d-flex justify-content-center mt-5" id="cargando_mensajes" style="color:#333;font-size:14px;margin-bottom:10px">
                                             <span style="color:#212529"><i style="color:#212529" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando mensajes... </span>
                                         </div>
                                     </td>
@@ -470,66 +528,16 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-none" id="DivMensaje" style="margin-left:5px">
+                    <div class="d-none" style="margin-left:5px">
                         <div class="d-none">
                             <button class="btn-icono" style="background-color:transparent" onclick="mostrar_mensaje()">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
                         </div>
 
-                        <div class="w-100">
-                            <div class="mensaje-encabezado d-flex ">
-                                <div class="d-flex justify-content-between w-100">
 
-                                    <div class="d-none justify-content-end">
-                                        <div class="titulo-mensaje">
-                                            <span id="MenUsuario">h4</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <div class="d-block">
-                                <div class="iconos-mensaje d-flex mb-3 mt-3">
-                                    <div class=" mr-1">
-                                        <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> Eliminar</button>
-                                    </div>
-                                    <div class=" mr-1">
-                                        <button type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-print"></i> Imprimir</button>
-                                    </div>
-
-                                    <div class=" mr-1">
-                                        <button type="button" class="btn btn-light btn-sm rounded-sm recividook" onclick="recibido_ok()"><i class="fas fa-check"></i> Enviar respuesta leído</button>
-                                    </div>
-
-                                    <div class=" mr-1">
-                                        <button type="button" class="btn btn-light btn-sm rounded-sm responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> Responder mensaje</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-block">
-                                <div class="mensaje-detalle">
-                                    <div class="rounded-lg mensaje p-4" style="border:1px solid #ebebeb;border-radius:5px">
-                                        <div class="titulo-mensaje">
-                                            <div class="d-flex justify-content-between">
-                                                <div id="MenAsunto"></div>
-                                                <div class="mensaje-fecha" id="MenFecha"></div>
-                                            </div>
-                                        </div>
-                                        <div class="lectura-mensaje" id="MenMensaje"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div id="DivRespuesta" class="d-none">
-                        <div id="editor"></div>
-                        <div class="d-flex justify-content-lg-end">
-                            <!--<div class="mt-1"><a class="a-btn" onclick="enviar_replica_mensaje()"><i class="far fa-paper-plane mr-1"></i>Enviar respuesta</a></div>
-                            <div class="ml-1 mt-1"><a class="a-btn" onclick="ocultar_replica()"><i class="fas fa-trash mr-1"></i>Descartar</a></div>-->
-                        </div>
-                    </div>
+
 
 
                 </div>
@@ -538,7 +546,146 @@
 
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl vh-100" role="document" id="modalsize">
+            <div class="modal-content">
+                <div class="modal-header d-none">
+                    <div class="d-flex justify-content-end w-100">
+                        <button type="button" class="close" onclick="expandar_modal()">
+                            <i class="fas fa-expand-alt"></i>
+                        </button>
+                        <button type="button" class="close d-none" onclick="colapsar_modal()">
+                            <i class="fas fa-compress-alt"></i>
+                        </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body" id="bodymsn">
+                    <div id="containerFrame">
+                        <iframe src="NuevoMensaje.html" id="frameNuevoMensaje" class="w-100" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" id="modalverMensaje" data-backdrop="static" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl vh-100" role="document" id="modalsize2">
+            <div class="modal-content">
+                <div class="modal-header d-none">
+                    <div class="d-flex justify-content-end w-100">
+
+                        <button type="button" class="close" onclick="expandar_modal()">
+                            <i class="fas fa-expand-alt"></i>
+                        </button>
+                        <button type="button" class="close d-none" onclick="colapsar_modal()">
+                            <i class="fas fa-compress-alt"></i>
+                        </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body" id="bodymsn">
+                    <div id="containerFrame">
+                        <div id="DivMensajeModal">
+                            <div class="w-100">
+
+                                <div class="d-block">
+                                    <div class="iconos-mensaje d-flex mb-3">
+                                        <div class="mr-1">
+
+                                            <button id="enviarReplicaBtn" data-toggle="tooltip" title="Enviar mensaje" type="button" class="btn btn-light btn-sm rounded-sm d-none" onclick="enviar_replica_mensaje()">
+                                                <i class="far fa-paper-plane mr-1"></i>
+
+
+                                            </button>
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100">
+                                            <div class="d-flex">
+                                                <div class=" mr-1">
+                                                    <button data-toggle="tooltip" title="Eliminar" type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> </button>
+                                                </div>
+                                                <div class=" mr-1">
+                                                    <button data-toggle="tooltip" title="Imprimir" type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-print"></i> </button>
+                                                </div>
+
+                                                <div class=" mr-1">
+                                                    <button data-toggle="tooltip" title="Enviar respuesta de recibido" type="button" class="btn btn-light btn-sm rounded-sm recividook" onclick="recibido_ok()"><i class="fas fa-check"></i> </button>
+                                                </div>
+
+                                                <div class=" mr-1">
+                                                    <button type="button" data-toggle="tooltip" title="Responder mensaje" class="btn btn-light btn-sm rounded-sm responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> </button>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class=" mr-1">
+                                                    <button data-toggle="tooltip" title="Pantalla completa" onclick="expandar_modal()" type="button" class="btn btn-light btn-sm rounded-sm">
+                                                        <i class="fas fa-expand-alt"></i>
+                                                    </button>
+                                                </div>
+                                                <div class=" mr-1">
+                                                    <button data-toggle="tooltip" title="Salor de la pantalla completa" onclick="colapsar_modal()" type="button" class="btn btn-light btn-sm rounded-sm d-none">
+                                                        <i class="fas fa-compress-alt"></i>
+                                                    </button>
+                                                </div>
+                                                <div class=" mr-1">
+                                                    <button data-dismiss="modal" aria-label="Close" onclick="cerrar_modal_mensaje()" data-toggle="tooltip" title="Cerrar" type="button" class="btn btn-light btn-sm rounded-sm">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="d-block">
+                                    <div class="mensaje-detalle">
+                                        <div class="rounded-lg mensaje p-2" style="border:1px solid #ebebeb;border-radius:5px">
+                                            <div class="titulo-mensaje">
+                                                <div class="titulo-mensaje">
+                                                    <div class="d-flex pb-1" >
+                                                        <div class="bg-secondary rounded-circle text-white" id="DivIniciales"></div>
+                                                        <div class="mt-1 ml-2">
+                                                            <span style="font-size:20px" id="MenUsuario"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <label class="d-none">Asunto:</label>
+                                                        <span id="MenAsunto" style="font-size:14px"></span>
+                                                    </div>
+
+                                                    <span class="mensaje-fecha" style="font-size:14px" id="MenFecha"></span>
+                                                </div>
+                                            </div>
+                                            <div>
+
+                                                <div class="lectura-mensaje pt-2" id="MenMensaje" style="border-top:1px solid #ebebeb"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="DivRespuesta" class="d-none mt-2">
+
+                            <div style="height:300px" id="editor"></div>
+                            <div class="d-flex justify-content-lg-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>

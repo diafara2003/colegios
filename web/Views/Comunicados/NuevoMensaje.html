@@ -38,32 +38,66 @@
         .mensaje {
             background-color: white;
         }
+
+
+        .circulo-icono {
+            background-color: white;
+            width: 30px;
+            height: 30px;
+            padding-top: 4px;
+            padding-left: 7px;
+            cursor: pointer;
+        }
+
+            .circulo-icono a {
+                font-size: 17px;
+            }
+
+            .circulo-icono:hover {
+                background-color: #ebebeb;
+            }
+
+        .custom-checkbox {
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body id="bodymensaje">
 
-    <div class="kids-background-image">
+    <!--<div class="kids-background-image">
         <img src="../../Img/background-clouds.jpg" />
-    </div>
+    </div>-->
 
-    <div class="container mt-2">
+    <div class="container-fluid mt-2" style="height:calc(100vh -10px)">
 
-        <div class="mensaje shadow rounded">
+        <div class="mensaje shadow rounded h-100">
             <div class="row" id="botones">
                 <div class="col-lg-12 mt-2">
-                    <div class="d-flex pl-2">
-                        <div><a class="a-btn" onclick="enviar_mensaje()"><i class="far fa-paper-plane mr-1"></i>Enviar</a></div>
-                        <div><a class="a-btn"><i class="fas fa-paperclip mr-1"></i>Adjuntar</a></div>
-                        <div><a class="a-btn" onclick="descartar()"><i class="fas fa-trash mr-1"></i>Descartar</a></div>
-                        <div class="custom-control custom-checkbox ml-2">
-                            <input type="checkbox" class="custom-control-input" id="MenBloquearRespuesta">
-                            <label class="custom-control-label" for="MenBloquearRespuesta">Bloquear respuesta</label>
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="d-flex pl-2">
+                            <div class="d-none"><a class="a-btn" onclick="descartar()"><i class="fas fa-arrow-left mr-1"></i></a></div>
+                            <div class="circulo-icono rounded-circle"><a style="margin-left:-1px" class="" data-toggle="tooltip" title="Enviar mensaje" onclick="enviar_mensaje()"><i class="far fa-paper-plane mr-1"></i></a></div>
+                            <div class="circulo-icono rounded-circle"><a data-toggle="tooltip" title="Adjuntar" class=" "><i class="fas fa-paperclip mr-1"></i></a></div>
+
+                            <div class="custom-control custom-checkbox ml-2">
+                                <input type="checkbox" class="custom-control-input" id="MenBloquearRespuesta">
+                                <label class="custom-control-label" for="MenBloquearRespuesta">Bloquear respuesta</label>
+                            </div>
+                            <div class="custom-control custom-checkbox ml-2">
+                                <input type="checkbox" class="custom-control-input" id="MenOkRecibido">
+                                <label class="custom-control-label" for="MenOkRecibido">Recibido OK</label>
+                            </div>
                         </div>
-                        <div class="custom-control custom-checkbox ml-2">
-                            <input type="checkbox" class="custom-control-input" id="MenOkRecibido">
-                            <label class="custom-control-label" for="MenOkRecibido">Recibido OK</label>
+                        <div class="d-flex pl-2 justify-content-lg-end" style="margin-top:5px">
+                            <select class="form-control form-control-sm  ml-2" id="ddlCategoria" style="margin-top:-3px;margin-right:8px;width:178px">
+                                <option>Seleccione una categoria para el mensaje</option>
+                            </select>
+                            <div><a onclick="colapsar_frame()" class="a-btn d-none"><i class="fas fa-compress-alt "></i></a></div>
+                            <div><a onclick="expandir_frame()" class="a-btn"><i class="fas fa-expand-alt "></i></a></div>
+                            <div><a class="a-btn" onclick="cerrar_modal_nuevo_mensaje()"><i class="fas fa-times"></i></a></div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="row ">
@@ -89,13 +123,11 @@
                             </div>
                         </div>
                         <div class="row d-none" id="DivCategoria">
-                            <div class="col-12  ml-2 mt-2">
+                            <div class="col-12  ml-2 mt-2 d-none">
 
                                 <div class="p-2 d-flex">
                                     <div class="para" style="width:auto">Gategoria</div>
-                                    <select class="form-control form-control-sm w-50 ml-2" id="ddlCategoria">
-                                        <option>Seleccione una categoria para el mensaje</option>
-                                    </select>
+
                                 </div>
 
 
@@ -123,5 +155,8 @@
 
     <script src="../../Script/Librerias/quill.min.js"></script>
     <script src="../../Script/Comunicados/NuevoMensaje.js"></script>
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
 </body>
 </html>

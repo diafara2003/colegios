@@ -1,5 +1,5 @@
 ﻿body, input, select {
-    font-size: 13px !important;
+    font-size: 12px !important;
 }
 
 i {
@@ -58,16 +58,17 @@ i {
     .btn-icono:focus {
         outline: none;
     }
+
     .btn-icono:active {
         outline: none;
     }
 
     .btn-icono:hover {
-        background-color: black;
+        background-color: #ebebeb !important;
     }
 
         .btn-icono:hover i {
-            color: buttonface;
+            /*color: buttonface;*/
         }
 
     .btn-icono i {
@@ -79,3 +80,4 @@ i {
     font-size: 17px;
     color: #666;
 }
+
