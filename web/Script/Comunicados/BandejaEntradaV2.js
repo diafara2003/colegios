@@ -360,13 +360,16 @@ function cerrar_modal() {
 }
 function cerrar_modal_mensaje() {
     $('.container-kids__content, #DivAcBuscarMensajes').removeClass('d-none');
+    $('#icono_notificacion_mensajes').find('button').removeClass('d-none');
 }
 function cerrar_modal_nuevo() {
     $('#exampleModal').modal('hide');
     $('.container-kids__content, #DivAcBuscarMensajes').removeClass('d-none');
+    $('#icono_notificacion_mensajes').find('button').removeClass('d-none');
 }
 
 function ocultar_bandeja() {
+    $('#exampleModal').modal('show');
     $('.container-kids__content').addClass('d-none');
 }
 function Ver_no_leidos(_this) {

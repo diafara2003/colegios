@@ -366,6 +366,25 @@
             padding-left: 12px;
             padding-top: 8px;
         }
+
+        .redactar {
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            padding: 0 10px 0 5px;
+            padding-top: 6px;
+            margin-left: 13px;
+            height: 34px;
+            border: 1px solid #ebebeb;
+        }
+
+            .redactar:hover {
+                background-color: #ebebeb;
+            }
+
+        .list-group-flush .menu-panel {
+            margin-left: -5px;
+        }
     </style>
 
 
@@ -384,15 +403,15 @@
                 <div class="row pl-1">
                     <div class="col-2">
                         <div class="d-flex">
-                            <button class="navbar-toggler btn-icono menu-panel" type="button" onclick="mostrar_panel_mensajes()">
+                            <button class="navbar-toggler btn-icono menu-panel" type="button" onclick="mostrar_panel_mensajes()" style="margin-top:-2px">
                                 <i class="fas fa-bars" style="font-size:19px !important"></i>
                             </button>
 
-                            <button class="navbar-toggler btn-icono menu-panel ml-2" onclick="ocultar_bandeja()" type="button" data-toggle="modal" data-target="#exampleModal" title="Nuevo mensaje">
-                                <i class="fas fa-plus" style="font-size:19px !important"></i>
-                            </button>
+                            <div class="d-flex redactar" onclick="ocultar_bandeja()">
+                                <i class="fas fa-plus" style="font-size:20px !important"></i>
+                                <span style="font-size:13px;margin-left:7px">Redactar</span>
+                            </div>
 
-                           
 
                             <!--<div class="ml-1">
                                 <button style="height:40px;font-size:15px" type="button" class="btn btn-outline-secondary btn-sm rounded-sm"><i class="fas fa-plus"></i> Redactar mensaje</button>
@@ -407,7 +426,7 @@
 
                         </div>
                     </div>
-                    <div>
+                    <div id="icono_notificacion_mensajes">
                         <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" style="margin-left:-12px" title="No leidos" id="BtnNoLeidos">
                             <div class="position-absolute d-flex" style="margin-top:-10px">
                                 <i style="font-size:21px !important" class="far fa-envelope" onclick="Ver_no_leidos(this)"></i>
@@ -452,7 +471,7 @@
 
                                         <span>Recibidos</span>
                                     </div>
-                                    <span style="margin-top:14px;color:#2E8CFF" id="countNoLeidos" ></span>
+                                    <span style="margin-top:14px;color:#2E8CFF" id="countNoLeidos"></span>
                                 </div>
                             </li>
                             <li class="list-group-item" onclick="cargar_bandeja('Enviados',this)">
@@ -647,7 +666,7 @@
                                         <div class="rounded-lg mensaje p-2" style="border:1px solid #ebebeb;border-radius:5px">
                                             <div class="titulo-mensaje">
                                                 <div class="titulo-mensaje">
-                                                    <div class="d-flex pb-1" >
+                                                    <div class="d-flex pb-1">
                                                         <div class="bg-secondary rounded-circle text-white" id="DivIniciales"></div>
                                                         <div class="mt-1 ml-2">
                                                             <span style="font-size:20px" id="MenUsuario"></span>
