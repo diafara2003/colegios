@@ -1,0 +1,360 @@
+﻿.cargando_mensajes {
+    margin-bottom: 15px;
+}
+
+.kids-background-image {
+    height: 100%;
+    left: -50%;
+    position: fixed;
+    top: 0;
+    width: 200%;
+    z-index: -9;
+}
+
+    .kids-background-image img {
+        bottom: 0;
+        left: 50%;
+        min-height: 100%;
+        min-width: 50%;
+        position: absolute;
+        transform: translate(-50%,0%);
+    }
+
+.container-kids {
+    margin-top: 20px;
+}
+
+
+
+    .container-kids .container-kids__content {
+        background-color: #fff;
+        border-radius: 14px;
+        margin: 0 auto;
+        max-width: 954px;
+        padding: 42px 0;
+        min-height: calc(100vh - 30px);
+        width: calc(100% - 60px);
+    }
+
+.refactor.container-kids__content .container-kids__content {
+    margin: 0;
+    padding: 0 50px;
+}
+
+
+
+.table-responsive-kids table thead tr th {
+    font-size: 14px;
+    font-weight: bold;
+    height: 48px;
+    padding: 4px 8px 8px 5px;
+}
+
+.table > thead > tr > th {
+    border-bottom: 1px solid #ddd;
+}
+
+.table th, .table td {
+    color: #999;
+}
+
+
+.table tr {
+    cursor: pointer;
+}
+
+.table td {
+    vertical-align: top;
+}
+
+    .table td input {
+        margin-left: 10px;
+    }
+
+.table a {
+    color: #3ea7d9;
+}
+
+.autocomplete {
+    position: relative;
+    box-sizing: border-box;
+}
+
+    .autocomplete input {
+        padding-left: 35px !important;
+    }
+
+    .autocomplete i {
+        position: absolute;
+        LEFT: 10px;
+        color: #343a40;
+        font-size: 20px;
+        top: 6px;
+    }
+
+.easy-autocomplete input {
+    width: 180px;
+}
+
+.btn-icono {
+    width: 30px;
+    height: 30px;
+}
+
+    .btn-icono:hover {
+        background: #ebebeb;
+    }
+
+        .btn-icono:hover i {
+            color: black;
+        }
+
+
+    .btn-icono i {
+        font-size: 18px;
+    }
+
+.custom-control {
+    margin-top: -2px;
+}
+
+/*.mensaje {
+            max-height: calc(100vh - 210px);
+        }*/
+
+.mensaje-detalle {
+    max-height: calc(100vh - 230px);
+    overflow: auto;
+}
+
+.titulo-mensaje {
+    color: #333;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    /*margin-bottom: 24px;*/
+}
+
+.lectura-mensaje, .mensaje-fecha {
+    color: #666;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+}
+
+.bandeja span {
+    color: #666;
+    font-size: 14px;
+}
+
+.categoria-mensaje {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+    .categoria-mensaje:hover {
+        background-color: #ebebeb;
+    }
+
+        .categoria-mensaje:hover button {
+            background-color: #ebebeb !important;
+        }
+
+.menu-panel {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+
+    .menu-panel i {
+        font-size: 19px !important;
+    }
+
+#EncabezadoIconos .menu-panel i {
+    color: #666;
+}
+
+.autocomplete input {
+    font-size: 14px !important;
+    height: 40px !important;
+}
+
+.autocomplete i {
+    top: 12px;
+}
+
+.panel {
+    width: 180px;
+}
+
+    .panel .categoria-mensaje i {
+        font-size: 20px;
+    }
+
+.actived {
+    background-color: #f2f2f2;
+}
+
+.fa-stack-1x {
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+    color: white;
+}
+
+
+
+.a-btn {
+    padding: 0.375rem 0.75rem;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #ebebeb;
+}
+
+    .a-btn:hover {
+        color: white !important;
+    }
+
+tbody td {
+    cursor: pointer;
+}
+
+.sin-leer td {
+    color: black;
+}
+
+#buscargrado:focus {
+    background-color: white !important;
+}
+
+.fa-flag {
+    margin-left: 5px;
+}
+
+td i {
+    padding-top: 6px;
+}
+
+.dropdown-toggle {
+    color: black;
+    padding-top: 3px;
+}
+
+
+.no-btn {
+    border: 0;
+    background-color: transparent;
+}
+
+    .no-btn:active, .no-btn:focus {
+        outline: none;
+    }
+
+.dropdown-menu {
+    left: 8px !important;
+}
+
+
+.numero-mensajes {
+    /*width: 30px;
+            height: 30px;
+            padding-left: 10px;
+            padding-top: 5px;*/
+    margin-top: 13px;
+    margin-right: 8px;
+    color: #6c757d;
+}
+
+li {
+    list-style: none;
+}
+
+.no-leidos-numero {
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    left: 10px;
+    position: absolute;
+    left: 13px;
+    top: -12px;
+}
+
+.panel li {
+    cursor: pointer;
+    border-bottom: none;
+}
+
+.list-group-item {
+    padding: 1px 5px;
+}
+
+.list-sub-menu {
+    margin-left: 44px;
+}
+
+    .list-sub-menu li {
+        padding: 5px 0;
+    }
+
+.favorito {
+    color: #EEC138;
+}
+
+.btn-active-gmail {
+    background-color: #2E8CFF;
+}
+
+    .btn-active-gmail i {
+        color: white !important;
+    }
+
+    .btn-active-gmail:hover {
+        background-color: #2E8CFF !important;
+    }
+
+        .btn-active-gmail:hover i {
+            color: white !important;
+        }
+
+
+#containerFrame {
+    height: calc(100% - 2px);
+}
+
+#frameNuevoMensaje {
+    height: 100%;
+}
+
+.close {
+    margin: -1rem -1rem -1rem 0rem !important;
+}
+
+
+.modal-full-view {
+    max-width: 100vw;
+}
+
+#DivIniciales {
+    width: 40px;
+    height: 40px;
+    padding-left: 12px;
+    padding-top: 8px;
+}
+
+.redactar {
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px 0 5px;
+    padding-top: 6px;
+    margin-left: 13px;
+    height: 34px;
+    border: 1px solid #ebebeb;
+}
+
+    .redactar:hover {
+        background-color: #ebebeb;
+    }
+
+.list-group-flush .menu-panel {
+    margin-left: -5px;
+}

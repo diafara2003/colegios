@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Bandeja movil</title>
+
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
+
+
+
+    <style>
+
+        .autocomplete i {
+            top: 9px;
+        }
+
+        .fa-search {
+            left: 93%;
+        }
+
+        .autocomplete {
+            position: relative;
+            box-sizing: border-box;
+        }
+
+            .autocomplete input {
+                height: 35px !important;
+                padding-left: 30px !important;
+            }
+
+            .autocomplete i {
+                position: absolute;
+                color: #343a40;
+                font-size: 20px;
+                top: 6px;
+            }
+
+            .autocomplete .fa-search {
+                left: 93%;
+                top: 7px;
+            }
+
+            .autocomplete .fa-bars {
+                left: 2%;
+                z-index: 9;
+            }
+
+        .mensaje {
+            border-bottom: 1px solid #ebebeb;
+            cursor: pointer;
+        }
+
+
+        .mensaje-burbuja {
+            width: 40px;
+            height: 39px;
+            padding-left: 9px;
+            padding-top: 6px;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        .cuerpo-mensaje {
+            width: 86%;
+        }
+
+        .mensaje-corto span {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .no-hay-mensajes {
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        .mensaje-leido span {
+            font-weight: normal !important;
+        }
+
+
+        .mensaje-leido .Asunto {
+            font-weight: normal !important;
+        }
+
+        .favorito {
+            color: #EEC138;
+        }
+
+
+        .opciones-bandeja {
+            width: 250px;
+            height: calc(100vh - 7px);
+            background-color: white;
+            z-index: 999;
+            position: absolute;
+            border-right: 1px solid #ebebeb;
+            top: 4px;
+            left: 0;
+        }
+
+        .menu-bandeja-show {
+            background-color: #7b7e8238;
+        }
+
+        .tipo-bandeja {
+            cursor: pointer;
+            padding: 10px 0px 10px 10px;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+            .tipo-bandeja:not(.categoria):not(.clases):hover {
+                background-color: #ebebeb;
+            }
+
+        .active-tipo-bandeja {
+            background-color: #ebebeb;
+        }
+
+
+        .menu-bandeja-movil {
+            padding-top: 6px;
+            padding-left: 10px;
+            height: 35px;
+            border-bottom: 1px solid #ebebeb;
+        }
+    </style>
+</head>
+
+<body id="bodybandeja">
+    <div class="container-fluid overflow-hidden">
+        <section class="">
+            <div class="row">
+                <div class="col-12 p-1">
+                    <div class="autocomplete input-group-sm">
+                        <input type="text" class="form-control rounded-sm" id="buscargrado" placeholder="Buscar mensaje" onkeyup="buscar_mensajes(this)">
+                        <i onclick="abril_bandeja()" class="fas fa-bars" style="font-size:19px !important"></i>
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="pl-2">
+                    <small>Bandeja de entrada</small>
+                </div>
+            </div>
+            <div class="row" id="bandejaDiv">
+                <div></div>
+                <div class="col-12 ml-0 pl-2" id="tbodydatos">
+
+                </div>
+            </div>
+            <div class="row d-none" id="DivcargarMensaje">
+                <div class="ver-mensaje w-100 p-2" >
+                    <div class="galeria-iconos d-flex justify-content-between w-100">
+                        <div>
+                            <div class=" mr-1">
+                                <button onclick="regresar_bandeja()" data-toggle="tooltip" title="Regresar" type="button" class="btn btn-light btn-sm rounded-circle" style="width:31px"><i class="fas fa-angle-left"></i> </button>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class=" mr-1">
+                                <button data-toggle="tooltip" title="Eliminar" type="button" class="btn btn-light btn-sm rounded-circle"><i class="fas fa-trash"></i> </button>
+                            </div>
+                            <div class=" mr-1">
+                                <button data-toggle="tooltip" title="Imprimir" type="button" class="btn btn-light btn-sm rounded-circle"><i class="fas fa-print"></i> </button>
+                            </div>
+
+                            <div class=" mr-1 recividook">
+                                <button data-toggle="tooltip" title="Enviar respuesta de recibido" type="button" class="btn btn-light btn-sm rounded-circle recividook" onclick="recibido_ok()"><i class="fas fa-check"></i> </button>
+                            </div>
+
+                            <div class=" mr-1 responder">
+                                <button type="button" data-toggle="tooltip" title="Responder mensaje" class="btn btn-light btn-sm rounded-circle responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="destinatario d-flex mt-2 ">
+                        <div class="mensaje-burbuja rounded-circle text-white" style="background-color:#dc3545" id="DivIniciales"></div>
+                        <div class="mt-3 ml-2">
+                            <span id="MenUsuario"></span>
+                            <span id="MenFecha" class="d-none"></span>
+                        </div>
+                    </div>
+                    <div class="asunto-mensaje pb-2 mt-2" style="border-bottom:1px solid #ebebeb">
+                        <span id="MenAsunto"></span>
+                    </div>
+                    <div class="mensaje-renderizado mt-2">
+                        <div id="MenMensaje"></div>
+                    </div>
+                </div>
+                <div id="DivRespuesta"></div>
+            </div>
+        </section>
+        <div class="opciones-bandeja d-none">
+            <div class="menu-bandeja-movil">
+                <i onclick="abril_bandeja()" class="fas fa-bars" style="font-size:19px !important"></i>
+                <span style="font-size:15px;" class="ml-2"> Bandeja de entrada</span>
+            </div>
+            <div class="pt-2">
+                <div class="tipo-bandeja d-flex active-tipo-bandeja" onclick="cargar_bandeja('bandeja',this)">
+                    <div>
+                        <i class="far fa-envelope mr-2" style="font-size:16px !important"></i>
+                        <span>Recibidos</span>
+                    </div>
+                </div>
+                <div class="tipo-bandeja" onclick="cargar_bandeja('Enviados',this)">
+                    <div>
+                        <i class="fas fa-share mr-2" style="font-size:16px !important"></i>
+                        <span>Enviados</span>
+                    </div>
+                </div>
+                <div class="tipo-bandeja categoria">
+                    <div>
+                        <i class="fas fa-flag mr-2" style="font-size:16px !important"></i>
+                        <span>Categorias</span>
+                    </div>
+                    <div id="LiOocionesCategorias"></div>
+                </div>
+                <div class="tipo-bandeja " onclick="ver_destacados(this)">
+                    <div>
+                        <i class="fas fa-star mr-2" style="font-size:16px !important"></i>
+                        <span>Destacados</span>
+                    </div>
+
+                </div>
+                <div class="tipo-bandeja clases">
+                    <div>
+                        <i class="fas fa-users mr-2" style="font-size:16px !important"></i>
+                        <span>Clases</span>
+                    </div>
+                    <div id="LiOocionesClases"></div>
+                </div>
+                <div class="tipo-bandeja">
+                    <div>
+                        <i class="fas fa-trash mr-2" style="font-size:16px !important"></i>
+                        <span>Eliminados</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="../../Script/Librerias/popper.js"></script>
+    <script src="../../Script/librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/quill.min.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/Comunicados/BandejaEntradaMovil.js"></script>
+</body>
+</html>

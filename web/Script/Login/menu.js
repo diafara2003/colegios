@@ -52,11 +52,11 @@ function renderizar_menu(response) {
         }
 
 
-        _html_movil += renderizar_opcion_movil(element);
+        _html_movil += renderizar_opcion_movil(element, i);
         _html += '</li>';
     }
-    _html_movil += '<div class="opcion p-2 text-info" onclick="actualizar_datos()">Actualizar datos</div>';
-    _html_movil += '<div class="opcion p-2 text-info" onclick="cerrar_session()">Cerrar Sesión</div>';
+    _html_movil += '<div class="opcion p-2 text-info" onclick="actualizar_datos()"><i class="fas fa-user-edit" style="margin-right:3px"></i> Actualizar datos</div>';
+    _html_movil += '<div class="opcion p-2 text-info" onclick="cerrar_session()"><i class="fas fa-sign-out-alt" style="margin-right:3px"></i> Cerrar Sesión</div>';
     document.getElementById('menu_movil').innerHTML = _html_movil;
     document.getElementById('opciones_menu').innerHTML = _html;
     // cerrar_mensaje();
@@ -72,6 +72,24 @@ function renderizar_opcion(_source, id) {
 
     return _opcion;
 }
+
+function renderizar_sub_menu_movil(_source, _name) {
+
+    let _opcion = '';
+    for (var i = 0; i < _source.length; i++) {
+        const _element = _source[i];
+        _opcion += '<div class="collapse ' + _name + ' " style="border-bottom:1px solid #ebebeb">';
+        _opcion += ' <a class="dropdown-item "  onclick="ver_opcion(this,\'' + _element.OpRuta + '\')">' + _element.OpDescripcion + '</a>';
+        _opcion += '</div>';
+    }
+    return _opcion;
+}
+function uuidv4() {
+    return 'xxxxxy'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(5);
+    })
+}
 function calcular_height_frame() {
     let _window = $(this).outerHeight(true);
     let _nav = $('header').outerHeight(true);
@@ -79,33 +97,49 @@ function calcular_height_frame() {
     $('#framrePage').css('min-height', (_window - (_nav + 75)) + 'px')
 
 }
-function renderizar_opcion_movil(opcion) {
+function renderizar_opcion_movil(opcion, _i) {
     let _html = '';
-    _html = '<div class="opcion p-2">' + opcion.SecDescripcion + '</div>';
+    if (opcion.opcion.length > 0) {
+        const _uuidv4 = uuidv4();
+        _html += '<div id="opcion_' + _uuidv4 + '" onclick="ver_sub_menu_movil(' + _uuidv4 + ')" class="opcion p-2">' + opcion.SecDescripcion + '</div>';
+        _html += renderizar_sub_menu_movil(opcion.opcion, _uuidv4);
 
+    } else {
+        _html = '<div onclick="ver_opcion(this,\'' + opcion.SecRuta + '\')" class="opcion p-2">' + opcion.SecDescripcion + '</div>';
+    }
     return _html;
 }
+
+let _times_movil = 0
 function menu() {
-    if ($('.opcion-frame').hasClass('menu-opcion-active')) {
-        $('.menu').removeClass('element-animation-show')
-        $('.menu').addClass('element-animation-hide')
-        setTimeout(function () {
-            $('.opcion-frame').removeClass('menu-opcion-active');
-            $('.menu').css('display', 'none');
-        }, 800)
+    if (_times_movil == 0) {
+        _times_movil = 1;
+        $('#menu_movil').fadeIn();
     } else {
-        $('.opcion-frame').addClass('menu-opcion-active');
-        $('.menu').css('display', 'block');
-        $('.menu').removeClass('element-animation-hide')
-        $('.menu').addClass('element-animation-show')
+        $('#menu_movil').fadeOut();
+        _times_movil = 0;
     }
 }
+function ver_sub_menu_movil(_name) {
+    if (!$('.' + _name).hasClass('show'))
+        $('.' + _name).addClass('show');
+    else
+        $('.' + _name).removeClass('show');
+}
 function ver_opcion(_this, _ruta) {
+    let _w = $(window).width();
+    if (_w <= 990) {
+
+        _ruta = "../comunicados/BandejaEntradaMovil.html";
+    }
 
     $('#framrePage').attr('src', _ruta);
     $('.active').removeClass('active');
     if (_this != undefined)
         $(_this).closest('li').addClass('active');
+
+    if ($('.navbar-toggler').css('display') != 'none')
+        menu();
 }
 function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
