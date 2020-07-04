@@ -85,7 +85,16 @@ namespace Colegio.Controllers
         [HttpPost]
         public bool TrunkAdjunto(AdjuntoD id)
         {
-            return new Adjuntos.Servicios.AdjuntosBL().Delete(id.id);
+            Trasversales.Modelo.Adjuntos _archivo = new Adjuntos.Servicios.AdjuntosBL().Get(id_adjunto: id.id).FirstOrDefault();
+            bool _id_deleted= new Adjuntos.Servicios.AdjuntosBL().Delete(id.id);
+
+            if (_id_deleted)
+            {
+                
+                File.Delete(_archivo.AdjIdRuta);
+            }
+
+            return true;
         }
     }
 

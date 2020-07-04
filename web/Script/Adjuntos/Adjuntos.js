@@ -38,7 +38,7 @@ function cargar_adjuntos() {
         _response.forEach(c => {
             return _html += renderizar_adjunto(c);
         });
-
+        
         document.getElementById('DivAdjunto').innerHTML = _html;
     });
 }
@@ -97,8 +97,8 @@ function subirAdjunto() {
                 let _html = '';
 
                 _html += renderizar_adjunto(_response);
+                $('#DivAdjunto').append(_html);
                 
-                document.getElementById('DivAdjunto').innerHTML = _html;
             },
             error: function () {
                 alert("Faild please try upload again");
