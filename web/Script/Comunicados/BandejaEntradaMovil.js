@@ -47,7 +47,7 @@ function buscar_mensajes(_this) {
 }
 function cargar_bandeja(tipo, _this) {
 
-    $('#bandejaDiv').fadeIn();
+    $('#bandejaDiv, #smallBandeja').fadeIn();
     $('#DivcargarMensaje').addClass('d-none');
     
     
@@ -90,7 +90,7 @@ function renderizar_bandeja(_mensaje) {
     _html += `<div categoria="${_mensaje.MenCategoriaId}" clase="${_mensaje.BanClaseId}" class="mensaje pb-1 d-flex ${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}">`;
     _html += `<div onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})" class="mensaje-burbuja rounded-circle text-white" style="background-color:${color}">${iniciales_usuario(_mensaje.PerNombres, _mensaje.PerApellidos)}</div>`;
     _html += '<div class="cuerpo-mensaje ml-3">';
-    _html += '<div onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})" class="destinatario font-weight-bold d-flex justify-content-between">';
+    _html += `<div onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})" class="destinatario font-weight-bold d-flex justify-content-between">`;
     _html += `<span>${_mensaje.PerNombres} ${_mensaje.PerApellidos}</span>`;
     _html += `<span>${_mensaje.MenFecha.split(' ')[0]}</span>`;
     _html += '</div>';
@@ -187,8 +187,8 @@ function ver_mensajes__tipo(_this, _tipo, _attr) {
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     
-    
-    $('#DivRespuesta').css('display', 'none');
+
+    $('#DivRespuesta, #smallBandeja').fadeOut();
     id_bandeja = _idBandeja;
 
     if (_idBandeja == 0) {
@@ -242,6 +242,27 @@ function regresar_bandeja() {
     _is_rendered = false;
     cargar_bandeja('bandeja', this);
 }
+function ocultar_bandeja() {
+    $('#exampleModal').modal('show');
+    $('.container-fluid').addClass('d-none');
+}
+function expandar_modal() {
+    $('#modalsize, #modalsize2').addClass('modal-full-view');
+    $('.fa-expand-alt').closest('button').addClass('d-none');
+    $('.fa-compress-alt').closest('button').removeClass('d-none');
+}
+function colapsar_modal() {
+    $('#modalsize, #modalsize2').removeClass('modal-full-view');
+    $('.fa-compress-alt').closest('button').addClass('d-none');
+    $('.fa-expand-alt').closest('button').removeClass('d-none');
+}
+function cerrar_modal_nuevo() {
+    $('#exampleModal').modal('hide');
+    $('.container-fluid').removeClass('d-none');
+}
+
+
+
 (function () {
     renderizar_categorias();
     renderizar_clases_bandeja();

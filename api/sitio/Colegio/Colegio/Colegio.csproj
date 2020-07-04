@@ -171,6 +171,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Autenticacion\JwtManager.cs" />
     <Compile Include="Autenticacion\TokenValidationHandler.cs" />
+    <Compile Include="Controllers\AdjuntosController.cs" />
     <Compile Include="Controllers\BandejaEntradaController.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ClasesController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Adjuntos.cs" />
     <Compile Include="Models\AutenticacionDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -205,6 +207,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Librerias\Adjuntos\Adjuntos\Adjuntos.csproj">
+      <Project>{052c28df-3bdb-4378-b7fe-932fcfd3e864}</Project>
+      <Name>Adjuntos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Librerias\Clases\Clases\Clases.csproj">
       <Project>{99bbf8b6-33f3-4c13-9f11-b8d6342c007a}</Project>
       <Name>Clases</Name>

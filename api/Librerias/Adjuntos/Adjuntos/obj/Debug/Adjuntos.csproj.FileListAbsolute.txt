@@ -1,0 +1,16 @@
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\Adjuntos.dll
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\Adjuntos.pdb
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\BaseDatos.dll
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\EntityFramework.dll
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\Trasversales.dll
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\BaseDatos.pdb
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\BaseDatos.dll.config
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\Trasversales.pdb
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\EntityFramework.xml
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csprojAssemblyReference.cache
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csproj.CoreCompileInputs.cache
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csproj.CopyComplete
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.dll
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.pdb

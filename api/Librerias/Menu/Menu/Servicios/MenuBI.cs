@@ -10,6 +10,11 @@ namespace Menu.Servicios
 {
     public class MenuBI
     {
+
+        public Empresas GetEmpresa(int id)
+        {
+            return new ColegioContext().empresas.Find(id);
+        }
         public IEnumerable<SeccionCustom> Get()
         {
             IEnumerable<SeccionCustom> objSeccion = new List<SeccionCustom>();

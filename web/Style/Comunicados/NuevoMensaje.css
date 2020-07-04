@@ -50,8 +50,7 @@
 
 
 .editor-height {
-    height: 228px;
-    max-height: 228px;
+    height: calc(100vh - 219px);
 }
 
 .list-group-item {

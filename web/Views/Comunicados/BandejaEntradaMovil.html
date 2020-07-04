@@ -126,11 +126,44 @@
         }
 
 
+
         .menu-bandeja-movil {
             padding-top: 6px;
             padding-left: 10px;
             height: 35px;
             border-bottom: 1px solid #ebebeb;
+        }
+
+        .nuevo-mensaje {
+            width: 50px;
+            height: 50px;
+            border-width: 0;
+            border: 1px solid #ebebeb;
+            outline: none;
+            top: 91%;
+            left: 86%;
+            position: fixed;
+        }
+
+            .nuevo-mensaje:focus {
+                outline: none;
+            }
+
+            .nuevo-mensaje:active {
+                outline: none;
+            }
+
+
+            .nuevo-mensaje i {
+                font-size: 20px;
+            }
+
+        #containerFrame {
+            height: calc(100% - 2px);
+        }
+
+        #frameNuevoMensaje {
+            height: 100%;
         }
     </style>
 </head>
@@ -147,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-2" id="smallBandeja">
                 <div class="pl-2">
                     <small>Bandeja de entrada</small>
                 </div>
@@ -159,7 +192,7 @@
                 </div>
             </div>
             <div class="row d-none" id="DivcargarMensaje">
-                <div class="ver-mensaje w-100 p-2" >
+                <div class="ver-mensaje w-100 p-2">
                     <div class="galeria-iconos d-flex justify-content-between w-100">
                         <div>
                             <div class=" mr-1">
@@ -249,11 +282,45 @@
 
         </div>
 
+
+        <button class="nuevo-mensaje rounded-circle bg-white p-2 " onclick="ocultar_bandeja()">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl vh-100" role="document" id="modalsize">
+            <div class="modal-content">
+                <div class="modal-header d-none">
+                    <div class="d-flex justify-content-end w-100">
+                        <button type="button" class="close" onclick="expandar_modal()">
+                            <i class="fas fa-expand-alt"></i>
+                        </button>
+                        <button type="button" class="close d-none" onclick="colapsar_modal()">
+                            <i class="fas fa-compress-alt"></i>
+                        </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body" id="bodymsn">
+                    <div id="containerFrame">
+                        <iframe src="NuevoMensaje.html" id="frameNuevoMensaje" class="w-100" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    
     <script src="../../Script/Librerias/popper.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
     <script src="../../Script/Librerias/quill.min.js"></script>

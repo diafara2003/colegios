@@ -29,73 +29,22 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row p-2">
+        <div class="row p-2" id="DivAdjuntar">
             <div class="input-group">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="myInput" aria-describedby="myInput">
-                    <label class="custom-file-label" for="myInput">Seleccione un archivo...</label>
+                    <input type="file" class="custom-file-input" multiple id="myInput" aria-describedby="myInput">
+                    <label id="lblAdjunto" class="custom-file-label" for="myInput">Seleccione un archivo...</label>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="myInput"><i class="fas fa-upload"></i></button>
+                    <button onclick="subirAdjunto()" class="btn btn-outline-secondary" type="button" id="myInput"><i class="fas fa-upload"></i></button>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="myInput"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-outline-secondary" type="button" id="myInput" onclick="limpiar_texto()"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         </div>
-        <hr/>
-        <div class="row p-2 ">
-
-            <div class="card shadow-sm m-1 bg-light">
-
-                <div class="card-body">
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                    <img src="../../Img/excel.svg" />
-                    <span class="card-title">Special title treatment</span>
-
-                </div>
-            </div>
-            <div class="card shadow-sm m-1 bg-light">
-                <div class="card-body ">
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img src="../../Img/word.svg" />
-                    <span class="card-title">Special title treatment</span>
-                </div>
-            </div>
-            <div class="card shadow-sm m-1 bg-light">
-                <div class="card-body">
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img src="../../Img/pdf.svg" />
-                    <span class="card-title">Special title treatment</span>
-                </div>
-            </div>
-            <div class="card shadow-sm m-1 bg-light">
-                <div class="card-body">
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img src="../../Img/imagen.svg" />
-                    <span class="card-title">Special title treatment</span>
-                </div>
-            </div>
-            <div class="card shadow-sm m-1 bg-light">
-
-                <div class="card-body">
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img src="../../Img/comprimido.svg" />
-                    <span class="card-title">Special title treatment</span>
-                </div>
-            </div>
-        </div>
+        <hr />
+        <div class="row p-2 " id="DivAdjunto"></div>
 
 
     </div>
@@ -103,11 +52,7 @@
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/librerias/bootstrap.min.js"></script>
-    <script src="../../Script/Librerias/moment.js"></script>
-    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
-    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
-
     <script src="../../Script/Adjuntos/Adjuntos.js"></script>
 </body>
 </html>

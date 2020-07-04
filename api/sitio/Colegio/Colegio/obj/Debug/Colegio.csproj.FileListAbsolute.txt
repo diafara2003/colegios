@@ -97,3 +97,5 @@ C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreCompileInputs
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Adjuntos.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Adjuntos.pdb

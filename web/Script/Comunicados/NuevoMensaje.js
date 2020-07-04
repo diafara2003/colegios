@@ -221,6 +221,9 @@ function expandir_frame() {
 function colapsar_frame() {
     window.parent.colapsar_modal();
 }
+function adjuntar() {
+
+}
 (function () {
 
     $('#DivResultados').css('display', 'none');

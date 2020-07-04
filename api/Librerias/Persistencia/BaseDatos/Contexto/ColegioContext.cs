@@ -86,5 +86,6 @@ namespace BaseDatos.Contexto
         public DbSet<LoginAuditoria> login_auditoria { get; set; }
         public DbSet<Categorias> categorias { get; set; }
         public DbSet<CategoriaPerfil> categorias_perfil { get; set; }
+        public DbSet<Adjuntos> adjuntos { get; set; }
     }
 }
