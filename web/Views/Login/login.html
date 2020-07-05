@@ -109,90 +109,72 @@
                 margin-top: 5%;
             }
         }
+
+        .kids-background-image {
+            height: 100%;
+            left: -50%;
+            position: fixed;
+            top: 0;
+            width: 200%;
+            z-index: -9;
+        }
+
+            .kids-background-image img {
+                bottom: 0;
+                left: 50%;
+                min-height: 100%;
+                min-width: 50%;
+                position: absolute;
+                transform: translate(-50%,0%);
+            }
     </style>
 
 </head>
 
 <body class="bg-light">
-
+    <div class="kids-background-image">
+        <!--<div class="kids-background-image">-->
+        <img src="../../Img/background-clouds.jpg" />
+    </div>
     <div class="container-fluid">
-        <div class="row vh-100 d-flex">
-            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 colegio-info d-lg-block d-md-block d-sm-none d-none">
-                <div class="navbar shadow-sm bg-white">
+        <div class="row d-flex">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 colegio-info">
+                <div class="navbar shadow-sm bg-dark">
                     <a class="navbar-brand" href="#"><img class="logo-colegio" src="../../Img/colegio.png" /></a>
-                    <a class="navbar-brand text-dark" href="#">Colegio Australiano Campestre</a>
+                    <a class="navbar-brand text-white" href="#">Colegio Australiano Campestre</a>
                 </div>
-
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 colegio-info rounded shadow-sm p-4 mt-3   bg-white">
-                    <!--<h4>Ultimas Noticias</h4>
-                    <hr class="m-1" />-->
-                    <section>
-                        <div class="text-center">
-                            <h4 style="color:#a8518a">About Us</h4>
-                            <hr class="m-1" />
-                        </div>
-                        <div>
-                            <p>
-                                El Colegio Australiano Campestre surgió como un sueño del Doctor ALEJANDRO ÁNGEL,
-                                quien en su vocación de servicio estructuró la oportunidad de iniciar una institución educativa distinta,
-                                moderna, que respondiera efectivamente a las necesidades actuales de los niños y jóvenes.
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 rounded shadow-sm">
-                                <div class="text-center">
-                                    <h4 style="color:#a8518a">Misión</h4>
-                                </div>
-                                <div>
-                                    <hr class="m-1" />
-                                    <p>
-                                        El Colegio Australiano Campestre es una institución educativa privada que fundamenta sus procesos
-                                        educativos en la formación de líderes con calidad humana, académica, Científica y visión empresarial.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 rounded shadow-sm">
-                                <div class="text-center">
-                                    <h4 style="color:#a8518a">Visión</h4>
-                                </div>
-                                <div>
-                                    <hr class="m-1" />
-                                    <p>
-                                        En el año 2024, el Colegio Australiano Campestre será una institución líder en la enseñanza de Ciencia,
-                                        Tecnología, Humanismo y lenguas extranjeras
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 bg-white">
-                <div class="rounded shadow-sm container-login mt-xl-5 mt-lg-5 mt-md-5 mt-sm-0 mt-0 p-3">
+        </div>
+        <div class="d-flex">
+
+
+
+
+
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 mt-3" style="border:1px solid white;border-radius:10px;">
+                <div class="rounded shadow-sm container-login mt-1 p-3">
 
                     <div class="imgcontainer">
-                        <img src="../../img/login.png" alt="Avatar" class="rounded-circle w-25">
+                        <img class="logo-colegio" src="../../Img/colegio.png" />
                     </div>
                     <div class="p-3 text-center">
                         <!--<small id="emailHelp" class="form-text text-muted">
                             No compartiremos tus datos con nadie.
                         </small>-->
                     </div>
-                    <div class="form-group p-2">
-                        <label for="txtusuario">Documento de identidad</label>
+                    <div class="form-group p-2" style="border:1px solid white;border-radius:10px;">
+                        <label for="txtusuario" class="text-white">Documento de identidad</label>
                         <input autocomplete="off" type="text" class="form-control form-control-sm" id="txtusuario"
                                aria-describedby="emailHelp" placeholder="Documento de identidad">
 
                     </div>
-                    <div class="form-group p-2 mt-0">
-                        <label for="txtclave">Contraseña</label>
+                    <div class="form-group p-2 mt-0" style="border:1px solid white;border-radius:10px;">
+                        <label for="txtclave" class="text-white">Contraseña</label>
                         <input autocomplete="off" type="password" class="form-control form-control-sm" id="txtclave"
                                aria-describedby="emailHelp" placeholder="">
                     </div>
                     <div class="form-group p-2">
-                        <button type="button" class="btn btn-block btn-outline-info"
+                        <button type="button" class="btn btn-block bg-white"
                                 onclick="validar_nombre_usuario(this)">
                             Ingresar
                         </button>
@@ -206,9 +188,60 @@
 
                 </div>
             </div>
-        </div>
 
+
+            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 colegio-info rounded shadow-sm p-4 pl-0 pr-0 mt-3 text-white d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                <!--<h4>Ultimas Noticias</h4>
+                <hr class="m-1" />-->
+                <section>
+                    <div class="text-center">
+                        <h4 style="color:black">About Us</h4>
+                        <hr class="m-1" />
+                    </div>
+                    <div>
+                        <p>
+                            El Colegio Australiano Campestre surgió como un sueño del Doctor ALEJANDRO ÁNGEL,
+                            quien en su vocación de servicio estructuró la oportunidad de iniciar una institución educativa distinta,
+                            moderna, que respondiera efectivamente a las necesidades actuales de los niños y jóvenes.
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 rounded shadow-sm" style="border:1px solid white;border-radius:10px !important">
+                            <div class="text-center">
+                                <h4 style="color:black" class="pt-2">Misión</h4>
+                            </div>
+                            <div>
+                                <hr class="m-1" />
+                                <p>
+                                    El Colegio Australiano Campestre es una institución educativa privada que fundamenta sus procesos
+                                    educativos en la formación de líderes con calidad humana, académica, Científica y visión empresarial.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 rounded shadow-sm ml-3" style="border:1px solid white;border-radius:10px !important">
+                            <div class="text-center">
+                                <h4 style="color:black" class="pt-2">Visión</h4>
+                            </div>
+                            <div>
+                                <hr class="m-1" />
+                                <p>
+                                    En el año 2024, el Colegio Australiano Campestre será una institución líder en la enseñanza de Ciencia,
+                                    Tecnología, Humanismo y lenguas extranjeras
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+
+        </div>
     </div>
+
+
+
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Login/login.js"></script>
