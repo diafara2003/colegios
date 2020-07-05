@@ -128,7 +128,7 @@ function ver_sub_menu_movil(_name) {
 }
 function ver_opcion(_this, _ruta) {
     let _w = $(window).width();
-    if (_w <= 990) {
+    if (_w <= 990 && _ruta.toLowerCase().includes('bandejaentrada')) {
 
         _ruta = "../comunicados/BandejaEntradaMovil.html";
     }

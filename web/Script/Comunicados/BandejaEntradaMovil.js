@@ -12,12 +12,13 @@ String.prototype.removeHtml = function () {
 
 
 function abril_bandeja() {
-    if ($('#bodybandeja').hasClass('active-tipo-bandeja')) {
-        $('#bodybandeja').removeClass('active-tipo-bandeja');
-        $('.opciones-bandeja').addClass('d-none');
-    } else {
-        $('#bodybandeja').addClass('active-tipo-bandeja');
+    if ($('.active-tipo-bandeja').hasClass('d-none')) {
+        $('.active-tipo-bandeja').removeClass('d-none');
         $('.opciones-bandeja').removeClass('d-none');
+        
+    } else {
+        $('.active-tipo-bandeja').addClass('d-none');        
+        $('.opciones-bandeja').addClass('d-none');
     }
 }
 function buscar_mensajes(_this) {
@@ -89,7 +90,7 @@ function renderizar_bandeja(_mensaje) {
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     _html += `<div categoria="${_mensaje.MenCategoriaId}" clase="${_mensaje.BanClaseId}" class="mensaje pb-1 d-flex ${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}">`;
     _html += `<div onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})" class="mensaje-burbuja rounded-circle text-white" style="background-color:${color}">${iniciales_usuario(_mensaje.PerNombres, _mensaje.PerApellidos)}</div>`;
-    _html += '<div class="cuerpo-mensaje ml-3">';
+    _html += '<div class="cuerpo-mensaje ml-3 w-100">';
     _html += `<div onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})" class="destinatario font-weight-bold d-flex justify-content-between">`;
     _html += `<span>${_mensaje.PerNombres} ${_mensaje.PerApellidos}</span>`;
     _html += `<span>${_mensaje.MenFecha.split(' ')[0]}</span>`;

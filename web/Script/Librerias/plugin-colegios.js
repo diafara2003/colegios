@@ -215,3 +215,14 @@ function groupBy(arr, prop) {
     arr.forEach(obj => map.get(obj[prop]).push(obj));
     return Array.from(map.values());
 }
+
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+
+document.addEventListener('touchmove', function (event) {
+    event = event.originalEvent || event;
+    if (event.scale > 1) {
+        event.preventDefault();
+    }
+}, false);
