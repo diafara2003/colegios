@@ -193,9 +193,10 @@ function buscar_cursos(_this) {
     else {
          filtered = data_personas.filter((item) => {
             return Object.keys(item).some(
-                (key) => item[key] != null && item[key].toString().includes(_text));
+                (key) => item[key] != null && item[key].toString().toLocaleLowerCase().includes(_text));
         });
     }
+    
     renderizar_cursos(filtered);
     setTimeout(c => { fixed_table_scroll('tblDatosCursos'); }, 300);
 }

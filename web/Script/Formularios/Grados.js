@@ -109,7 +109,7 @@ function buscar_grados(_this) {
     else {
         filtered = _data_grados.filter(x =>
             x.GraCodigo.toString().toLowerCase().includes(_text)
-            || x.GraDescripcion.toString().toLowerCase().includes(_text));
+            || x.GraDescripcion.toString().toLocaleLowerCase().includes(_text));
     }
     renderizar_grados(filtered);
 }

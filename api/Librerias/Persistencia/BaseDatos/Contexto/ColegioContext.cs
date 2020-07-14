@@ -7,8 +7,10 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using Trasversales.Modelo;
 
 namespace BaseDatos.Contexto
@@ -19,7 +21,7 @@ namespace BaseDatos.Contexto
         {
             Database.SetInitializer<ColegioContext>(null);
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
-            
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,6 +29,10 @@ namespace BaseDatos.Contexto
             base.OnModelCreating(modelBuilder);
         }
 
+        public T GetEntity<T>(int _id) where T : class
+        {
+            return base.Set<T>().Find(_id);
+        }
 
         public DataTable ExecuteStoreQuery(ProcedureDTO data)
         {
@@ -72,7 +78,7 @@ namespace BaseDatos.Contexto
         public DbSet<Mensajes> mensajes { get; set; }
         public DbSet<Salones> salones { get; set; }
         public DbSet<Temporada> temporada { get; set; }
-        public DbSet<UsuarioPerfil> usuario_perfi { get; set; }        
+        public DbSet<UsuarioPerfil> usuario_perfi { get; set; }
         public DbSet<Personas> personas { get; set; }
         public DbSet<Estudiantes> estudiantes { get; set; }
         public DbSet<Profesores> prefesores { get; set; }
@@ -82,7 +88,7 @@ namespace BaseDatos.Contexto
         public DbSet<GruposEnvioAutorizadoCursos> grupo_envio_autorizacion_cursos { get; set; }
         public DbSet<GruposEnvioAutorizadoGrados> grupo_envio_autorizacion_grados { get; set; }
         public DbSet<GruposEnvioColores> grupo_envio_colores { get; set; }
-        public DbSet<EstadoMensaje> estado_mensaje{ get; set; }
+        public DbSet<EstadoMensaje> estado_mensaje { get; set; }
         public DbSet<LoginAuditoria> login_auditoria { get; set; }
         public DbSet<Categorias> categorias { get; set; }
         public DbSet<CategoriaPerfil> categorias_perfil { get; set; }

@@ -10,7 +10,7 @@ function buscar_personas(_this) {
     else {
         var res = data_personas.filter((item) => {
             return Object.keys(item).some(
-                (key) => item[key] != null && item[key].toString().toLowerCase().includes(_text));
+                (key) => item[key] != null && item[key].toString().toLocaleLowerCase().includes(_text));
         });
         filtered = res;
     }

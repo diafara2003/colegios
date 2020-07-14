@@ -12,7 +12,7 @@ namespace Curso.Servicios
 {
     public class CursosBI
     {
-        public IEnumerable<CursosCustom> Get(int id = 0)
+        public IEnumerable<CursosCustom> Get(int id = 0, int empresa = 0)
         {
             ColegioContext objCnn = new ColegioContext();
             IEnumerable<CursosCustom> objSeccion = new List<CursosCustom>();
@@ -33,6 +33,7 @@ namespace Curso.Servicios
                               join auxiliar in objCnn.personas on data.CurAuxiliar equals auxiliar.PerId into CursoAuxiliar
                               from auxiliarPersona in CursoAuxiliar.DefaultIfEmpty()
                               where data.CurTemporada == temporada_activa
+                              && data.CurEmpId == empresa
                               select new CursosCustom()
                               {
                                   CurCodigo = data.CurCodigo,
@@ -66,6 +67,7 @@ namespace Curso.Servicios
                               from auxiliarPersona in CursoAuxiliar.DefaultIfEmpty()
 
                               where data.CurId == id
+                              && data.CurEmpId == empresa
                               select new CursosCustom()
                               {
                                   CurCodigo = data.CurCodigo,
@@ -85,13 +87,21 @@ namespace Curso.Servicios
             return objSeccion;
         }
 
-        public IEnumerable<Cursos> GetCursosGrados(int idgrado)
+        public IEnumerable<Cursos> GetCursosAC(string filter = "", int empresa = 0)
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            return objCnn.cursos.Where(c => c.CurEmpId == empresa && c.CurDescripcion.ToLower().Contains(filter.ToLower())).Take(10);
+        }
+
+        public IEnumerable<Cursos> GetCursosGrados(int idgrado, int empresa)
         {
             ColegioContext objCnn = new ColegioContext();
             int temporada_activa = objCnn.temporada.Where(C => C.TempEstado == 1).FirstOrDefault().TempId;
 
             return (from curso in objCnn.cursos
                     where curso.CurGrado == idgrado && curso.CurTemporada == temporada_activa
+                    && curso.CurEmpId == empresa
                     select curso);
         }
 

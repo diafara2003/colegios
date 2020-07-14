@@ -51,6 +51,7 @@
     <Compile Include="Modelos\BandejaEntradaDTO.cs" />
     <Compile Include="Modelos\CategoriasBandejaDTO.cs" />
     <Compile Include="Modelos\CrearMensajeCustom.cs" />
+    <Compile Include="Modelos\GruposEnvioAutorizadoCustom.cs" />
     <Compile Include="Modelos\Leido.cs" />
     <Compile Include="Modelos\Mensaje_Custom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

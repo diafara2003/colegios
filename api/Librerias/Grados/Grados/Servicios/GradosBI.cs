@@ -9,14 +9,26 @@ using Trasversales.Modelo;
 
 namespace Grado.Servicios
 {
-  public  class GradosBI
+    public class GradosBI
     {
-        public IEnumerable<Grados> Get()
+        public IEnumerable<Grados> Get(int empresa)
         {
             IEnumerable<Grados> objSeccion = new List<Grados>();
             ColegioContext objCnn = new ColegioContext();
 
-            objSeccion = (from data in objCnn.grados select data).OrderBy(c=> c.GraOrden);
+            objSeccion = (from data in objCnn.grados where data.GraEmpId == empresa select data).OrderBy(c => c.GraOrden);
+            return objSeccion;
+        }
+
+        public IEnumerable<Grados> GetGradoAC(int empresa, string filter = "")
+        {
+            IEnumerable<Grados> objSeccion = new List<Grados>();
+            ColegioContext objCnn = new ColegioContext();
+
+            objSeccion = (from data in objCnn.grados
+                          where data.GraEmpId == empresa
+                          && data.GraDescripcion.ToLower().Contains(filter.ToLower())
+                          select data).OrderBy(c => c.GraOrden);
             return objSeccion;
         }
 

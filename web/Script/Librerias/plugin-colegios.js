@@ -128,21 +128,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
                 $(`#${id_input}`).attr('result', JSON.stringify(_selected));
 
                 fn_selected(_selected, `#${id_input}`);
-            },
-            //onHideListEvent: function () {
-            //    let _selected = $(`#${id_input}`).getSelectedItemData()
-
-            //    if (_selected == -1) {
-            //        $(`#${id_input}`).removeAttr('result');
-
-            //        if (!fn_selected)
-            //            fn_selected(_selected, `#${id_input}`);
-            //    }
-            //},
-            //onKeyEnterEvent: function () {
-            //    let _selected = $(`#${id_input}`).getSelectedItemData()
-            //    fn_selected(_selected, `#${id_input}`);
-            //},
+            },           
             match: {
                 enabled: false
             },

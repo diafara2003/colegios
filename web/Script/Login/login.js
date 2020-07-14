@@ -25,7 +25,7 @@ function validar_nombre_usuario(_this) {
         if (response != null) {
             localStorage.setItem("sesion", response.token);
             localStorage.setItem("colegio", JSON.stringify(response.usuario));
-            window.location.href = window.location.href.toLowerCase().split('login.html')[0] + 'menu.html';
+            window.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/menu.html';
             
         } else {
             _this.textContent = "Ingresar";
