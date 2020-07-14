@@ -143,7 +143,17 @@ function ver_opcion(_this, _ruta) {
 }
 function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
-    $('.spnnombreUsuario').text(`${_usuario.PerNombres} ${_usuario.PerApellidos}`);
+    $('.spnnombreUsuario').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
+}
+function nombres(nombre, apellido) {
+    let _result = '';
+    let _nombre = nombre.split(' ');
+    let _apellido = apellido.split(' ');
+
+    
+    _result = `${_nombre.length == 1 ? _nombre : _nombre[0]}  ${_apellido.length == 1 ? _apellido : _apellido[0]}`  ;
+
+    return _result;
 }
 function cargar_mensajes_no_leidos() {
     localStorage.removeItem('noleidos');

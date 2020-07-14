@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -127,6 +127,16 @@
                 position: absolute;
                 transform: translate(-50%,0%);
             }
+
+        .fondo-login {
+            background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            opacity: 0.85
+        }
+
+        .navbar {
+            border-bottom: 1px solid #343a40;
+        }
     </style>
 
 </head>
@@ -134,7 +144,7 @@
 <body class="bg-light">
     <div class="kids-background-image">
         <!--<div class="kids-background-image">-->
-        <img src="../../Img/background-clouds.jpg" />
+        <img src="../../Img/colegio1.jpg" />
     </div>
     <div class="container-fluid">
         <div class="row d-flex">
@@ -145,14 +155,9 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex">
-
-
-
-
-
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 mt-3" style="border:1px solid white;border-radius:10px;">
-                <div class="rounded shadow-sm container-login mt-1 p-3">
+        <div class="row d-flex">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 mt-2 " style="border-radius:10px;">
+                <div class="rounded shadow-sm container-login p-3 fondo-login">
 
                     <div class="imgcontainer">
                         <img class="logo-colegio" src="../../Img/colegio.png" />
@@ -189,55 +194,61 @@
                 </div>
             </div>
 
+            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 colegio-info rounded shadow-sm text-white d-xl-block d-lg-block d-md-block d-sm-none d-none">
 
-            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 colegio-info rounded shadow-sm p-4 pl-0 pr-0 mt-3 text-white d-xl-block d-lg-block d-md-block d-sm-none d-none">
-                <!--<h4>Ultimas Noticias</h4>
-                <hr class="m-1" />-->
                 <section>
-                    <div class="text-center">
-                        <h4 style="color:black">About Us</h4>
-                        <hr class="m-1" />
-                    </div>
-                    <div>
-                        <p>
-                            El Colegio Australiano Campestre surgió como un sueño del Doctor ALEJANDRO ÁNGEL,
-                            quien en su vocación de servicio estructuró la oportunidad de iniciar una institución educativa distinta,
-                            moderna, que respondiera efectivamente a las necesidades actuales de los niños y jóvenes.
-                        </p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 rounded shadow-sm" style="border:1px solid white;border-radius:10px !important">
-                            <div class="text-center">
-                                <h4 style="color:black" class="pt-2">Misión</h4>
-                            </div>
-                            <div>
-                                <hr class="m-1" />
-                                <p>
-                                    El Colegio Australiano Campestre es una institución educativa privada que fundamenta sus procesos
-                                    educativos en la formación de líderes con calidad humana, académica, Científica y visión empresarial.
-                                </p>
-                            </div>
+                    <div class="fondo-login mt-2">
+                        <div class="text-center pt-2">
+                            <h4 style="color:white">About Us</h4>
+
+                        </div>
+                        <div class="p-2">
+                            <p>
+                                El Colegio Australiano Campestre surgió como un sueño del Doctor ALEJANDRO ÁNGEL,
+                                quien en su vocación de servicio estructuró la oportunidad de iniciar una institución educativa distinta,
+                                moderna, que respondiera efectivamente a las necesidades actuales de los niños y jóvenes.
+                            </p>
                         </div>
 
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 rounded shadow-sm ml-3" style="border:1px solid white;border-radius:10px !important">
-                            <div class="text-center">
-                                <h4 style="color:black" class="pt-2">Visión</h4>
+                    </div>
+
+
+                    <div class="d-flex justify-content-between  mt-4">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 fondo-login">
+                            <div class="p-1">
+                                <div class="text-center">
+                                    <h4 style="color:white" class="pt-2">Misión</h4>
+                                </div>
+                                <div class="p-2">
+                                    <hr class="m-1" />
+                                    <p>
+                                        El Colegio Australiano Campestre es una institución educativa privada que fundamenta sus procesos
+                                        educativos en la formación de líderes con calidad humana, académica, Científica y visión empresarial.
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <hr class="m-1" />
-                                <p>
-                                    En el año 2024, el Colegio Australiano Campestre será una institución líder en la enseñanza de Ciencia,
-                                    Tecnología, Humanismo y lenguas extranjeras
-                                </p>
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12  fondo-login">
+                            <div class="p-1">
+                                <div class="text-center">
+                                    <h4 style="color:white" class="pt-2">Visión</h4>
+                                </div>
+                                <div class="p-2">
+                                    <hr class="m-1" />
+                                    <p>
+                                        En el año 2024, el Colegio Australiano Campestre será una institución líder en la enseñanza de Ciencia,
+                                        Tecnología, Humanismo y lenguas extranjeras
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
-
-
-
         </div>
+
     </div>
 
 

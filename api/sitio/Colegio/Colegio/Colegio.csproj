@@ -177,6 +177,7 @@
     <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
+    <Compile Include="Controllers\GrupoEnvioController.cs" />
     <Compile Include="Controllers\MateriasController.cs" />
     <Compile Include="Controllers\MensajesController.cs" />
     <Compile Include="Controllers\MenuController.cs" />

@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Notificaciones</title>
+
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
+
+    <style>
+
+        tr {
+            cursor: pointer;
+        }
+
+
+        .nuevo-mensaje {
+            width: 40px;
+            height: 40px;
+            border-width: 0;
+            border: 1px solid white;
+            outline: none;
+            cursor: pointer;
+        }
+
+            .nuevo-mensaje:hover {
+                background-color: #343a40;
+                border: 1px solid #343a40;
+            }
+
+                .nuevo-mensaje:hover i {
+                    color: white;
+                }
+
+            .nuevo-mensaje:focus {
+                outline: none;
+            }
+
+            .nuevo-mensaje:active {
+                outline: none;
+            }
+
+
+            .nuevo-mensaje i {
+                font-size: 18px;
+                padding-left: 11px;
+                padding-top: 10px;
+            }
+
+
+
+
+
+        input[type=color] {
+            width: 30px;
+            height: 27px;
+            border: none;
+            border-radius: 50%;
+            outline: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-sm mt-2 ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Configuración de colores y grupos de autorización para el envio de correo</header>
+            </div>
+        </div>
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#colores" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#grado" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Grados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#personalizado" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Personalizado</a>
+                </li>
+
+                
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="colores" role="tabpanel" aria-labelledby="areametaria-tab">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <table class="table table-hover table-sm" id="tblDatosAreaMateria">
+                                <thead>
+                                    <tr>
+                                        <th>Categoria</th>
+                                        <th class="text-center">Burbuja</th>
+                                        <th class="text-center">Texto</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyGrupos"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" id="DivGrupos">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade show" id="cursos" role="tabpanel" aria-labelledby="materia-tab">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row">
+                            <table class="table table-hover table-sm" id="tblDatosAreaMateria">
+                                <thead>
+                                    <tr>
+                                        <th>Grado</th>
+                                        <th class="text-center">Docente</th>
+                                        <th>Opción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id=""></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show" id="grado" role="tabpanel" aria-labelledby="materia-tab">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row">
+                            <table class="table table-hover table-sm" id="tblDatosAreaMateria">
+                                <thead>
+                                    <tr>
+                                        <th>Curso</th>
+                                        <th class="text-center">Docente</th>
+                                        <th>Opción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id=""></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="personalizado" role="tabpanel" aria-labelledby="materia-tab">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row">
+                            <table class="table table-hover table-sm" id="tblDatosAreaMateria">
+                                <thead>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th class="text-center">Color</th>
+                                        <th>Opción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id=""></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="../../Script/Librerias/popper.js"></script>
+        <script src="../../Script/librerias/bootstrap.min.js"></script>
+        <script src="../../Script/Librerias/moment.js"></script>
+        <script src="../../Script/Librerias/quill.min.js"></script>
+        <script src="../../Script/Librerias/plugin-colegios.js"></script>
+        <script src="../../Script/GruposEnvio/GruposEnvioColores.js"></script>
+
+</body>
+</html>
