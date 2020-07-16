@@ -165,10 +165,11 @@ function cargar_mensajes_no_leidos() {
     });
 }
 function actualizar_datos() {
+    let _user = obtener_session().idusuario;
     if (obtener_session().tipo == 1)
-        ver_opcion(undefined, '../areapersonal/Personas.html?T=P');
+        ver_opcion(undefined, `../areapersonal/Personas.html?T=P&user=${_user}`);
     else
-        ver_opcion(undefined, '../areapersonal/Personas.html?T=E');
+        ver_opcion(undefined, `../areapersonal/Personas.html?T=E&user=${_user}`);
 }
 $(window).resize(function () {
     calcular_height_frame()

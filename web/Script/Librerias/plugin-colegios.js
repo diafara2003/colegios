@@ -43,7 +43,7 @@
         });
 }
 function paginar_sesion() {
-    window.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
+    window.location.href = window.parent.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
 }
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");

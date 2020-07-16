@@ -26,7 +26,7 @@ namespace Colegio.Controllers
             return new PersonasBI().GetEstudiantesSinAsignar(curso);
         }
 
-        
+
         [Route("Tipos")]
         public IEnumerable<UsuarioPerfil> GetTipoPersona(int id = 0)
         {
@@ -36,13 +36,22 @@ namespace Colegio.Controllers
         // POST: api/Personas
         public Personas Post(Personas request)
         {
-            return new PersonasBI().Save(request);
+            if (request.PerId <= 0)
+            {
+                return new PersonasBI().Save(request);
+            }
+            else
+            {
+                new PersonasBI().UpdateEnvio<Personas>(request);
+                return request;
+            }
+
         }
 
         // PUT: api/Personas/5
         public ResponseDTO Put(Personas request)
         {
-            return new PersonasBI().Update(request);
+            return new PersonasBI().UpdateEnvio<Personas>(request);
         }
 
         // DELETE: api/Personas/5
@@ -50,5 +59,68 @@ namespace Colegio.Controllers
         {
             return new PersonasBI().Remove(id);
         }
+
+
+
+
+        [Route("estudiante")]
+        [HttpGet]
+        public Estudiantes SaveEstudiante(int id)
+        {
+            return new PersonasBI().GetdatoEstudiante(id);
+        }
+
+        [Route("profesor")]
+        [HttpGet]
+        public Profesores SaveProfesor(int id)
+        {
+            return new PersonasBI().GetdatoProfesor(id);
+
+        }
+
+
+
+
+        [Route("profesor")]
+        [HttpPost]
+        public Profesores SaveProfesor(Profesores request)
+        {
+            if (request.ProfId == 0)
+            {
+                request.ProfId = -1;
+            }
+
+            if (request.ProfId == -1)
+            {
+                return new PersonasBI().Save(request);
+            }
+            else
+            {
+                new PersonasBI().UpdateEnvio(request);
+                return request;
+            }
+        }
+
+
+        [Route("estudiante")]
+        [HttpPost]
+        public Estudiantes SaveEstudiante(Estudiantes request)
+        {
+            if (request.EstId == 0)
+            {
+                request.EstId = -1;
+            }
+
+            if (request.EstId == -1)
+            {
+                return new PersonasBI().Save(request);
+            }
+            else
+            {
+                new PersonasBI().UpdateEnvio(request);
+                return request;
+            }
+        }
+
     }
 }

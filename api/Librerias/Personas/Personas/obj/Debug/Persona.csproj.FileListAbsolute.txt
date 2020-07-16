@@ -13,3 +13,4 @@ C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CoreCompile
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CopyComplete
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.dll
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.pdb
+C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csprojAssemblyReference.cache

@@ -67,30 +67,7 @@ namespace Persona.Servicios
             return objSeccion;
         }
 
-        public Personas Save(Personas modelo)
-        {
-            //  ResponseDTO objresponse = new ResponseDTO();
-            ColegioContext objCnn = new ColegioContext();
 
-            try
-            {
-                objCnn.personas.Add(modelo);
-
-                objCnn.SaveChanges();
-
-                //objresponse.codigo = 1;
-                //objresponse.respuesta = "";
-            }
-            catch (Exception e)
-            {
-
-                //objresponse.codigo = -1;
-                //objresponse.respuesta = e.Message;
-            }
-            return modelo;
-
-
-        }
 
         public ResponseDTO Remove(int id)
         {
@@ -119,31 +96,12 @@ namespace Persona.Servicios
 
         }
 
-        public ResponseDTO Update(Personas modelo)
+
+        public T Select<T>(int id) where T : class
         {
-            ResponseDTO objresponse = new ResponseDTO();
-            ColegioContext objCnn = new ColegioContext();
-
-            try
-            {
-
-                objCnn.Entry(modelo).State = EntityState.Modified;
-
-                objCnn.SaveChanges();
-
-                objresponse.codigo = 1;
-                objresponse.respuesta = "";
-            }
-            catch (Exception e)
-            {
-
-                objresponse.codigo = -1;
-                objresponse.respuesta = e.Message;
-            }
-            return objresponse;
-
-
+            return new ColegioContext().GetEntity<T>(id);
         }
+
 
         public Personas GetUser(string documento, string password)
         {
@@ -167,6 +125,54 @@ namespace Persona.Servicios
 
             return _persona;
 
+        }
+
+        public Estudiantes GetdatoEstudiante(int id_estudiante)
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            Estudiantes _result = objCnn.estudiantes.Where(c => c.EstIdPersona == id_estudiante).FirstOrDefault();
+            if (_result == null)
+            {
+                _result = new Estudiantes();
+            }
+
+            return _result;
+        }
+
+        public Profesores GetdatoProfesor(int id_profesor)
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            Profesores _result = objCnn.prefesores.Where(c => c.ProfIdPersona == id_profesor).FirstOrDefault();
+
+            if (_result == null) _result = new Profesores();
+
+            return _result;
+        }
+
+        public T Save<T>(T modelo) where T : class
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            objCnn.Entry(modelo).State = EntityState.Added;
+
+            objCnn.SaveChanges();
+
+            return modelo;
+        }
+        public ResponseDTO UpdateEnvio<T>(T modelo) where T : class
+        {
+            ResponseDTO objresponse = new ResponseDTO();
+            ColegioContext objCnn = new ColegioContext();
+
+            objCnn.Entry(modelo).State = EntityState.Modified;
+
+            objCnn.SaveChanges();
+
+            objresponse.codigo = 1;
+            objresponse.respuesta = "";
+            return objresponse;
         }
     }
 }
