@@ -1,4 +1,5 @@
-﻿using Grado.Servicios;
+﻿using Grado.Modelos;
+using Grado.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,13 @@ namespace Colegio.Controllers
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+        }
+
+        [HttpGet]
+        [Route("estudiante")]
+        public GradoEstudianteDTO GradoEstudiante (){
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            return new GradosBI().GetGrdoCursoXUsuario(identity);
         }
 
         // GET: api/Grados

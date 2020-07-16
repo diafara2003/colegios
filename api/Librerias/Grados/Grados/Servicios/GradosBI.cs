@@ -1,4 +1,5 @@
 ﻿using BaseDatos.Contexto;
+using Grado.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -108,6 +109,22 @@ namespace Grado.Servicios
             return objresponse;
 
 
+        }
+
+        public GradoEstudianteDTO GetGrdoCursoXUsuario(int usuario)
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            return (from _c in objCnn.cursos
+                    join _g in objCnn.grados on _c.CurGrado equals _g.GraId
+                    join _ce in objCnn.curso_estudiantes on _c.CurId equals _ce.CurEstCursoId
+                    select new GradoEstudianteDTO()
+                    {
+                        CursoId = _c.CurId,
+                        GradiId = _g.GraId,
+                        NombreCurso = _c.CurDescripcion,
+                        NombreGrado = _g.GraDescripcion
+                    }).FirstOrDefault();
         }
     }
 }

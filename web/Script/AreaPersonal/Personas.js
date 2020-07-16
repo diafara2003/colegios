@@ -191,10 +191,18 @@ function cargar_usuario(_user) {
         } else {
             consultarAPI('Persona/estudiante?id=' + _persona, 'GET', (_response) => {
                 _estudiantes = _response;
-                renderizar_esteudiante(_estudiantes);
+                renderizar_estudiante(_estudiantes);
+            });
+
+            consultarAPI('grado/estudiante', 'GET', (_response) => {                
+                renderizar_grado_curso(_response);
             });
         }
     });
+}
+function renderizar_grado_curso(_grado_curso) {
+    document.getElementById('NombreCurso').value = _grado_curso.NombreCurso;
+    document.getElementById('NombreGrado').value = _grado_curso.NombreGrado;
 }
 function renderizar_profesor() {
     var _data = {};
@@ -203,7 +211,7 @@ function renderizar_profesor() {
 
     return _data;
 }
-function renderizar_esteudiante(_data) {
+function renderizar_estudiante(_data) {
     _data.EstNombresEstudiante = "";//document.getElementById('EstNombresEstudiante').value;
     document.getElementById('EstNombresMama').value = _data.EstNombresMama;
     document.getElementById('EstApellidosMama').value = _data.EstApellidosMama;
