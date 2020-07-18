@@ -3,4 +3,3 @@ C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\Utilidades.pdb
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.dll
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.pdb
-C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csprojAssemblyReference.cache

@@ -68,7 +68,7 @@ namespace Mensaje.Servicios
         public IEnumerable<Categorias> GetCategorias(int empresa)
         {
             ColegioContext objCnn = new ColegioContext();
-            throw new Exception();
+           
             return (from data in objCnn.categorias where data.CatEmpresaId == empresa select data);
         }
 
