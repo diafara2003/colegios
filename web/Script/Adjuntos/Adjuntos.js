@@ -5,6 +5,7 @@ document.querySelector('.custom-file-input').addEventListener('change', function
     var nextSibling = e.target.nextElementSibling
     nextSibling.innerText = `Nombre: ${fileName}`;
 })
+var _Adjuntos_subidos = [];
 let _readonly = false;
 let _get_icono = (_extencion) => {
     let _icono = '';
@@ -36,9 +37,10 @@ function cargar_adjuntos() {
     consultarAPI('Adjuntos' + armar_url(), 'GET', (_response) => {
         let _html = '';
         _response.forEach(c => {
+            _Adjuntos_subidos.push(c.AjdId);
             return _html += renderizar_adjunto(c);
         });
-        
+
         document.getElementById('DivAdjunto').innerHTML = _html;
     });
 }
@@ -96,9 +98,12 @@ function subirAdjunto() {
             success: function (_response) {
                 let _html = '';
 
+                _Adjuntos_subidos = [];
+                _Adjuntos_subidos.push(_response.AjdId);
+
                 _html += renderizar_adjunto(_response);
                 $('#DivAdjunto').append(_html);
-                
+
             },
             error: function () {
                 alert("Faild please try upload again");
@@ -108,13 +113,16 @@ function subirAdjunto() {
     }
 }
 function eliminar_adjunto(_id, _this) {
-    var _data = { id:_id };
+    var _data = { id: _id };
     consultarAPI('adjunto/eliminar', 'POST', () => {
         $(_this).closest('.card').remove();
+        let _index = _Adjuntos_subidos.findIndex(c => c == _id);
+        _Adjuntos_subidos.splice(_index, 1);
     }, _data);
 }
 
 (function () {
+    _Adjuntos_subidos = [];
     validar_visual();
     cargar_adjuntos();
 })();

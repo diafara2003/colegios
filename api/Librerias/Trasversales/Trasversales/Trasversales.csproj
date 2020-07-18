@@ -55,6 +55,7 @@
     <Compile Include="Modelo\EstadoMensaje.cs" />
     <Compile Include="Modelo\Estudiantes.cs" />
     <Compile Include="Modelo\Grados.cs" />
+    <Compile Include="Modelo\AdjuntosMensaje.cs" />
     <Compile Include="Modelo\GruposEnvio.cs" />
     <Compile Include="Modelo\GruposEnvioAsignacion.cs" />
     <Compile Include="Modelo\GruposEnvioAutorizado.cs" />
