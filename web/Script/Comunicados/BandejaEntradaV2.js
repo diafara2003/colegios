@@ -407,11 +407,8 @@ function colapsar_modal() {
     $('.fa-expand-alt').closest('button').removeClass('d-none');
 }
 function tamano_frame() {
-    let _w = $('.container-kids__content').width();
-    let _h = $('.container-kids__content').height();
-
-    //$('#exampleModal').css('width', _w + 'px');
-    //$('#exampleModal').css('height', _h + 'px');
+    let _w = $(window).width();
+   
 }
 (function () {
     calcular_width_tabla();

@@ -263,6 +263,10 @@ function cerrar_modal_nuevo() {
 }
 
 
+$(window).resize(() => {
+  
+
+});
 
 (function () {
     renderizar_categorias();

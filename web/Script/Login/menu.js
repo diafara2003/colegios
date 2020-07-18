@@ -130,7 +130,7 @@ function ver_opcion(_this, _ruta) {
     let _w = $(window).width();
     if (_w <= 990 && _ruta.toLowerCase().includes('bandejaentrada')) {
 
-        _ruta = "../comunicados/BandejaEntradaMovil.html";
+        bandeja_movil();
     }
 
     $('#framrePage').attr('src', _ruta);
@@ -140,6 +140,14 @@ function ver_opcion(_this, _ruta) {
 
     if ($('.navbar-toggler').css('display') != 'none')
         menu();
+}
+function bandeja_movil() {
+    _ruta = "../comunicados/BandejaEntradaMovil.html";
+    $('#framrePage').attr('src', _ruta);
+}
+function bandeja_desktop() {
+    _ruta = "../comunicados/BandejaEntradaV2.html";
+    $('#framrePage').attr('src', _ruta);
 }
 function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
