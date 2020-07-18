@@ -130,7 +130,10 @@
         <div class="col-12 p-0">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#colores" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Categorías</a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#categorias" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#colores" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Grupos Envio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Cursos</a>
@@ -138,12 +141,60 @@
                 <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#grado" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Grados</a>
                 </li>
-                
+
 
 
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="colores" role="tabpanel" aria-labelledby="areametaria-tab">
+
+                <div class="tab-pane fade show active" id="categorias" role="tabpanel" aria-labelledby="areametaria-tab">
+                    <div class="d-flex mt-4 flex-wrap">
+
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-2">
+                            <table class="table table-hover table-sm" id="tblCategorias">
+                                <thead>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th class="text-center">Color</th>
+                                        <th class="text-center">Opción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="TbogyCategorias"></tbody>
+                                <tfoot class="bg-light">
+                                    <tr>
+                                        <td>
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" maxlength="20" class="form-control" id="CatDescripcion_-1" placeholder="Descripción">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <input type="color" id="CatColor_-1" />
+                                        </td>
+
+                                        <td class="text-center">
+                                            <button class="btn-icono" onclick="agregar_categoria()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Agregar"><i class="fas fa-plus text-success"></i></button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4 order-1">
+                            <span>Filtro de búsqueda</span>
+                            <div class="autocomplete input-group-sm">
+                                <input type="text" class="form-control" id="buscarCategorias" placeholder="Buscar descripción" onkeyup="buscar_categorias(this)">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6" id="DivGrupos">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="colores" role="tabpanel" aria-labelledby="areametaria-tab">
                     <div class="d-flex mt-4 flex-wrap">
 
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-2">
@@ -263,7 +314,7 @@
                         </div>
                     </div>
                 </div>
-              
+
             </div>
         </div>
 
@@ -276,11 +327,12 @@
     <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
     <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/GruposEnvio/Categoria.js"></script>
     <script src="../../Script/GruposEnvio/GruposEnvioColores.js"></script>
     <script src="../../Script/GruposEnvio/GruposEnvioCursos.js"></script>
     <script src="../../Script/GruposEnvio/GruposEnvioGrados.js"></script>
     <script>
-        
+
     </script>
     <!--<script src="../../Script/GruposEnvio/GruposEnvioPersonalizados.js"></script>-->
 

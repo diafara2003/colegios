@@ -34,6 +34,12 @@ namespace BaseDatos.Contexto
             return base.Set<T>().Find(_id);
         }
 
+
+        public IEnumerable<T> GetAllEntity<T>(int _id) where T : class
+        {
+            return base.Set<T>();
+        }
+
         public DataTable ExecuteStoreQuery(ProcedureDTO data)
         {
 

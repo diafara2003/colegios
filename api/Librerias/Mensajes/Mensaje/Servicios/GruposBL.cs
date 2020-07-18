@@ -14,7 +14,7 @@ namespace Mensaje.Servicios
     {
 
         public IEnumerable<GruposEnvioColores> GetEnvioColores(int empresa)
-        {
+        {            
             ColegioContext objCnn = new ColegioContext();
 
             return objCnn.grupo_envio_colores.Where(c => c.GrEnColorEmp == empresa);
@@ -63,6 +63,13 @@ namespace Mensaje.Servicios
             ColegioContext objCnn = new ColegioContext();
 
             return objCnn.grupo_envio.Where(c => c.GruEnvEmpId == empresa && c.GruEnvTemporada == temporada);
+        }
+
+        public IEnumerable<Categorias> GetCategorias(int empresa)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            throw new Exception();
+            return (from data in objCnn.categorias where data.CatEmpresaId == empresa select data);
         }
 
 

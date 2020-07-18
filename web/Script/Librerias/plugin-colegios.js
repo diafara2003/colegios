@@ -27,7 +27,7 @@
 
     fetch(`${_url}api/${metodo}`, Init)
         .then(res => {
-            if (res.status == 401 || res.status >= 500) {
+            if (res.status == 401 || res.status>=500) {
                 paginar_sesion();
             }
             else {
@@ -43,7 +43,7 @@
         });
 }
 function paginar_sesion() {
-    window.location.href = window.parent.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
+    window.parent.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
 }
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");

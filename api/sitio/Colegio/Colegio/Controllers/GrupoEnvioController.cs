@@ -41,6 +41,12 @@ namespace Colegio.Controllers
             return new Mensaje.Servicios.GruposBL().GetPersonalizados(_empresa.PerIdEmpresa, temporada);
         }
 
+        [Route("categoria")]
+        public IEnumerable<Categorias> GetCategoria()
+        {
+            return new Mensaje.Servicios.GruposBL().GetCategorias(_empresa.PerIdEmpresa);
+        }
+
 
 
 
@@ -77,8 +83,35 @@ namespace Colegio.Controllers
             return new Mensaje.Servicios.GruposBL().GetPersonalizados(_empresa.PerIdEmpresa, request.GruEnvTemporada);
         }
 
+        [Route("categoria")]
+        public IEnumerable<Categorias> PostCategoria(Categorias request)
+        {
+            if (request.CatId == -1)
+            {
+                new Mensaje.Servicios.GruposBL().AddAutorizado<Categorias>(request);                
+            }
+            else
+            {
+                new Mensaje.Servicios.GruposBL().UpdateEnvio<Categorias>(request);
+            }
+
+            return new Mensaje.Servicios.GruposBL().GetCategorias(_empresa.PerIdEmpresa);
+        }
 
 
+
+
+
+
+        [Route("categoria/eliminar")]
+        public IEnumerable<Categorias> PostCategoriaDelete(Categorias request)
+        {
+            var _categoria = new Mensaje.Servicios.GruposBL().Select<Categorias>(request.CatId);
+
+            new Mensaje.Servicios.GruposBL().DeleteAutorizado<Categorias>(_categoria);
+
+            return new Mensaje.Servicios.GruposBL().GetCategorias(request.CatEmpresaId);
+        }
 
         [Route("cursos/eliminar")]
         public IEnumerable<GruposEnvioAutorizadoCustom> PostCursosDelete(GruposEnvioAutorizadoCustom request)
