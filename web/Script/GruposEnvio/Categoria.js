@@ -22,6 +22,15 @@ function renderizar_categorias(_grupo, index) {
     _list += `<td>${_grupo.CatDescripcion}</td>`;
     //_list += `<td class="text-center"><input onblur="actualizar_categoria(${index})" type="text" value="${_grupo.CatDescripcion}" id="CatDescripcion_${index}"/></td>`;
     _list += `<td class="text-center"><input type="color" onblur="actualizar_categoria(${index})" value="${_grupo.CatColor}" id="CatColor_${index}"/></td>`;
+
+
+    _list += `<td class="text-center">`;
+    _list += '<div class="custom-control custom-switch">';
+    _list += '<input type="checkbox" class="custom-control-input" onclick="actualizar_categoria(' + index + ')" id="CarHoraPermitida_' + index + '"  ' + (_grupo.CarHoraPermitida ? 'checked' : '') + '>';
+    _list += `<label class="custom-control-label" for="CarHoraPermitida_${index}"></label>`;
+    _list += '</div>';
+    _list += '</td>';
+
     _list += `<td class="text-center"><button onclick="eliminar_categoria(${index},this)" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>`;
     _list += `</tr>`;
 
@@ -52,14 +61,16 @@ function actualizar_categoria(_index) {
 function armar_objeto_categoria(_index) {
     let data_cagetoria = {};
     if (_index != -1)
-        _lstcategorias[_index];
+        data_cagetoria = _lstcategorias[_index];
     else {
         data_cagetoria.CatId = -1;
         data_cagetoria.CatEmpresaId = obtener_session().empresa;
+        data_cagetoria.CatDescripcion = $(`#CatDescripcion_${_index}`).val();
     }
 
-    data_cagetoria.CatDescripcion = $(`#CatDescripcion_${_index}`).val();
+
     data_cagetoria.CatColor = $(`#CatColor_${_index}`).val();
+    data_cagetoria.CarHoraPermitida = $('#CarHoraPermitida_' + _index).is(':checked');
 
     return data_cagetoria;
 }

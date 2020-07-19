@@ -13,5 +13,6 @@ namespace Trasversales.Modelo
         public string CatDescripcion { get; set; }
         [StringLength(50)]
         public string CatColor { get; set; }
+        public bool CarHoraPermitida { get; set; }
     }
 }
