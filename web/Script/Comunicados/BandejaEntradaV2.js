@@ -107,6 +107,10 @@ function renderizar_bandeja(_mensaje) {
     _html += `<i onclick="marcar_destacado(${_mensaje.BanId},this)" data-toggle="tooltip" title="Favorito" class="${(_mensaje.BanDestacado == 0 ? 'far no-favorito' : 'fa favorito')} fa-star"></i>`;
     if (_mensaje.MenColor != '')
         _html += `<i data-toggle="tooltip" title="Categoria" style="color:${_mensaje.MenColor}" class="far fa-flag"></i>`;
+
+    if (_mensaje.TieneAdjuntos > 0)
+        _html += `<i data-toggle="tooltip" title="Adjuntos"  class="fas fa-paperclip"></i>`;
+
     _html += '</td>';
     _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.PerApellidos} ${_mensaje.PerNombres}</td>`;
     _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.MenAsunto}</td>`;
@@ -156,6 +160,10 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         $('#modalverMensaje').modal('show');
         $('.container-kids__content').addClass('d-none');
         renderizar_mensaje(response);
+
+        if (response.adjuntos != null && response.adjuntos.length > 0)
+            renderizar_adjuntos(response.adjuntos);
+
         mostrar_mensaje();
         window.parent.cargar_mensajes_no_leidos();
         renderizar_categorias();
@@ -163,6 +171,19 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         actualizar_bandeja_count();
     });
 }
+function renderizar_adjuntos(_adjuntos) {
+    let _html = "";
+
+    _adjuntos.forEach(a => {      
+        _html += `<div class="adjunto-mensaje rounded border p-2 m-1">`;
+        _html += `<a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${a.AjdId}">`;
+        _html += `<img style="width:30px" src="${_get_icono(a.AjdExtension)}" />`;;
+        _html += `${a.AdjNombre}${a.AjdExtension}</a></div>`
+    });
+    document.getElementById('DivAdjuntos').innerHTML = _html;
+    $('#spnAdjuntos').removeClass('d-none');
+}
+
 function renderizar_mensaje(_mensaje) {
     document.getElementById('DivIniciales').textContent = iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos);
     document.getElementById('MenAsunto').textContent = _mensaje.MenAsunto;
@@ -369,6 +390,7 @@ function cerrar_modal_nuevo() {
 }
 
 function ocultar_bandeja() {
+    colapsar_modal();
     $('#exampleModal').modal('show');
     $('.container-kids__content').addClass('d-none');
 }
@@ -408,7 +430,7 @@ function colapsar_modal() {
 }
 function tamano_frame() {
     let _w = $(window).width();
-   
+
 }
 (function () {
     calcular_width_tabla();

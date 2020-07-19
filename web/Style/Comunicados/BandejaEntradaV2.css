@@ -226,7 +226,7 @@ tbody td {
     background-color: white !important;
 }
 
-.fa-flag {
+.fa-flag, .fa-paperclip {
     margin-left: 5px;
 }
 

@@ -106,16 +106,30 @@ function enviar_mensaje() {
     let mensaje = obtener_datos();
     data.destinatarios = obtener_destinatarios();
     data.mensaje = mensaje;
+    data.adjuntos = obtener_adjuntos_al_mensaje();
     if (validar_datos(mensaje)) {
         consultarAPI('Mensajes', 'POST', (response) => {
             window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
-
+                localStorage.removeItem("adjuntos-mensajes");
                 descartar();
             });
         }, data, (error) => {
             alert('mal');
         });
     }
+}
+function obtener_adjuntos_al_mensaje() {
+    let _result = null;
+    let _data = localStorage.getItem("adjuntos-mensajes");
+
+    if (_data != '' && _data != undefined) {
+        let _adjuntos = JSON.parse(localStorage.getItem("adjuntos-mensajes"));
+        _result = [];
+
+        _adjuntos.forEach(c => _result.push(c));
+
+    }
+    return _result;
 }
 function obtener_destinatarios() {
     return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
@@ -156,7 +170,7 @@ function mostrar_mensaje_validacion_error(mensaje) {
 }
 function consultar_mensaje(id) {
     consultarAPI(`mensajes?id=${id}&bandeja=1`, 'GET', response => {
-       // read_only();
+        // read_only();
         cargar_mensaje(response);
         $('#bodymensaje').css('display', 'block');
     });
@@ -217,15 +231,35 @@ function cerrar_modal_nuevo_mensaje() {
 }
 function expandir_frame() {
     window.parent.expandar_modal();
+    $('.fa-expand-alt').closest('a').addClass('d-none');
+    $('.fa-compress-alt').closest('a').removeClass('d-none');
 }
 function colapsar_frame() {
     window.parent.colapsar_modal();
+    $('.fa-compress-alt').closest('a').addClass('d-none');
+    $('.fa-expand-alt').closest('a').removeClass('d-none');
 }
 function adjuntar() {
+    $('#modalAdjuntos').empty();
+    let _adjuntos = localStorage.getItem("adjuntos-mensajes");
+    let _URI = "../Adjuntos/Adjuntos.html";
+    if (_adjuntos != null && _adjuntos != undefined && _adjuntos != '') {
+        _URI += concatenar_id_adjuntos(JSON.parse(_adjuntos))
+    }
+    
+    $('#modalAdjuntos').append('<iframe frameborder="0" src="' + _URI + '" style="width:100%;height:100%"></iframe>');
+    $('#demo').modal('show');
+}
+function concatenar_id_adjuntos(_adjuntos) {
+    let _url = "?id=";
 
+    let id = _adjuntos.join(",");
+
+    
+    return _url + id;
 }
 (function () {
-
+    colapsar_frame();
     $('#DivResultados').css('display', 'none');
 
     let id = Get_query_string('id');

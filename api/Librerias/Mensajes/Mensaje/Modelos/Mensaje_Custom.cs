@@ -10,5 +10,6 @@ namespace Mensaje.Modelos
     public class Mensaje_Custom : Mensajes
     {
         public Personas usuario { get; set; }
+        public IEnumerable<Adjuntos> adjuntos { get; set; }
     }
 }

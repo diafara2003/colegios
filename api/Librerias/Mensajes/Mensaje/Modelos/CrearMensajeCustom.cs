@@ -11,7 +11,8 @@ namespace Mensaje.Modelos
     {
         public List<Destinarario> destinatarios { get; set; }
         public Mensajes mensaje { get; set; }
-       
+        public List<int> adjuntos { get; set; }
+
     }
 
     public class Destinarario {

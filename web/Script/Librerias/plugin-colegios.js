@@ -43,6 +43,7 @@
         });
 }
 function paginar_sesion() {
+    localStorage.clear();
     window.parent.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
 }
 function GetDateNow() {
@@ -200,6 +201,25 @@ function groupBy(arr, prop) {
     const map = new Map(Array.from(arr, obj => [obj[prop], []]));
     arr.forEach(obj => map.get(obj[prop]).push(obj));
     return Array.from(map.values());
+}
+let _get_icono = (_extencion) => {
+    let _icono = '';
+    switch (_extencion.toLocaleLowerCase().replace('.', '')) {
+
+        case 'doc':
+        case 'docx':
+            _icono = '../../Img/word.svg'; break;
+        case 'xls':
+        case 'xlsx':
+            _icono = '../../Img/excel.svg'; break;
+        case 'pdf': _icono = '../../Img/pdf.svg'; break;
+        case '.zip':
+        case '.rar': _icon = '../../Img/comprimido.svg'; break;
+        default:
+            _icono = '../../Img/imagen.svg'; break;
+    }
+
+    return _icono;
 }
 
 document.addEventListener('gesturestart', function (e) {

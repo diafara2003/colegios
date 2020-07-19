@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,9 +16,32 @@ namespace Colegio.Controllers
     [RoutePrefix("adjunto")]
     public class AdjuntosController : ApiController
     {
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("descargar")]
+        public HttpResponseMessage DescargarAdjunto(int id)
+        {
+
+            Trasversales.Modelo.Adjuntos _adjunto = new Adjuntos.Servicios.AdjuntosBL().Get(id: id).FirstOrDefault();
+
+
+            //converting Pdf file into bytes array  
+            var dataBytes = File.ReadAllBytes(_adjunto.AdjIdRuta);
+            //adding bytes to memory stream   
+            var dataStream = new MemoryStream(dataBytes);
+
+            HttpResponseMessage httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+            httpResponseMessage.Content = new StreamContent(dataStream);
+            httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            httpResponseMessage.Content.Headers.ContentDisposition.FileName = _adjunto.AdjNombre+_adjunto.AjdExtension;
+            httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+
+            return httpResponseMessage;
+        }
+
 
         [HttpGet]
-        public IEnumerable<Trasversales.Modelo.Adjuntos> Get(int adjunto = 0, int usuario = 0)
+        public IEnumerable<Trasversales.Modelo.Adjuntos> Get([FromUri] List<int> adjunto = null, int usuario = 0)
         {
             return new Adjuntos.Servicios.AdjuntosBL().Get(id_adjunto: adjunto, id_usuario: usuario);
         }
@@ -85,12 +109,12 @@ namespace Colegio.Controllers
         [HttpPost]
         public bool TrunkAdjunto(AdjuntoD id)
         {
-            Trasversales.Modelo.Adjuntos _archivo = new Adjuntos.Servicios.AdjuntosBL().Get(id_adjunto: id.id).FirstOrDefault();
-            bool _id_deleted= new Adjuntos.Servicios.AdjuntosBL().Delete(id.id);
+            Trasversales.Modelo.Adjuntos _archivo = new Adjuntos.Servicios.AdjuntosBL().Get(id: id.id).FirstOrDefault();
+            bool _id_deleted = new Adjuntos.Servicios.AdjuntosBL().Delete(id.id);
 
             if (_id_deleted)
             {
-                
+
                 File.Delete(_archivo.AdjIdRuta);
             }
 

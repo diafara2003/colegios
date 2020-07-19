@@ -19,6 +19,7 @@ namespace Mensaje.Modelos
         public int BanClaseId { get; set; }
         public int BanDestacado { get; set; }
         public int MenCategoriaId { get; set; }
+        public int TieneAdjuntos { get; set; }
 
     }
 }

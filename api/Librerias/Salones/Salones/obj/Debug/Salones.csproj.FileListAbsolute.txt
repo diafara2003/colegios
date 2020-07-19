@@ -13,3 +13,4 @@ C:\Colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csproj.CoreCompileIn
 C:\Colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csproj.CopyComplete
 C:\Colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.dll
 C:\Colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.pdb
+C:\Colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csprojAssemblyReference.cache

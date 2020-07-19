@@ -5,27 +5,9 @@ document.querySelector('.custom-file-input').addEventListener('change', function
     var nextSibling = e.target.nextElementSibling
     nextSibling.innerText = `Nombre: ${fileName}`;
 })
-var _Adjuntos_subidos = [];
-let _readonly = false;
-let _get_icono = (_extencion) => {
-    let _icono = '';
-    switch (_extencion.toLocaleLowerCase().replace('.', '')) {
 
-        case 'doc':
-        case 'docx':
-            _icono = '../../Img/word.svg'; break;
-        case 'xls':
-        case 'xlsx':
-            _icono = '../../Img/excel.svg'; break;
-        case 'pdf': _icono = '../../Img/pdf.svg'; break;
-        case '.zip':
-        case '.rar': _icon = '../../Img/comprimido.svg'; break;
-        default:
-            _icono = '../../Img/imagen.svg'; break;
-    }
+let _readonly = false, _adjuntos_cargados = [];
 
-    return _icono;
-}
 
 function validar_visual() {
     if (Get_query_string('readonly') != undefined) {
@@ -33,13 +15,43 @@ function validar_visual() {
         _readonly = true;
     }
 }
+function descargar_archivo(id) {
+
+    var Init = {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${localStorage.getItem('sesion')}`
+        },
+        //mode: 'cors',
+        //cache: 'default'
+    };
+
+
+    Init.headers.Authorization = `Bearer ${localStorage.getItem('sesion')}`
+
+    let _url = window.location.href.toLowerCase().split('views')[0]
+    fetch(`${_url}api/adjunto/descargar?id=${id}`, Init)
+        .then(res => {
+
+        })
+        .catch(error => {
+            if (!error)
+                error(error);
+        });
+
+}
 function cargar_adjuntos() {
     consultarAPI('Adjuntos' + armar_url(), 'GET', (_response) => {
         let _html = '';
+        _adjuntos_cargados = _response;
         _response.forEach(c => {
-            _Adjuntos_subidos.push(c.AjdId);
+
             return _html += renderizar_adjunto(c);
         });
+
+        localStorage.getItem("adjuntos-mensajes", JSON.stringify(_response.map(c => c.AjdId)));
 
         document.getElementById('DivAdjunto').innerHTML = _html;
     });
@@ -48,8 +60,8 @@ function armar_url() {
     let _url = '';
     let _usuario = obtener_session().idusuario, _adjunto = 0;
 
-    if (Get_query_string('adjunto') != undefined) {
-        _adjunto = Get_query_string('adjunto');
+    if (Get_query_string('id') != null) {
+        _adjunto = Get_query_string('id').split(',');
     }
 
     _url += '?usuario=' + _usuario;
@@ -68,7 +80,7 @@ function renderizar_adjunto(_adjunto) {
         _html += '</button>';
     }
     _html += `<img src="${_get_icono(_adjunto.AjdExtension)}" />`;
-    _html += `<span class="card-title">${_adjunto.AdjNombre}</span>`;
+    _html += `<a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${_adjunto.AjdId}" class="card-title"><span> ${_adjunto.AdjNombre}</span></a>`;
     _html += '</div>';
     _html += '</div>';
 
@@ -98,8 +110,9 @@ function subirAdjunto() {
             success: function (_response) {
                 let _html = '';
 
-                _Adjuntos_subidos = [];
-                _Adjuntos_subidos.push(_response.AjdId);
+                _adjuntos_cargados.push(_response);
+
+                localStorage.setItem("adjuntos-mensajes", JSON.stringify(_adjuntos_cargados.map(c => c.AjdId)));
 
                 _html += renderizar_adjunto(_response);
                 $('#DivAdjunto').append(_html);
@@ -116,13 +129,18 @@ function eliminar_adjunto(_id, _this) {
     var _data = { id: _id };
     consultarAPI('adjunto/eliminar', 'POST', () => {
         $(_this).closest('.card').remove();
-        let _index = _Adjuntos_subidos.findIndex(c => c == _id);
-        _Adjuntos_subidos.splice(_index, 1);
+        let _index = _adjuntos_cargados.findIndex(c => c.AjdId == _id);
+        _adjuntos_cargados.splice(_index, 1);
+
+        localStorage.setItem("adjuntos-mensajes", JSON.stringify(_adjuntos_cargados.map(c => c.AjdId)));
     }, _data);
 }
 
 (function () {
-    _Adjuntos_subidos = [];
+    _adjuntos_cargados = [];
+    //localStorage.removeItem("adjuntos-mensajes");
     validar_visual();
-    cargar_adjuntos();
+
+    if (Get_query_string('id') != null)
+        cargar_adjuntos();
 })();

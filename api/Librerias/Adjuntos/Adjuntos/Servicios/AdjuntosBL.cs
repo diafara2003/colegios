@@ -19,17 +19,21 @@ namespace Adjuntos.Servicios
             return _modelo;
         }
 
-        public IEnumerable<Trasversales.Modelo.Adjuntos> Get(int id_usuario = 0, int id_adjunto = 0)
+        public IEnumerable<Trasversales.Modelo.Adjuntos> Get(int id_usuario = 0, List<int> id_adjunto = null, int id=0)
         {
             ColegioContext objCnn = new ColegioContext();
 
-            if (id_usuario != 0)
+            if (id_usuario != 0 && id_adjunto==null)
             {
                 return objCnn.adjuntos.Where(c => c.AdjIdUsuario == id_usuario);
             }
+            else if (id_adjunto != null)
+            {
+                return objCnn.adjuntos.Where(c => id_adjunto.Contains(c.AjdId));
+            }
             else
             {
-                return objCnn.adjuntos.Where(c => c.AjdId == id_adjunto);
+                return objCnn.adjuntos.Where(c => c.AjdId == id);
             }
         }
 

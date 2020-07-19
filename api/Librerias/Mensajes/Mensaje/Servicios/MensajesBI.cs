@@ -16,28 +16,35 @@ namespace Mensaje.Servicios
         public Mensaje_Custom Get(int id)
         {
             ColegioContext objCnn = new ColegioContext();
+            Mensaje_Custom obj_response = new Mensaje_Custom();
 
+            obj_response = (from mensaje in objCnn.mensajes
+                            join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
+                            where mensaje.MenId == id
+                            select new Mensaje_Custom
+                            {
+                                MenAsunto = mensaje.MenAsunto,
+                                MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
+                                MenUsuario = mensaje.MenUsuario,
+                                MenClase = mensaje.MenClase,
+                                MenEmpId = mensaje.MenEmpId,
+                                MenFecha = mensaje.MenFecha,
+                                MenId = mensaje.MenId,
+                                MenMensaje = mensaje.MenMensaje,
+                                MenOkRecibido = mensaje.MenOkRecibido,
+                                MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
+                                MenSendTo = mensaje.MenSendTo,
+                                MenTipoMsn = mensaje.MenTipoMsn,
+                                usuario = _usuario,
+                            }).FirstOrDefault();
 
-            return (from mensaje in objCnn.mensajes
-                    join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
-                    where mensaje.MenId == id
-                    select new Mensaje_Custom
-                    {
-                        MenAsunto = mensaje.MenAsunto,
-                        MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
-                        MenUsuario = mensaje.MenUsuario,
-                        MenClase = mensaje.MenClase,
-                        MenEmpId = mensaje.MenEmpId,
-                        MenFecha = mensaje.MenFecha,
-                        MenId = mensaje.MenId,
-                        MenMensaje = mensaje.MenMensaje,
-                        MenOkRecibido = mensaje.MenOkRecibido,
-                        MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
-                        MenSendTo = mensaje.MenSendTo,
-                        MenTipoMsn = mensaje.MenTipoMsn,
-                        usuario = _usuario
+            obj_response.adjuntos = (from a in objCnn.adjuntos
+                                     join adjmsj in objCnn.adjuntos_mensajes on a.AjdId equals adjmsj.AdjMenAdjuntoId
+                                     where adjmsj.AdjMsnMensajeId == obj_response.MenId
+                                     select a
+                                     );
 
-                    }).FirstOrDefault();
+            return obj_response;
         }
 
         public Mensajes Save(CrearMensajeCustom request)
@@ -51,10 +58,28 @@ namespace Mensaje.Servicios
                 objCnn.mensajes.Add(request.mensaje);
                 objCnn.SaveChanges();
 
+                //adjuntos al mensaje
+                if (request.adjuntos != null)
+                {
+                    objCnn = new ColegioContext();
+                    request.adjuntos.ForEach(a =>
+                    {
+                        objCnn.adjuntos_mensajes.Add(new AdjuntosMensaje()
+                        {
+                            AdjMenAdjuntoId = a,
+                            AdjMsnMensajeId = request.mensaje.MenId
+                        });
+                    });
+                    objCnn.SaveChanges();
+                }
+
+
+
                 string _xml_destinatarios = Utilidad.ObjectToXMLGeneric<List<Destinarario>>(request.destinatarios);
                 objCnn = new ColegioContext();
                 ProcedureDTO ProcedureDTO = new ProcedureDTO();
                 IEnumerable<AcEnvioCorreoPersonas> objlstResultado = new List<AcEnvioCorreoPersonas>();
+
 
                 ProcedureDTO.commandText = "MSN.CrearMensaje_Bandeja_Entrada";
                 ProcedureDTO.parametros.Add("idMensaje", request.mensaje.MenId);
@@ -74,7 +99,7 @@ namespace Mensaje.Servicios
         }
 
 
-      
+
         public IEnumerable<AcEnvioCorreoPersonas> GetAcEnvioCorreoPersonas(int idusuario, string filter, string temporada, string empresa)
         {
 
@@ -120,7 +145,7 @@ namespace Mensaje.Servicios
             objResultado = (from query in result.AsEnumerable()
                             select new TipoBandejaDTO()
                             {
-                                id=(int)query["BanClaseId"],
+                                id = (int)query["BanClaseId"],
                                 Count = (int)query["CtaNoLeido"],
                                 Descripcion = (string)query["MatDescripcion"]
                             });

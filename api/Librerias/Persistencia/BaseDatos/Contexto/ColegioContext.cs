@@ -99,6 +99,6 @@ namespace BaseDatos.Contexto
         public DbSet<Categorias> categorias { get; set; }
         public DbSet<CategoriaPerfil> categorias_perfil { get; set; }
         public DbSet<Adjuntos> adjuntos { get; set; }
-        public DbSet<AdjuntosMensaje> adjuntos_menasjes { get; set; }
+        public DbSet<AdjuntosMensaje> adjuntos_mensajes { get; set; }
     }
 }

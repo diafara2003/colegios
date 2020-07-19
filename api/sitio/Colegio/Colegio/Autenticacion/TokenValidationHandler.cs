@@ -29,6 +29,7 @@ namespace Colegio.Autenticacion
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            
             HttpStatusCode statusCode;
             string token;
 
@@ -65,14 +66,11 @@ namespace Colegio.Autenticacion
 
                 return base.SendAsync(request, cancellationToken);
             }
-            catch (SecurityTokenValidationException e)
+            catch (Exception e)
             {
                 statusCode = HttpStatusCode.Unauthorized;
             }
-            catch (Exception e)
-            {
-                statusCode = HttpStatusCode.InternalServerError;
-            }
+           
 
             return Task<HttpResponseMessage>.Factory.StartNew(() => new HttpResponseMessage(statusCode) { });
         }
