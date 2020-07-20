@@ -55,8 +55,8 @@
 <body>
     <div class="container-fluid ml-0 mr-0">
 
-        <div class="row">
-            <div class="col-12">
+        <div class="row p-0">
+            <div class="col-12 p-0">
                 <header class="mt-1 card-header">
                     <div class="d-lg-flex d-md-flex d-sm-block d-block">
                         <div class="col-lg-6 col-md-4 col-sm-12 col-12">
@@ -89,7 +89,7 @@
                         <th scope="col">Tipo</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Correo electrónico</th>
-                        <th scope="col">Telefono</th>
+                        <th scope="col">Télefono</th>
                         <th scope="col">Género</th>
                         <th scope="col">RH</th>
                         <th scope="col">EPS</th>
@@ -116,9 +116,11 @@
                             <div class="input-group input-group-sm">
                                 <select class="form-control" id="PerTipoDoc_-1">
                                     <option value="-1">Seleccione</option>
-                                    <option value="RC">Registro civil</option>
-                                    <option value="TI">Tarjeta de identidad</option>
-                                    <option value="CC">Cedula de ciudadania</option>
+                                    <option class="opcion-docente" value="PP">Pasaporte</option>
+                                    <option class="opcion-estudiante" value="RC">Registro civil</option>
+                                    <option class="opcion-estudiante" value="TI">Tarjeta de identidad</option>
+                                    <option value="CC">Cédula de ciudadanía</option>
+                                    <option class="opcion-docente" value="CE">Cédula de extranjería</option>
                                 </select>
                             </div>
                         </td>
@@ -129,12 +131,12 @@
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="50" class="form-control" id="PerEmail_-1" placeholder="Correo electronico">
+                                <input type="text" maxlength="50" class="form-control" id="PerEmail_-1" placeholder="Correo electrónico">
                             </div>
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="50" class="form-control" id="PerTelefono_-1" placeholder="Telefono / celular" onkeypress="return only_number(event)">
+                                <input type="text" maxlength="50" class="form-control" id="PerTelefono_-1" placeholder="Télefono" onkeypress="return only_number(event)">
                             </div>
                         </td>
                         <td>
@@ -147,7 +149,20 @@
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="5" class="form-control" id="PerRH_-1" placeholder="RH">
+                                <!--<input type="text" maxlength="5" class="form-control" id="PerRH_-1" placeholder="RH">-->
+
+                                <select class="form-control" id="PerRH_-1">
+                                    <option value="-1">Seleccione</option>                                    
+                                    <option value="A-">A-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="O+">O+</option>
+                                </select>
+
                             </div>
                         </td>
                         <td>
@@ -166,7 +181,7 @@
                         </td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="20" class="form-control" id="PerLugarNacimiento_-1" placeholder="Lugar de ncimiento">
+                                <input type="text" maxlength="20" class="form-control" id="PerLugarNacimiento_-1" placeholder="Lugar de nacimiento">
                             </div>
                         </td>
                         <td>

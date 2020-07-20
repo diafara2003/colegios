@@ -1,4 +1,5 @@
 ﻿let _sesion = {};//39;
+_adjuntos_cargados = [];
 let _data_source_ac = [], destinatarios = [], _sent_to = '';
 let iniciales = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
@@ -118,18 +119,8 @@ function enviar_mensaje() {
         });
     }
 }
-function obtener_adjuntos_al_mensaje() {
-    let _result = null;
-    let _data = localStorage.getItem("adjuntos-mensajes");
-
-    if (_data != '' && _data != undefined) {
-        let _adjuntos = JSON.parse(localStorage.getItem("adjuntos-mensajes"));
-        _result = [];
-
-        _adjuntos.forEach(c => _result.push(c));
-
-    }
-    return _result;
+function obtener_adjuntos_al_mensaje() {    
+    return _adjuntos_cargados.map(c => c.AjdId);    
 }
 function obtener_destinatarios() {
     return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
@@ -220,7 +211,8 @@ function consultar_categoria() {
 
         if (response.length > 0) {
             renderizar_categorias(response);
-            $('#DivCategoria').removeClass('d-none');
+        } else {
+            $('#DivCategorias').addClass('d-none');
         }
     })
 
@@ -240,23 +232,81 @@ function colapsar_frame() {
     $('.fa-expand-alt').closest('a').removeClass('d-none');
 }
 function adjuntar() {
-    $('#modalAdjuntos').empty();
-    let _adjuntos = localStorage.getItem("adjuntos-mensajes");
-    let _URI = "../Adjuntos/Adjuntos.html";
-    if (_adjuntos != null && _adjuntos != undefined && _adjuntos != '') {
-        _URI += concatenar_id_adjuntos(JSON.parse(_adjuntos))
-    }
-    
-    $('#modalAdjuntos').append('<iframe frameborder="0" src="' + _URI + '" style="width:100%;height:100%"></iframe>');
-    $('#demo').modal('show');
+    $('#myInput').click();
 }
 function concatenar_id_adjuntos(_adjuntos) {
     let _url = "?id=";
 
     let id = _adjuntos.join(",");
 
-    
+
     return _url + id;
+}
+function cargar_adjuntos() {
+
+    let _html = '';
+
+    _adjuntos_cargados.forEach(a => {
+        _html += `<div class="adjunto-mensaje rounded border p-2 m-1">`;
+        _html += `<a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${a.AjdId}">`;
+        _html += `<img style="width:30px" src="${_get_icono(a.AjdExtension)}" />`;;
+        _html += `${a.AdjNombre}${a.AjdExtension}</a>`
+
+        _html += `<button type="button" class="close" aria-label="Close" onclick="eliminar_adjunto(${a.AjdId},this)">`;
+        _html += '<span aria-hidden="true">&times;</span>';
+        _html += '</button></div>';
+    });
+    document.getElementById('DivAdjunto').innerHTML = _html;
+    //return _html;
+
+}
+function armar_url_adjuntos() {
+    let _url = '';
+    let _usuario = obtener_session().idusuario, _adjunto = 0;
+    
+    _url += '?usuario=' + _usuario;
+    _url += '&adjunto=' + _adjunto;
+
+    return _url;
+}
+function subirAdjunto() {
+    
+    let _url = window.location.href.toLowerCase().split('views')[0];
+
+    var formData = new FormData();
+    var file = $('#myInput')[0];
+    formData.append('file', file.files[0]);
+    $.ajax({
+        url: `${_url}api/Adjuntos${armar_url_adjuntos()}`,
+        type: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('sesion')}`,
+            'Accept': 'application/json',
+        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (_response) {
+            
+            _adjuntos_cargados.push(_response);
+            cargar_adjuntos();
+        },
+        error: function () {
+            alert("Faild please try upload again");
+        }
+    });
+}
+function eliminar_adjunto(_id, _this) {
+    var _data = { id: _id };
+    consultarAPI('adjunto/eliminar', 'POST', () => {
+        $(_this).closest('.card').remove();
+        let _index = _adjuntos_cargados.findIndex(c => c.AjdId == _id);
+        _adjuntos_cargados.splice(_index, 1);
+
+        
+        cargar_adjuntos();
+
+    }, _data);
 }
 (function () {
     colapsar_frame();

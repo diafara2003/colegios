@@ -15,7 +15,7 @@ function call_back_consulta_cursos(_response) {
     });
     
     document.getElementById('tbodyCursos').innerHTML = _html;
-    $('[data-toggle="tooltip"]').tooltip();
+    
     fixed_cursos();
 }
 function renderizar_cursos_envio(_curso, _index) {
@@ -23,7 +23,7 @@ function renderizar_cursos_envio(_curso, _index) {
     _list += `<tr id=index_${_index}>`;
     _list += `<td>${_curso.Descripcion}</td>`;
     _list += `<td>${_curso.Nombres} ${_curso.Apellidos}</td>`;
-    _list += `<td class="text-center"><button onclick="eliminar_curso(${_index},this)" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>`;
+    _list += `<td class="text-center"><button onclick="eliminar_curso(${_index},this)" class="btn-icono" ><i class="fas fa-trash"></i></button></td>`;
     _list += `</tr>`;
 
 

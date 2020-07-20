@@ -11,14 +11,14 @@ function call_back_consulta_grados(_response) {
         _html += renderizar_grados_envio(c, i);
     });   
     document.getElementById('tbodyGrados').innerHTML = _html;
-    $('[data-toggle="tooltip"]').tooltip();
+    
 }
 function renderizar_grados_envio(_curso, _index) {
     let _list = '';
     _list += `<tr id=index_${_index}>`;
     _list += `<td>${_curso.Descripcion}</td>`;
     _list += `<td>${_curso.Nombres} ${_curso.Apellidos}</td>`;
-    _list += `<td class="text-center"><button onclick="eliminar_grado(${_index},this)" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>`;
+    _list += `<td class="text-center"><button onclick="eliminar_grado(${_index},this)" class="btn-icono" ><i class="fas fa-trash"></i></button></td>`;
     _list += `</tr>`;
 
 

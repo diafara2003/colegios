@@ -24,7 +24,15 @@ function consltar_tipo_perfil() {
         _tipo_perfil = response.find(x => x.UsuPerDescripcion == filtered);
         consultar_personas(_tipo_perfil.UsuPerId);
 
-        document.getElementById('HeaderOpcion').textContent = `Registro de ${filtered}s`
+        if (tipo == 'P') {
+            $('.opcion-docente').removeClass('d-none');
+            $('.opcion-estudiante').addClass('d-none');
+        } else {
+            $('.opcion-estudiante').removeClass('d-none');
+            $('.opcion-docente').addClass('d-none');
+        }
+
+        document.getElementById('HeaderOpcion').textContent = `Listado de ${filtered}s`
     });
 }
 function consultar_personas(_tipo) {
@@ -162,10 +170,10 @@ function obtener_datos_persona(posicion) {
         _data.PerTelefono = document.getElementById('PerTelefono_' + posicion).value;
     }
 
-    if (document.getElementById('PerRH_' + posicion).tagName.toLowerCase() == 'div') {
-        _data.PerRH = document.getElementById('PerRH_' + posicion).textContent;
+    if (posicion==-1) {
+        _data.PerRH = $('#PerRH_-1').find('option:selected').val();
     } else {
-        _data.PerRH = document.getElementById('PerRH_' + posicion).value;
+        _data.PerRH = document.getElementById('PerRH_' + posicion).textContent;
     }
 
     if (document.getElementById('PerEPS_' + posicion).tagName.toLowerCase() == 'div') {
@@ -212,12 +220,12 @@ function validar_campos_obligatorio_persona(persona) {
         return;
     }
     if (persona.PerEmail == '' && persona.PerTelefono == '') {
-        mostrar_mensaje_validacion_error('Correo electrónico o telefono obligatorio.');
+        mostrar_mensaje_validacion_error('Correo electrónico o télefono obligatorio.');
         result = false;
         return;
     }
     if (persona.PerEmail != '' && !validar_correo(persona.PerEmail)) {
-        mostrar_mensaje_validacion_error('Correo invalido.');
+        mostrar_mensaje_validacion_error('Correo inválido.');
         result = false;
         return;
     }

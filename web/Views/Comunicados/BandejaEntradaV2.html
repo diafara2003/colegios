@@ -15,8 +15,12 @@
     <link href="../../Style/Comunicados/BandejaEntradaV2.css" rel="stylesheet" />
 
     <style>
-        .adjunto-mensaje {            
+        .adjunto-mensaje {
             cursor: pointer;
+        }
+
+        .modal-backdrop.show {
+            opacity: 0.2 !important;
         }
     </style>
 
@@ -59,7 +63,7 @@
                         </div>
                     </div>
                     <div id="icono_notificacion_mensajes">
-                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" style="margin-left:-12px" title="No leidos" id="BtnNoLeidos">
+                        <button class="navbar-toggler btn-icono menu-panel" type="button" data-toggle="tooltip" style="margin-left:-12px" title="No leídos" id="BtnNoLeidos">
                             <div class="position-absolute d-flex" style="margin-top:-10px">
                                 <i style="font-size:21px !important" class="far fa-envelope" onclick="Ver_no_leidos(this)"></i>
                                 <div class="text-white rounded-circle bg-danger pt-1 no-leidos-numero" id="numeroMsn"></div>
@@ -297,22 +301,24 @@
                                     <div class="mensaje-detalle">
                                         <div class="rounded-lg mensaje p-2" style="border:1px solid #ebebeb;border-radius:5px">
                                             <div class="titulo-mensaje">
-                                                <div class="titulo-mensaje">
+                                                <div class="titulo-mensaje d-flex justify-content-between">
                                                     <div class="d-flex pb-1">
                                                         <div class="bg-secondary rounded-circle text-white" id="DivIniciales"></div>
                                                         <div class="mt-1 ml-2">
                                                             <span style="font-size:20px" id="MenUsuario"></span>
                                                         </div>
                                                     </div>
+                                                    <span class="mensaje-fecha" style="font-size:14px" id="MenFecha"></span>
                                                 </div>
 
-                                                <div class="d-flex justify-content-between mt-1">
+                                                <div class="d-flex justify-content-between mt-2">
                                                     <div>
-                                                        <label class="d-none">Asunto:</label>
+                                                        <label class="">Asunto:</label>
+
                                                         <span id="MenAsunto" style="font-size:14px"></span>
                                                     </div>
 
-                                                    <span class="mensaje-fecha" style="font-size:14px" id="MenFecha"></span>
+
                                                 </div>
                                             </div>
                                             <div>
@@ -322,7 +328,7 @@
                                             <hr style="padding:5px" />
                                             <p class="d-none font-weight-bold m-0" id="spnAdjuntos">Adjuntos:</p>
                                             <div id="DivAdjuntos" class="d-flex">
-                                                
+
 
                                             </div>
                                         </div>

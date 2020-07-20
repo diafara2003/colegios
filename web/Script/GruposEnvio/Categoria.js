@@ -1,4 +1,4 @@
-﻿let _lstcategorias = [];
+﻿let _lstcategorias = [], _lstPerfil = [], categoria_id;
 
 
 function cargarCategorias() {
@@ -30,8 +30,8 @@ function renderizar_categorias(_grupo, index) {
     _list += `<label class="custom-control-label" for="CarHoraPermitida_${index}"></label>`;
     _list += '</div>';
     _list += '</td>';
-
-    _list += `<td class="text-center"><button onclick="eliminar_categoria(${index},this)" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>`;
+    _list += `<td class="text-center"><button onclick="asignar_perfiles(${index},this)" class="btn-icono" ><i class="fas fa-users"></i></button></td>`;
+    _list += `<td class="text-center"><button onclick="eliminar_categoria(${index},this)" class="btn-icono"><i class="fas fa-trash"></i></button></td>`;
     _list += `</tr>`;
 
 
@@ -57,6 +57,13 @@ function fixed_cursos() {
 }
 function actualizar_categoria(_index) {
     consultarAPI('autorizados/categoria', 'POST', () => { }, armar_objeto_categoria(_index));
+}
+function asignar_perfiles(_index) {
+    let _categoria = _lstcategorias[_index];
+    document.getElementById('spnCategoria').textContent = " "+ _categoria.CatDescripcion;
+    categoria_id = _categoria.CatId;
+    cargar_perfil_usuarios();
+
 }
 function armar_objeto_categoria(_index) {
     let data_cagetoria = {};
@@ -101,6 +108,48 @@ function eliminar_categoria(_index, _this) {
         call_back_categorias(_response);
     }, _lstcategorias[_index])
 }
+function cargar_perfil_usuarios() {
+    consultarAPI('autorizados/categoriaperfil?id=' + categoria_id, 'GET', (_response) => {
+        _lstPerfil = _response;
+        renderizar_perfiles();
+        $('#asignar_perfil').modal('show')
+    });
+}
+function renderizar_perfiles() {
+    let _html = "";
+    _lstPerfil.forEach(c => {
+        _html += `<li onclick="asignar_perfil(${c.idPerfil},this)" class="list-group-item ${(c.enUso > 0 ? ' bg-primary text-white' : '')}">`;
+        _html += `<div class="d-flex justify-content-between">`;
+        _html += `<div>${c.nombrePerfil}</div>`;
+       // _html += `<div><i class="fas fa-trash" onclick="quitar_perfil(${c.idPerfil},this)"></i></div>`;
+        _html += `</div></li>`;
+    });
+
+    document.getElementById('ltPerfiles').innerHTML = _html;
+}
+function quitar_perfil(id, _this) {
+    consultarAPI('autorizados/categoriaperfil/eliminar', 'POST', () => {
+        $(_this).closest('li').removeClass('bg-primary text-white');
+    }, {
+            id_perfil: id,
+            id_categoria: categoria_id
+        })
+
+}
+function asignar_perfil(id, _this) {
+    if ($(_this).closest('li').hasClass('bg-primary')) {
+        quitar_perfil(id, _this);
+    } else {
+        consultarAPI('autorizados/categoriaperfil', 'POST', (_response) => {
+            $(_this).closest('li').addClass('bg-primary text-white');
+        }, {
+                CatPerId: 0,
+                CatPerPerfil: id,
+                CatPerCategoria: categoria_id
+            });
+    }
+}
 (function () {
+    ///cargar_perfil_usuarios();
     cargarCategorias();
 })();

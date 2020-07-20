@@ -48,6 +48,12 @@ namespace Colegio.Controllers
         }
 
 
+        [Route("categoriaperfil")]
+        public IEnumerable<CategoriaPerfilCustom> GetCategoriaPerfil(int id)
+        {
+            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(id);
+        }
+
 
 
 
@@ -88,7 +94,7 @@ namespace Colegio.Controllers
         {
             if (request.CatId == -1)
             {
-                new Mensaje.Servicios.GruposBL().AddAutorizado<Categorias>(request);                
+                new Mensaje.Servicios.GruposBL().AddAutorizado<Categorias>(request);
             }
             else
             {
@@ -99,9 +105,26 @@ namespace Colegio.Controllers
         }
 
 
+        [Route("categoriaperfil")]
+        public IEnumerable<CategoriaPerfilCustom> PostCategoria(CategoriaPerfil request)
+        {
+
+            CategoriaPerfil nuevo = new Mensaje.Servicios.GruposBL().AddAutorizado<CategoriaPerfil>(request);
+
+            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(nuevo.CatPerCategoria);
+        }
 
 
 
+
+        [Route("categoriaperfil/eliminar")]
+        public bool PostCategoriaPerfilDelete(EliminarPerfilCategoria request)
+        {
+
+            new Mensaje.Servicios.GruposBL().DeleteCategoriaPerfil(request);
+            return true;
+
+        }
 
         [Route("categoria/eliminar")]
         public IEnumerable<Categorias> PostCategoriaDelete(Categorias request)

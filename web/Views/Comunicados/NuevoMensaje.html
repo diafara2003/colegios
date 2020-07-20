@@ -13,6 +13,10 @@
     <link href="../../Style/Comunicados/NuevoMensaje.css" rel="stylesheet" />
 
     <style>
+        .adjunto-mensaje {
+            cursor: pointer;
+        }
+
         .nombre-destinatario {
             margin-top: 5px;
         }
@@ -121,10 +125,8 @@
                                 <label class="custom-control-label" for="MenOkRecibido">Recibido OK</label>
                             </div>
                         </div>
-                        <div class="d-flex pl-2 justify-content-lg-end w-100" style="margin-top:5px">
-                            <select class="form-control form-control-sm  ml-2" id="ddlCategoria" style="margin-top:-3px;margin-right:8px;width:178px">
-                                <option>Seleccione una categoria para el mensaje</option>
-                            </select>
+                        <div class="d-flex pl-2 justify-content-lg-end" style="margin-top:5px">
+
                             <div><a onclick="colapsar_frame()" class="a-btn d-none"><i class="fas fa-compress-alt "></i></a></div>
                             <div id="DivExpandir"><a onclick="expandir_frame()" class="a-btn"><i class="fas fa-expand-alt "></i></a></div>
                             <div><a class="a-btn" onclick="cerrar_modal_nuevo_mensaje()"><i class="fas fa-times"></i></a></div>
@@ -152,17 +154,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12 ml-2 mt-2">
+                        <div class="col-lg-12">
+
+                            <div class="d-flex mt-2">
+                                <div class="para">Asunto</div>
                                 <div placeholder="Agregar un asunto" id="MenAsunto" class="ml-2 col-11" contenteditable="true" style="border-bottom:1px solid #369;padding:5px"></div>
                             </div>
                         </div>
-                        <div class="row d-none" id="DivCategoria">
-                            <div class="col-12  ml-2 mt-2 d-none">
+                        <div class="row" id="DivCategoria">
+                            <div class="col-12  ml-2 mt-2">
 
-                                <div class="p-2 d-flex">
-                                    <div class="para" style="width:auto">Gategoria</div>
-
+                                <div class="p-2 d-flex" id="DivCategorias">
+                                    <div class="para" style="width:auto">Categorías</div>
+                                    <select class="form-control form-control-sm  ml-2" id="ddlCategoria" style="margin-top:-3px;margin-right:8px;width:280px;height:30px;margin-top:0px">
+                                        <option>Seleccione una Categoría para el mensaje</option>
+                                    </select>
                                 </div>
 
 
@@ -175,6 +181,14 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="DivAdjunto" class="d-flex ml-1">
+
+                                    <div id="DivAdjunto" class="d-flex ml-1"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,11 +208,14 @@
                     </button>
                 </div>
                 <div class="modal-body" style="height:calc(100vh - 100px)" id="modalAdjuntos">
-                    
+
                 </div>
 
             </div>
         </div>
+    </div>
+    <div class="d-none">
+        <input type="file" id="myInput" onchange="subirAdjunto()" />
     </div>
 
 
@@ -211,7 +228,7 @@
     <script src="../../Script/Librerias/sweetalert2@9.js"></script>
     <script src="../../Script/Comunicados/NuevoMensaje.js"></script>
     <script>
-                                       // $('[data-toggle="tooltip"]').tooltip();
+                                               // $('[data-toggle="tooltip"]').tooltip();
     </script>
 </body>
 </html>

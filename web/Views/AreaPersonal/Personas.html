@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -59,11 +59,13 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerNombres">Tipo de documento</label>
-                                    <select type="text" class="form-control " id="PerTipoDoc" placeholder="Tipo de documento">
+                                    <select class="form-control" id="PerTipoDoc_-1">
                                         <option value="-1">Seleccione</option>
-                                        <option value="RC">Registro civil</option>
-                                        <option value="TI">Tarjeta de identidad</option>
-                                        <option value="CC">Cedula de ciudadania</option>
+                                        <option class="opcion-docente" value="PP">Pasaporte</option>
+                                        <option class="opcion-estudiante" value="RC">Registro civil</option>
+                                        <option class="opcion-estudiante" value="TI">Tarjeta de identidad</option>
+                                        <option value="CC">Cédula de ciudadanía</option>
+                                        <option class="opcion-docente" value="CE">Cédula de extranjería</option>
                                     </select>
                                 </div>
                             </div>
@@ -76,7 +78,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerEmail">Correo electrónico</label>
-                                    <input type="text" class="form-control " id="PerEmail" placeholder="Correo electronico">
+                                    <input type="text" class="form-control " id="PerEmail" placeholder="Correo electrónico">
                                 </div>
                             </div>
 
@@ -86,27 +88,38 @@
                                 <div class="form-group input-group-sm">
                                     <label for="PerNombres">Género</label>
                                     <div class="d-flex">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" value="M" id="customRadio1" name="customGenero" class="custom-control-input">
-                                            <label class="custom-control-label" for="customRadio1">Hombre</label>
+                                        <div class="custom-control custom-radio ">
+                                            <input type="radio" value="F" id="customRadio2" name="customGenero" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Femenino</label>
                                         </div>
                                         <div class="custom-control custom-radio ml-4">
-                                            <input type="radio" value="F" id="customRadio2" name="customGenero" class="custom-control-input">
-                                            <label class="custom-control-label" for="customRadio2">Mujer</label>
+                                            <input type="radio" value="M" id="customRadio1" name="customGenero" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Masculino</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="PerTelefono">Telefono / Celular</label>
-                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="PerTelefono" placeholder="Telefono / celular">
+                                    <label for="PerTelefono">Teléfono</label>
+                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="PerTelefono" placeholder="Teléfono">
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerRH">Tipo de sangre</label>
-                                    <input type="text" class="form-control " id="PerRH" placeholder="Tipo de sangre">
+                                    <select class="form-control" id="PerRH">
+                                        <option value="-1">Seleccione</option>
+                                        <option value="A-">A-</option>
+                                        <option value="A+">A+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="O+">O+</option>
+                                    </select>
+                                    <!--<input type="text" class="form-control " id="PerRH" placeholder="Tipo de sangre">-->
                                 </div>
                             </div>
 
@@ -130,7 +143,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerDireccion">Dirección</label>
-                                    <input type="text" class="form-control " id="PerDireccion" placeholder="Direccion">
+                                    <input type="text" class="form-control " id="PerDireccion" placeholder="Dirección">
                                 </div>
                             </div>
 
@@ -143,9 +156,7 @@
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2 estudiante">
                 <div class="card">
-                    <div class="card-header p-1">
-                        Información Academica
-                    </div>
+                    <div class="card-header p-1">Información Académica</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
@@ -158,7 +169,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerNombres">Curso</label>
-                                    <input type="text" disabled readonly="readonly" class="form-control " id="NombreGrado" >
+                                    <input type="text" disabled readonly="readonly" class="form-control " id="NombreGrado">
                                 </div>
                             </div>
 
@@ -170,46 +181,76 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2 estudiante">
                 <div class="card">
                     <div class="card-header p-1 ">
-                        Datos de acudientes
+                        Información de acudientes
                     </div>
                     <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Madre</strong>
+                                <hr class="m-2 ml-0 mr-0 p-0" />
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="EstNombresMama">Nombres de la mama</label>
+                                    <label for="EstNombresMama">Nombres</label>
                                     <input type="text" class="form-control " id="EstNombresMama" placeholder="Nombres de la mama">
-
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="EstApellidosMama">Apellidos de la mama</label>
+                                    <label for="EstApellidosMama">Apellidos</label>
                                     <input type="text" class="form-control " id="EstApellidosMama" placeholder="Apellidos de la mama">
 
                                 </div>
                             </div>
-
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="EstTelefonoMama">Telefono / Celular de la mama</label>
-                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstTelefonoMama" placeholder="Telefono / Celular de la mama">
+                                    <label for="EstTelefonoMama">Télefono</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstTelefonoMama" placeholder="Teléfono">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstEmpresaMama">Empresa</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstEmpresaMama" placeholder="Empresa">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstCargoMama">Cargo</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstCargoMama" placeholder="Cargo">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstTeleEmpresaMama">Teléfono empresa</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstTeleEmpresaMama" placeholder="Teléfono empresa">
 
                                 </div>
                             </div>
                         </div>
 
-
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <strong>Padre</strong>
+                                <hr class="m-2 ml-0 mr-0 p-0"/>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="EstNombresPapa">Nombres del papa</label>
+                                    <label for="EstNombresPapa">Nombres</label>
                                     <input type="text" class="form-control " id="EstNombresPapa" placeholder="Nombres del papa">
 
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="EstApellidosPapa">Apellidos del papa</label>
+                                    <label for="EstApellidosPapa">Apellidos</label>
                                     <input type="text" class="form-control " id="EstApellidosPapa" placeholder="Apellidos del papa">
 
                                 </div>
@@ -217,12 +258,84 @@
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="EstTelefonoPapa">Telefono / Celular del papa</label>
-                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="EstTelefonoPapa" placeholder="Telefono / Celular de la mama">
+                                    <label for="EstTelefonoPapa">Télefono </label>
+                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="EstTelefonoPapa" placeholder="Télefono">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstEmpresaPapa">Empresa</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstEmpresaPapa" placeholder="Empresa">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstCargoPapa">Cargo</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstCargoPapa" placeholder="Cargo">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstTeleEmpresaPapa">Teléfono empresa</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstTeleEmpresaPapa" placeholder="Teléfono empresa">
 
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <strong>Acudiente</strong>
+                                <hr class="m-2 ml-0 mr-0 p-0" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstNombresAcuediente">Nombres</label>
+                                    <input type="text" class="form-control " id="EstNombresAcuediente" placeholder="Nombres acudiente">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstApellidosAcudiente">Apellidos</label>
+                                    <input type="text" class="form-control " id="EstApellidosAcudiente" placeholder="Apellidos del acudiente">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstTelefonoAcudiente">Télefono </label>
+                                    <input type="text" class="form-control " onkeypress="return only_number(event)" id="EstTelefonoAcudiente" placeholder="Télefono">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstEmpresaAcudiente">Empresa</label>
+                                    <input type="text"  class="form-control " id="EstEmpresaAcudiente" placeholder="Empresa">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstCargoAcudiente">Cargo</label>
+                                    <input type="text"  class="form-control " id="EstCargoAcudiente" placeholder="Cargo">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group input-group-sm">
+                                    <label for="EstTeleEmpresaAcudiente">Teléfono empresa</label>
+                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="EstTeleEmpresaAcudiente" placeholder="Teléfono empresa">
+
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -237,14 +350,16 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerNombres">Profesión</label>
-                                    <input type="text"  class="form-control " id="ProfProfesion" placeholder="Profesión">
+                                    <input type="text" class="form-control " id="ProfProfesion" placeholder="Profesión">
 
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
-                                    <label for="PerNombres">Area de especialidad</label>
-                                    <input type="text"  class="form-control " id="ProfEspacialidad" placeholder="Area de especialidad">
+                                    <label for="PerNombres">Área de especialidad</label>
+                                    <select class="form-control" id="ProfEspacialidad"></select>
+
+                                    <!--<input type="text" class="form-control " id="ProfEspacialidad" placeholder="Área de especialidad">-->
                                 </div>
                             </div>
 

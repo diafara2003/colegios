@@ -10,6 +10,15 @@ namespace Persona.Servicios
 {
     public class PersonasBI
     {
+
+        public IEnumerable<UsuarioPerfil> GetPerfi()
+        {
+
+            ColegioContext objCnn = new ColegioContext();
+
+            return objCnn.usuario_perfi;
+        }
+
         public IEnumerable<Personas> Get(int id = 0)
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();

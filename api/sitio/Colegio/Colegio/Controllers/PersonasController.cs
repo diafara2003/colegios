@@ -9,6 +9,14 @@ namespace Colegio.Controllers
     [RoutePrefix("Persona")]
     public class PersonasController : ApiController
     {
+
+        [HttpGet]
+        [Route("perfiles")]
+        public IEnumerable<UsuarioPerfil> GetUsuariosPerfiles() {
+
+            return new PersonasBI().GetPerfi();
+        }
+
         // GET: api/Personas
         public IEnumerable<Personas> Get(int id = 0, string filter = "", int tipo = 0)
         {

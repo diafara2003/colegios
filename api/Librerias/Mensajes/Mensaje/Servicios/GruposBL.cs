@@ -1,7 +1,9 @@
 ﻿using BaseDatos.Contexto;
+using BaseDatos.Modelos;
 using Mensaje.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -14,7 +16,7 @@ namespace Mensaje.Servicios
     {
 
         public IEnumerable<GruposEnvioColores> GetEnvioColores(int empresa)
-        {            
+        {
             ColegioContext objCnn = new ColegioContext();
 
             return objCnn.grupo_envio_colores.Where(c => c.GrEnColorEmp == empresa);
@@ -68,8 +70,28 @@ namespace Mensaje.Servicios
         public IEnumerable<Categorias> GetCategorias(int empresa)
         {
             ColegioContext objCnn = new ColegioContext();
-           
+
             return (from data in objCnn.categorias where data.CatEmpresaId == empresa select data);
+        }
+
+
+
+        public IEnumerable<CategoriaPerfilCustom> GetCategoriasPerfil(int idCategoria)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            List<CategoriaPerfilCustom> objresultado = new List<CategoriaPerfilCustom>();
+
+            objCnn.usuario_perfi.ToList().ForEach(c =>
+            {
+                objresultado.Add(new CategoriaPerfilCustom()
+                {
+                    idPerfil = c.UsuPerId,
+                    nombrePerfil = c.UsuPerDescripcion,
+                    enUso = objCnn.categorias_perfil.Count(p => p.CatPerCategoria == idCategoria && p.CatPerPerfil == c.UsuPerId)
+                });
+            });
+
+            return objresultado;
         }
 
 
@@ -88,14 +110,14 @@ namespace Mensaje.Servicios
             return true;
         }
 
-        public bool AddAutorizado<T>(T modelo) where T : class
+        public T AddAutorizado<T>(T modelo) where T : class
         {
             ColegioContext objCnn = new ColegioContext();
 
             objCnn.Entry(modelo).State = EntityState.Added;
 
             objCnn.SaveChanges();
-            return true;
+            return modelo;
         }
 
         public bool DeleteAutorizado<T>(T modelo) where T : class
@@ -106,6 +128,21 @@ namespace Mensaje.Servicios
 
             objCnn.SaveChanges();
             return true;
+        }
+
+        public void DeleteCategoriaPerfil(EliminarPerfilCategoria request)
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            var _cat_perfil = objCnn.categorias_perfil.Where(c => c.CatPerCategoria == request.id_categoria && c.CatPerPerfil == request.id_perfil).FirstOrDefault();
+
+
+            objCnn.Entry(_cat_perfil).State = EntityState.Deleted;
+
+            objCnn.SaveChanges();
+
+            
+
         }
     }
 }

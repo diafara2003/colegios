@@ -11,9 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 
-    
-    <style>
 
+    <style>
+      
+
+        .list-group-item {
+            cursor: pointer !important;
+        }
+
+            .list-group-item:hover {
+                background-color: #ebebeb;
+            }
 
         .input-autocomplete {
             outline: none;
@@ -125,7 +133,7 @@
     <div class="container container-sm mt-2 ">
         <div class="row mb-2">
             <div class="col-12">
-                <header class="card-header">Configuración de colores y grupos de autorización para el envio de correo</header>
+                <header class="card-header">Configuración de colores y grupos de autorización para el envÍo de correo</header>
             </div>
         </div>
         <div class="col-12 p-0">
@@ -134,7 +142,7 @@
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#categorias" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Categorías</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#colores" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Grupos Envio</a>
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#colores" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-graduation-cap mr-2"></i>Grupos Envío</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-graduate mr-2"></i>Cursos</a>
@@ -157,8 +165,9 @@
                                     <tr>
                                         <th>Descripción</th>
                                         <th class="text-center">Color</th>
-                                        <th class="text-center">Hora de envio</th>
-                                        <th class="text-center">Opción</th>
+                                        <th class="text-center">Hora de envío</th>
+                                        <th class="text-center">Asignar usuarios</th>
+                                        <th class="text-center"><i class="fas fa-cog"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="TbogyCategorias"></tbody>
@@ -178,9 +187,9 @@
                                                 <label class="custom-control-label" for="CarHoraPermitida_-1"></label>
                                             </div>
                                         </td>
-
+                                        <td></td>
                                         <td class="text-center">
-                                            <button class="btn-icono" onclick="agregar_categoria()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Agregar"><i class="fas fa-plus text-success"></i></button>
+                                            <button class="btn-icono" onclick="agregar_categoria()" ><i class="fas fa-plus text-success"></i></button>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -218,15 +227,6 @@
                             </table>
                         </div>
 
-                        <div class="d-none col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4 order-1">
-                            <span>Filtro de búsqueda</span>
-                            <div class="autocomplete input-group-sm">
-                                <input type="text" class="form-control" id="txtbuscargrupoenvio" placeholder="Buscar por codigo o descripción" onkeyup="buscar_salones(this)">
-                                <i class="fas fa-search"></i>
-                            </div>
-                        </div>
-
-
                     </div>
                     <div class="row">
                         <div class="col-6" id="DivGrupos">
@@ -244,7 +244,7 @@
                                         <tr>
                                             <th>Curso</th>
                                             <th>Docente</th>
-                                            <th>Opción</th>
+                                            <th class="text-center"><i class="fas fa-cog"></i></th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbodyCursos"></tbody>
@@ -262,7 +262,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                <button class="btn-icono" onclick="agregar_curso()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Agregar"><i class="fas fa-plus text-success"></i></button>
+                                                <button class="btn-icono" onclick="agregar_curso()"><i class="fas fa-plus text-success"></i></button>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -272,7 +272,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4 order-1">
                             <span>Filtro de búsqueda</span>
                             <div class="autocomplete input-group-sm">
-                                <input type="text" class="form-control" id="txtbuscarcurso" placeholder="Buscar por codigo o descripción" onkeyup="buscar_cursos(this)">
+                                <input type="text" class="form-control" id="txtbuscarcurso" placeholder="Buscar por curso o docente" onkeyup="buscar_cursos(this)">
                                 <i class="fas fa-search"></i>
                             </div>
                         </div>
@@ -288,7 +288,7 @@
                                         <tr>
                                             <th>Grado</th>
                                             <th>Docente</th>
-                                            <th>Opción</th>
+                                            <th class="text-center"><i class="fas fa-cog"></i></th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbodyGrados"></tbody>
@@ -306,7 +306,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                <button class="btn-icono" onclick="agregar_grado()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Agregar"><i class="fas fa-plus text-success"></i></button>
+                                                <button class="btn-icono" onclick="agregar_grado()"><i class="fas fa-plus text-success"></i></button>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -316,7 +316,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-12 mt-4 order-lg-2 order-md-1 order-sm-1 order-1 rounded mb-4 order-1">
                             <span>Filtro de búsqueda</span>
                             <div class="autocomplete input-group-sm">
-                                <input type="text" class="form-control" id="txtbuscargrado" placeholder="Buscar por codigo o descripción" onkeyup="buscar_grados(this)">
+                                <input type="text" class="form-control" id="txtbuscargrado" placeholder="Buscar por grado o docente" onkeyup="buscar_grados(this)">
                                 <i class="fas fa-search"></i>
                             </div>
                         </div>
@@ -326,13 +326,41 @@
             </div>
         </div>
 
-       
     </div>
+
+
+    <div class="modal fade" id="asignar_perfil" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable vh-100" role="document" id="modalsize">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex justify-content-end w-100">
+                        <div class="pt-1">
+                            <span class="mr-1">Asignar perfiles a la categoria</span>
+                            <strong id="spnCategoria"></strong>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body" id="bodymsn">
+                    <div id="containerFrame">
+                        <div class="col-12">
+                           
+                            <ul class="list-group mt-2" id="ltPerfiles"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="../../Script/Librerias/popper.js"></script>
     <script src="../../Script/Librerias/bootstrap.min.js"></script>
-    <script src="../../Script/Librerias/moment.js"></script>    
+    <script src="../../Script/Librerias/moment.js"></script>
     <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
     <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
@@ -341,11 +369,7 @@
     <script src="../../Script/GruposEnvio/GruposEnvioCursos.js"></script>
     <script src="../../Script/GruposEnvio/GruposEnvioGrados.js"></script>
 
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker4').datetimepicker();
-        });
-    </script>
+
     <!--<script src="../../Script/GruposEnvio/GruposEnvioPersonalizados.js"></script>-->
 
 </body>
