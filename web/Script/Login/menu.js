@@ -128,12 +128,13 @@ function ver_sub_menu_movil(_name) {
 }
 function ver_opcion(_this, _ruta) {
     let _w = $(window).width();
-    if (_w <= 990 && _ruta.toLowerCase().includes('bandejaentrada')) {
+    if (_w <= 1000 && _ruta.toLowerCase().includes('bandejaentrada')) {
 
         bandeja_movil();
     }
-
-    $('#framrePage').attr('src', _ruta);
+    else {
+        $('#framrePage').attr('src', _ruta);
+    }
     $('.active').removeClass('active');
     if (_this != undefined)
         $(_this).closest('li').addClass('active');
@@ -181,6 +182,7 @@ function actualizar_datos() {
 }
 $(window).resize(function () {
     calcular_height_frame()
+    
 });
 (function () {
     //mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones...</span>');
