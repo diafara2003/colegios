@@ -59,7 +59,7 @@ function renderizar_materias_curso(id_grado, materias) {
     table_thead += '<tr>';
     table_thead += '<th scope="col">Materia</th>';
     table_thead += '<th scope="col">Código</th>';
-    table_thead += '<th scope="col">Profesor</th>';
+    table_thead += '<th scope="col">Docente</th>';
     table_thead += '<th scope="col">Salón</th>';
     table_thead += '</tr>';
     table_thead += '</thead>';
@@ -74,7 +74,7 @@ function renderizar_materias_curso(id_grado, materias) {
         _tbody += '<input type="text" maxlength="50" class="form-control" id="ClaCodigo_' + index + '" value="' + materias.ClaCodigo + '" onblur="guardar_info(this,' + index+')" placeholder="Código">';
         _tbody += '</div></td>';
         _tbody += '<td><div class="input-group input-group-sm">';
-        _tbody += '<input type="text" maxlength="50" class="form-control ac-personas" onfocusin="setAutocomolete(' + index + ',' + materias.Claid + ')" id="' + id_profesor + '" value="' + materias.NombreProfesor + '" placeholder="Profesor" />';
+        _tbody += '<input type="text" maxlength="50" class="form-control ac-personas" onfocusin="setAutocomolete(' + index + ',' + materias.Claid + ')" id="' + id_profesor + '" value="' + materias.NombreProfesor + '" placeholder="Docente" />';
         _tbody += '</div></td>';
         _tbody += '<td><div class="input-group input-group-sm">';
         _tbody += '<input type="text" maxlength="50" class="form-control ac-salones" onfocusin="setAutocomolete_salon(' + index + ',' + materias.Claid + ')" id="' + id_salon + '" value="' + materias.NombreSalon + '" placeholder="Salón" />';
