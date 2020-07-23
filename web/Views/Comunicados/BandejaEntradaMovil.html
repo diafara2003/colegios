@@ -210,7 +210,7 @@
                         </div>
                         <div class="d-flex">
                             <div class=" mr-1">
-                                <button data-toggle="tooltip" title="Eliminar" type="button" class="btn btn-light btn-sm rounded-circle"><i class="fas fa-trash"></i> </button>
+                                <button onclick="eliminar_mensaje()" data-toggle="tooltip" title="Eliminar" type="button" class="btn btn-light btn-sm rounded-circle"><i class="fas fa-trash"></i> </button>
                             </div>
                             <div class=" mr-1">
                                 <button data-toggle="tooltip" title="Imprimir" type="button" class="btn btn-light btn-sm rounded-circle"><i class="fas fa-print"></i> </button>
@@ -281,10 +281,16 @@
                     </div>
                     <div id="LiOocionesClases" style="margin-left:18px"></div>
                 </div>
-                <div class="tipo-bandeja">
+                <div class="tipo-bandeja" onclick="cargar_bandeja('eliminados',this)">
                     <div>
                         <i class="fas fa-trash mr-2" style="font-size:16px !important"></i>
                         <span>Eliminados</span>
+                    </div>
+                </div>
+                <div class="tipo-bandeja" onclick="cargar_bandeja('borradores',this)">
+                    <div>
+                        <i class="far fa-file mr-2" style="font-size:16px !important"></i>
+                        <span>Borradores</span>
                     </div>
                 </div>
             </div>

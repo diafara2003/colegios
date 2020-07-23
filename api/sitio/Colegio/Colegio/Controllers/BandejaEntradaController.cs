@@ -68,5 +68,11 @@ namespace Colegio.Controllers
 
             return new Mensaje.Servicios.BandejaEntradaBI().MarcarLeido(request, identity);
         }
+
+        [Route("cambioEstado")]
+        [HttpPost]
+        public bool CambioEstado(CambiarEstadoDTO request) {
+            return new BandejaEntradaBI().CambiarEstado(request);
+        }
     }
 }

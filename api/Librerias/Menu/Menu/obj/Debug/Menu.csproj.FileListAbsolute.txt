@@ -14,3 +14,4 @@ C:\Colegios\api\Librerias\Menu\Menu\obj\Debug\Menu.csproj.CoreCompileInputs.cach
 C:\Colegios\api\Librerias\Menu\Menu\obj\Debug\Menu.csproj.CopyComplete
 C:\Colegios\api\Librerias\Menu\Menu\obj\Debug\Menu.dll
 C:\Colegios\api\Librerias\Menu\Menu\obj\Debug\Menu.pdb
+C:\Colegios\api\Librerias\Menu\Menu\obj\Debug\Menu.csprojAssemblyReference.cache

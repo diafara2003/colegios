@@ -13,7 +13,7 @@ go
 -- Description:	<Description,,>
 -- msn.CategoriasMensajesRecibido  15
 -- =============================================
-CREATE PROCEDURE msn.CategoriasMensajesRecibido
+CREATE PROCEDURE [msn].[CategoriasMensajesRecibido]
 	-- Add the parameters for the stored procedure here
 	@usuario int
 AS
@@ -37,4 +37,3 @@ BEGIN
 	WHERE	BanUsuario=@usuario
 	GROUP BY CatDescripcion,CtaNoLeido,MenCategoriaId
 END
-GO

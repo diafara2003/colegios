@@ -1,6 +1,6 @@
-﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
+﻿const _tipo_mensaje = { borradores:-2,eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
-
+let _this_ctx = undefined;
 let iniciales_usuario = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
     return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
@@ -139,7 +139,7 @@ function limpiar_mensaje_leido() {
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     $('#DivRespuesta').css('display', 'none');
     id_bandeja = _idBandeja;
-
+    _this_ctx = _this;
     if (_idBandeja == 0) {
         _is_rta_ok = 0;
         $('.responder').addClass('d-none');
@@ -154,7 +154,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         $('.recividook').removeClass('d-none');
     }
     $('#DivAcBuscarMensajes, #BtnNoLeidos').addClass('d-none');
-    consultarAPI(`Mensajes/¿?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
+    consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
         $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
         $('#DivRespuesta').addClass('d-none');
         $('#modalverMensaje').modal('show');
@@ -174,7 +174,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 function renderizar_adjuntos(_adjuntos) {
     let _html = "";
 
-    _adjuntos.forEach(a => {      
+    _adjuntos.forEach(a => {
         _html += `<div class="adjunto-mensaje rounded border p-2 m-1">`;
         _html += `<a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${a.AjdId}">`;
         _html += `<img style="width:30px" src="${_get_icono(a.AjdExtension)}" />`;;
@@ -183,7 +183,6 @@ function renderizar_adjuntos(_adjuntos) {
     document.getElementById('DivAdjuntos').innerHTML = _html;
     $('#spnAdjuntos').removeClass('d-none');
 }
-
 function renderizar_mensaje(_mensaje) {
     document.getElementById('DivIniciales').textContent = iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos);
     document.getElementById('MenAsunto').textContent = _mensaje.MenAsunto;
@@ -431,6 +430,22 @@ function colapsar_modal() {
 function tamano_frame() {
     let _w = $(window).width();
 
+}
+function eliminar_mensaje() {
+
+    consultarAPI('BandejaEntrada/mensajes/cambioEstado', 'POST', () => {
+
+    }, {
+            idBandeja: id_bandeja,
+            Estado: -1
+        });
+
+    let index = data_mensajes.findIndex(c => c.BanId == id_bandeja);
+    data_mensajes.splice(index, 1);
+    $(_this_ctx).closest('tr').remove();
+
+    $('#modalverMensaje').modal('hide');
+    $('.container-kids__content').removeClass('d-none');
 }
 (function () {
     calcular_width_tabla();

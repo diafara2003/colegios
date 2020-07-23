@@ -119,8 +119,8 @@ function enviar_mensaje() {
         });
     }
 }
-function obtener_adjuntos_al_mensaje() {    
-    return _adjuntos_cargados.map(c => c.AjdId);    
+function obtener_adjuntos_al_mensaje() {
+    return _adjuntos_cargados.map(c => c.AjdId);
 }
 function obtener_destinatarios() {
     return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
@@ -128,7 +128,8 @@ function obtener_destinatarios() {
 function obtener_datos() {
     var myobject = {
         MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
-        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0
+        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0,
+        MenEstado: 0
     };
 
     myobject.MenMensaje = quill.root.innerHTML;
@@ -227,7 +228,9 @@ function expandir_frame() {
     $('.fa-compress-alt').closest('a').removeClass('d-none');
 }
 function colapsar_frame() {
-    window.parent.colapsar_modal();
+    if (window.parent.colapsar_modal != undefined)
+        window.parent.colapsar_modal();
+
     $('.fa-compress-alt').closest('a').addClass('d-none');
     $('.fa-expand-alt').closest('a').removeClass('d-none');
 }
@@ -263,14 +266,14 @@ function cargar_adjuntos() {
 function armar_url_adjuntos() {
     let _url = '';
     let _usuario = obtener_session().idusuario, _adjunto = 0;
-    
+
     _url += '?usuario=' + _usuario;
     _url += '&adjunto=' + _adjunto;
 
     return _url;
 }
 function subirAdjunto() {
-    
+
     let _url = window.location.href.toLowerCase().split('views')[0];
 
     var formData = new FormData();
@@ -287,7 +290,7 @@ function subirAdjunto() {
         contentType: false,
         processData: false,
         success: function (_response) {
-            
+
             _adjuntos_cargados.push(_response);
             cargar_adjuntos();
         },
@@ -303,7 +306,7 @@ function eliminar_adjunto(_id, _this) {
         let _index = _adjuntos_cargados.findIndex(c => c.AjdId == _id);
         _adjuntos_cargados.splice(_index, 1);
 
-        
+
         cargar_adjuntos();
 
     }, _data);

@@ -6,6 +6,7 @@ using Mensaje.Modelos;
 using System;
 using Trasversales.Modelo;
 using System.Linq;
+using System.Data.Entity;
 
 namespace Mensaje.Servicios
 {
@@ -63,7 +64,7 @@ namespace Mensaje.Servicios
             ColegioContext objCnn = new ColegioContext();
 
             BandejaEntrada _mensaje = objCnn.bandeja_entrada.Where(c => c.BanId == mensaje.IdBandeja && c.BanUsuario == usuario).FirstOrDefault();
-            if (_mensaje != null)
+            if (_mensaje != null && _mensaje.BanEstado >= 0)
             {
                 if (_mensaje.BanHoraLeido == null)
                 {
@@ -113,6 +114,22 @@ namespace Mensaje.Servicios
             objCnn.SaveChanges();
 
 
+        }
+
+        public bool CambiarEstado(CambiarEstadoDTO modelo)
+        {
+
+            ColegioContext objCnn = new ColegioContext();
+
+            var _bandeja = objCnn.bandeja_entrada.Find(modelo.idBandeja);
+
+            _bandeja.BanEstado = -1;
+
+            objCnn.Entry(_bandeja).State = EntityState.Modified;
+
+            objCnn.SaveChanges();
+
+            return true;
         }
     }
 }

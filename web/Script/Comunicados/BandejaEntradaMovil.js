@@ -1,5 +1,6 @@
-﻿const _tipo_mensaje = { bandeja: 0, Enviados: 1, NoLeidos: 2 }
+﻿const _tipo_mensaje = { borradores: -2, eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
+let _this_ctx = undefined;
 let _is_rendered = false;
 let iniciales_usuario = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
@@ -188,7 +189,7 @@ function ver_mensajes__tipo(_this, _tipo, _attr) {
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     
-
+    _this_ctx = _this;
     $('#DivRespuesta, #smallBandeja').fadeOut();
     id_bandeja = _idBandeja;
 
@@ -261,7 +262,20 @@ function cerrar_modal_nuevo() {
     $('#exampleModal').modal('hide');
     $('.container-fluid').removeClass('d-none');
 }
+function eliminar_mensaje() {
 
+    consultarAPI('BandejaEntrada/mensajes/cambioEstado', 'POST', () => {
+
+    }, {
+            idBandeja: id_bandeja,
+            Estado: -1
+        });
+
+    let index = data_mensajes.findIndex(c => c.BanId == id_bandeja);
+    data_mensajes.splice(index, 1);
+    regresar_bandeja();
+    $(_this_ctx).closest('div.mensaje').remove();
+}
 
 $(window).resize(() => {
   

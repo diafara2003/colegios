@@ -13,7 +13,7 @@ go
 -- Description:	<Description,,>
 -- msn.BandejaClases  15
 -- =============================================
-CREATE PROCEDURE msn.BandejaClases
+CREATE PROCEDURE [msn].[BandejaClases]
 	-- Add the parameters for the stored procedure here
 	@usuario int
 AS
@@ -35,4 +35,3 @@ BEGIN
 	WHERE	BanUsuario=@usuario and BanHoraLeido IS NULL
 	GROUP BY MatDescripcion,CtaNoLeido,BanClaseId
 END
-GO
