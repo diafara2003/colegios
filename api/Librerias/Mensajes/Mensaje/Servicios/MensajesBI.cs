@@ -36,6 +36,8 @@ namespace Mensaje.Servicios
                                 MenSendTo = mensaje.MenSendTo,
                                 MenTipoMsn = mensaje.MenTipoMsn,
                                 usuario = _usuario,
+                                MenCategoriaId = mensaje.MenCategoriaId,
+                                MenEstado = mensaje.MenEstado
                             }).FirstOrDefault();
 
             obj_response.adjuntos = (from a in objCnn.adjuntos
@@ -47,15 +49,79 @@ namespace Mensaje.Servicios
             return obj_response;
         }
 
+        public CrearMensajeCustom SaveBorrador(CrearMensajeCustom request)
+        {
+
+            ColegioContext objCnn = new ColegioContext();
+            int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;
+
+            request.mensaje.MenFecha = DateTime.Now;
+            request.mensaje.MenEstado = -1;
+
+            if (request.mensaje.MenId > 0)
+            {
+                objCnn.Entry(request.mensaje).State = System.Data.Entity.EntityState.Modified;
+
+            }
+            else
+            {
+                objCnn.mensajes.Add(request.mensaje);
+
+            }
+            objCnn.SaveChanges();
+
+            objCnn.adjuntos_mensajes
+                .Where(c => c.AdjMsnMensajeId == request.mensaje.MenId).ToList()
+                .ForEach(i =>
+            {
+                objCnn = new ColegioContext();
+
+                objCnn.Entry(i).State = System.Data.Entity.EntityState.Deleted;
+                objCnn.SaveChanges();
+            });
+
+
+
+            //adjuntos al mensaje
+            if (request.adjuntos != null)
+            {
+                objCnn = new ColegioContext();
+                request.adjuntos.ForEach(a =>
+                {
+                    objCnn.adjuntos_mensajes.Add(new AdjuntosMensaje()
+                    {
+                        AdjMenAdjuntoId = a,
+                        AdjMsnMensajeId = request.mensaje.MenId
+                    });
+                });
+                objCnn.SaveChanges();
+            }
+
+
+            return request;
+        }
+
+
         public Mensajes Save(CrearMensajeCustom request)
         {
             ColegioContext objCnn = new ColegioContext();
 
             try
             {
-                int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;
                 request.mensaje.MenFecha = DateTime.Now;
-                objCnn.mensajes.Add(request.mensaje);
+                int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;
+                if (request.mensaje.MenId > 0)
+                {
+                    request.mensaje.MenEstado = 0;
+                    objCnn.Entry(request.mensaje).State = System.Data.Entity.EntityState.Modified;
+                }
+                else
+                {
+                    request.mensaje.MenFecha = DateTime.Now;
+                    objCnn.mensajes.Add(request.mensaje);
+                }
+
+
                 objCnn.SaveChanges();
 
                 //adjuntos al mensaje

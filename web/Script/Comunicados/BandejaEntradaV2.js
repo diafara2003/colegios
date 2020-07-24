@@ -1,4 +1,4 @@
-﻿const _tipo_mensaje = { borradores:-2,eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
+﻿const _tipo_mensaje = { borradores: -2, eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
 let _this_ctx = undefined;
 let iniciales_usuario = (nombre, apellidos) => {
@@ -138,6 +138,13 @@ function limpiar_mensaje_leido() {
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     $('#DivRespuesta').css('display', 'none');
+
+    if ($('.panel').find('.actived').attr('borrador') == 'true') {
+
+        ocultar_bandeja(_id);
+        return;
+    }
+
     id_bandeja = _idBandeja;
     _this_ctx = _this;
     if (_idBandeja == 0) {
@@ -197,10 +204,14 @@ function renderizar_mensaje(_mensaje) {
     else $('.recividook').css('display', '');
     _mensaje_context = _mensaje;
 }
-function nuevo_mensaje() {
+function nuevo_mensaje(id) {
     let _url = window.location.href.toLowerCase().split('comunicados')[0];
+    var _paramter = '';
 
-    window.location.href = _url + 'comunicados/nuevomensaje.html'
+    if (id != undefined) {
+        _paramter = '?id=' + id;
+    }
+    window.location.href = _url + 'comunicados/nuevomensaje.html' + _paramter;
 }
 function recibido_ok() {
     if (_is_recibido == 0) {
@@ -388,8 +399,14 @@ function cerrar_modal_nuevo() {
     $('#icono_notificacion_mensajes').find('button').removeClass('d-none');
 }
 
-function ocultar_bandeja() {
+function ocultar_bandeja(id) {
     colapsar_modal();
+    var url = 'NuevoMensaje.html';
+    if (id != undefined) {
+        url += '?id=' + id;
+    }
+
+    $('#frameNuevoMensaje').attr('src', url);
     $('#exampleModal').modal('show');
     $('.container-kids__content').addClass('d-none');
 }

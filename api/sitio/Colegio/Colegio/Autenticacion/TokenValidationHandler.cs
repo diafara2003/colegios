@@ -60,10 +60,13 @@ namespace Colegio.Autenticacion
                     IssuerSigningKey = securityKey
                 };
 
-                // Extract and assign Current Principal and user
-                Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
-                HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
-
+                // COMPRUEBA LA VALIDEZ DEL TOKEN
+                Thread.CurrentPrincipal = tokenHandler.ValidateToken(token,
+                                                                     validationParameters,
+                                                                     out securityToken);
+                HttpContext.Current.User = tokenHandler.ValidateToken(token,
+                                                                      validationParameters,
+                                                                      out securityToken);
                 return base.SendAsync(request, cancellationToken);
             }
             catch (Exception e)

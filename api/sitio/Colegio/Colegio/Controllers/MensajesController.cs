@@ -48,7 +48,12 @@ namespace Colegio.Controllers
             return new Mensaje.Servicios.MensajesBI().Save(request);
         }
 
-       
+
+        [Route("borrador")]
+        [HttpPost]
+        public CrearMensajeCustom SaveBorrador(CrearMensajeCustom request) {
+            return new Mensaje.Servicios.MensajesBI().SaveBorrador(request);
+        }
 
         // PUT: api/Mensajes/5
         public void Put(int id, [FromBody]string value)

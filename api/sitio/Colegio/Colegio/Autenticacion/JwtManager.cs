@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -13,7 +15,39 @@ namespace Colegio.Autenticacion
 {
     public class JwtManager
     {
-     
+
+        // RECUPERA EL TOKEN DE LA PETICIÓN
+        private static bool TryRetrieveToken(HttpRequestMessage request, out string token)
+        {
+            token = null;
+            IEnumerable<string> authzHeaders;
+            if (!request.Headers.TryGetValues("Authorization", out authzHeaders) ||
+                                              authzHeaders.Count() > 1)
+            {
+                return false;
+            }
+            var bearerToken = authzHeaders.ElementAt(0);
+            token = bearerToken.StartsWith("Bearer ") ?
+                    bearerToken.Substring(7) : bearerToken;
+            return true;
+        }
+
+        // COMPRUEBA LA CADUCIDAD DEL TOKEN
+        public bool LifetimeValidator(DateTime? notBefore,
+                                      DateTime? expires,
+                                      SecurityToken securityToken,
+                                      TokenValidationParameters validationParameters)
+        {
+            var valid = false;
+
+            if ((expires.HasValue && DateTime.UtcNow < expires)
+                && (notBefore.HasValue && DateTime.UtcNow > notBefore))
+            { valid = true; }
+
+            return valid;
+        }
+
+
         public static string GenerateToken(Personas user, int expireMinutes = 20)
         {
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];

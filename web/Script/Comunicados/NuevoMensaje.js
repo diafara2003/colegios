@@ -78,13 +78,13 @@ function renderizar_html_seleccionado(persona, _id_deleted) {
     _html += '<div class="desti-seleccionado">';
     _html += '<span class="desti-cuerpo">';
     _html += '<div class="imageArea">';
-    _html += '<div class="desti-nombre bg-estudiante" aria-hidden="true">';
+    _html += `<div class="desti-nombre" style="background-color:${persona.GrEnColorBurbuja}" aria-hidden="true">`;
     _html += `<span>${iniciales(persona.PerApellidos, persona.PerNombres)}</span>`;
     _html += '</div></div>';
-    _html += `<div style="display:block"><span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
+    _html += `<div style="display:block;ine-height: 0px"><span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
     _html += `<small>${persona.CurDescripcion}</small></div>`;
     if (_id_deleted)
-        _html += `<button style="margin-top:-3px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
+        _html += `<button style="margin-top:1px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
     _html += '</span>';
     _html += '</div>';
 
@@ -93,7 +93,7 @@ function renderizar_html_seleccionado(persona, _id_deleted) {
 function set_sent_to() {
     let _data = [];
 
-    destinatarios.forEach(_item => _data.push({ tipo: _item.tipo, id: _item.PerId, ocupacion: _item.CurDescripcion, nombre: _item.PerNombres, apellido: _item.PerApellidos }));
+    destinatarios.forEach(_item => _data.push({ BG: _item.GrEnColorBurbuja, tipo: _item.tipo, id: _item.PerId, ocupacion: _item.CurDescripcion, nombre: _item.PerNombres, apellido: _item.PerApellidos }));
 
     return JSON.stringify(_data);
 }
@@ -102,13 +102,17 @@ function eliminar_persona_selected(_this, id) {
     destinatarios.splice(_index, 1);
     $(_this).closest('.desti-seleccionado').remove();
 }
-function enviar_mensaje() {
+function armar_objeto_mensaje() {
     let data = {};
     let mensaje = obtener_datos();
     data.destinatarios = obtener_destinatarios();
     data.mensaje = mensaje;
     data.adjuntos = obtener_adjuntos_al_mensaje();
-    if (validar_datos(mensaje)) {
+    return data;
+}
+function enviar_mensaje() {
+    let data = armar_objeto_mensaje();
+    if (validar_datos(data)) {
         consultarAPI('Mensajes', 'POST', (response) => {
             window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
                 localStorage.removeItem("adjuntos-mensajes");
@@ -132,10 +136,16 @@ function obtener_datos() {
         MenEstado: 0
     };
 
+    let id = Get_query_string('id');
+
+    if (id != null && id != undefined) {
+        myobject.MenId = id;
+    }
+
     myobject.MenMensaje = quill.root.innerHTML;
     myobject.MenAsunto = document.getElementById('MenAsunto').textContent;
     myobject.MenOkRecibido = $('#MenOkRecibido').is(':checked') ? 1 : 0;
-    myobject.MenBloquearRespuesta = $('#MenOkRecibido').is(':checked') ? 1 : 0;
+    myobject.MenBloquearRespuesta = $('#MenBloquearRespuesta').is(':checked') ? 1 : 0;
     myobject.MenSendTo = set_sent_to();
     myobject.MenCategoriaId = $('#ddlCategoria').find('option:selected').val();
 
@@ -160,10 +170,16 @@ function validar_datos(_data) {
 function mostrar_mensaje_validacion_error(mensaje) {
     window.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar');
 }
-function consultar_mensaje(id) {
+async function consultar_mensaje(id) {
+    //se balida si el panel es borrador
+
     consultarAPI(`mensajes?id=${id}&bandeja=1`, 'GET', response => {
         // read_only();
         cargar_mensaje(response);
+        if (response.adjuntos != null && response.adjuntos.length > 0) {
+            _adjuntos_cargados = response.adjuntos;
+            cargar_adjuntos();
+        }
         $('#bodymensaje').css('display', 'block');
     });
 }
@@ -180,8 +196,17 @@ function cargar_mensaje(mensaje) {
     quill.clipboard.dangerouslyPasteHTML(0, mensaje.MenMensaje);
     document.getElementById('MenAsunto').textContent = mensaje.MenAsunto;
 
+    if (mensaje.MenOkRecibido == 1) {
+        $('#MenOkRecibido').attr('checked', 'checked');
+    }
 
+    if (mensaje.MenBloquearRespuesta == 1) {
+        $('#MenBloquearRespuesta').attr('checked', 'checked');
+    }
+
+    $('#ddlCategoria').find('option[value="' + mensaje.MenCategoriaId + '"]').attr('selected', 'selected');
     let sent_to = JSON.parse(mensaje.MenSendTo);
+
 
     sent_to.forEach(_item => {
         let _persona = {};
@@ -190,8 +215,12 @@ function cargar_mensaje(mensaje) {
         _persona.PerNombres = _item.apellido;
         _persona.PerId = _item.id;
         _persona.CurDescripcion = _item.ocupacion;
+        _persona.tipo = _item.tipo;
+        _persona.GrEnColorBurbuja = _item.BG;
+        destinatarios.push(_persona);
 
-        $('#DivBusqueda').before(renderizar_html_seleccionado(_persona, false))
+
+        $('#DivBusqueda').before(renderizar_html_seleccionado(_persona, true))
     });
 
 
@@ -206,7 +235,7 @@ function renderizar_categorias(_response) {
 
     document.getElementById('ddlCategoria').innerHTML = _html;
 }
-function consultar_categoria() {
+async function consultar_categoria() {
 
     consultarAPI('Categorias', 'GET', response => {
 
@@ -311,7 +340,21 @@ function eliminar_adjunto(_id, _this) {
 
     }, _data);
 }
+function guardar_mensaje() {
+
+    let data = armar_objeto_mensaje();
+    if (validar_datos(data)) {
+        consultarAPI('Mensajes/borrador', 'POST', (response) => {
+            window.parent.parent.mostrar_mensajes('', 'Mensaje guardado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+                cerrar_modal_nuevo_mensaje();
+            });
+        }, data);
+    }
+}
 (function () {
+    iniico();
+})();
+async function iniico() {
     colapsar_frame();
     $('#DivResultados').css('display', 'none');
 
@@ -319,12 +362,13 @@ function eliminar_adjunto(_id, _this) {
 
     if (id != undefined) {
         $('#bodymensaje').css('display', 'none');
+        await consultar_categoria();
         consultar_mensaje(id);
     } else {
         $('.ql-container').addClass('editor-height');
         consultar_categoria();
     }
     _sesion = obtener_session();
-})();
+}
 
 //.ql-container
