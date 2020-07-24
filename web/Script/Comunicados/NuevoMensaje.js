@@ -111,16 +111,20 @@ function armar_objeto_mensaje() {
     return data;
 }
 function enviar_mensaje() {
+
     let data = armar_objeto_mensaje();
     if (validar_datos(data)) {
         consultarAPI('Mensajes', 'POST', (response) => {
-            window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
-                localStorage.removeItem("adjuntos-mensajes");
-                descartar();
-            });
+
         }, data, (error) => {
             alert('mal');
         });
+
+        window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+            localStorage.removeItem("adjuntos-mensajes");
+            descartar();
+        });
+
     }
 }
 function obtener_adjuntos_al_mensaje() {
