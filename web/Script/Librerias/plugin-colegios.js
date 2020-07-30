@@ -1,7 +1,7 @@
 ﻿function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
     if (AllowAnonymous == undefined && localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
         localStorage.clear();
-        paginar_sesion();
+        window.parent.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
         return;
     }
 
@@ -27,7 +27,7 @@
 
     fetch(`${_url}api/${metodo}`, Init)
         .then(res => {
-            if (res.status == 401 || res.status>=500) {
+            if (res.status == 401 || res.status >= 500) {
                 paginar_sesion();
             }
             else {
@@ -114,10 +114,12 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         return;
     }
 
+    let _url = window.location.href.toLowerCase().split('views')[0];
+
 
     var options = {
         url: function (whiting) {
-            return `http://localhost/colegios/api/${_api}&filter=${whiting}`;
+            return `${_url}api/${_api}&filter=${whiting}`;
         },
         getValue: GetValueProperty,
         requestDelay: 500,
@@ -129,7 +131,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
                 $(`#${id_input}`).attr('result', JSON.stringify(_selected));
 
                 fn_selected(_selected, `#${id_input}`);
-            },           
+            },
             match: {
                 enabled: false
             },

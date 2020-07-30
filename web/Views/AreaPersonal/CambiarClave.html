@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cambiar clave</title>
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container container-sm mt-2">
+        <div class="d-flex justify-content-center ">
+
+            <div class="border rounded p-2 shadow-sm" style="width:20rem">
+                <h5 class="text-danger text-center">Cambiar contraseña</h5>
+                <hr />
+
+                <div class="">
+                    <div class="d-flex justify-content-center">
+                        <div class="rounded-circle border p-3 shadow-sm" style="width:60px;height:60px"><h5 id="iniciales"></h5></div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <small id="nombre"></small>
+                    </div>
+                </div>
+
+                <div>
+                    <hr />
+                    <div class="form-group input-group-sm">
+                        <label for="PerNombres">Nueva contraseña</label>
+                        <input type="password" autocomplete="off" class="form-control " id="txtclave" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group input-group-sm">
+                        <label for="PerNombres">Confirmar contraseña</label>
+                        <input type="password" autocomplete="off" class="form-control " id="txtclave2" placeholder="Confirmar contraseña">
+                    </div>
+                </div>
+                <div class="text-right">
+                    <hr />
+                    <a href="#" class="btn btn-primary" onclick="actualizar()">Actualizar</a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/AreaPersonal/CambiarClave.js"></script>
+</body>
+</html>

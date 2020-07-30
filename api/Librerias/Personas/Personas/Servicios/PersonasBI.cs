@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using Trasversales.Modelo;
 using System.Data;
+using Persona.Modelos;
 
 namespace Persona.Servicios
 {
@@ -147,6 +148,46 @@ namespace Persona.Servicios
             }
 
             return _result;
+        }
+
+        public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado)
+        {
+            IEnumerable<GradoEstudianteDTO> obj = new List<GradoEstudianteDTO>();
+            ColegioContext objCnn = new ColegioContext();
+
+            if (grado == -1)
+            {
+                obj = (from p in objCnn.personas
+                       join c_e in objCnn.curso_estudiantes on p.PerId equals c_e.CurEstEstudianteId
+                       join c in objCnn.cursos on c_e.CurEstCursoId equals c.CurId
+                       join g in objCnn.grados on c.CurGrado equals g.GraId
+                       orderby g.GraOrden,c.CurCodigo
+                       select new GradoEstudianteDTO
+                       {
+                           estudiante = p,
+                           grado = g,
+                           curso = c
+                       });
+
+            }
+            else
+            {
+                obj = (from p in objCnn.personas
+                       join c_e in objCnn.curso_estudiantes on p.PerId equals c_e.CurEstEstudianteId
+                       join c in objCnn.cursos on c_e.CurEstCursoId equals c.CurId
+                       join g in objCnn.grados on c.CurGrado equals g.GraId
+                       where g.GraId == grado
+                       select new GradoEstudianteDTO
+                       {
+                           estudiante = p,
+                           grado = g,
+                           curso = c
+                       });
+
+            }
+
+
+            return obj;
         }
 
         public Profesores GetdatoProfesor(int id_profesor)

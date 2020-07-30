@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <style>
+        h5, .h5 {
+            font-size: 1rem;
+            padding-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid mt-2 ">
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Buscar estudiantes</header>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="PerNombres">Buscar por grado</label>
+                                <select class="form-control" id="DdlGrados" onchange="changeGrado()"></select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="PerNombres">Buscar por nombre</label>
+                                <input class="form-control" id="PerTipoDoc_-1" onkeyup="buscar_estudiantes(this)" placeholder="Buscar por nombre" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <ul class="list-group" id="ulEstudiantes"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/AreaPersonal/ListadoUsuarios.js"></script>
+</body>
+</html>

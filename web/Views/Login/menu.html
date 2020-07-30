@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Inicio</title>
@@ -79,6 +79,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="DivNombreUsu">
                                 <button class="dropdown-item" type="button" onclick="actualizar_datos()"><i class="fas fa-user-edit" style="margin-right:3px"></i>Actualizar datos</button>
+                                <button class="dropdown-item" type="button" onclick="cambiar_clave()"><i class="fas fa-key" style="margin-right:3px"></i>Cambiar contraseña</button>
                                 <button class="dropdown-item" type="button" onclick="cerrar_session()"><i class="fas fa-sign-out-alt" style="margin-right:3px"></i>Cerrar sesión</button>
                             </div>
                         </div>
@@ -132,16 +133,16 @@
     <script src="../../Script/Librerias/sweetalert2@9.js"></script>
     <script src="../../Script/Login/menu.js"></script>
     <script>
-         document.addEventListener('gesturestart', function (e) {
-             e.preventDefault();
-         });
-         document.addEventListener('touchmove', function (event) {
-             event = event.originalEvent || event;
-             if (event.scale > 1) {
-                 event.preventDefault();
-             }
-         }, false);
-     </script>
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('touchmove', function (event) {
+            event = event.originalEvent || event;
+            if (event.scale > 1) {
+                event.preventDefault();
+            }
+        }, false);
+    </script>
 </body>
 
 </html>

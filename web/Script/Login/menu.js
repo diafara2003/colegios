@@ -38,17 +38,22 @@ function renderizar_menu(response) {
 
     for (var i = 0; i < response.length; i++) {
         const element = response[i];
+        let icono = '';
+
+        if (element.SecIcono != '' && element.SecIcono != null) {
+            icono = `<i style="margin-right:3px" class="${element.SecIcono}"></i>`;
+        }
 
         if (element.opcion.length) {
             _html += '<li class="nav-item dropdown">';
             let id = "navbarDropdownMenu_" + element.SeccionId;
-            _html += '<a class="nav-link  dropdown-toggle" href="#" id="' + id + '" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">' + element.SecDescripcion + '</a>';
+            _html += '<a class="nav-link  dropdown-toggle" href="#" id="' + id + '" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">' + icono + element.SecDescripcion + '</a>';
             _html += '<div class="dropdown-menu bg-dark" aria-labelledby="' + id + '">';
             _html += renderizar_opcion(element.opcion, id);
             _html += '</div>';
         } else {
             _html += '<li class="nav-item" >';
-            _html += '<a class="nav-link" onclick="ver_opcion(this,\'' + element.SecRuta + '\')">' + element.SecDescripcion + '</a>';
+            _html += '<a class="nav-link" onclick="ver_opcion(this,\'' + element.SecRuta + '\')">' + icono + element.SecDescripcion + '</a>';
         }
 
 
@@ -56,6 +61,7 @@ function renderizar_menu(response) {
         _html += '</li>';
     }
     _html_movil += '<div class="opcion p-2 text-info" onclick="actualizar_datos()"><i class="fas fa-user-edit" style="margin-right:3px"></i> Actualizar datos</div>';
+    _html_movil += '<div class="opcion p-2 text-info" onclick="cambiar_clave()"><i class="fas fa-sign-out-alt" style="margin-right:3px"></i> Cambiar contraseña</div>';
     _html_movil += '<div class="opcion p-2 text-info" onclick="cerrar_session()"><i class="fas fa-sign-out-alt" style="margin-right:3px"></i> Cerrar Sesión</div>';
     document.getElementById('menu_movil').innerHTML = _html_movil;
     document.getElementById('opciones_menu').innerHTML = _html;
@@ -99,13 +105,21 @@ function calcular_height_frame() {
 }
 function renderizar_opcion_movil(opcion, _i) {
     let _html = '';
+
+    let icono = '';
+
+    if (opcion.SecIcono != '' && opcion.SecIcono != null) {
+        icono = `<i style="margin-right:3px" class="${opcion.SecIcono}"></i>`;
+    }
+
+
     if (opcion.opcion.length > 0) {
         const _uuidv4 = uuidv4();
-        _html += '<div id="opcion_' + _uuidv4 + '" onclick="ver_sub_menu_movil(' + _uuidv4 + ')" class="opcion p-2">' + opcion.SecDescripcion + '</div>';
+        _html += '<div id="opcion_' + _uuidv4 + '" onclick="ver_sub_menu_movil(' + _uuidv4 + ')" class="opcion p-2">' + icono + opcion.SecDescripcion + '</div>';
         _html += renderizar_sub_menu_movil(opcion.opcion, _uuidv4);
 
     } else {
-        _html = '<div onclick="ver_opcion(this,\'' + opcion.SecRuta + '\')" class="opcion p-2">' + opcion.SecDescripcion + '</div>';
+        _html = '<div onclick="ver_opcion(this,\'' + opcion.SecRuta + '\')" class="opcion p-2">' + icono + opcion.SecDescripcion + '</div>';
     }
     return _html;
 }
@@ -159,8 +173,8 @@ function nombres(nombre, apellido) {
     let _nombre = nombre.split(' ');
     let _apellido = apellido.split(' ');
 
-    
-    _result = `${_nombre.length == 1 ? _nombre : _nombre[0]}  ${_apellido.length == 1 ? _apellido : _apellido[0]}`  ;
+
+    _result = `${_nombre.length == 1 ? _nombre : _nombre[0]}  ${_apellido.length == 1 ? _apellido : _apellido[0]}`;
 
     return _result;
 }
@@ -180,9 +194,12 @@ function actualizar_datos() {
     else
         ver_opcion(undefined, `../areapersonal/Personas.html?T=E&user=${_user}`);
 }
+function cambiar_clave() {
+    ver_opcion(undefined, `../areapersonal/CambiarClave.html`);
+}
 $(window).resize(function () {
     calcular_height_frame()
-    
+
 });
 (function () {
     //mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones...</span>');

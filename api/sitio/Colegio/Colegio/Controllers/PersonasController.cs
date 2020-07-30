@@ -1,4 +1,5 @@
 ﻿
+using Persona.Modelos;
 using Persona.Servicios;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -12,7 +13,8 @@ namespace Colegio.Controllers
 
         [HttpGet]
         [Route("perfiles")]
-        public IEnumerable<UsuarioPerfil> GetUsuariosPerfiles() {
+        public IEnumerable<UsuarioPerfil> GetUsuariosPerfiles()
+        {
 
             return new PersonasBI().GetPerfi();
         }
@@ -46,6 +48,13 @@ namespace Colegio.Controllers
         {
             if (request.PerId <= 0)
             {
+                if (string.IsNullOrEmpty(request.PerClave))
+                {
+                    request.PerClave = request.PerNombres.ToLower().Substring(0, 2) +
+                        request.PerApellidos.ToLower().Substring(0, 2) +
+                        request.PerDocumento.ToLower().Substring(0, 4)
+                        ;
+                }
                 return new PersonasBI().Save(request);
             }
             else
@@ -69,7 +78,12 @@ namespace Colegio.Controllers
         }
 
 
-
+        [Route("grado/estudiantes")]
+        [HttpGet]
+        public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado=-1)
+        {
+            return new PersonasBI().GetCursosEstudiante(grado);
+        }
 
         [Route("estudiante")]
         [HttpGet]

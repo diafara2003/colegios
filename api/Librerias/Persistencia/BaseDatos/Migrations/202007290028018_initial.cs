@@ -7,8 +7,29 @@
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Adjuntos",
+                c => new
+                    {
+                        AjdId = c.Int(nullable: false, identity: true),
+                        AdjIdEmpresa = c.Int(nullable: false),
+                        AdjIdUsuario = c.Int(nullable: false),
+                        AdjIdRuta = c.String(),
+                        AdjNombre = c.String(),
+                        AjdExtension = c.String(),
+                    })
+                .PrimaryKey(t => t.AjdId);
             
-
+            CreateTable(
+                "msn.AdjuntosMensaje",
+                c => new
+                    {
+                        AdjMenId = c.Int(nullable: false, identity: true),
+                        AdjMenAdjuntoId = c.Int(nullable: false),
+                        AdjMsnMensajeId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.AdjMenId);
+            
             CreateTable(
                 "dbo.AreasMaterias",
                 c => new
@@ -30,6 +51,8 @@
                         BanHoraLeido = c.DateTime(),
                         BanOkRecibido = c.Byte(nullable: false),
                         BanOkRecibidoFecha = c.DateTime(),
+                        BanClaseId = c.Int(),
+                        BanDestacado = c.Int(),
                     })
                 .PrimaryKey(t => t.BanId);
             
@@ -41,6 +64,7 @@
                         CatEmpresaId = c.Int(nullable: false),
                         CatDescripcion = c.String(maxLength: 50),
                         CatColor = c.String(maxLength: 50),
+                        CarHoraPermitida = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.CatId);
             
@@ -140,10 +164,22 @@
                         EstApellidosMama = c.String(maxLength: 50),
                         EstTelefonoMama = c.String(maxLength: 50),
                         EstCorreoMama = c.String(maxLength: 50),
+                        EstEmpresaMama = c.String(maxLength: 50),
+                        EstCargoMama = c.String(maxLength: 50),
+                        EstTeleEmpresaMama = c.String(maxLength: 50),
                         EstNombresPapa = c.String(maxLength: 50),
                         EstApellidosPapa = c.String(maxLength: 50),
                         EstTelefonoPapa = c.String(maxLength: 50),
                         EstCorreoPapa = c.String(maxLength: 50),
+                        EstEmpresaPapa = c.String(maxLength: 50),
+                        EstCargoPapa = c.String(maxLength: 50),
+                        EstTeleEmpresaPapa = c.String(maxLength: 50),
+                        EstNombresAcuediente = c.String(maxLength: 50),
+                        EstApellidosAcudiente = c.String(maxLength: 50),
+                        EstTelefonoAcudiente = c.String(maxLength: 50),
+                        EstEmpresaAcudiente = c.String(maxLength: 50),
+                        EstCargoAcudiente = c.String(maxLength: 50),
+                        EstTeleEmpresaAcudiente = c.String(maxLength: 50),
                     })
                 .PrimaryKey(t => t.EstId);
             
@@ -290,6 +326,7 @@
                         MenOkRecibido = c.Byte(nullable: false),
                         MenBloquearRespuesta = c.Byte(nullable: false),
                         MenSendTo = c.String(),
+                        MenEstado = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.MenId);
             
@@ -337,6 +374,7 @@
                         ProfId = c.Int(nullable: false, identity: true),
                         ProfIdPersona = c.Int(nullable: false),
                         ProfProfesion = c.String(),
+                        ProfEspacialidad = c.String(),
                     })
                 .PrimaryKey(t => t.ProfId);
             
@@ -428,6 +466,8 @@
             DropTable("msn.Categorias");
             DropTable("msn.BandejaEntrada");
             DropTable("dbo.AreasMaterias");
+            DropTable("msn.AdjuntosMensaje");
+            DropTable("dbo.Adjuntos");
         }
     }
 }

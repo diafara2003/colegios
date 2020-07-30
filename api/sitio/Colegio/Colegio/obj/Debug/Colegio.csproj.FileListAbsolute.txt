@@ -1,4 +1,3 @@
-C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ApplicationInsights.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\csc.exe
 C:\Colegios\api\sitio\Colegio\Colegio\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -53,6 +52,7 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\System.Web.WebPages.Razor.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Temporada.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Trasversales.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\WebGrease.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\EntityFramework.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Utilidades.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Adjuntos.pdb
