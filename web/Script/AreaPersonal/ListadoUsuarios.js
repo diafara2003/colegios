@@ -22,7 +22,7 @@ function renderizar_grados(_response) {
     document.getElementById('DdlGrados').innerHTML = _html;
 }
 function buscar_estudiantes(_this) {
-    let _text = _this.value;
+    let _text = _this.value.toString();
     let filtered = [];
 
     if (_text == '') {
