@@ -10,6 +10,7 @@
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
     <link href="../../Style/quill.snow.css" rel="stylesheet" />
     <link href="../../Style/estandar.css" rel="stylesheet" />
+    <link href="../../Style/jquery.datetimepicker.css" rel="stylesheet" />
     <link href="../../Style/Comunicados/NuevoMensaje.css" rel="stylesheet" />
 
     <style>
@@ -73,7 +74,7 @@
         }
 
         .ql-container {
-            height: calc(100vh - 380px);
+            height: calc(100vh - 328px);
         }
 
         @media screen and (max-width: 600px) {
@@ -172,14 +173,22 @@
 
                                 <div class="p-2 d-flex" id="DivCategorias">
                                     <div class="para" style="width:auto">Categorías</div>
-                                    <select class="form-control form-control-sm  ml-2" id="ddlCategoria" style="margin-top:-3px;margin-right:8px;width:280px;height:30px;margin-top:0px">
+                                    <select class="form-control form-control-sm  ml-2" id="ddlCategoria" onchange="ddlCategorias(this)" style="margin-top:-3px;margin-right:8px;width:280px;height:30px;margin-top:0px">
                                         <option>Seleccione una Categoría para el mensaje</option>
                                     </select>
+
+
+                                    <div class="d-none" id="divFechaHora">
+                                        <div class="para" style="width:auto">Fecha y hora máxima de respuesta</div>
+                                        <div class='input-group date ml-2' id='datetimepicker1' style="margin-top:-3px;margin-right:8px;width:280px;height:30px;margin-top:0px">
+                                            <input type="text" class="form-control" name="search-to-date" id="datetimepicker4" />
+                                        </div>
+                                    </div>
+
                                 </div>
-
-
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-12 ml-2 mt-2 pr-5 movil-height">
                                 <!-- Create the editor container -->
@@ -233,7 +242,9 @@
 
     <script src="../../Script/Librerias/quill.min.js"></script>
     <script src="../../Script/Librerias/sweetalert2@9.js"></script>
+    <script src="../../Script/Librerias/jquery.datetimepicker.full.js"></script>
     <script src="../../Script/Comunicados/NuevoMensaje.js"></script>
+
     <script>
         $('[data-toggle="tooltip"]').tooltip();// $('[data-toggle="tooltip"]').tooltip();
     </script>

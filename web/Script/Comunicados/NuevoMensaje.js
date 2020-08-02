@@ -1,6 +1,6 @@
 ﻿let _sesion = {};//39;
 _adjuntos_cargados = [];
-let _data_source_ac = [], destinatarios = [], _sent_to = '';
+let _data_source_ac = [], destinatarios = [], _sent_to = '', _Categorias = [];
 let iniciales = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
     return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
@@ -234,7 +234,7 @@ function renderizar_categorias(_response) {
 
     _response.forEach(c => {
 
-        _html += `<option style="color:${c.CatColor}" value="${c.CatId}">${c.CatDescripcion}</option>`;
+        _html += `<option style="color:${c.CatColor}" value="${c.CatId}"><i class="fas fa-tag"></i>${c.CatDescripcion}</option>`;
     });
 
     document.getElementById('ddlCategoria').innerHTML = _html;
@@ -242,15 +242,13 @@ function renderizar_categorias(_response) {
 async function consultar_categoria() {
 
     consultarAPI('Categorias', 'GET', response => {
-
+        _Categorias = response;
         if (response.length > 0) {
             renderizar_categorias(response);
         } else {
-            $('#DivCategorias').addClass('d-none');
+            $('#DivCategorias').addClass('d-none').removeClass('d-flex');
         }
     })
-
-
 }
 function cerrar_modal_nuevo_mensaje() {
     window.parent.cerrar_modal_nuevo();
@@ -355,13 +353,26 @@ function guardar_mensaje() {
         }, data);
     }
 }
+function ddlCategorias(_this) {
+    let selected = $(_this).find('option:selected').val();
+
+    let _categoria = _Categorias.find(x => { return x.CatId == selected });
+    if (_categoria != null && _categoria.CarHoraPermitida) {
+        $('#divFechaHora').removeClass('d-none').addClass('d-flex')
+    } else {
+        if (!$('#divFechaHora').hasClass('d-none')) {
+            $('#divFechaHora').addClass('d-none').removeClass('d-flex');
+        }
+
+    }
+}
 (function () {
-    iniico();
+    inicio();
 })();
-async function iniico() {
+async function inicio() {
     colapsar_frame();
     $('#DivResultados').css('display', 'none');
-
+    $('#datetimepicker4').datetimepicker();
     let id = Get_query_string('id');
 
     if (id != undefined) {

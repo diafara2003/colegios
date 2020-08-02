@@ -106,7 +106,7 @@ function renderizar_bandeja(_mensaje) {
     _html += `<label class="custom-control-label" for="customCheck${_mensaje.MenId}"></label>`;
     _html += `<i onclick="marcar_destacado(${_mensaje.BanId},this)" data-toggle="tooltip" title="Favorito" class="${(_mensaje.BanDestacado == 0 ? 'far no-favorito' : 'fa favorito')} fa-star"></i>`;
     if (_mensaje.MenColor != '')
-        _html += `<i data-toggle="tooltip" title="Categoria" style="color:${_mensaje.MenColor}" class="far fa-flag"></i>`;
+        _html += `<i data-toggle="tooltip" title="${_mensaje.CatDescripcion}" style="color:${_mensaje.MenColor};margin-left:4px" class="fas fa-tag"></i>`;
 
     if (_mensaje.TieneAdjuntos > 0)
         _html += `<i data-toggle="tooltip" title="Adjuntos"  class="fas fa-paperclip"></i>`;

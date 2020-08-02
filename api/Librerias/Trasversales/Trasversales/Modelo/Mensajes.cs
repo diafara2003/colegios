@@ -29,5 +29,6 @@ namespace Trasversales.Modelo
         public byte MenBloquearRespuesta { get; set; }
         public string MenSendTo { get; set; }
         public int MenEstado { get; set; }
+        public string MenFechaMaxima { get; set; }
     }
 }

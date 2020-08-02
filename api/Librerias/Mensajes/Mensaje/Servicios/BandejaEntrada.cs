@@ -44,6 +44,7 @@ namespace Mensaje.Servicios
                                    MenColor = (string)data["MenColor"],
                                    BanOkRecibido = (byte)data["BanOkRecibido"],
                                    TieneAdjuntos = (int)data["TieneAdjuntos"],
+                                   CatDescripcion=(string)data["CatDescripcion"],
                                    BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() : (DateTime)data["BanHoraLeido"],
                                });
 
