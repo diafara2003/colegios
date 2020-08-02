@@ -37,7 +37,8 @@ namespace Mensaje.Servicios
                                 MenTipoMsn = mensaje.MenTipoMsn,
                                 usuario = _usuario,
                                 MenCategoriaId = mensaje.MenCategoriaId,
-                                MenEstado = mensaje.MenEstado
+                                MenEstado = mensaje.MenEstado,
+                                MenFechaMaxima=mensaje.MenFechaMaxima
                             }).FirstOrDefault();
 
             obj_response.adjuntos = (from a in objCnn.adjuntos

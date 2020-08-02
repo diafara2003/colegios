@@ -274,7 +274,7 @@
                                             </button>
                                         </div>
                                         <div class="d-flex justify-content-between w-100">
-                                            <div class="d-flex">
+                                            <div class="" id="btnMensajesOpciones">
                                                 <div class=" mr-1">
                                                     <button onclick="eliminar_mensaje()" data-toggle="tooltip" title="Eliminar" type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> </button>
                                                 </div>
@@ -286,18 +286,18 @@
                                                     <button data-toggle="tooltip" title="Enviar respuesta de recibido" type="button" class="btn btn-light btn-sm rounded-sm recividook" onclick="recibido_ok()"><i class="fas fa-check"></i> </button>
                                                 </div>
 
-                                                <div class=" mr-1">
-                                                    <button type="button" data-toggle="tooltip" title="Responder mensaje" class="btn btn-light btn-sm rounded-sm responder" onclick="replicar_mensaje()"><i class="fas fa-reply"></i> </button>
+                                                <div class=" mr-1" id="DivBtnReplicar">
+                                                    <button type="button" data-toggle="tooltip" title="Responder mensaje" class="btn btn-light btn-sm rounded-sm responder" onclick=""><i class="fas fa-reply"></i> </button>
                                                 </div>
                                             </div>
-                                            <div class="d-flex">
+                                            <div class="d-flex" id="BtnModalMensaje">
                                                 <div class=" mr-1">
                                                     <button data-toggle="tooltip" title="Pantalla completa" onclick="expandar_modal()" type="button" class="btn btn-light btn-sm rounded-sm">
                                                         <i class="fas fa-expand-alt"></i>
                                                     </button>
                                                 </div>
                                                 <div class=" mr-1">
-                                                    <button data-toggle="tooltip" title="Salor de la pantalla completa" onclick="colapsar_modal()" type="button" class="btn btn-light btn-sm rounded-sm d-none">
+                                                    <button data-toggle="tooltip" title="Salir de la pantalla completa" onclick="colapsar_modal()" type="button" class="btn btn-light btn-sm rounded-sm d-none">
                                                         <i class="fas fa-compress-alt"></i>
                                                     </button>
                                                 </div>
@@ -322,7 +322,16 @@
                                                             <span style="font-size:20px" id="MenUsuario"></span>
                                                         </div>
                                                     </div>
-                                                    <span class="mensaje-fecha" style="font-size:14px" id="MenFecha"></span>
+                                                    <div>
+                                                        <span id="MenFechaMaxima" class="mensaje-fecha d-none" style="font-size:14px"></span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mensaje-fecha" style="font-size:14px" id="MenFecha"></span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="d-flex justify-content-end w-100">
+
                                                 </div>
 
                                                 <div class="d-flex justify-content-between mt-2">
@@ -369,7 +378,7 @@
     <script src="../../Script/Librerias/sweetalert2@9.js"></script>
     <script src="../../Script/Librerias/popper.js"></script>
     <script src="../../Script/Librerias/bootstrap.min.js"></script>
-    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>        
     <script src="../../Script/Librerias/quill.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Comunicados/BandejaEntradaV2.js"></script>

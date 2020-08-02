@@ -137,7 +137,7 @@ function obtener_datos() {
     var myobject = {
         MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
         MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0,
-        MenEstado: 0
+        MenEstado: 0, MenFechaMaxima: ''
     };
 
     let id = Get_query_string('id');
@@ -152,6 +152,7 @@ function obtener_datos() {
     myobject.MenBloquearRespuesta = $('#MenBloquearRespuesta').is(':checked') ? 1 : 0;
     myobject.MenSendTo = set_sent_to();
     myobject.MenCategoriaId = $('#ddlCategoria').find('option:selected').val();
+    myobject.MenFechaMaxima = document.getElementById('datetimepicker4').value;
 
     return myobject;
 }
@@ -372,7 +373,10 @@ function ddlCategorias(_this) {
 async function inicio() {
     colapsar_frame();
     $('#DivResultados').css('display', 'none');
-    $('#datetimepicker4').datetimepicker();
+    $('#datetimepicker4').datetimepicker({
+        format: 'd/m/Y H:i',        
+        minDate: '0',
+    });
     let id = Get_query_string('id');
 
     if (id != undefined) {

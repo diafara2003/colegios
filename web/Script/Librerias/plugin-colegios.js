@@ -1,4 +1,4 @@
-﻿function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
+﻿async function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
     if (AllowAnonymous == undefined && localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
         localStorage.clear();
         window.parent.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
@@ -25,22 +25,22 @@
 
     let _url = window.location.href.toLowerCase().split('views')[0];
 
-    fetch(`${_url}api/${metodo}`, Init)
-        .then(res => {
-            if (res.status == 401 || res.status >= 500) {
-                paginar_sesion();
+    try {
+        const response = await fetch(`${_url}api/${metodo}`, Init);
+
+        if (response.ok) {
+            const _result = await response.json();
+
+            if (callback != undefined) {
+                callback(_result);
             }
-            else {
-                return res.json();
-            }
-        })
-        .catch(error => {
-            if (!error)
-                error(error);
-        })
-        .then(data => {
-            callback(data);
-        });
+        }
+        else {
+            paginar_sesion();
+        }
+    } catch (e) {
+
+    }
 }
 function paginar_sesion() {
     localStorage.clear();

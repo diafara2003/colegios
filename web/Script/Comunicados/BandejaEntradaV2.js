@@ -1,6 +1,7 @@
 ﻿const _tipo_mensaje = { borradores: -2, eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
 let _this_ctx = undefined;
+let _times = 0;
 let iniciales_usuario = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
     return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
@@ -15,12 +16,32 @@ var quill = new Quill('#editor', {
 });
 let _times_glasses = 0;
 
-function mostrar_no_leidos(_ocultar_leidos) {
+function strar_no_leidos(_ocultar_leidos) {
     if (_ocultar_leidos) {
         $('.mensaje-leido').addClass('d-none');
     } else {
         $('.mensaje-leido').removeClass('d-none');
     }
+}
+function convertir_fecha(fecha) {
+    const date = fecha.split('/');
+
+    const _date_format = `${date[0]}/${date[1]}/${date[2]}`;
+
+    let _m_date = moment();
+
+
+    _m_date.set("year", fecha.split('/')[2].split(' ')[0]);
+    _m_date.set("month", parseInt(date[1]) - 1);
+    _m_date.set("date", date[0]);
+
+    if (fecha.split(' ')[1].split(':').length > 0) {
+
+        _m_date.set("hour", fecha.split(' ')[1].split(':')[0]);
+        _m_date.set("minute", fecha.split(' ')[1].split(':')[1]);
+    }
+
+    return _m_date;
 }
 function buscar_mensajes(_this) {
     let _text = _this.value;
@@ -67,6 +88,15 @@ function cargar_bandeja(tipo, _this) {
     $('#DivRespuesta').addClass('d-none').removeClass('d-block');
     $('#DivAcBuscarMensajes, #BtnNoLeidos').removeClass('d-none');
     $('#buscargrado').val('');
+
+    if (_tipo_mensaje[tipo] == _tipo_mensaje.eliminados) {
+        $('#btnMensajesOpciones').addClass('d-none').removeClass('d-flex');
+        $('#BtnModalMensaje').addClass('w-100 justify-content-end');
+    } else {
+        $('#btnMensajesOpciones').removeClass('d-none').addClass('d-flex');
+        $('#BtnModalMensaje').removeClass('w-100 justify-content-end');
+    }
+
     consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
 
@@ -95,6 +125,7 @@ function cargar_bandeja(tipo, _this) {
     limpiar_mensaje_leido();
 }
 function renderizar_bandeja(_mensaje) {
+
     let _html = '';
     const color = _mensaje.MenColor == "" ? "#ebebeb" : _mensaje.MenColor;
     //border: 2px solid #A8518A
@@ -114,7 +145,9 @@ function renderizar_bandeja(_mensaje) {
     _html += '</td>';
     _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.PerApellidos} ${_mensaje.PerNombres}</td>`;
     _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.MenAsunto}</td>`;
-    _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${_mensaje.MenFecha.split(' ')[0]}</td>`;
+    _html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${(_mensaje.MenFecha.split(' ')[0])}</td>`;
+
+    //_html += `<td onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">${localLocale.startOf().fromNow()}</td>`;
     _html += '</tr>';
 
     return _html;
@@ -191,11 +224,22 @@ function renderizar_adjuntos(_adjuntos) {
     $('#spnAdjuntos').removeClass('d-none');
 }
 function renderizar_mensaje(_mensaje) {
+
+    let _fecha = convertir_fecha(_mensaje.MenFechaMaxima);
+
     document.getElementById('DivIniciales').textContent = iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos);
     document.getElementById('MenAsunto').textContent = _mensaje.MenAsunto;
     document.getElementById('MenUsuario').textContent = _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres;
     document.getElementById('MenFecha').textContent = "Fecha de envio: " + moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
     document.getElementById('MenMensaje').innerHTML = _mensaje.MenMensaje;
+
+    $('#MenFechaMaxima').addClass('d-none');
+    if (_mensaje.MenFechaMaxima != null && _mensaje.MenFechaMaxima != '') {
+        document.getElementById('MenFechaMaxima').textContent = "Fecha máxima de respuesta: " + moment(_fecha).format("DD/MM/YYYY HH:mm A");
+
+        $('#MenFechaMaxima').removeClass('d-none');
+    }
+
 
     if (_mensaje.MenBloquearRespuesta == 1) $('.responder').css('display', 'none');
     else $('.responder').css('display', '');
@@ -203,6 +247,20 @@ function renderizar_mensaje(_mensaje) {
     if (_mensaje.MenOkRecibido == 1) $('.recividook').css('display', 'none');
     else $('.recividook').css('display', '');
     _mensaje_context = _mensaje;
+
+
+    //si la fecha maxima es positiva es porque ya se paso el tiempo para responder el mensaje
+    if (_mensaje.MenFechaMaxima != null && _mensaje.MenFechaMaxima != '')
+        var _duracion = moment.duration(moment().diff(_fecha)).asMinutes();
+
+    if (_duracion > 0) {
+        $('#DivBtnReplicar').addClass('d-none');
+        $('#MenFechaMaxima').addClass('text-danger');
+    } else {
+        $('#DivBtnReplicar').removeClass('d-none');
+        $('#MenFechaMaxima').removeClass('text-danger');
+    }
+
 }
 function nuevo_mensaje(id) {
     let _url = window.location.href.toLowerCase().split('comunicados')[0];
@@ -243,7 +301,11 @@ function habiitar_btn_encabezado(_this) {
     }
 }
 function ocultar_replica() {
-    $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+    //si es negativo es porque se encuentra dentro de la fecha maxima de envio
+    if (moment().diff(_mensaje_context.MenFechaMaxima, 'minutes') < 0) {
+        $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+    }
+
 }
 function replicar_mensaje() {
 
@@ -287,7 +349,6 @@ function obtener_datos_replica() {
 
     return myobject;
 }
-let _times = 0;
 function mostrar_panel_mensajes() {
     if (_times == 0) {
         _times = 1;
@@ -398,7 +459,6 @@ function cerrar_modal_nuevo() {
     $('.container-kids__content, #DivAcBuscarMensajes').removeClass('d-none');
     $('#icono_notificacion_mensajes').find('button').removeClass('d-none');
 }
-
 function ocultar_bandeja(id) {
     colapsar_modal();
     var url = 'NuevoMensaje.html';
@@ -476,3 +536,13 @@ function eliminar_mensaje() {
     tamano_frame();
 })();
 $(window).resize(tamano_frame);
+
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && typeof module.exports === 'object') {
+        factory(require('jquery'));
+    } else {
+        factory(jQuery);
+    }
+});
