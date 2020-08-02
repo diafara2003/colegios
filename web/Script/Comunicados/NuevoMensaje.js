@@ -137,7 +137,7 @@ function obtener_datos() {
     var myobject = {
         MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
         MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0,
-        MenEstado: 0, MenFechaMaxima: ''
+        MenEstado: 0, MenFechaMaxima: null
     };
 
     let id = Get_query_string('id');
@@ -152,9 +152,30 @@ function obtener_datos() {
     myobject.MenBloquearRespuesta = $('#MenBloquearRespuesta').is(':checked') ? 1 : 0;
     myobject.MenSendTo = set_sent_to();
     myobject.MenCategoriaId = $('#ddlCategoria').find('option:selected').val();
-    myobject.MenFechaMaxima = document.getElementById('datetimepicker4').value;
+    if (document.getElementById('datetimepicker4').value != '')
+        myobject.MenFechaMaxima = convertir_fecha(document.getElementById('datetimepicker4').value).format('YYYY-MM-DD HH:mm');
 
     return myobject;
+}
+function convertir_fecha(fecha) {
+    const date = fecha.split('/');
+
+    const _date_format = `${date[0]}/${date[1]}/${date[2]}`;
+
+    let _m_date = moment();
+
+
+    _m_date.set("year", fecha.split('/')[2].split(' ')[0]);
+    _m_date.set("month", parseInt(date[1]) - 1);
+    _m_date.set("date", date[0]);
+
+    if (fecha.split(' ')[1].split(':').length > 0) {
+
+        _m_date.set("hour", fecha.split(' ')[1].split(':')[0]);
+        _m_date.set("minute", fecha.split(' ')[1].split(':')[1]);
+    }
+
+    return _m_date;
 }
 function validar_datos(_data) {
     let _result = true;
@@ -374,7 +395,7 @@ async function inicio() {
     colapsar_frame();
     $('#DivResultados').css('display', 'none');
     $('#datetimepicker4').datetimepicker({
-        format: 'd/m/Y H:i',        
+        format: 'd/m/Y H:i',
         minDate: '0',
     });
     let id = Get_query_string('id');

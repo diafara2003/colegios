@@ -24,23 +24,23 @@ function strar_no_leidos(_ocultar_leidos) {
     }
 }
 function convertir_fecha(fecha) {
-    const date = fecha.split('/');
+    //const date = fecha.split('/');
 
-    const _date_format = `${date[0]}/${date[1]}/${date[2]}`;
+    //const _date_format = `${date[0]}/${date[1]}/${date[2]}`;
 
-    let _m_date = moment();
+    //let _m_date = moment();
 
 
-    _m_date.set("year", fecha.split('/')[2].split(' ')[0]);
-    _m_date.set("month", parseInt(date[1]) - 1);
-    _m_date.set("date", date[0]);
+    //_m_date.set("year", fecha.split('/')[2].split(' ')[0]);
+    //_m_date.set("month", parseInt(date[1]) - 1);
+    //_m_date.set("date", date[0]);
 
-    if (fecha.split(' ')[1].split(':').length > 0) {
+    //if (fecha.split(' ')[1].split(':').length > 0) {
 
-        _m_date.set("hour", fecha.split(' ')[1].split(':')[0]);
-        _m_date.set("minute", fecha.split(' ')[1].split(':')[1]);
-    }
-
+    //    _m_date.set("hour", fecha.split(' ')[1].split(':')[0]);
+    //    _m_date.set("minute", fecha.split(' ')[1].split(':')[1]);
+    //}
+    _m_date = moment(fecha);
     return _m_date;
 }
 function buscar_mensajes(_this) {
