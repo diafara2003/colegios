@@ -54,6 +54,27 @@ namespace Temporadas.Servicios
             {
                 Temporada obj = objCnn.temporada.Find(id);
 
+
+                //se valida si la temporada tiene asigando grados
+                int curso = objCnn.cursos.Count(c => c.CurTemporada == id);
+
+
+                if (curso > 0)
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar la temporada porque tiene asigando {0} cursos.", curso);
+                    return objresponse;
+                }
+
+                int materias = objCnn.materias.Count(c => c.MatTemporadaId == id);
+                if (materias > 0)
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar la temporada porque tiene asigando {0} materias.", curso);
+                    return objresponse;
+                }
+
+
                 objCnn.Entry(obj).State = EntityState.Deleted;
 
                 objCnn.SaveChanges();

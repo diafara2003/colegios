@@ -18,9 +18,9 @@ namespace BaseDatos.Contexto
     public class ColegioContext : DbContext
     {
         public ColegioContext() : base("name=colegioapp")
-        {
-            Database.SetInitializer<ColegioContext>(null);
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
+        {           
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ColegioContext>());
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
 
         }
 

@@ -65,10 +65,15 @@ function eliminar_grados(_this, _posicion) {
 
     let data_changed = obtener_datos_grado(-1)
     consultarAPI('Grados/' + _posicion, 'DELETE', function (response) {
-        let _index = _data_grados.findIndex(c => c.GraId == data_changed.GraId);
-        _data_grados.splice(_index, 1);
-        $(_this).closest('tr').remove();
-        window.parent.cerrar_mensaje();
+
+        if (response.codigo < 0) {
+            window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
+        } else {
+            let _index = _data_grados.findIndex(c => c.GraId == data_changed.GraId);
+            _data_grados.splice(_index, 1);
+            $(_this).closest('tr').remove();
+            window.parent.cerrar_mensaje();
+        }
     }, data_changed);
 }
 function obtener_datos_grado(posicion) {

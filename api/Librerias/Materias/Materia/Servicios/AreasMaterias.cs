@@ -54,12 +54,25 @@ namespace Materia.Servicios
             {
                 AreasMaterias obj = objCnn.areas_materias.Find(id);
 
-                objCnn.Entry(obj).State = EntityState.Deleted;
+                //se valida si el area tiene materias asignadas
+                int objmaterias = objCnn.materias.Where(c => c.MatAreaId == obj.ArMaId).Count();
 
-                objCnn.SaveChanges();
+                if (objmaterias == 0)
+                {
 
-                objresponse.codigo = 1;
-                objresponse.respuesta = "";
+                    objCnn.Entry(obj).State = EntityState.Deleted;
+
+                    objCnn.SaveChanges();
+
+                    objresponse.codigo = 1;
+                    objresponse.respuesta = "";
+                }
+                else
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar porque tiene asignado {0} materias", objmaterias);
+                }
+
             }
             catch (Exception e)
             {

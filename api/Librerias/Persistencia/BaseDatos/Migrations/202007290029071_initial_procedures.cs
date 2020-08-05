@@ -8,6 +8,7 @@
     {
         public override void Up()
         {
+            
             Sql(DBO._dbo___AsignarMateriasClase_);
             Sql(DBO._dbo___AsignarMaterriasCurso_);
             Sql(DBO._dbo___ConsultarClasesMateria_);

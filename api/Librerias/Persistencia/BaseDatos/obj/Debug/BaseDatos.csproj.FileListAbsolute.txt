@@ -10,6 +10,7 @@ C:\Colegios\api\Librerias\Persistencia\BaseDatos\bin\Debug\EntityFramework.SqlSe
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.initial.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.initial_procedures.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.mensajes.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.DBO.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.MSN.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.GenerateResource.cache

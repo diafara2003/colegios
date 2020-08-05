@@ -84,8 +84,7 @@ function mostrar_mensaje() {
 }
 function cargar_bandeja(tipo, _this) {
     $('#enviarReplicaBtn').addClass('d-none');
-    $('.fa-glasses').css('color', '#999');
-    $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+    $('.fa-glasses').css('color', '#999');    
     $('#DivAcBuscarMensajes, #BtnNoLeidos').removeClass('d-none');
     $('#buscargrado').val('');
 
@@ -131,10 +130,10 @@ function renderizar_bandeja(_mensaje) {
     //border: 2px solid #A8518A
     _html += `<tr categoria="${_mensaje.MenCategoriaId}" clase="${_mensaje.BanClaseId}" class="${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}" >`;
     //_html += `<div style="border: 2px solid ${color}"></div>`;
-    _html += '<td><div class="custom-control custom-checkbox">';
-    _html += `<input type="checkbox" class="custom-control-input" onclick="habiitar_btn_encabezado(this)" id="customCheck${_mensaje.MenId}">`;
+    _html += '<td ><div class="custom-control custom-checkbox">';
+    _html += `<input type="checkbox" class="custom-control-input d-none" onclick="habiitar_btn_encabezado(this)" id="customCheck${_mensaje.MenId}">`;
 
-    _html += `<label class="custom-control-label" for="customCheck${_mensaje.MenId}"></label>`;
+    _html += `<label class="custom-control-label d-none" for="customCheck${_mensaje.MenId}"></label>`;
     _html += `<i onclick="marcar_destacado(${_mensaje.BanId},this)" data-toggle="tooltip" title="Favorito" class="${(_mensaje.BanDestacado == 0 ? 'far no-favorito' : 'fa favorito')} fa-star"></i>`;
     if (_mensaje.MenColor != '')
         _html += `<i data-toggle="tooltip" title="${_mensaje.CatDescripcion}" style="color:${_mensaje.MenColor};margin-left:4px" class="fas fa-tag"></i>`;
@@ -170,8 +169,8 @@ function limpiar_mensaje_leido() {
     document.getElementById('DivIniciales').textContent = "";
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
-    $('#DivRespuesta').css('display', 'none');
-
+    
+    reiniciar_reenviar();
     if ($('.panel').find('.actived').attr('borrador') == 'true') {
 
         ocultar_bandeja(_id);
@@ -195,8 +194,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     }
     $('#DivAcBuscarMensajes, #BtnNoLeidos').addClass('d-none');
     consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
-        $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
-        $('#DivRespuesta').addClass('d-none');
+        $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');        
         $('#modalverMensaje').modal('show');
         $('.container-kids__content').addClass('d-none');
         renderizar_mensaje(response);
@@ -210,6 +208,11 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         renderizar_clases_bandeja();
         actualizar_bandeja_count();
     });
+}
+function reiniciar_reenviar() {
+    document.getElementById('MenMensaje').innerHTML = '';
+    $('.ql-editor')[0].innerHTML = "";
+    $('#DivRespuesta').removeClass('d-block').addClass('d-none');
 }
 function renderizar_adjuntos(_adjuntos) {
     let _html = "";
@@ -230,7 +233,7 @@ function renderizar_mensaje(_mensaje) {
     document.getElementById('DivIniciales').textContent = iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos);
     document.getElementById('MenAsunto').textContent = _mensaje.MenAsunto;
     document.getElementById('MenUsuario').textContent = _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres;
-    document.getElementById('MenFecha').textContent = "Fecha de envio: " + moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
+    document.getElementById('MenFecha').textContent = "Fecha de envío: " + moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
     document.getElementById('MenMensaje').innerHTML = _mensaje.MenMensaje;
 
     $('#MenFechaMaxima').addClass('d-none');
@@ -285,10 +288,13 @@ function recibido_ok() {
 }
 function check_All(_this) {
     if ($(_this).is(':checked')) {
-        $('#tbodydatos').find('input[type="checkbox"]').attr('checked', 'true');
+        $('#tbodydatos').find('input[type="checkbox"]').attr('checked', 'checked');
+
         $('.menu-panel i').css('color', 'black');
     } else {
+
         $('#tbodydatos').find('input[type="checkbox"]').removeAttr('checked');
+
         $('.menu-panel i').css('color', '#666');
     }
     habiitar_btn_encabezado(_this);
@@ -302,9 +308,9 @@ function habiitar_btn_encabezado(_this) {
 }
 function ocultar_replica() {
     //si es negativo es porque se encuentra dentro de la fecha maxima de envio
-    if (moment().diff(_mensaje_context.MenFechaMaxima, 'minutes') < 0) {
-        $('#DivRespuesta').addClass('d-none').removeClass('d-block');
-    }
+
+    $('#DivRespuesta').addClass('d-none').removeClass('d-block');
+
 
 }
 function replicar_mensaje() {
@@ -319,11 +325,22 @@ function enviar_replica_mensaje() {
     data.mensaje = mensaje;
 
     consultarAPI('Mensajes', 'POST', (response) => {
-        window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
-            ocultar_replica();
-            $('#DivTableMsn').css('display', 'block');
-            $('#enviarReplicaBtn').addClass('d-none');
-        });
+
+        if (response.codigo > 0) {
+            window.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+                ocultar_replica();
+                $('#DivTableMsn').css('display', 'block');
+                $('#enviarReplicaBtn').addClass('d-none');
+            });
+        }
+        else {
+            window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar', '', '', '', () => {
+                ocultar_replica();
+                $('#DivTableMsn').css('display', 'block');
+                $('#enviarReplicaBtn').addClass('d-none');
+            });
+
+        }
     }, data, (error) => {
         alert('mal');
     });

@@ -252,7 +252,7 @@ function cargar_mensaje(mensaje) {
 
 }
 function renderizar_categorias(_response) {
-    let _html = '<option value="-1">Seleccione una categoria para el mensaje</option>';
+    let _html = '<option value="-1">Seleccione una categoría para el mensaje</option>';
 
     _response.forEach(c => {
 

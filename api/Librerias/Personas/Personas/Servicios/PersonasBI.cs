@@ -88,7 +88,26 @@ namespace Persona.Servicios
             {
                 Personas obj = objCnn.personas.Find(id);
 
+
+
                 objCnn.Entry(obj).State = EntityState.Deleted;
+
+
+                objCnn.curso_estudiantes.Where(c => c.CurEstEstudianteId == id).ToList().ForEach(d => objCnn.Entry(d).State = EntityState.Deleted);
+                Estudiantes objestudiante = objCnn.estudiantes.Where(c => c.EstIdPersona == id).FirstOrDefault();
+
+                if (objestudiante!=null)
+                {
+                    objCnn.Entry(objestudiante).State = EntityState.Deleted;
+                }
+
+                Profesores objProfesor = objCnn.prefesores.Where(c => c.ProfIdPersona == id).FirstOrDefault();
+
+                if (objProfesor != null)
+                {
+                    objCnn.Entry(objProfesor).State = EntityState.Deleted;
+                }
+
 
                 objCnn.SaveChanges();
 

@@ -63,6 +63,10 @@
     <Compile Include="Migrations\202007290029071_initial_procedures.designer.cs">
       <DependentUpon>202007290029071_initial_procedures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008022350170_mensajes.cs" />
+    <Compile Include="Migrations\202008022350170_mensajes.designer.cs">
+      <DependentUpon>202008022350170_mensajes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007290029071_initial_procedures.resx">
       <DependentUpon>202007290029071_initial_procedures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008022350170_mensajes.resx">
+      <DependentUpon>202008022350170_mensajes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

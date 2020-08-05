@@ -7,6 +7,7 @@
     {
         public override void Up()
         {
+           
             CreateTable(
                 "dbo.Adjuntos",
                 c => new

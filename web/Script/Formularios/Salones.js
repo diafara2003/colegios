@@ -65,10 +65,14 @@ function eliminar_salones(_this, _posicion) {
 
     let data_changed = obtener_datos_salon(-1)
     consultarAPI('salones/' + _posicion, 'DELETE', function (response) {
-        let _index = _data_salones.findIndex(c => c.SalId == data_changed.SalId);
-        _data_salones.splice(_index, 1);
-        $(_this).closest('tr').remove();
-        window.parent.cerrar_mensaje();
+        if (response.codigo < 0) {
+            window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
+        } else {
+            let _index = _data_salones.findIndex(c => c.SalId == data_changed.SalId);
+            _data_salones.splice(_index, 1);
+            $(_this).closest('tr').remove();
+            window.parent.cerrar_mensaje();
+        }
     }, data_changed);
 }
 function obtener_datos_salon(posicion) {

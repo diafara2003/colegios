@@ -43,7 +43,7 @@ namespace Colegio.Controllers
         }
 
         // POST: api/Mensajes
-        public Mensajes Post(CrearMensajeCustom request)
+        public ResponseDTO Post(CrearMensajeCustom request)
         {
             return new Mensaje.Servicios.MensajesBI().Save(request);
         }

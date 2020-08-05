@@ -66,6 +66,15 @@ namespace Salon.Servicios
             {
                 Trasversales.Modelo.Salones obj = objCnn.salones.Find(id);
 
+                int materias = objCnn.materias.Count(c => c.MatTemporadaId == id);
+
+                if (materias > 0)
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar el salón porque tiene asigando {0} materias.", materias);
+                    return objresponse;
+                }
+
                 objCnn.Entry(obj).State = EntityState.Deleted;
 
                 objCnn.SaveChanges();

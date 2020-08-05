@@ -66,6 +66,25 @@ namespace Grado.Servicios
             try
             {
                 Grados obj = objCnn.grados.Find(id);
+                //se valida si tiene asignado un curso el grado
+
+                int cursos = objCnn.cursos.Count(c => c.CurGrado == id);
+
+                if (cursos > 0)
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar el grado porque tiene asigando {0} cursos.",cursos);
+                    return objresponse;
+                }
+
+                int materias = objCnn.materias.Count(c => c.MatGradoId == id);
+
+                if (materias > 0)
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar el grado porque tiene asigando {0} materias.", cursos);
+                    return objresponse;
+                }
 
                 objCnn.Entry(obj).State = EntityState.Deleted;
 

@@ -66,10 +66,13 @@ function agregar_temporada() {
 function eliminar_temporada(_this, _posicion) {
     let data_changed = obtener_datos(-1)
     consultarAPI('Temporada/' + _posicion, 'DELETE', function (response) {
-        let _index = _data_termporada.findIndex(c => c.TempId == data_changed.TempId);
-        _data_termporada.splice(_index, 1);
-        $(_this).closest('tr').remove();
-
+        if (response.codigo < 0) {
+            window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
+        } else {
+            let _index = _data_termporada.findIndex(c => c.TempId == data_changed.TempId);
+            _data_termporada.splice(_index, 1);
+            $(_this).closest('tr').remove();
+        }
     }, data_changed);
 }
 function obtener_datos(posicion) {

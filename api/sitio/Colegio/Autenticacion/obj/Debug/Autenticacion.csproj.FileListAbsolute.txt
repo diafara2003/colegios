@@ -13,4 +13,3 @@ C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CoreC
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.dll
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.pdb
-C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csprojAssemblyReference.cache

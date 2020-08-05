@@ -38,7 +38,7 @@ namespace Mensaje.Servicios
                                 usuario = _usuario,
                                 MenCategoriaId = mensaje.MenCategoriaId,
                                 MenEstado = mensaje.MenEstado,
-                                MenFechaMaxima=mensaje.MenFechaMaxima
+                                MenFechaMaxima = mensaje.MenFechaMaxima
                             }).FirstOrDefault();
 
             obj_response.adjuntos = (from a in objCnn.adjuntos
@@ -103,13 +103,26 @@ namespace Mensaje.Servicios
         }
 
 
-        public Mensajes Save(CrearMensajeCustom request)
+        public ResponseDTO Save(CrearMensajeCustom request)
         {
             ColegioContext objCnn = new ColegioContext();
-
+            ResponseDTO objResultado = new ResponseDTO();
             try
             {
                 request.mensaje.MenFecha = DateTime.Now;
+                if (request.mensaje.MenReplicaIdMsn != 0)
+                {
+                    request.mensaje.MenBloquearRespuesta = 0;
+                    var mensaje_original = objCnn.mensajes.Find(request.mensaje.MenReplicaIdMsn);
+                    if (request.mensaje.MenFecha > mensaje_original.MenFechaMaxima)
+                    {
+                        objResultado.codigo = -1;
+                        objResultado.respuesta = "No se puede responder el mensaje porque se venció la fecha limite establecida.";
+                        return objResultado;
+                    }
+                }
+
+
                 int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;
                 if (request.mensaje.MenId > 0)
                 {
@@ -156,12 +169,15 @@ namespace Mensaje.Servicios
                 DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
                 //por cada destinatario se inserta en la tabla bandeja de entrada
 
-
+                objResultado.codigo = 1;
+                objResultado.respuesta = "mensaje creado correctamente";
             }
             catch (Exception e)
             {
+                objResultado.codigo = -1;
+                objResultado.respuesta = e.Message;
             }
-            return request.mensaje;
+            return objResultado;
 
         }
 

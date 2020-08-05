@@ -64,10 +64,15 @@ function eliminar_area_materia(_this, _posicion) {
     window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
     let data_changed = { ArMaId: _posicion };
     consultarAPI('materia/areasmaterias/eliminar?id=' + _posicion, 'GET', (response) => {
-        let _index = _data_area_materia.findIndex(c => c.ArMaId == data_changed.ArMaId);
-        _data_area_materia.splice(_index, 1);
-        $(_this).closest('tr').remove();
-        window.parent.cerrar_mensaje();
+        if (response.codigo < 0) {
+            window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
+        } else {
+            let _index = _data_area_materia.findIndex(c => c.ArMaId == data_changed.ArMaId);
+            _data_area_materia.splice(_index, 1);
+            $(_this).closest('tr').remove();
+            window.parent.cerrar_mensaje();
+        }
+
     });
 }
 function obtener_datos_area_materia(posicion) {

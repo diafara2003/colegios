@@ -182,7 +182,19 @@ namespace Curso.Servicios
             {
                 Trasversales.Modelo.Cursos obj = objCnn.cursos.Find(id);
 
+                //int estudiantes = objCnn.curso_estudiantes.Count(c => c.CurEstCursoId == id);
+
+                //if (estudiantes > 0)
+                //{
+                //    objresponse.codigo = -1;
+                //    objresponse.respuesta = string.Format("No se puede eliminar el curso porque tiene asigando {0} estudiantes.", estudiantes);
+                //    return objresponse;
+                //}
+
+
                 objCnn.Entry(obj).State = EntityState.Deleted;
+
+                objCnn.curso_estudiantes.Where(c => c.CurEstCursoId == id).ToList().ForEach(d => objCnn.Entry(d).State = EntityState.Deleted);
 
                 objCnn.SaveChanges();
 
