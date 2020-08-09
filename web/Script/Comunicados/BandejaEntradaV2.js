@@ -82,9 +82,9 @@ function mostrar_mensaje() {
     }
     $('#enviarReplicaBtn').addClass('d-none');
 }
-function cargar_bandeja(tipo, _this) {
+async function cargar_bandeja(tipo, _this) {
     $('#enviarReplicaBtn').addClass('d-none');
-    $('.fa-glasses').css('color', '#999');    
+    $('.fa-glasses').css('color', '#999');
     $('#DivAcBuscarMensajes, #BtnNoLeidos').removeClass('d-none');
     $('#buscargrado').val('');
 
@@ -96,7 +96,7 @@ function cargar_bandeja(tipo, _this) {
         $('#BtnModalMensaje').removeClass('w-100 justify-content-end');
     }
 
-    consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
+    await consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', response => {
         let _html = '';
 
         if (_this != undefined) {
@@ -111,6 +111,7 @@ function cargar_bandeja(tipo, _this) {
             response.forEach(_mensaje => {
                 _html += renderizar_bandeja(_mensaje);
             });
+            setTimeout(c => { fixed_table_scroll('tblDatosMensajes'); }, 300);
         } else {
             _html = no_hay_mensajes();
         }
@@ -169,7 +170,7 @@ function limpiar_mensaje_leido() {
     document.getElementById('DivIniciales').textContent = "";
 }
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
-    
+
     reiniciar_reenviar();
     if ($('.panel').find('.actived').attr('borrador') == 'true') {
 
@@ -194,7 +195,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     }
     $('#DivAcBuscarMensajes, #BtnNoLeidos').addClass('d-none');
     consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
-        $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');        
+        $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
         $('#modalverMensaje').modal('show');
         $('.container-kids__content').addClass('d-none');
         renderizar_mensaje(response);
@@ -377,7 +378,9 @@ function mostrar_panel_mensajes() {
             calcular_width_tabla();
         }, 400);
         //
-
+        $('#LiOocionesCategorias').find('ul').css('display', 'none');
+        $('#LiOocionesClases').find('ul').css('display', 'none');
+        $('.panel').find('[open="open"]').removeAttr('open');
     } else {
         _times = 0;
         $('.panel').find('span').fadeIn();
@@ -408,7 +411,7 @@ function renderizar_categorias() {
         document.getElementById('LiOocionesCategorias').innerHTML = renderizar_tipo_bandeja(_response, 'categoria');
     });
 }
-function renderizar_clases_bandeja() {
+async function renderizar_clases_bandeja() {
     consultarAPI('BandejaEntrada/mensajes/NoLeido/tipo', 'GET', (_response) => {
         document.getElementById('LiOocionesClases').innerHTML = renderizar_tipo_bandeja(_response, 'clase');
     });
@@ -500,10 +503,16 @@ function Ver_no_leidos(_this) {
     }
     mostrar_no_leidos(_times_glasses == 0 ? false : true);
 }
+function mostrar_no_leidos(_is_hidden) {
+    if (_is_hidden)
+        $('.mensaje-leido ').addClass('d-none');
+    else
+        $('.mensaje-leido ').removeClass('d-none');
+}
 function ver_destacados(_this) {
     $('.actived').removeClass('actived');
     $(_this).addClass('actived');
-    $('#tbodydatos').find('.no-favorito').closest('tr').addClass('d-none');
+    $('#tbodydatos').find('.no-favorito').closest('tr').remove();
 }
 function ver_mensajes__tipo(_this, _tipo, _attr) {
     $('.actived').removeClass('actived');
@@ -541,12 +550,16 @@ function eliminar_mensaje() {
     $('#modalverMensaje').modal('hide');
     $('.container-kids__content').removeClass('d-none');
 }
-(function () {
+(async function () {
     calcular_width_tabla();
     window.parent.cargar_mensajes_no_leidos();
     renderizar_categorias();
     renderizar_clases_bandeja();
-    cargar_bandeja('bandeja');
+    await cargar_bandeja('bandeja');
+
+    if (Get_query_string('noLeidos') == 'true') {
+        Ver_no_leidos($('#icono_notificacion_mensajes').find('i')[0]);
+    }
     _sesion = obtener_session();
     $('[data-toggle="tooltip"]').tooltip()
     actualizar_bandeja_count();

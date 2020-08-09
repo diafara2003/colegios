@@ -182,20 +182,16 @@ namespace Curso.Servicios
             {
                 Trasversales.Modelo.Cursos obj = objCnn.cursos.Find(id);
 
-                //int estudiantes = objCnn.curso_estudiantes.Count(c => c.CurEstCursoId == id);
+                int estudiantes = objCnn.curso_estudiantes.Count(c => c.CurEstCursoId == id);
 
-                //if (estudiantes > 0)
-                //{
-                //    objresponse.codigo = -1;
-                //    objresponse.respuesta = string.Format("No se puede eliminar el curso porque tiene asigando {0} estudiantes.", estudiantes);
-                //    return objresponse;
-                //}
+                if (estudiantes > 0)
+                {
+                    objresponse.codigo = -1;
+                    objresponse.respuesta = string.Format("No se puede eliminar el curso porque tiene asigando {0} estudiantes.", estudiantes);
+                    return objresponse;
+                }
 
-
-                objCnn.Entry(obj).State = EntityState.Deleted;
-
-                objCnn.curso_estudiantes.Where(c => c.CurEstCursoId == id).ToList().ForEach(d => objCnn.Entry(d).State = EntityState.Deleted);
-
+                
                 objCnn.SaveChanges();
 
                 objresponse.codigo = 1;
@@ -227,7 +223,7 @@ namespace Curso.Servicios
                 objresponse.resultado.codigo = 1;
                 objresponse.resultado.respuesta = "";
 
-                objresponse.curso = this.Get(modelo.CurId).FirstOrDefault();
+                objresponse.curso = this.Get(id: modelo.CurId,empresa:modelo.CurEmpId).FirstOrDefault();
             }
             catch (Exception e)
             {

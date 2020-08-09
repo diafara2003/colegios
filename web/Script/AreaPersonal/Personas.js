@@ -38,15 +38,22 @@ function guardar_cambios() {
     if (validar_campos_obligatorio_persona(datos_persona)) {
         window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
         consultarAPI('Personas', 'POST', response => {
-            switch (tipo) {
-                case 'E':
-                    guardar_estudiante(response);
-                    break;
-                case 'P':
-                    guardar_profesor(response);
-                    break;
+            if (response.codigo < 0) {
+                window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
+            } else {
+                switch (tipo) {
+                    case 'E':
+                        guardar_estudiante(response);
+                        break;
+                    case 'P':
+                        guardar_profesor(response);
+                        break;
+                }
+                window.parent.mostrar_mensajes('', 'Se guardaron los cambios correctamente.', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+                    if (Get_query_string('user') == undefined)
+                        window.location.reload();
+                });
             }
-            window.parent.mostrar_mensajes('', 'Se guardaron los cambios correctamente.', 'success', true, false, false, 'Aceptar');
 
         }, datos_persona);
     }
@@ -63,13 +70,13 @@ function obtener_datos_persona() {
     };
 
     myobject.PerUsuario = _usuario;
-    myobject.PerClave = _clave;
+    myobject.PerClave = "";
     myobject.PerId = _persona;
     myobject.PerIdEmpresa = obtener_session().empresa;
     myobject.PerEstado = _tipo_perfil.UsuPerId;
     myobject.PerNombres = document.getElementById('PerNombres').value;
     myobject.PerApellidos = document.getElementById('PerApellidos').value;
-    myobject.PerTipoDoc = $('#PerTipoDoc').find('option:selected').val();
+    myobject.PerTipoDoc = $('#PerTipoDoc_-1').find('option:selected').val();
     myobject.PerDocumento = document.getElementById('PerDocumento').value;
     myobject.PerEmail = document.getElementById('PerEmail').value;
     myobject.PerTelefono = document.getElementById('PerTelefono').value;
@@ -106,13 +113,18 @@ function validar_campos_obligatorio_persona(persona) {
         result = false;
         return;
     }
+    if (persona.PerTipoDoc.length > 5) {
+        mostrar_mensaje_validacion_error('Ingrese un documento valido.');
+        result = false;
+        return;
+    }
     if (persona.PerDocumento == '') {
         mostrar_mensaje_validacion_error('Número de documento obligatorio.');
         result = false;
         return;
     }
     if (persona.PerEmail == '' && persona.PerTelefono == '') {
-        mostrar_mensaje_validacion_error('Correo electrónico o telefono obligatorio.');
+        mostrar_mensaje_validacion_error('Correo electrónico o teléfono obligatorio.');
         result = false;
         return;
     }
@@ -123,7 +135,7 @@ function validar_campos_obligatorio_persona(persona) {
     }
 
     if (persona.PerGenero == '') {
-        mostrar_mensaje_validacion_error('Genero obligatorio.');
+        mostrar_mensaje_validacion_error('Género obligatorio.');
         result = false;
         return;
     }
@@ -275,7 +287,7 @@ function renderizar_usuario(_response) {
     document.getElementById('PerNombres').value = _response.PerNombres;
     document.getElementById('PerApellidos').value = _response.PerApellidos;
     document.getElementById('PerEPS').value = _response.PerEPS;
-    $('#PerTipoDoc').find(`option[value="${_response.PerTIpoDoc}"]`).attr('selected', 'selected');
+    $('#PerTipoDoc_-1').find(`option[value="${_response.PerTIpoDoc}"]`).attr('selected', 'selected');
     document.getElementById('PerDocumento').value = _response.PerDocumento;
     document.getElementById('PerEmail').value = _response.PerEmail;
 
@@ -309,10 +321,13 @@ function renderizar_areas(response) {
 (function () {
     let qs = Get_query_string('T');
 
-    if (Get_query_string('user') != undefined)
+    if (Get_query_string('user') != undefined) {
         cargar_usuario(Get_query_string('user'));
-
+    } else {
+        $('#infoacademica').addClass('d-none');
+    }
     tipo = qs;
     consltar_tipo_perfil();
     validar_visual_tipo();
+    asignar_control_fecha('PerFechanacimiento');
 })();

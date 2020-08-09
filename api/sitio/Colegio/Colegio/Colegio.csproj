@@ -184,6 +184,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\SalonesController.cs" />
     <Compile Include="Controllers\TemporadaController.cs" />
+    <Compile Include="Controllers\TipoPerfilController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

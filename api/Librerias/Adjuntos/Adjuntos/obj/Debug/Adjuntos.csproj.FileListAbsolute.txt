@@ -13,3 +13,4 @@ C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csproj.CoreCompil
 C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csproj.CopyComplete
 C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.dll
 C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.pdb
+C:\Colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csprojAssemblyReference.cache

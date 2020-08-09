@@ -67,6 +67,14 @@
     <Compile Include="Migrations\202008022350170_mensajes.designer.cs">
       <DependentUpon>202008022350170_mensajes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008090447274_perfil_empresas.cs" />
+    <Compile Include="Migrations\202008090447274_perfil_empresas.designer.cs">
+      <DependentUpon>202008090447274_perfil_empresas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008090501028_perfil_estado.cs" />
+    <Compile Include="Migrations\202008090501028_perfil_estado.designer.cs">
+      <DependentUpon>202008090501028_perfil_estado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +108,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008022350170_mensajes.resx">
       <DependentUpon>202008022350170_mensajes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008090447274_perfil_empresas.resx">
+      <DependentUpon>202008090447274_perfil_empresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008090501028_perfil_estado.resx">
+      <DependentUpon>202008090501028_perfil_estado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

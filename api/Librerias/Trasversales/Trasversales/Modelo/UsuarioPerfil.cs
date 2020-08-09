@@ -13,7 +13,10 @@ namespace Trasversales.Modelo
     {
         [Key]
         public int UsuPerId { get; set; }
+        public int UsuEmpId { get; set; }
         [MaxLength(50)]
         public string UsuPerDescripcion { get; set; }
+
+        public bool UsuPerEstado { get; set; }
     }
 }

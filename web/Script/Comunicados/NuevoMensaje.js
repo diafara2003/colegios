@@ -409,6 +409,11 @@ async function inicio() {
         consultar_categoria();
     }
     _sesion = obtener_session();
+
+
+    if (_sesion.tipo == 2) {
+        $('#botones').find('.custom-control').remove();
+    }
 }
 
 //.ql-container

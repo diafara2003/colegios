@@ -32,20 +32,25 @@ namespace Persona.Servicios
             return objSeccion;
         }
 
-        public IEnumerable<Personas> Get(string filter = "", int tipo = 0)
+        public IEnumerable<Personas> Get(int empresa, string filter = "", int tipo = 0)
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();
             ColegioContext objCnn = new ColegioContext();
 
             if (filter == string.Empty)
                 objSeccion = (from data in objCnn.personas
+                              join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
                               where data.PerEstado && data.PerTipoPerfil == tipo
+                                && tp.UsuEmpId == empresa
                               select data).OrderBy(c => c.PerApellidos);
             else
                 objSeccion = (from data in objCnn.personas
+                              join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
                               where data.PerEstado
+                              && tp.UsuEmpId == empresa
                               && data.PerTipoPerfil == tipo
                                 && data.PerNombres.Contains(filter) || data.PerApellidos.Contains(filter)
+
                               select data).OrderBy(c => c.PerApellidos); ;
             return objSeccion;
         }
@@ -96,7 +101,7 @@ namespace Persona.Servicios
                 objCnn.curso_estudiantes.Where(c => c.CurEstEstudianteId == id).ToList().ForEach(d => objCnn.Entry(d).State = EntityState.Deleted);
                 Estudiantes objestudiante = objCnn.estudiantes.Where(c => c.EstIdPersona == id).FirstOrDefault();
 
-                if (objestudiante!=null)
+                if (objestudiante != null)
                 {
                     objCnn.Entry(objestudiante).State = EntityState.Deleted;
                 }
@@ -136,20 +141,10 @@ namespace Persona.Servicios
         {
             ColegioContext objCnn = new ColegioContext();
             Personas _persona = new Personas();
-            if (string.IsNullOrEmpty(password))
-            {
-                _persona = (from data in objCnn.personas
-                            where data.PerDocumento == documento
-                            select data).FirstOrDefault();
-            }
-            else
-            {
 
-                _persona = (from data in objCnn.personas
-                            where data.PerDocumento == documento && data.PerClave == password
-                            select data).FirstOrDefault();
-            }
-
+            _persona = (from data in objCnn.personas
+                        where data.PerDocumento == documento && data.PerClave == password
+                        select data).FirstOrDefault();
 
 
             return _persona;
@@ -180,7 +175,7 @@ namespace Persona.Servicios
                        join c_e in objCnn.curso_estudiantes on p.PerId equals c_e.CurEstEstudianteId
                        join c in objCnn.cursos on c_e.CurEstCursoId equals c.CurId
                        join g in objCnn.grados on c.CurGrado equals g.GraId
-                       orderby g.GraOrden,c.CurCodigo
+                       orderby g.GraOrden, c.CurCodigo
                        select new GradoEstudianteDTO
                        {
                            estudiante = p,
@@ -220,9 +215,39 @@ namespace Persona.Servicios
             return _result;
         }
 
+
+        public ResponseDTO SavePersona(Personas modelo)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            ResponseDTO objresponse = new ResponseDTO();
+
+            //se valida que no existan documentos de identidad iguales
+            int documentos = objCnn.personas.Count(c => c.PerDocumento == modelo.PerDocumento);
+
+
+            if (documentos > 0)
+            {
+                objresponse.codigo = -1;
+                objresponse.respuesta = string.Format("El documento de identidad ingresado ya existe en el sistema.");
+                return objresponse;
+            }
+
+            objCnn.Entry(modelo).State = EntityState.Added;
+
+            objCnn.SaveChanges();
+
+            objresponse.codigo = 1;
+            objresponse.respuesta = "";
+
+            return objresponse;
+        }
+
+
+
         public T Save<T>(T modelo) where T : class
         {
             ColegioContext objCnn = new ColegioContext();
+
 
             objCnn.Entry(modelo).State = EntityState.Added;
 

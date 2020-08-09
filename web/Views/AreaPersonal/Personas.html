@@ -8,6 +8,7 @@
     <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/bootstrap-datepicker3.min.css" rel="stylesheet" />
 
     <style>
         body, input, select {
@@ -137,7 +138,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="PerLugarNacimiento">Lugar de nacimiento</label>
-                                    <input type="text" onkeypress="return only_number(event)" class="form-control " id="PerLugarNacimiento" placeholder="Lugar de nacimiento">
+                                    <input type="text" class="form-control " id="PerLugarNacimiento" placeholder="Lugar de nacimiento">
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
@@ -155,7 +156,7 @@
             </div>
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2 estudiante">
-                <div class="card">
+                <div class="card" id="infoacademica">
                     <div class="card-header p-1">Información Académica</div>
                     <div class="card-body">
                         <div class="row">
@@ -237,7 +238,7 @@
                         <div class="row mt-4">
                             <div class="col-12">
                                 <strong>Padre</strong>
-                                <hr class="m-2 ml-0 mr-0 p-0"/>
+                                <hr class="m-2 ml-0 mr-0 p-0" />
                             </div>
                         </div>
                         <div class="row">
@@ -316,14 +317,14 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="EstEmpresaAcudiente">Empresa</label>
-                                    <input type="text"  class="form-control " id="EstEmpresaAcudiente" placeholder="Empresa">
+                                    <input type="text" class="form-control " id="EstEmpresaAcudiente" placeholder="Empresa">
 
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group input-group-sm">
                                     <label for="EstCargoAcudiente">Cargo</label>
-                                    <input type="text"  class="form-control " id="EstCargoAcudiente" placeholder="Cargo">
+                                    <input type="text" class="form-control " id="EstCargoAcudiente" placeholder="Cargo">
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
@@ -385,6 +386,8 @@
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/Librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/bootstrap-datepicker.min.js"></script>
+    <script src="../../Script/Librerias/es.js"></script>
     <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
     <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>

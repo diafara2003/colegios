@@ -51,7 +51,10 @@ namespace Colegio.Controllers
         [Route("categoriaperfil")]
         public IEnumerable<CategoriaPerfilCustom> GetCategoriaPerfil(int id)
         {
-            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(id);
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(_persona.PerIdEmpresa, id);
         }
 
 
@@ -111,7 +114,11 @@ namespace Colegio.Controllers
 
             CategoriaPerfil nuevo = new Mensaje.Servicios.GruposBL().AddAutorizado<CategoriaPerfil>(request);
 
-            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(nuevo.CatPerCategoria);
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(_persona.PerIdEmpresa, nuevo.CatPerCategoria);
         }
 
 

@@ -1,7 +1,10 @@
 ﻿
 using Persona.Modelos;
 using Persona.Servicios;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Web.Http;
 using Trasversales.Modelo;
 
@@ -22,9 +25,12 @@ namespace Colegio.Controllers
         // GET: api/Personas
         public IEnumerable<Personas> Get(int id = 0, string filter = "", int tipo = 0)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
             if (tipo != 0)
             {
-                return new PersonasBI().Get(filter, tipo);
+                return new PersonasBI().Get(_persona.PerIdEmpresa, filter, tipo);
             }
             return new PersonasBI().Get(id);
         }
@@ -40,11 +46,14 @@ namespace Colegio.Controllers
         [Route("Tipos")]
         public IEnumerable<UsuarioPerfil> GetTipoPersona(int id = 0)
         {
-            return new TipoPersona().Get(id);
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            return new TipoPersona().Get(_persona.PerIdEmpresa, id: id);
         }
 
         // POST: api/Personas
-        public Personas Post(Personas request)
+        public ResponseDTO Post(Personas request)
         {
             if (request.PerId <= 0)
             {
@@ -55,12 +64,12 @@ namespace Colegio.Controllers
                         request.PerDocumento.ToLower().Substring(0, 4)
                         ;
                 }
-                return new PersonasBI().Save(request);
+                return new PersonasBI().SavePersona(request);
             }
             else
             {
                 new PersonasBI().UpdateEnvio<Personas>(request);
-                return request;
+                return new ResponseDTO() { codigo = 1, respuesta = "" };
             }
 
         }
@@ -80,7 +89,7 @@ namespace Colegio.Controllers
 
         [Route("grado/estudiantes")]
         [HttpGet]
-        public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado=-1)
+        public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado = -1)
         {
             return new PersonasBI().GetCursosEstudiante(grado);
         }

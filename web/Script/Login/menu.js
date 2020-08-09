@@ -78,7 +78,10 @@ function renderizar_opcion(_source, id) {
 
     return _opcion;
 }
-
+function ver_no_leidos() {
+    _this = $('#opciones_menu').find('a').first();
+    ver_opcion(_this,'../comunicados/bandejaentradav2.html?noLeidos=true');
+}
 function renderizar_sub_menu_movil(_source, _name) {
 
     let _opcion = '';

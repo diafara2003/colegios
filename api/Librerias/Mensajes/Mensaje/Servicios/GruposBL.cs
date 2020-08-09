@@ -76,20 +76,20 @@ namespace Mensaje.Servicios
 
 
 
-        public IEnumerable<CategoriaPerfilCustom> GetCategoriasPerfil(int idCategoria)
+        public IEnumerable<CategoriaPerfilCustom> GetCategoriasPerfil(int empresa, int idCategoria)
         {
             ColegioContext objCnn = new ColegioContext();
             List<CategoriaPerfilCustom> objresultado = new List<CategoriaPerfilCustom>();
 
-            objCnn.usuario_perfi.ToList().ForEach(c =>
-            {
-                objresultado.Add(new CategoriaPerfilCustom()
+            objCnn.usuario_perfi.Where(c => c.UsuEmpId == empresa && c.UsuPerEstado).ToList().ForEach(c =>
                 {
-                    idPerfil = c.UsuPerId,
-                    nombrePerfil = c.UsuPerDescripcion,
-                    enUso = objCnn.categorias_perfil.Count(p => p.CatPerCategoria == idCategoria && p.CatPerPerfil == c.UsuPerId)
+                    objresultado.Add(new CategoriaPerfilCustom()
+                    {
+                        idPerfil = c.UsuPerId,
+                        nombrePerfil = c.UsuPerDescripcion,
+                        enUso = objCnn.categorias_perfil.Count(p => p.CatPerCategoria == idCategoria && p.CatPerPerfil == c.UsuPerId)
+                    });
                 });
-            });
 
             return objresultado;
         }
@@ -141,7 +141,7 @@ namespace Mensaje.Servicios
 
             objCnn.SaveChanges();
 
-            
+
 
         }
     }
