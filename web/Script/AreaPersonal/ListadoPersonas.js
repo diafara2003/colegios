@@ -16,13 +16,13 @@ function buscar_personas(_this) {
     }
     renderizar_datos(filtered);
 }
-function consltar_tipo_perfil() {
+async function consltar_tipo_perfil() {
     let tipo = Get_query_string('T');
 
-    consultarAPI('Persona/Tipos', 'GET', response => {
+    await consultarAPI('Persona/Tipos', 'GET', response => {
         let filtered = tipo == 'P' ? 'Docente' : 'Estudiante';
         _tipo_perfil = response.find(x => x.UsuPerDescripcion == filtered);
-        consultar_personas(_tipo_perfil.UsuPerId);
+
 
         if (tipo == 'P') {
             $('.opcion-docente').removeClass('d-none');
@@ -36,7 +36,7 @@ function consltar_tipo_perfil() {
     });
 }
 function consultar_personas(_tipo) {
-    consultarAPI(`Personas?tipo=${_tipo}`, 'GET', response => {
+    consultarAPI(`Persona/all?tipo=${_tipo}`, 'GET', response => {
         data_personas = response;
         renderizar_datos(response);
     });
@@ -67,6 +67,14 @@ function renderizar_tr(persona) {
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerFechanacimiento_' + persona.PerId + '">' + IsNull(persona.PerFechanacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerLugarNacimiento_' + persona.PerId + '">' + IsNull(persona.PerLugarNacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerDireccion_' + persona.PerId + '">' + IsNull(persona.PerDireccion) + '</div></td>';
+
+    _tr += '<td class="text-center" id="PerEstado_' + persona.PerId + '" >';
+    _tr += '<div class="custom-control custom-switch">';
+    _tr += '<input type="checkbox" class="custom-control-input" onblur="modificar_persona(this,' + persona.PerId + ')" id="customSwitch_' + persona.PerId + '"  ' + (persona.PerEstado ? 'checked' : '') + '>';
+    _tr += '<label class="custom-control-label" for="customSwitch_' + persona.PerId + '"></label>';
+    _tr += '</div>';
+    _tr += '</td>';
+
     _tr += '<td><button onclick="eliminar_persona(this,' + persona.PerId + ')" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>';
     _tr += '</tr>';
 
@@ -83,7 +91,10 @@ function eventos_listado_personas() {
 function modificar_persona(this_, id) {
     let data_changed = obtener_datos_persona(id);
 
+
     if (validar_campos_obligatorio_persona(data_changed)) {
+
+        data_changed.PerEstado = $('#customSwitch_' + id).is(':checked');
         consultarAPI('Personas', 'PUT', function (response) {
             let _index = data_personas.findIndex(c => c.PerId == data_changed.PerId);
             data_personas[_index] = data_changed;
@@ -108,15 +119,19 @@ function guardar_cambios() {
     if (validar_campos_obligatorio_persona(datos_persona)) {
         window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
         consultarAPI('Personas', 'POST', response => {
-            data_personas.push(response);
-            let nuevo_tr = renderizar_tr(response);
+            if (response.codigo < 0) {
+                window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
+            } else {
+                datos_persona.PerId = response.codigo;
+                data_personas.push(datos_persona);
+                let nuevo_tr = renderizar_tr(datos_persona);
 
-            $('#tbodyDatos').append(nuevo_tr);
-            limpiar_registro_personas(-1);
-            $('#PerNombres_-1').focus();
-            eventos_listado_personas();
-            window.parent.mostrar_mensajes('', 'Se guardaron los cambios correctamente.', 'success', true, false, false, 'Aceptar');
-
+                $('#tbodyDatos').append(nuevo_tr);
+                limpiar_registro_personas(-1);
+                $('#PerNombres_-1').focus();
+                eventos_listado_personas();
+                window.parent.mostrar_mensajes('', 'Se guardaron los cambios correctamente.', 'success', true, false, false, 'Aceptar');
+            }
         }, datos_persona);
     }
 
@@ -170,7 +185,7 @@ function obtener_datos_persona(posicion) {
         _data.PerTelefono = document.getElementById('PerTelefono_' + posicion).value;
     }
 
-    if (posicion==-1) {
+    if (posicion == -1) {
         _data.PerRH = $('#PerRH_-1').find('option:selected').val();
     } else {
         _data.PerRH = document.getElementById('PerRH_' + posicion).textContent;
@@ -266,8 +281,9 @@ function limpiar_registro_personas(posicion) {
     document.getElementById('PerDireccion_' + posicion).value = "";
 
 }
-(function () {
-    consltar_tipo_perfil();
+(async function () {
+    await consltar_tipo_perfil();
+    consultar_personas(_tipo_perfil.UsuPerId);
     asignar_control_fecha('PerFechanacimiento_-1');
     $('#PerNombres_-1').focus();
 })();

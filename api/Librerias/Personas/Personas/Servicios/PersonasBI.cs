@@ -56,6 +56,23 @@ namespace Persona.Servicios
         }
 
 
+
+        public IEnumerable<Personas> GetAll(int empresa, int tipo = 0)
+        {
+            IEnumerable<Personas> objSeccion = new List<Personas>();
+            ColegioContext objCnn = new ColegioContext();
+
+
+            objSeccion = (from data in objCnn.personas
+                          join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
+                          where data.PerTipoPerfil == tipo
+                            && tp.UsuEmpId == empresa
+                          select data).OrderBy(c => c.PerApellidos);
+
+            return objSeccion;
+        }
+
+
         public IEnumerable<Personas> GetEstudiantesSinAsignar(int curso = 0)
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();
@@ -236,7 +253,7 @@ namespace Persona.Servicios
 
             objCnn.SaveChanges();
 
-            objresponse.codigo = 1;
+            objresponse.codigo = modelo.PerId;
             objresponse.respuesta = "";
 
             return objresponse;

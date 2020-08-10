@@ -22,6 +22,17 @@ namespace Colegio.Controllers
             return new PersonasBI().GetPerfi();
         }
 
+
+        [HttpGet]
+        [Route("all")]
+        public IEnumerable<Personas> GetAllUser(int tipo=0)
+        {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            return new PersonasBI().GetAll(_persona.PerIdEmpresa, tipo);
+        }
+
         // GET: api/Personas
         public IEnumerable<Personas> Get(int id = 0, string filter = "", int tipo = 0)
         {
