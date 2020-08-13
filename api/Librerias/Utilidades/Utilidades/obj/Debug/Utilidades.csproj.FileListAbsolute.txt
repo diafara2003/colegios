@@ -4,3 +4,13 @@ C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csproj.Core
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.dll
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.pdb
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csprojAssemblyReference.cache
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\BaseDatos.dll
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\EntityFramework.dll
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\EntityFramework.SqlServer.dll
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\Trasversales.dll
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\BaseDatos.pdb
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\BaseDatos.dll.config
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\EntityFramework.xml
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\EntityFramework.SqlServer.xml
+C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\Trasversales.pdb
+C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csproj.CopyComplete

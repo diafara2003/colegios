@@ -34,6 +34,7 @@
             if (callback != undefined) {
                 callback(_result);
             }
+            return _result;
         }
         else {
             paginar_sesion();
@@ -203,6 +204,15 @@ function groupBy(arr, prop) {
     const map = new Map(Array.from(arr, obj => [obj[prop], []]));
     arr.forEach(obj => map.get(obj[prop]).push(obj));
     return Array.from(map.values());
+}
+function random_data(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
 let _get_icono = (_extencion) => {
     let _icono = '';

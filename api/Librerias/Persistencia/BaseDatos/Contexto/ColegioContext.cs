@@ -35,7 +35,7 @@ namespace BaseDatos.Contexto
         }
 
 
-        public IEnumerable<T> GetAllEntity<T>(int _id) where T : class
+        public IEnumerable<T> GetAllEntity<T>() where T : class
         {
             return base.Set<T>();
         }

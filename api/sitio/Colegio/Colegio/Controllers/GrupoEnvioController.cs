@@ -20,31 +20,31 @@ namespace Colegio.Controllers
 
         public IEnumerable<GruposEnvioColores> Get()
         {
-            return new Mensaje.Servicios.GruposBL().GetEnvioColores(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioColores>().GetEnvioColores(_empresa.PerIdEmpresa);
         }
 
         [Route("grados")]
         public IEnumerable<GruposEnvioAutorizadoCustom> GetGrados()
         {
-            return new Mensaje.Servicios.GruposBL().GetautorizadoGrados(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCustom>().GetautorizadoGrados(_empresa.PerIdEmpresa);
         }
 
         [Route("cursos")]
         public IEnumerable<GruposEnvioAutorizadoCustom> GetCursos()
         {
-            return new Mensaje.Servicios.GruposBL().GetautorizadoCursos(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCustom>().GetautorizadoCursos(_empresa.PerIdEmpresa);
         }
 
         [Route("personalizado")]
         public IEnumerable<GruposEnvio> GetPersonalizado(int temporada)
         {
-            return new Mensaje.Servicios.GruposBL().GetPersonalizados(_empresa.PerIdEmpresa, temporada);
+            return new Mensaje.Servicios.GruposBL<GruposEnvio>().GetPersonalizados(_empresa.PerIdEmpresa, temporada);
         }
 
         [Route("categoria")]
         public IEnumerable<Categorias> GetCategoria()
         {
-            return new Mensaje.Servicios.GruposBL().GetCategorias(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(_empresa.PerIdEmpresa);
         }
 
 
@@ -54,7 +54,7 @@ namespace Colegio.Controllers
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
             var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
-            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(_persona.PerIdEmpresa, id);
+            return new Mensaje.Servicios.GruposBL<CategoriaPerfilCustom>().GetCategoriasPerfil(_persona.PerIdEmpresa, id);
         }
 
 
@@ -62,34 +62,34 @@ namespace Colegio.Controllers
 
         public bool Post(GruposEnvioColores request)
         {
-            return new Mensaje.Servicios.GruposBL().UpdateEnvio<GruposEnvioColores>(request);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioColores>().Update(request);
         }
 
         [Route("cursos")]
         public IEnumerable<GruposEnvioAutorizadoCustom> PostCursos(GruposEnvioAutorizadoCursos request)
         {
 
-            new Mensaje.Servicios.GruposBL().AddAutorizado<GruposEnvioAutorizadoCursos>(request);
+            new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCursos>().Add(request);
 
-            return new Mensaje.Servicios.GruposBL().GetautorizadoCursos(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCustom>().GetautorizadoCursos(_empresa.PerIdEmpresa);
         }
 
         [Route("grados")]
         public IEnumerable<GruposEnvioAutorizadoCustom> PostGrados(GruposEnvioAutorizadoGrados request)
         {
 
-            new Mensaje.Servicios.GruposBL().AddAutorizado<GruposEnvioAutorizadoGrados>(request);
+            new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoGrados>().Add(request);
 
-            return new Mensaje.Servicios.GruposBL().GetautorizadoGrados(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCustom>().GetautorizadoGrados(_empresa.PerIdEmpresa);
         }
 
         [Route("personalizado")]
         public IEnumerable<GruposEnvio> PostPersonalizado(GruposEnvio request)
         {
 
-            new Mensaje.Servicios.GruposBL().AddAutorizado<GruposEnvio>(request);
+            new Mensaje.Servicios.GruposBL<GruposEnvio>().Add(request);
 
-            return new Mensaje.Servicios.GruposBL().GetPersonalizados(_empresa.PerIdEmpresa, request.GruEnvTemporada);
+            return new Mensaje.Servicios.GruposBL<GruposEnvio>().GetPersonalizados(_empresa.PerIdEmpresa, request.GruEnvTemporada);
         }
 
         [Route("categoria")]
@@ -97,14 +97,14 @@ namespace Colegio.Controllers
         {
             if (request.CatId == -1)
             {
-                new Mensaje.Servicios.GruposBL().AddAutorizado<Categorias>(request);
+                new Mensaje.Servicios.GruposBL<Categorias>().Add(request);
             }
             else
             {
-                new Mensaje.Servicios.GruposBL().UpdateEnvio<Categorias>(request);
+                new Mensaje.Servicios.GruposBL<Categorias>().Update(request);
             }
 
-            return new Mensaje.Servicios.GruposBL().GetCategorias(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(_empresa.PerIdEmpresa);
         }
 
 
@@ -112,13 +112,13 @@ namespace Colegio.Controllers
         public IEnumerable<CategoriaPerfilCustom> PostCategoria(CategoriaPerfil request)
         {
 
-            CategoriaPerfil nuevo = new Mensaje.Servicios.GruposBL().AddAutorizado<CategoriaPerfil>(request);
+            CategoriaPerfil nuevo = new Mensaje.Servicios.GruposBL<CategoriaPerfil>().Add(request);
 
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
             var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
 
-            return new Mensaje.Servicios.GruposBL().GetCategoriasPerfil(_persona.PerIdEmpresa, nuevo.CatPerCategoria);
+            return new Mensaje.Servicios.GruposBL<CategoriaPerfilCustom>().GetCategoriasPerfil(_persona.PerIdEmpresa, nuevo.CatPerCategoria);
         }
 
 
@@ -128,7 +128,7 @@ namespace Colegio.Controllers
         public bool PostCategoriaPerfilDelete(EliminarPerfilCategoria request)
         {
 
-            new Mensaje.Servicios.GruposBL().DeleteCategoriaPerfil(request);
+            new Mensaje.Servicios.GruposBL<EliminarPerfilCategoria>().DeleteCategoriaPerfil(request);
             return true;
 
         }
@@ -136,43 +136,43 @@ namespace Colegio.Controllers
         [Route("categoria/eliminar")]
         public IEnumerable<Categorias> PostCategoriaDelete(Categorias request)
         {
-            var _categoria = new Mensaje.Servicios.GruposBL().Select<Categorias>(request.CatId);
+            var _categoria = new Mensaje.Servicios.GruposBL<Categorias>().SelectById(request.CatId);
 
-            new Mensaje.Servicios.GruposBL().DeleteAutorizado<Categorias>(_categoria);
+            new Mensaje.Servicios.GruposBL<Categorias>().Delete(_categoria);
 
-            return new Mensaje.Servicios.GruposBL().GetCategorias(request.CatEmpresaId);
+            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(request.CatEmpresaId);
         }
 
         [Route("cursos/eliminar")]
         public IEnumerable<GruposEnvioAutorizadoCustom> PostCursosDelete(GruposEnvioAutorizadoCustom request)
         {
-            var _curso = new Mensaje.Servicios.GruposBL().Select<GruposEnvioAutorizadoCursos>(request.id);
+            var _curso = new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCursos>().SelectById(request.id);
 
-            new Mensaje.Servicios.GruposBL().DeleteAutorizado<GruposEnvioAutorizadoCursos>(_curso);
+            new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCursos>().Delete(_curso);
 
-            return new Mensaje.Servicios.GruposBL().GetautorizadoCursos(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCustom>().GetautorizadoCursos(_empresa.PerIdEmpresa);
         }
 
         [Route("grados/eliminar")]
         public IEnumerable<GruposEnvioAutorizadoCustom> PostGradosDelete(GruposEnvioAutorizadoCustom request)
         {
 
-            var _grado = new Mensaje.Servicios.GruposBL().Select<GruposEnvioAutorizadoGrados>(request.id);
+            var _grado = new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoGrados>().SelectById(request.id);
 
-            new Mensaje.Servicios.GruposBL().DeleteAutorizado<GruposEnvioAutorizadoGrados>(_grado);
+            new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoGrados>().Delete(_grado);
 
-            return new Mensaje.Servicios.GruposBL().GetautorizadoGrados(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioAutorizadoCustom>().GetautorizadoGrados(_empresa.PerIdEmpresa);
         }
 
         [Route("personalizado/eliminar")]
         public IEnumerable<GruposEnvio> PostPersonalizadoDelete(GruposEnvio request)
         {
 
-            var _personalizado = new Mensaje.Servicios.GruposBL().Select<GruposEnvio>(request.GruEnvId);
+            var _personalizado = new Mensaje.Servicios.GruposBL<GruposEnvio>().SelectById(request.GruEnvId);
 
-            new Mensaje.Servicios.GruposBL().DeleteAutorizado<GruposEnvio>(_personalizado);
+            new Mensaje.Servicios.GruposBL<GruposEnvio>().Delete(_personalizado);
 
-            return new Mensaje.Servicios.GruposBL().GetPersonalizados(_empresa.PerIdEmpresa, request.GruEnvTemporada);
+            return new Mensaje.Servicios.GruposBL<GruposEnvio>().GetPersonalizados(_empresa.PerIdEmpresa, request.GruEnvTemporada);
         }
     }
 }

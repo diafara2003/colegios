@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+
+    <style>
+        ul li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mt-2 ">
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Configuración de empresa</header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
+
+                <button class="btn btn-sm btn-outline-primary" onclick="nueva_empresa()">
+                    <i class="fas fa-plus"></i> Agregar Empresa
+                </button>
+
+
+                <div class="input-group input-group-sm mt-3">
+                    <input type="text" class="form-control" aria-label="Small"
+                           placeholder="Buscar empresa"
+                           onkeyup="buscar_empresas(this)"
+                           aria-describedby="inputGroup-sizing-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
+                    </div>
+                </div>
+                <ul class="list-group mt-1" id="ulempresas"></ul>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-8 col-sm-12 col-12 d-none" id="divEmpresa">
+                <div>
+
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre de la empresa</label>
+                        <input type="email" class="form-control" id="EmpNombre"
+                               autocomplete="off" aria-describedby="emailHelp"
+                               placeholder="nombre de la empresa">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Dirección de la empresa</label>
+                        <input type="text" class="form-control" id="EmpDireccion"
+                               autocomplete="off" aria-describedby="emailHelp"
+                               placeholder="Dirección de la empresa">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nit de la empresa</label>
+                        <input type="text" class="form-control" id="EmpNit"
+                               onkeypress="return only_number(event)"
+                               autocomplete="off" aria-describedby="emailHelp"
+                               placeholder="Nit de la empresa">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contraseña de la empresa</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" id="PerClave"
+                                   autocomplete="off" aria-describedby="emailHelp"
+                                   placeholder="Contraseña de la empresa">
+                            <div class="input-group-prepend  cursor-pointer" onclick="generar_clave()" style="height:32px">
+                                <span class="input-group-text bg-primary text-white cursor-pointer" id="inputGroup-sizing-sm">
+                                    <i class="fas fa-key mr-1"></i>Generar clave
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="agregar_datos()" id="btnAgregarEmpresa">
+                        <i class="fas fa-plus"></i>
+                        Nueva empresa
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="modificar_empresa()" id="btnModificarEmpresa">
+                        <i class="fas fa-pen"></i>
+                        Modificar datos empresa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/Empresa/empresa.js"></script>
+</body>
+</html>

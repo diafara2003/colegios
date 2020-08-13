@@ -176,6 +176,7 @@
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
     <Compile Include="Controllers\GrupoEnvioController.cs" />
     <Compile Include="Controllers\MateriasController.cs" />
@@ -221,6 +222,10 @@
       <Project>{3ea699e0-b325-43f1-b8b5-15f9643d1351}</Project>
       <Name>Cursos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Librerias\Empresa\Empresa\Empresa.csproj">
+      <Project>{081CF1BC-F228-4064-80D1-B53F47DB9DA9}</Project>
+      <Name>Empresa</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Librerias\Grados\Grados\Grados.csproj">
       <Project>{1712087d-919c-47be-b2f0-ee8edd59b4ba}</Project>
       <Name>Grados</Name>
@@ -252,6 +257,10 @@
     <ProjectReference Include="..\..\..\Librerias\Trasversales\Trasversales\Trasversales.csproj">
       <Project>{7dd3ad82-d326-43dd-bb52-bd504bf84390}</Project>
       <Name>Trasversales</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Librerias\Utilidades\Utilidades\Utilidades.csproj">
+      <Project>{DD385C09-EF67-4BCB-A95B-C600571E6D84}</Project>
+      <Name>Utilidades</Name>
     </ProjectReference>
     <ProjectReference Include="..\Autenticacion\Autenticacion.csproj">
       <Project>{9168d962-6581-4cff-8418-98ece0718227}</Project>

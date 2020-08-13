@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Trasversales.Modelo;
+using Utilidades.Servicios;
 
 namespace Mensaje.Servicios
 {
-    public class GruposBL
+    public class GruposBL<T> : EntityGenerics<T> where T : class
     {
 
         public IEnumerable<GruposEnvioColores> GetEnvioColores(int empresa)
@@ -94,41 +95,6 @@ namespace Mensaje.Servicios
             return objresultado;
         }
 
-
-        public T Select<T>(int id) where T : class
-        {
-            return new ColegioContext().GetEntity<T>(id);
-        }
-
-        public bool UpdateEnvio<T>(T modelo) where T : class
-        {
-            ColegioContext objCnn = new ColegioContext();
-
-            objCnn.Entry(modelo).State = EntityState.Modified;
-
-            objCnn.SaveChanges();
-            return true;
-        }
-
-        public T AddAutorizado<T>(T modelo) where T : class
-        {
-            ColegioContext objCnn = new ColegioContext();
-
-            objCnn.Entry(modelo).State = EntityState.Added;
-
-            objCnn.SaveChanges();
-            return modelo;
-        }
-
-        public bool DeleteAutorizado<T>(T modelo) where T : class
-        {
-            ColegioContext objCnn = new ColegioContext();
-
-            objCnn.Entry(modelo).State = EntityState.Deleted;
-
-            objCnn.SaveChanges();
-            return true;
-        }
 
         public void DeleteCategoriaPerfil(EliminarPerfilCategoria request)
         {
