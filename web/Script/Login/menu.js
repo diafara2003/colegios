@@ -80,7 +80,7 @@ function renderizar_opcion(_source, id) {
 }
 function ver_no_leidos() {
     _this = $('#opciones_menu').find('a').first();
-    ver_opcion(_this,'../comunicados/bandejaentradav2.html?noLeidos=true');
+    ver_opcion(_this, '../comunicados/bandejaentradav2.html?noLeidos=true');
 }
 function renderizar_sub_menu_movil(_source, _name) {
 
@@ -171,10 +171,41 @@ function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
     $('.spnnombreUsuario').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
 }
+async function cargar_datos_empresa() {
+    let _id_emp = obtener_session().empresa;
+
+    const empresa = await consultarAPI('Empresa/' + _id_emp, 'GET');
+
+    let _url = window.location.href.toLowerCase().split('views')[0];
+    const url = `${_url}api/Adjuntos${armar_url_adjuntos()}`;
+
+    if (empresa.EmpLogo != null) {
+
+        try {
+            document.getElementById('MenuImgLogoColegio').src = `${_url}api/adjuntos/${empresa.EmpLogo}`;
+        } catch (e) {
+        }
+    } else {
+        document.getElementById('imglogoColegio').src = '';
+    }
+
+
+}
+function armar_url_adjuntos() {
+    let _url = '';
+    let _usuario = obtener_session().idusuario, _adjunto = 0;
+
+    _url += '?usuario=' + _usuario;
+    _url += '&adjunto=' + _adjunto;
+
+    return _url;
+}
 function nombres(nombre, apellido) {
     let _result = '';
     let _nombre = nombre.split(' ');
-    let _apellido = apellido.split(' ');
+    let _apellido = ' ';
+
+    if (apellido != undefined) apellido.split(' ');
 
 
     _result = `${_nombre.length == 1 ? _nombre : _nombre[0]}  ${_apellido.length == 1 ? _apellido : _apellido[0]}`;
@@ -211,4 +242,5 @@ $(window).resize(function () {
     cargar_opciones();
     cargar_usuario();
     $('[data-toggle="tooltip"]').tooltip();
+    cargar_datos_empresa();
 })();
