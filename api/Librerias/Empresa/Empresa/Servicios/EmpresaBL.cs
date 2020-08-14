@@ -50,7 +50,7 @@ namespace Empresa.Servicios
                 objresultado = (from e in objCnn.empresas
                                 join p in objCnn.personas on e.EmpId equals p.PerIdEmpresa
                                 where e.EmpNit == p.PerDocumento
-                                && p.PerNombres.Equals(e.EmpNombre)                                
+                                && p.PerNombres.Equals(e.EmpNombre)
                                 select new EmpresaCustomDTO()
                                 {
                                     empresa = e,
@@ -85,6 +85,14 @@ namespace Empresa.Servicios
 
             objCnn.SaveChanges();
 
+            if (!string.IsNullOrEmpty(modelo.EmpLogo))
+            {
+                var adjunto = objCnn.adjuntos.Find(modelo.EmpLogo);
+                adjunto.AdjIdEmpresa = modelo.EmpId;
+                objCnn.Entry(adjunto).State = EntityState.Modified;
+                objCnn.SaveChanges();
+            }
+
 
             //se crea un usuario por defecto
             Personas objPersona = new Personas();
@@ -103,7 +111,7 @@ namespace Empresa.Servicios
             objPersona.PerIdEmpresa = modelo.EmpId;
             objPersona.PerTipoPerfil = 1;
 
-
+            EliminarAdjuntos_huerfanos(modelo.EmpNombre);
             return objPersona;
         }
 
@@ -115,14 +123,33 @@ namespace Empresa.Servicios
             //se valida que no exista el documento
             var documento = objCnn.empresas.Count(d => d.EmpNit == modelo.empresa.EmpNit);
 
-            if (documento>0)
+            if (documento > 0)
             {
                 obj.codigo = -1;
                 obj.respuesta = "EL nit ya se encuentra en el sistema";
                 return obj;
             }
 
+            
             modelo.empresa = base.Add(modelo.empresa);
+
+            objCnn.SaveChanges();
+
+            if (!string.IsNullOrEmpty(modelo.empresa.EmpLogo))
+            {
+                int id = Convert.ToInt32(modelo.empresa.EmpLogo);
+                var adjunto = objCnn.adjuntos.Where(c => c.AjdId == id).FirstOrDefault();
+
+                if (adjunto != null)
+                {
+                    adjunto.AdjIdEmpresa = modelo.empresa.EmpId;
+                    objCnn.Entry(adjunto).State = EntityState.Modified;
+                    objCnn.SaveChanges();
+                }
+
+            }
+
+
 
             modelo.persona.PerDocumento = modelo.empresa.EmpNit;
             modelo.persona.PerNombres = modelo.empresa.EmpNombre;
@@ -131,6 +158,9 @@ namespace Empresa.Servicios
             objCnn.personas.Add(modelo.persona);
 
             objCnn.SaveChanges();
+
+
+            EliminarAdjuntos_huerfanos(modelo.empresa.EmpNombre);
 
             obj.codigo = modelo.empresa.EmpId;
             obj.respuesta = modelo.persona.PerId.ToString();
@@ -152,9 +182,43 @@ namespace Empresa.Servicios
 
             objCnn.Entry(modelo.persona).State = EntityState.Modified;
 
+
+            if (!string.IsNullOrEmpty(modelo.empresa.EmpLogo))
+            {
+                int id = Convert.ToInt32(modelo.empresa.EmpLogo);
+                var adjunto = objCnn.adjuntos.Where(c => c.AjdId == id).FirstOrDefault();
+
+                if (adjunto!=null)
+                {
+                    adjunto.AdjIdEmpresa = modelo.empresa.EmpId;
+                    objCnn.Entry(adjunto).State = EntityState.Modified;
+                    objCnn.SaveChanges();
+                }
+                
+            }
+
+
+
             objCnn.SaveChanges();
 
+            EliminarAdjuntos_huerfanos(modelo.empresa.EmpNombre);
+
             return true;
+        }
+
+        void EliminarAdjuntos_huerfanos(string nombre_embresa)
+        {
+            ColegioContext objCnn = new ColegioContext();
+
+            var adjuntos = objCnn.adjuntos.Where(c => c.AdjIdEmpresa == -1 && c.AdjIdRuta.Contains(nombre_embresa));
+
+            adjuntos.ToList().ForEach(c =>
+            {
+
+                objCnn.Entry(c).State = EntityState.Deleted;
+            });
+
+            objCnn.SaveChanges();
         }
     }
 }
