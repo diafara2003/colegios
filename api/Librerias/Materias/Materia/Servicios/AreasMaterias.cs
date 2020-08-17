@@ -3,20 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Trasversales.Modelo;
 
 namespace Materia.Servicios
 {
     public class AreaMateria
     {
-        public IEnumerable<AreasMaterias> Get()
+        public IEnumerable<AreasMaterias> Get(int empresa)
         {
+          
             IEnumerable<AreasMaterias> objSeccion = new List<AreasMaterias>();
             ColegioContext objCnn = new ColegioContext();
 
-            objSeccion = (from data in objCnn.areas_materias select data);
+            objSeccion = (from data in objCnn.areas_materias where data.ArEmpresaId==empresa select data);
             return objSeccion;
         }
 

@@ -17,5 +17,6 @@ namespace Trasversales.Modelo
         public string SalCodigo { get; set; }
         [MaxLength(50)]
         public string SalDescripcion { get; set; }
+        public int SalEmpresaId { get; set; }
     }
 }

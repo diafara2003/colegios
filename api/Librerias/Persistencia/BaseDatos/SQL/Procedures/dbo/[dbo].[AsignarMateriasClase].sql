@@ -12,14 +12,14 @@ go
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[AsignarMateriasClase]
-	
+	@empresa int
 AS
 BEGIN
 
 INSERT INTO [dbo].[Clases]
            ([ClaEmpId],[ClaTemporada],[ClaMateriaId],ClaCursoId           
            )
-SELECT		1 AS empresa ,MatTemporadaId,MatID,CurId
+SELECT		@empresa AS empresa ,MatTemporadaId,MatID,CurId
 FROM		Materias 
 			INNER JOIN Temporada ON TempId=MatTemporadaId
 			INNER JOIN Grados ON GraId=MatGradoId

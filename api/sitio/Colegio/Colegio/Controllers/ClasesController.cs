@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 
 namespace Colegio.Controllers
@@ -29,6 +30,15 @@ namespace Colegio.Controllers
         [HttpGet]
         public IEnumerable<AsignarClases> GetMateriasGrado(int empresa, int curso = 0)
         {
+            if (empresa<0)
+            {
+                var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+                var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+                empresa = _empresa.PerIdEmpresa;
+
+            }
+
             return new Clases.Servicios.ClasesBI().GetMateriasGrado(empresa, curso);
         }
 

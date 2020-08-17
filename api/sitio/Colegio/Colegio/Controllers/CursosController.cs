@@ -13,16 +13,12 @@ namespace Colegio.Controllers
     [RoutePrefix("curso")]
     public class CursosController : ApiController
     {
-        Personas _empresa = new Personas();
 
-        public CursosController()
-        {
-            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
-            _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
-        }
         // GET: api/Cursos
         public IEnumerable<CursosCustom> Get()
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
 
             return new Curso.Servicios.CursosBI().Get(empresa: _empresa.PerIdEmpresa);
         }
@@ -30,6 +26,8 @@ namespace Colegio.Controllers
         [Route("filtro")]
         public IEnumerable<Cursos> GetAC(string demo = "", string filter = "")
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
 
             return new Curso.Servicios.CursosBI().GetCursosAC(empresa: _empresa.PerIdEmpresa, filter: filter);
         }
@@ -37,12 +35,18 @@ namespace Colegio.Controllers
 
         public IEnumerable<CursosCustom> Get(int id)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
             return new Curso.Servicios.CursosBI().Get(id, empresa: _empresa.PerIdEmpresa);
         }
 
         [Route("grado")]
         public IEnumerable<Cursos> GetGradoCurso(int grado = 0)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
             return new Curso.Servicios.CursosBI().GetCursosGrados(grado, _empresa.PerIdEmpresa);
         }
 

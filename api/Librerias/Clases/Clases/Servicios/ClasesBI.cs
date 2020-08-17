@@ -14,13 +14,15 @@ namespace Clases.Servicios
     public class ClasesBI
     {
 
-        public void AsignarMatariasClases() {
+        public void AsignarMatariasClases(int empresa) {
 
             //AsignarMateriasClase
             ColegioContext objCnn = new ColegioContext();
             ProcedureDTO ProcedureDTO = new ProcedureDTO();
 
             ProcedureDTO.commandText = "AsignarMateriasClase";
+            ProcedureDTO.parametros.Add("@empresa", empresa);
+
             
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
         }
@@ -29,7 +31,7 @@ namespace Clases.Servicios
         {
             IEnumerable<AsignarClases> objlst = new List<AsignarClases>();
 
-            AsignarMatariasClases();
+            AsignarMatariasClases(empresa);
             
             ColegioContext objCnn = new ColegioContext();
             ProcedureDTO ProcedureDTO = new ProcedureDTO();

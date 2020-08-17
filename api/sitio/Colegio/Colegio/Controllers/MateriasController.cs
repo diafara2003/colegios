@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using Trasversales.Modelo;
 
@@ -38,7 +39,11 @@ namespace Colegio.Controllers
         [HttpGet]
         public IEnumerable<AreasMaterias> GetAreaMAteria()
         {
-            return new Materia.Servicios.AreaMateria().Get();
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+
+            return new Materia.Servicios.AreaMateria().Get(_empresa.PerIdEmpresa);
         }
 
 
@@ -46,6 +51,11 @@ namespace Colegio.Controllers
         [HttpPost]
         public AreasMaterias PostAreaMAteria(AreasMaterias request)
         {
+
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            request.ArEmpresaId = _empresa.PerIdEmpresa;
+
             return new Materia.Servicios.AreaMateria().Save(request);
         }
 
@@ -55,6 +65,10 @@ namespace Colegio.Controllers
         [HttpPut]
         public ResponseDTO PutAreaMAteria(AreasMaterias request)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            request.ArEmpresaId = _empresa.PerIdEmpresa;
+
             return new Materia.Servicios.AreaMateria().Update(request);
         }
 

@@ -20,3 +20,6 @@ C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.dll
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.pdb
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.perfil_empresas.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.perfil_estado.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.AreaMateriasEmpresa.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.SalonesXEmpresa.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.sp_asignarclases.resources

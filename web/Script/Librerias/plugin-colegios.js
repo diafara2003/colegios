@@ -1,7 +1,7 @@
 ﻿async function consultarAPI(metodo, type, callback, _data, error, AllowAnonymous) {
     if (AllowAnonymous == undefined && localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
         localStorage.clear();
-        window.parent.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
+        window.parent.location.href = window.location.href = window.location.href.toLowerCase().split('views')[0];
         return;
     }
 
@@ -45,7 +45,7 @@
 }
 function paginar_sesion() {
     localStorage.clear();
-    window.parent.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/login.html';
+    window.location.href = window.location.href.toLowerCase().split('views')[0];
 }
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");
@@ -198,7 +198,7 @@ function obtener_usuario_sesion() {
 }
 function cerrar_session() {
     localStorage.clear();
-    window.location.href = window.location.href.toLowerCase().split('menu.html')[0] + 'login.html';
+    window.location.href = window.location.href.toLowerCase().split('views')[0] ;
 }
 function groupBy(arr, prop) {
     const map = new Map(Array.from(arr, obj => [obj[prop], []]));

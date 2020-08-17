@@ -13,5 +13,6 @@ namespace Trasversales.Modelo
         public string ArMaCodigo { get; set; }
         [MaxLength(50)]
         public string ArMaDescripcion { get; set; }
+        public int ArEmpresaId { get; set; }
     }
 }

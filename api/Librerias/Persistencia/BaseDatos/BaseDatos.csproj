@@ -75,6 +75,18 @@
     <Compile Include="Migrations\202008090501028_perfil_estado.designer.cs">
       <DependentUpon>202008090501028_perfil_estado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008171702478_AreaMateriasEmpresa.cs" />
+    <Compile Include="Migrations\202008171702478_AreaMateriasEmpresa.designer.cs">
+      <DependentUpon>202008171702478_AreaMateriasEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008171710305_SalonesXEmpresa.cs" />
+    <Compile Include="Migrations\202008171710305_SalonesXEmpresa.designer.cs">
+      <DependentUpon>202008171710305_SalonesXEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008171717341_sp_asignarclases.cs" />
+    <Compile Include="Migrations\202008171717341_sp_asignarclases.designer.cs">
+      <DependentUpon>202008171717341_sp_asignarclases.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +126,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008090501028_perfil_estado.resx">
       <DependentUpon>202008090501028_perfil_estado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008171702478_AreaMateriasEmpresa.resx">
+      <DependentUpon>202008171702478_AreaMateriasEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008171710305_SalonesXEmpresa.resx">
+      <DependentUpon>202008171710305_SalonesXEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008171717341_sp_asignarclases.resx">
+      <DependentUpon>202008171717341_sp_asignarclases.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

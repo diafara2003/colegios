@@ -11,7 +11,7 @@ namespace Salon.Servicios
 {
     public class SalonesBI
     {
-        public IEnumerable<Trasversales.Modelo.Salones> Get(string filter = "")
+        public IEnumerable<Trasversales.Modelo.Salones> Get(int empresa,string filter = "")
         {
 
             IEnumerable<Trasversales.Modelo.Salones> objSeccion = new List<Trasversales.Modelo.Salones>();
@@ -19,7 +19,7 @@ namespace Salon.Servicios
 
             if (filter == "")
             {
-                objSeccion = (from data in objCnn.salones select data);
+                objSeccion = (from data in objCnn.salones where data.SalEmpresaId==empresa select data);
             }
             else
             {
