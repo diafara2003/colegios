@@ -15,9 +15,13 @@ namespace Colegio.Controllers
     public class MateriasController : ApiController
     {
         // GET: api/Materias
-        public IEnumerable<Materias> Get(int empresa, int grado)
+        public IEnumerable<Materias> Get( int grado)
         {
-            return new Materia.Servicios.MateriaBL().Get(empresa, grado);
+
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+            return new Materia.Servicios.MateriaBL().Get(_empresa.PerIdEmpresa, grado);
         }
 
         public ResponseMateriaCustom Post(Materias materias)

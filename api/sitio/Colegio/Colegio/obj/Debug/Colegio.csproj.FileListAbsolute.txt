@@ -101,3 +101,16 @@ C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Empresa.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Empresa.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\ClosedXML.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\DocumentFormat.OpenXml.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Excel.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\ExcelNumberFormat.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\ICSharpCode.SharpZipLib.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IO.FileSystem.Primitives.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IO.Packaging.dll
+C:\Colegios\api\sitio\Colegio\Colegio\bin\ClosedXML.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\ClosedXML.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\DocumentFormat.OpenXml.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\Excel.pdb
+C:\Colegios\api\sitio\Colegio\Colegio\bin\ExcelNumberFormat.xml
+C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IO.Packaging.xml

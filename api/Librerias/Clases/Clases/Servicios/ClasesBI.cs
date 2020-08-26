@@ -21,7 +21,7 @@ namespace Clases.Servicios
             ProcedureDTO ProcedureDTO = new ProcedureDTO();
 
             ProcedureDTO.commandText = "AsignarMateriasClase";
-            ProcedureDTO.parametros.Add("@empresa", empresa);
+            ProcedureDTO.parametros.Add("empresa", empresa);
 
             
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);

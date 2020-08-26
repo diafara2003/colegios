@@ -180,12 +180,12 @@ function convertir_fecha(fecha) {
 function validar_datos(_data) {
     let _result = true;
 
-    if (_data.MenAsunto == '') {
+    if (_data.mensaje.MenAsunto == '') {
         mostrar_mensaje_validacion_error('Asunto obligatorio.');
         result = false;
         return;
     }
-    if (_data.MenMensaje == '') {
+    if (_data.mensaje.MenMensaje == '') {
         mostrar_mensaje_validacion_error('No hay mensaje.');
         result = false;
         return;
@@ -194,7 +194,12 @@ function validar_datos(_data) {
     return _result;
 }
 function mostrar_mensaje_validacion_error(mensaje) {
-    window.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar');
+
+    window.parent.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar', '', '', '', () => {
+        
+    });
+
+    
 }
 async function consultar_mensaje(id) {
     //se balida si el panel es borrador

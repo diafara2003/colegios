@@ -10,7 +10,7 @@ namespace Persona.Servicios
 {
     public class TipoPersona
     {
-        public IEnumerable<UsuarioPerfil> Get(int empresa ,int id = 0)
+        public IEnumerable<UsuarioPerfil> Get(int empresa, int id = 0)
         {
             IEnumerable<UsuarioPerfil> objSeccion = new List<UsuarioPerfil>();
             ColegioContext objCnn = new ColegioContext();
@@ -18,7 +18,7 @@ namespace Persona.Servicios
 
             if (id == 0)
             {
-                objSeccion = (from data in objCnn.usuario_perfi where data.UsuEmpId== empresa select data);
+                objSeccion = (from data in objCnn.usuario_perfi where (data.UsuEmpId == null ? empresa : data.UsuEmpId) == empresa select data);
             }
             else
             {
@@ -29,7 +29,7 @@ namespace Persona.Servicios
         }
 
 
-        public ResponseDTO UpdateEnvio(UsuarioPerfil modelo) 
+        public ResponseDTO UpdateEnvio(UsuarioPerfil modelo)
         {
             ColegioContext objCnn = new ColegioContext();
             ResponseDTO objresponse = new ResponseDTO();
@@ -62,7 +62,7 @@ namespace Persona.Servicios
             return modelo;
         }
 
-        public ResponseDTO DeleteAutorizado(int id) 
+        public ResponseDTO DeleteTipoPerfil(int id)
         {
             ResponseDTO objresponse = new ResponseDTO();
             ColegioContext objCnn = new ColegioContext();
@@ -75,6 +75,16 @@ namespace Persona.Servicios
             {
                 objresponse.codigo = -1;
                 objresponse.respuesta = string.Format("No se puede eliminar el perfil de usuario porque tiene asigando {0} categorías de envío.", categorias);
+                return objresponse;
+            }
+
+
+            int usuarios_perfil = objCnn.personas.Count(c => c.PerTipoPerfil == id);
+
+            if (usuarios_perfil > 0)
+            {
+                objresponse.codigo = -1;
+                objresponse.respuesta = string.Format("No se puede eliminar el perfil de usuario porque tiene asigando {0} usuarios.", categorias);
                 return objresponse;
             }
 

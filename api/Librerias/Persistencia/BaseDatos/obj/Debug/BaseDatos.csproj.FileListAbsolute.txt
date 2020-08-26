@@ -23,3 +23,4 @@ C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.AreaMateriasEmpresa.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.SalonesXEmpresa.resources
 C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.sp_asignarclases.resources
+C:\Colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.perfiles.resources

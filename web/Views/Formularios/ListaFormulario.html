@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="description" content="comunicacion de colegios" />
     <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
@@ -222,7 +225,7 @@
                                                 <tr>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <select class="form-control" id="CurGrado_-1"></select>
+                                                            <select class="form-control p-0" id="CurGrado_-1"></select>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -324,10 +327,11 @@
         <div class="modal-dialog modal-dialog-scrollable  modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <label class="modal-title">Los estudiantes se asignarán al curso   </label>
-                    <strong class="ml-1">
-                        <label id="nombrecurso"></label>
-                    </strong>
+                    <div class="w-100 text-center">
+                        <h5 class="modal-title">Los estudiantes se asignarán al curso   </h5>
+                        <h5 id="nombrecurso" class="ml-2">
+                    </div>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

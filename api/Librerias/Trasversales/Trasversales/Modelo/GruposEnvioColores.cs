@@ -13,7 +13,7 @@ namespace Trasversales.Modelo
     {
         [Key]
         public int GrEnColorId { get; set; }
-        public int GrEnColorEmp { get; set; }
+        public int? GrEnColorEmp { get; set; }
         public int GrEnColorTipo { get; set; }
         [StringLength(50)]
         public string GrEnColorRGB { get; set; }

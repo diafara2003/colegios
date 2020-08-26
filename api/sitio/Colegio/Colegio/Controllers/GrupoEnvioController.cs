@@ -20,7 +20,7 @@ namespace Colegio.Controllers
 
         public IEnumerable<GruposEnvioColores> Get()
         {
-            return new Mensaje.Servicios.GruposBL<GruposEnvioColores>().GetEnvioColores(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<GruposEnvioColores>().GetEnvioColores();
         }
 
         [Route("grados")]
@@ -60,9 +60,24 @@ namespace Colegio.Controllers
 
 
 
-        public bool Post(GruposEnvioColores request)
+        public IEnumerable<GruposEnvioColores> Post(GruposEnvioColores request)
         {
-            return new Mensaje.Servicios.GruposBL<GruposEnvioColores>().Update(request);
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+            if (request.GrEnColorEmp == null)
+            {
+                request.GrEnColorEmp = _empresa.PerIdEmpresa;
+
+                new Mensaje.Servicios.GruposBL<GruposEnvioColores>().Add(request);
+
+
+            }
+
+            else
+                new Mensaje.Servicios.GruposBL<GruposEnvioColores>().Update(request);
+
+            return new Mensaje.Servicios.GruposBL<GruposEnvioColores>().SelectAll();
         }
 
         [Route("cursos")]

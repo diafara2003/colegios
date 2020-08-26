@@ -19,7 +19,7 @@ function selected_grado() {
 function consultar_materias_curso() {
     
     let grado = $('#ddlGrados').find('option:selected').val();
-    consultarAPI('Materias?empresa=1&grado=' + grado, 'GET', response => {
+    consultarAPI('Materias?grado=' + grado, 'GET', response => {
         datos_materias = response;
         renderizar_materias_curso( response);
         eventos_materias();

@@ -16,11 +16,11 @@ namespace Mensaje.Servicios
     public class GruposBL<T> : EntityGenerics<T> where T : class
     {
 
-        public IEnumerable<GruposEnvioColores> GetEnvioColores(int empresa)
+        public IEnumerable<GruposEnvioColores> GetEnvioColores()
         {
             ColegioContext objCnn = new ColegioContext();
 
-            return objCnn.grupo_envio_colores.Where(c => c.GrEnColorEmp == empresa);
+            return objCnn.grupo_envio_colores;
         }
 
         public IEnumerable<GruposEnvioAutorizadoCustom> GetautorizadoGrados(int empresa)

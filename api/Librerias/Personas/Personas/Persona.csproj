@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelos\CursosEstudianteDTO.cs" />
+    <Compile Include="Modelos\CustomPersonasDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\PersonasBI.cs" />
     <Compile Include="Servicios\TipoPersona.cs" />

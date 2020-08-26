@@ -67,7 +67,8 @@ namespace Colegio.Controllers
         [HttpDelete]
         public ResponseDTO DeletePerfil(int id)
         {
-            return new TipoPersona().DeleteAutorizado(id);
+
+            return new TipoPersona().DeleteTipoPerfil(id);
         }
     }
 }

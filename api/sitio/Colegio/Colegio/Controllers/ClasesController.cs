@@ -23,6 +23,7 @@ namespace Colegio.Controllers
 
         public AisgnarMateriaClaseCustom Post(Trasversales.Modelo.Clases request)
         {
+
             return new Clases.Servicios.ClasesBI().Save(request);
         }
 

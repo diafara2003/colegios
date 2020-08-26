@@ -25,7 +25,7 @@ namespace Colegio.Controllers
 
         [HttpGet]
         [Route("all")]
-        public IEnumerable<Personas> GetAllUser(int tipo=0)
+        public IEnumerable<CustomPersonasDTO> GetAllUser(int tipo = 0)
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
@@ -43,14 +43,16 @@ namespace Colegio.Controllers
             {
                 return new PersonasBI().Get(_persona.PerIdEmpresa, filter, tipo);
             }
-            return new PersonasBI().Get(id);
+            return new PersonasBI().Get(empresa: _persona.PerIdEmpresa, id:id);
         }
 
         [Route("estudiantes/sinasignar")]
         public IEnumerable<Personas> Get(int curso = 0)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
 
-            return new PersonasBI().GetEstudiantesSinAsignar(curso);
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            return new PersonasBI().GetEstudiantesSinAsignar(curso, _persona.PerIdEmpresa);
         }
 
 
@@ -88,6 +90,12 @@ namespace Colegio.Controllers
         // PUT: api/Personas/5
         public ResponseDTO Put(Personas request)
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+            request.PerIdEmpresa = _persona.PerIdEmpresa;
+
             return new PersonasBI().UpdateEnvio<Personas>(request);
         }
 

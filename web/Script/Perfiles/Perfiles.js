@@ -28,12 +28,19 @@ function renderizar_tr__data_usuarios_perfil(_item) {
     _tr += '<tr>';
     _tr += '<th scope="row"><div id="UsuPerDescripcion_' + _item.UsuPerId + '" contenteditable="true" onblur="modificar__data_usuarios_perfil(' + _item.UsuPerId + ')">' + _item.UsuPerDescripcion + '</th>';
     _tr += '<td id="UsuPerEstado_' + _item.UsuPerId + '" >';
-    _tr += '<div class="custom-control custom-switch">';
-    _tr += '<input type="checkbox" class="custom-control-input" onclick="modificar__data_usuarios_perfil(' + _item.UsuPerId + ')" id="customSwitch_' + _item.UsuPerId + '"  ' + (_item.UsuPerEstado ? 'checked' : '') + '>';
-    _tr += '<label class="custom-control-label" for="customSwitch_' + _item.UsuPerId + '"></label>';
+    if (_item.UsuEmpId != null) {
+        _tr += '<div class="custom-control custom-switch">';
+        _tr += '<input type="checkbox" class="custom-control-input" onclick="modificar__data_usuarios_perfil(' + _item.UsuPerId + ')" id="customSwitch_' + _item.UsuPerId + '"  ' + (_item.UsuPerEstado ? 'checked' : '') + '>';
+        _tr += '<label class="custom-control-label" for="customSwitch_' + _item.UsuPerId + '"></label>';
+    }
+
     _tr += '</div>';
     _tr += '</td>';
-    _tr += '<td class="text-center"><button onclick="eliminar__data_usuarios_perfil(this,' + _item.UsuPerId + ')" class="btn-icono" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar"><i class="fas fa-trash"></i></button></td>';
+    if (_item.UsuEmpId != null)
+        _tr += '<td class="text-center"><button onclick="eliminar__data_usuarios_perfil(this,' + _item.UsuPerId + ')" class="btn-icono" data - toggle="tooltip" data - placement="top" title = "" data - original - title="Eliminar" > <i class="fas fa-trash"></i></button ></td > ';
+    else
+        _tr += '<td></td>';
+
     _tr += '</tr>';
 
     return _tr;
@@ -55,7 +62,7 @@ function agregar__data_usuarios_perfil() {
     let nueva_data = obtener_datos(-1);
 
     if (nueva_data.TempAno != '') {
-        consultarAPI('TipoPerfil', 'POST', function (response) {            
+        consultarAPI('TipoPerfil', 'POST', function (response) {
             renderizar_datos_pagina(response);
 
         }, nueva_data);
@@ -77,7 +84,7 @@ function eliminar__data_usuarios_perfil(_this, _posicion) {
         if (response.codigo < 0) {
             window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar', '', '', '', () => {
 
-                
+
             });
         } else {
             let _index = _data_termporada.findIndex(c => c.TempId == data_changed.TempId);

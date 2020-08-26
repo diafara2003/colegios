@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="es">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="comunicacion de colegios" />
+    <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
+
+    <title>Inicio</title>
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link rel="stylesheet" href="../../Style/bootstrap.css" />
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/Adjuntos.css" rel="stylesheet" />
+
+
+    <title></title>
+</head>
+<body>
+
+    <div class="container container-sm mt-2 ">
+        <div class="row ">
+            <div class="col-12">
+                <header class="card-header m-0">Importaciones</header>
+            </div>
+        </div>
+        <div class="row p-3" id="DivAdjuntar">
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" multiple id="myInput" aria-describedby="myInput">
+                    <label id="lblAdjunto" class="custom-file-label" for="myInput">Seleccione un archivo...</label>
+                </div>
+                <div class="input-group-append">
+                    <a href="#" onclick="subirAdjunto()" class="btn btn-outline-primary"> <i class="fas fa-upload"></i></a>
+                </div>
+                <div class="input-group-append">
+                    <a href="../../formatos/AreaMateriaxlsx.xlsx" class="btn btn-outline-primary">  <i style="font-size:19px" class="far fa-file-excel"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-12 order-lg-1 order-md-2 order-sm-2 order-2">
+                <table class="table table-hover table-sm">
+                    <thead id="HeadTable"></thead>
+                    <tbody id="DetalleTabla"></tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/importacion/importacion.js"></script>
+</body>
+</html>

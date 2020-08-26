@@ -1,4 +1,4 @@
-﻿let temporada_activa = {}, datos_clases = [],cursoId=-1;
+﻿let temporada_activa = {}, datos_clases = [], cursoId = -1, _tipo_perfil = {};
 
 
 function consultar_grados() {
@@ -71,7 +71,7 @@ function renderizar_materias_curso(id_grado, materias) {
         _tbody += '<tr posicion="' + materias.Claid + '">';
         _tbody += '<th>' + materias.MatDescripcion + '</th>'
         _tbody += '<td><div class="input-group input-group-sm">';
-        _tbody += '<input type="text" maxlength="50" class="form-control" id="ClaCodigo_' + index + '" value="' + materias.ClaCodigo + '" onblur="guardar_info(this,' + index+')" placeholder="Código">';
+        _tbody += '<input type="text" maxlength="50" class="form-control" id="ClaCodigo_' + index + '" value="' + materias.ClaCodigo + '" onblur="guardar_info(this,' + index + ')" placeholder="Código">';
         _tbody += '</div></td>';
         _tbody += '<td><div class="input-group input-group-sm">';
         _tbody += '<input type="text" maxlength="50" class="form-control ac-personas" onfocusin="setAutocomolete(' + index + ',' + materias.Claid + ')" id="' + id_profesor + '" value="' + materias.NombreProfesor + '" placeholder="Docente" />';
@@ -107,15 +107,15 @@ function setAutocomolete_salon(index, id_clase) {
         autocomplete(id_salon, 'salon/filtro?id=0', 'SalDescripcion', 'SalCodigo', 'Salón', (selected, input) => {
             let _index = input.split('_')[1];
             let _data = obtener_datos($(input), _index)
-            guardar_datos(_index,_data);
+            guardar_datos(_index, _data);
         });
     }
 
     $(`#${id_salon}`).focus();
 }
-function guardar_info(_this,_index) {
-    let _data = obtener_datos(_this,_index);
-    guardar_datos(_index,_data);
+function guardar_info(_this, _index) {
+    let _data = obtener_datos(_this, _index);
+    guardar_datos(_index, _data);
 }
 function guardar_datos(_index, data) {
 
@@ -154,12 +154,12 @@ function obtener_datos(_this, _index) {
         } else {
             myobject.ClaSalonId = null;
         }
-        
+
     }
 
     return myobject;
 }
-
-(function () {    
+(async function () {
     consultar_grados();
+
 })();

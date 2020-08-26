@@ -157,7 +157,7 @@ namespace Curso.Servicios
 
                 objCnn.SaveChanges();
 
-                objInserted = this.Get(modelo.CurId).FirstOrDefault();
+                objInserted = this.Get(modelo.CurId,modelo.CurEmpId).FirstOrDefault();
 
                 //objresponse.codigo = 1;
                 //objresponse.respuesta = "";
@@ -191,7 +191,7 @@ namespace Curso.Servicios
                     return objresponse;
                 }
 
-                
+                objCnn.Entry(obj).State = EntityState.Deleted;
                 objCnn.SaveChanges();
 
                 objresponse.codigo = 1;

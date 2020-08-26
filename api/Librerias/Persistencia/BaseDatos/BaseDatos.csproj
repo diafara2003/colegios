@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202008171717341_sp_asignarclases.designer.cs">
       <DependentUpon>202008171717341_sp_asignarclases.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008260155582_perfiles.cs" />
+    <Compile Include="Migrations\202008260155582_perfiles.designer.cs">
+      <DependentUpon>202008260155582_perfiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008171717341_sp_asignarclases.resx">
       <DependentUpon>202008171717341_sp_asignarclases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008260155582_perfiles.resx">
+      <DependentUpon>202008260155582_perfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

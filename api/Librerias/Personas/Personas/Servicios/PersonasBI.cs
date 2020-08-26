@@ -20,13 +20,13 @@ namespace Persona.Servicios
             return objCnn.usuario_perfi;
         }
 
-        public IEnumerable<Personas> Get(int id = 0)
+        public IEnumerable<Personas> Get(int empresa = 0, int id = 0)
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();
             ColegioContext objCnn = new ColegioContext();
 
             if (id == 0)
-                objSeccion = (from data in objCnn.personas select data).OrderBy(c => c.PerApellidos);
+                objSeccion = (from data in objCnn.personas where data.PerIdEmpresa == empresa select data).OrderBy(c => c.PerApellidos);
             else
                 objSeccion = (from data in objCnn.personas where data.PerId == id select data).OrderBy(c => c.PerApellidos);
             return objSeccion;
@@ -41,58 +41,88 @@ namespace Persona.Servicios
                 objSeccion = (from data in objCnn.personas
                               join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
                               where data.PerEstado && data.PerTipoPerfil == tipo
-                                && tp.UsuEmpId == empresa
-                              select data).OrderBy(c => c.PerApellidos);
+                                && data.PerIdEmpresa == empresa
+                              select data).OrderBy(c => c.PerApellidos).Where(c => c.PerIdEmpresa == empresa && c.PerTipoPerfil == tipo);
             else
                 objSeccion = (from data in objCnn.personas
                               join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
                               where data.PerEstado
-                              && tp.UsuEmpId == empresa
+                              && data.PerIdEmpresa == empresa
                               && data.PerTipoPerfil == tipo
-                                && data.PerNombres.Contains(filter) || data.PerApellidos.Contains(filter)
+                                && (data.PerNombres.Contains(filter) || data.PerApellidos.Contains(filter))
 
-                              select data).OrderBy(c => c.PerApellidos); ;
+                              select data).OrderBy(c => c.PerApellidos).Where(c => c.PerIdEmpresa == empresa && c.PerTipoPerfil == tipo);
             return objSeccion;
         }
 
 
 
-        public IEnumerable<Personas> GetAll(int empresa, int tipo = 0)
+        public IEnumerable<CustomPersonasDTO> GetAll(int empresa, int tipo = 0)
         {
-            IEnumerable<Personas> objSeccion = new List<Personas>();
+            IEnumerable<CustomPersonasDTO> objSeccion = new List<CustomPersonasDTO>();
             ColegioContext objCnn = new ColegioContext();
 
 
             objSeccion = (from data in objCnn.personas
                           join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
-                          where data.PerTipoPerfil == tipo
-                            && tp.UsuEmpId == empresa
-                          select data).OrderBy(c => c.PerApellidos);
+                          where tp.UsuPerId == tipo
+                            && data.PerIdEmpresa == empresa
+                          select new CustomPersonasDTO()
+                          {
+                              PerTipoPerfilDesc = tp.UsuPerDescripcion,
+                              PerApellidos = data.PerApellidos,
+                              PerClave = data.PerClave,
+                              PerDireccion = data.PerDireccion,
+                              PerDocumento = data.PerDocumento,
+                              PerEmail = data.PerEmail,
+                              PerEPS = data.PerEPS,
+                              PerEstado = data.PerEstado,
+                              PerFechanacimiento = data.PerFechanacimiento,
+                              PerGenero = data.PerGenero,
+                              PerId = data.PerId,
+                              PerIdEmpresa = data.PerIdEmpresa,
+                              PerLugarNacimiento = data.PerLugarNacimiento,
+                              PerNombres = data.PerNombres,
+                              PerRH = data.PerRH,
+                              PerTelefono = data.PerTelefono,
+                              PerTIpoDoc = data.PerTIpoDoc,
+                              PerTipoPerfil = data.PerTipoPerfil,
+                              PerUsuario = data.PerUsuario
+                          }).OrderBy(c => c.PerApellidos);
 
             return objSeccion;
         }
 
 
-        public IEnumerable<Personas> GetEstudiantesSinAsignar(int curso = 0)
+        public IEnumerable<Personas> GetEstudiantesSinAsignar(int curso = 0, int empresa = 0)
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();
             ColegioContext objCnn = new ColegioContext();
+            var _tipo_estudiante = objCnn.usuario_perfi.Where(c => c.UsuEmpId == empresa && c.UsuPerDescripcion.Contains("estudiante")).FirstOrDefault();
+
 
             if (curso == 0)
             {
+
+
+
                 objSeccion = (from estudiantes in objCnn.personas
 
                               join cursos in objCnn.curso_estudiantes on estudiantes.PerId equals cursos.CurEstEstudianteId into CursoEstudiante
                               from cursoest in CursoEstudiante.DefaultIfEmpty()
 
-                              where estudiantes.PerTipoPerfil == 2 && cursoest.CurEstId == null
+                              where estudiantes.PerTipoPerfil == _tipo_estudiante.UsuPerId && cursoest.CurEstId == null
+                              && estudiantes.PerIdEmpresa == empresa
                               select estudiantes).OrderBy(c => c.PerApellidos);
             }
             else
             {
+
+
                 objSeccion = (from curest in objCnn.curso_estudiantes
                               join estudiantes in objCnn.personas on curest.CurEstEstudianteId equals estudiantes.PerId
-                              where estudiantes.PerTipoPerfil == 2 && curest.CurEstCursoId == curso
+                              where estudiantes.PerTipoPerfil == _tipo_estudiante.UsuPerId && curest.CurEstCursoId == curso
+                              && estudiantes.PerIdEmpresa == empresa
                               select estudiantes).OrderBy(c => c.PerApellidos);
             }
 

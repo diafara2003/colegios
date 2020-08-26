@@ -1,4 +1,4 @@
-﻿let _tipo_perfil = {}, data_personas = [];
+﻿let _tipo_perfil = {}, data_personas = [], lst_perfiles = [];
 
 function buscar_personas(_this) {
     let _text = _this.value;
@@ -20,20 +20,43 @@ async function consltar_tipo_perfil() {
     let tipo = Get_query_string('T');
 
     await consultarAPI('Persona/Tipos', 'GET', response => {
-        let filtered = tipo == 'P' ? 'Docente' : 'Estudiante';
-        _tipo_perfil = response.find(x => x.UsuPerDescripcion == filtered);
+
+        lst_perfiles = response;
+
+        if (tipo == 'E') _tipo_perfil = response.find(x => x.UsuPerId == 2);
+        else
+            renderizar_tipo_perfiles(response);
 
 
         if (tipo == 'P') {
+            filtered = "Administrativo";
             $('.opcion-docente').removeClass('d-none');
             $('.opcion-estudiante').addClass('d-none');
         } else {
+            filtered = "Estudiante";
             $('.opcion-estudiante').removeClass('d-none');
             $('.opcion-docente').addClass('d-none');
+            $('.tipo-perfil').addClass('d-none');
         }
 
-        document.getElementById('HeaderOpcion').textContent = `Listado de ${filtered}s`
+        document.getElementById('HeaderOpcion').textContent = `Listado de ${filtered}s`;
     });
+}
+function ddlTipoPerfil(_this) {
+    let _id = $(_this).find('option:selected').val();
+
+    _tipo_perfil = lst_perfiles.find(c => c.UsuPerId == _id);
+
+}
+function renderizar_tipo_perfiles(response) {
+    let _html = '';
+    _tipo_perfil = response.find(x => x.UsuPerId == 1);
+
+    response.forEach((c, i) => {
+        if (c.UsuPerId == 2) return;
+        _html += `<option ${i == 0 ? 'selected' : ''} value="${c.UsuPerId}">${c.UsuPerDescripcion}</option>`;
+    });
+    document.getElementById('PerTipoPerfil_-1').innerHTML = _html;
 }
 function consultar_personas(_tipo) {
     consultarAPI(`Persona/all?tipo=${_tipo}`, 'GET', response => {
@@ -53,7 +76,7 @@ function renderizar_datos(response) {
 }
 function renderizar_tr(persona) {
     let _tr = '';
-
+    let tipo = Get_query_string('T');
     _tr += '<tr>';
     _tr += '<td><div onblur="modificar_persona(this,' + persona.PerId + ')" contenteditable="true" id="PerNombres_' + persona.PerId + '">' + IsNull(persona.PerNombres) + '</div></td>';
     _tr += '<td><div onblur="modificar_persona(this,' + persona.PerId + ')" contenteditable="true" id="PerApellidos_' + persona.PerId + '">' + IsNull(persona.PerApellidos) + '</div></td>';
@@ -67,6 +90,9 @@ function renderizar_tr(persona) {
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerFechanacimiento_' + persona.PerId + '">' + IsNull(persona.PerFechanacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerLugarNacimiento_' + persona.PerId + '">' + IsNull(persona.PerLugarNacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerDireccion_' + persona.PerId + '">' + IsNull(persona.PerDireccion) + '</div></td>';
+
+    if (tipo != 'E')
+        _tr += '<td id="PerTipoPerfil_' + persona.PerTipoPerfil + '" >' + persona.PerTipoPerfilDesc+'</td>';
 
     _tr += '<td class="text-center" id="PerEstado_' + persona.PerId + '" >';
     _tr += '<div class="custom-control custom-switch">';
@@ -123,6 +149,7 @@ function guardar_cambios() {
                 window.parent.mostrar_mensajes('', response.respuesta, 'error', true, false, false, 'Aceptar');
             } else {
                 datos_persona.PerId = response.codigo;
+                datos_persona.PerTipoPerfilDesc = _tipo_perfil.UsuPerDescripcion;
                 data_personas.push(datos_persona);
                 let nuevo_tr = renderizar_tr(datos_persona);
 

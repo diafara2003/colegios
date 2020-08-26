@@ -84,21 +84,21 @@ function modificar_cursos_ac(_this, id, property) {
         modificar_cursos(id);
     }
 }
-function agregar_curso() {
+async function agregar_curso() {
     window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
     let nueva_data = obtener_datos_curso(-1);
 
     if (nueva_data.TempAno != '') {
-        consultarAPI('cursos', 'POST', function (response) {
-            _data_cursos.push(response);
-            let nuevo_tr = renderizar_tr_cursos(response);
+        let response = await consultarAPI('cursos', 'POST', undefined, nueva_data);
 
-            $('#tblcursos').append(nuevo_tr);
-            limpiar_registro_cursos(-1);
-            $('#CurCodigo_-1').focus();
-            eventos_cursos();
-            window.parent.cerrar_mensaje();
-        }, nueva_data);
+        _data_cursos.push(response);
+        let nuevo_tr = renderizar_tr_cursos(response);
+
+        $('#tblcursos').append(nuevo_tr);
+        limpiar_registro_cursos(-1);
+        $('#CurCodigo_-1').focus();
+        eventos_cursos();
+        window.parent.cerrar_mensaje();
     }
 
 }
@@ -150,12 +150,12 @@ function obtener_datos_curso(posicion) {
     _data.CurTemporada = temporada_activa.TempId;
 
     let _index = _data_cursos.findIndex(c => c.CurId == posicion);
-    if (_index!=-1) {
+    if (_index != -1) {
         _data.CurAuxiliar = _data_cursos[_index].CurAuxiliar;
         _data.CurTutor = _data_cursos[_index].CurTutor;
 
     }
-    
+
 
 
     if (auxiliar_id != -1)

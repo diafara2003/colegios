@@ -5,10 +5,10 @@ let tipo = '', _tipo_perfil = {}, _persona = -1, _usuario = '', _clave = '124',
 function consltar_tipo_perfil() {
 
     consultarAPI('Persona/Tipos', 'GET', response => {
-        let filtered = tipo == 'E' ? 'Estudiante' : 'Docente';
-        _tipo_perfil = response.find(x => x.UsuPerDescripcion == filtered);
 
-        if (tipo == 'P') {
+        _tipo_perfil = response.find(x => x.UsuPerId == obtener_session().tipo);
+
+        if (obtener_session().tipo != 2) {
             $('.opcion-docente').removeClass('d-none');
             $('.opcion-estudiante').addClass('d-none');
             cargar_Areas_();
