@@ -222,6 +222,7 @@
     <Compile Include="Helper\Adjuntos.cs" />
     <Compile Include="Helper\Tools.cs" />
     <Compile Include="Models\AutenticacionDTO.cs" />
+    <Compile Include="Models\LoginDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

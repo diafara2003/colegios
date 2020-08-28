@@ -45,7 +45,13 @@
 }
 function paginar_sesion() {
     localStorage.clear();
-    window.location.href = window.location.href.toLowerCase().split('views')[0];
+    let _inital = document.location.hostname;
+
+    if (_inital.includes('localhost'))
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
+    else
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
+
 }
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");
@@ -198,7 +204,14 @@ function obtener_usuario_sesion() {
 }
 function cerrar_session() {
     localStorage.clear();
-    window.location.href = window.location.href.toLowerCase().split('views')[0] ;
+
+    let _inital = document.location.hostname;
+
+    if (_inital.includes('localhost'))
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
+    else
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital ;
+    
 }
 function groupBy(arr, prop) {
     const map = new Map(Array.from(arr, obj => [obj[prop], []]));

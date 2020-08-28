@@ -16,11 +16,26 @@ namespace Mensaje.Servicios
     public class GruposBL<T> : EntityGenerics<T> where T : class
     {
 
-        public IEnumerable<GruposEnvioColores> GetEnvioColores()
+        public IEnumerable<GruposEnvioColores> GetEnvioColores(int empresa)
         {
             ColegioContext objCnn = new ColegioContext();
+            List<GruposEnvioColores> objresultado = new List<GruposEnvioColores>();
 
-            return objCnn.grupo_envio_colores;
+            var colores = objCnn.grupo_envio_colores.Where(c => (c.GrEnColorEmp) == empresa);
+
+            colores.ToList().ForEach(c => objresultado.Add(c));
+
+            objCnn.grupo_envio_colores
+                .Where(c => c.GrEnColorEmp == null)
+                .ToList()
+                .ForEach(c =>
+                {
+                    if (objresultado.Find(x => x.GrEnColorObs.Equals(c.GrEnColorObs)) == null)
+                        objresultado.Add(c);
+                });
+
+            return objresultado.OrderBy(c=> c.GrEnColorObs);
+
         }
 
         public IEnumerable<GruposEnvioAutorizadoCustom> GetautorizadoGrados(int empresa)
@@ -76,13 +91,12 @@ namespace Mensaje.Servicios
         }
 
 
-
         public IEnumerable<CategoriaPerfilCustom> GetCategoriasPerfil(int empresa, int idCategoria)
         {
             ColegioContext objCnn = new ColegioContext();
             List<CategoriaPerfilCustom> objresultado = new List<CategoriaPerfilCustom>();
 
-            objCnn.usuario_perfi.Where(c => c.UsuEmpId == empresa && c.UsuPerEstado).ToList().ForEach(c =>
+            objCnn.usuario_perfi.Where(c => (c.UsuEmpId==null ? empresa: c.UsuEmpId) == empresa && c.UsuPerEstado).ToList().ForEach(c =>
                 {
                     objresultado.Add(new CategoriaPerfilCustom()
                     {

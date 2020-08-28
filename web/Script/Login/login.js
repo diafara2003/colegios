@@ -25,6 +25,9 @@ function validar_datos() {
 
     return is_valido;
 }
+function validar_enter(_event) {
+    if (_event.keyCode == 13) $('#btnLogin').click();
+}
 function validar_nombre_usuario(_this) {
     if (!validar_datos()) {
         return;
@@ -38,7 +41,7 @@ function validar_nombre_usuario(_this) {
     let _documento = document.getElementById('txtusuario').value;
     let _clave = document.getElementById('txtclave').value;
 
-    consultarAPI(`login/validacion?username=${_documento}&password=${_clave}`, 'GET', response => {
+    consultarAPI(`login/validacion`, 'POST', response => {
         $(_this).removeAttr('disabled');
         if (response != null) {
             localStorage.setItem("sesion", response.token);
@@ -52,16 +55,23 @@ function validar_nombre_usuario(_this) {
 
         }
 
-    }, undefined, undefined, true);
+    }, {
+            username: _documento,
+            password: _clave
+        },
+        undefined, true);
 }
 function generar_token() {
     let _documento = document.getElementById('txtusuario').value;
     let _clave = document.getElementById('txtclave').value;
-    consultarAPI(`login/token?username=${_documento}&password=${_clave}`, 'GET', response => {
+    consultarAPI(`login/token`, 'POST', response => {
         localStorage.setItem("sesion", response);
         localStorage.setItem("colegio", JSON.stringify(_user));
         window.location.href = window.location.href.toLowerCase().split('login')[0] + 'login/menu.html';
-    });
+    }, {
+            username: _documento,
+            password: _clave
+        });
 }
 function usuario_no_valido(msn) {
     document.getElementById('lblmensajewe').textContent = msn;

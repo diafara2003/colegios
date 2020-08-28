@@ -186,7 +186,7 @@
                                     <i class="fas fa-user"></i>
                                 </div>
                             </div>
-                            <input type="text" autocomplete="off" class="form-control" id="txtusuario" placeholder="Username">
+                            <input type="text" autocomplete="off" onkeypress="validar_enter(event)" class="form-control" id="txtusuario" placeholder="Username">
                         </div>
                     </div>
                     <div class="form-group p-2">
@@ -198,12 +198,12 @@
                                     <i class="fas fa-lock"></i>
                                 </div>
                             </div>
-                            <input type="password" autocomplete="off" class="form-control" id="txtclave" placeholder="Contraseña">
+                            <input type="password" autocomplete="off" onkeypress="validar_enter(event)" class="form-control" id="txtclave" placeholder="Contraseña">
                         </div>
                     </div>
                     <div class="form-group p-2">
                         <button type="button" class="btn btn-block btn-primary"
-                                onclick="validar_nombre_usuario(this)">
+                               id="btnLogin" onclick="validar_nombre_usuario(this)">
                             Ingresar
                         </button>
 

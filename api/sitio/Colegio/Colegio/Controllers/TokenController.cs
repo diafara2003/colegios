@@ -25,13 +25,13 @@ namespace Colegio.Controllers
 
    
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         [Route("validacion")]
-        public AutenticacionDTO GetLogin(string username = "", string password = "")
+        public AutenticacionDTO GetLogin(LoginDTO request)
         {
             AutenticacionDTO objresponse = new AutenticacionDTO();
 
-            objresponse.usuario = CheckUser(username, password);
+            objresponse.usuario = CheckUser(request.username, request.password);
 
             if (objresponse.usuario != null)
             {

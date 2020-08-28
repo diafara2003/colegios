@@ -98,8 +98,9 @@ namespace Persona.Servicios
         {
             IEnumerable<Personas> objSeccion = new List<Personas>();
             ColegioContext objCnn = new ColegioContext();
-            var _tipo_estudiante = objCnn.usuario_perfi.Where(c => c.UsuEmpId == empresa && c.UsuPerDescripcion.Contains("estudiante")).FirstOrDefault();
+            var _tipo_estudiante = objCnn.usuario_perfi.Where(c => (c.UsuEmpId==null ? empresa: c.UsuEmpId) == empresa && c.UsuPerDescripcion.Contains("estudiante")).FirstOrDefault();
 
+            
 
             if (curso == 0)
             {
@@ -211,7 +212,7 @@ namespace Persona.Servicios
             return _result;
         }
 
-        public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado)
+        public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado,int empresa)
         {
             IEnumerable<GradoEstudianteDTO> obj = new List<GradoEstudianteDTO>();
             ColegioContext objCnn = new ColegioContext();
@@ -222,6 +223,7 @@ namespace Persona.Servicios
                        join c_e in objCnn.curso_estudiantes on p.PerId equals c_e.CurEstEstudianteId
                        join c in objCnn.cursos on c_e.CurEstCursoId equals c.CurId
                        join g in objCnn.grados on c.CurGrado equals g.GraId
+                       where p.PerIdEmpresa==empresa
                        orderby g.GraOrden, c.CurCodigo
                        select new GradoEstudianteDTO
                        {

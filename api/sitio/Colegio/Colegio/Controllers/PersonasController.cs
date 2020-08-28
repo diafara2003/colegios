@@ -110,7 +110,10 @@ namespace Colegio.Controllers
         [HttpGet]
         public IEnumerable<GradoEstudianteDTO> GetCursosEstudiante(int grado = -1)
         {
-            return new PersonasBI().GetCursosEstudiante(grado);
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            return new PersonasBI().GetCursosEstudiante(grado,_persona.PerIdEmpresa);
         }
 
         [Route("estudiante")]
