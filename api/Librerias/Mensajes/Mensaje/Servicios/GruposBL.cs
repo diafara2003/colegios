@@ -34,7 +34,7 @@ namespace Mensaje.Servicios
                         objresultado.Add(c);
                 });
 
-            return objresultado.OrderBy(c=> c.GrEnColorObs);
+            return objresultado.OrderBy(c => c.GrEnColorObs);
 
         }
 
@@ -83,11 +83,27 @@ namespace Mensaje.Servicios
             return objCnn.grupo_envio.Where(c => c.GruEnvEmpId == empresa && c.GruEnvTemporada == temporada);
         }
 
-        public IEnumerable<Categorias> GetCategorias(int empresa)
+        public IEnumerable<Categorias> GetCategorias(int empresa, int perfil = 0)
         {
             ColegioContext objCnn = new ColegioContext();
+            List<Categorias> objresultado = new List<Categorias>();
 
-            return (from data in objCnn.categorias where data.CatEmpresaId == empresa select data);
+            if (perfil != 0)
+                objresultado = (from c in objCnn.categorias
+                                join cp in objCnn.categorias_perfil on c.CatId equals cp.CatPerCategoria
+                                where c.CatEmpresaId == empresa && cp.CatPerPerfil == perfil
+                                select c
+                        ).ToList();
+            else
+                objresultado = (from c in objCnn.categorias
+                                    //join cp in objCnn.categorias_perfil on c.CatId equals cp.CatPerCategoria
+                                where c.CatEmpresaId == empresa
+                                select c
+                    ).ToList();
+
+
+
+            return objresultado;
         }
 
 
@@ -96,7 +112,20 @@ namespace Mensaje.Servicios
             ColegioContext objCnn = new ColegioContext();
             List<CategoriaPerfilCustom> objresultado = new List<CategoriaPerfilCustom>();
 
-            objCnn.usuario_perfi.Where(c => (c.UsuEmpId==null ? empresa: c.UsuEmpId) == empresa && c.UsuPerEstado).ToList().ForEach(c =>
+            objCnn.usuario_perfi.Where(c => c.UsuEmpId == empresa && c.UsuPerEstado).ToList().ForEach(c =>
+                   {
+                       objresultado.Add(new CategoriaPerfilCustom()
+                       {
+                           idPerfil = c.UsuPerId,
+                           nombrePerfil = c.UsuPerDescripcion,
+                           enUso = objCnn.categorias_perfil.Count(p => p.CatPerCategoria == idCategoria && p.CatPerPerfil == c.UsuPerId)
+                       });
+                   });
+
+
+            objCnn.usuario_perfi.Where(c => c.UsuEmpId == null && c.UsuPerEstado).ToList().ForEach(c =>
+            {
+                if (objresultado.Find(x => x.nombrePerfil.Equals(c.UsuPerDescripcion)) == null)
                 {
                     objresultado.Add(new CategoriaPerfilCustom()
                     {
@@ -104,7 +133,9 @@ namespace Mensaje.Servicios
                         nombrePerfil = c.UsuPerDescripcion,
                         enUso = objCnn.categorias_perfil.Count(p => p.CatPerCategoria == idCategoria && p.CatPerPerfil == c.UsuPerId)
                     });
-                });
+                }
+                
+            });
 
             return objresultado;
         }

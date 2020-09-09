@@ -184,9 +184,19 @@ function asignar_control_fecha(id) {
         autoclose: true,
         todayHighlight: true,
         toggleActive: true
-    });
+    }).on('changeDate', function (ev) {
+        const _select = ev.format(0, "dd/mm/yyyy");
+        if ($(ev.target).attr('data-changed') != undefined)
+            eval($(ev.target).attr('data-changed') + '("' + _select + '","' + ev.target.id + '")');
+    });;
     $('.input-group-append').click(function () {
         $(event.target).closest('div.input-group').find('input').focus();
+    });
+
+    $('#' + id).on('blur', () => {
+
+        if ($(event.target).val() == '' && ($(event.target).attr('data-changed') != undefined))
+            eval($(event.target).attr('data-changed') + '("","' + event.target.id + '")');
     });
 }
 function obtener_session() {
@@ -210,8 +220,8 @@ function cerrar_session() {
     if (_inital.includes('localhost'))
         window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
     else
-        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital ;
-    
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
+
 }
 function groupBy(arr, prop) {
     const map = new Map(Array.from(arr, obj => [obj[prop], []]));
@@ -257,3 +267,236 @@ document.addEventListener('touchmove', function (event) {
         event.preventDefault();
     }
 }, false);
+
+
+//============================================================================================================================================================ 
+//                                                                  CONVERT POSITION
+var contexto, divInitialPosi = undefined;
+function ConvertPosicion() {
+
+    $(".tdEditable").on("focus", function () {
+
+        // se remueve el atributo al div
+        if ($('.datepicker').css('display') == undefined) {
+            var id_object = $(this).attr('objectreplace');
+
+            if (divInitialPosi != this && divInitialPosi != undefined) {
+                focus_out_get_value(divInitialPosi);
+            }
+
+            Focusposition(this);
+
+
+            var selectedobj = $(this).attr('typeValue');
+            $('#' + id_object).on("focusout", function () {
+                var _ctc = this;
+                var td = $(this).closest("td");
+                var d = divInitialPosi;
+                var _tagname = this.children[0].tagName;
+
+                switch (_tagname) {
+                    case "INPUT":
+
+                        //    setTimeout(function () {
+
+                        if ($('.datepicker').css('display') == undefined) {
+
+                            var _e = $(_ctc).find('input').attr('cambio');
+                            if (_e != undefined) {
+                                eval(_e + '(\'' + id_object + '\')');
+                            }
+
+                            $(_ctc).appendTo("#controles");
+                            $(d).text(identify_type(d));
+                            $(d).attr("onfocus", "Focusposition(this)")
+
+                            td.append(d);
+                            divInitialPosi = undefined;
+                        } else {
+                            $('#' + id_object).find("input").datepicker().off("hide");
+                            $('#' + id_object).find("input").datepicker().on("hide", function () {
+                                //  if (!isChrome)    {
+                                //  setTimeout(function () {
+                                var _e = $(_ctc).find('input').attr('cambio');
+                                if (_e != undefined) {
+                                    eval(_e + '(\'' + id_object + '\')');
+                                }
+
+
+                                $(_ctc).appendTo("#controles");
+                                $(d).text(identify_type(d));
+                                $(d).attr("onfocus", "Focusposition(this)")
+
+                                td.append(d);
+                                //divInitialPosi = undefined;
+                                //  },100);
+                                //  }
+
+
+
+                            })
+                        }
+                        //}, 50);
+
+                        break;
+                    case "DIV":
+                        console.log('position')
+                        if ($(this).find('div.autocomplete').length > 0 && $(".resultAC").find('.option').length == 0) {
+
+                            $(_ctc).appendTo("#controles");
+                            $(d).text(identify_type(d));
+                            if ($(d).attr('contenteditable') == undefined) {
+                                $(d).attr('contenteditable', 'true');
+                            }
+                            $(d).attr("onfocus", "Focusposition(this)")
+
+                            var _e = $(_ctc).find('input').attr('cambio');
+                            if (_e != undefined) {
+                                eval(_e + '()');
+                            }
+                            td.append(d);
+                            divInitialPosi = undefined;
+                        }
+
+                        break;
+                    case "SELECT":
+
+                        var _e = $(this).find('select').attr('cambio');
+                        if (_e != undefined) {
+                            eval(_e + '(\'' + id_object + '\')');
+                        }
+                        reset_Select(this, td);
+                        divInitialPosi = undefined;
+                        break;
+                }
+
+            });
+            focus_element(this);
+        }
+
+    });
+}
+
+function focus_out_get_value(_ctc, id_object) {
+
+    var id_object = $(_ctc).attr('objectreplace');
+    var _e = $('#' + id_object).find("input").attr('cambio');
+
+    var td = $('#' + id_object).closest("td");
+
+    if (_e != undefined) {
+        eval(_e + '(\'' + id_object + '\')');
+    }
+
+    $('#' + id_object).appendTo("#controles");
+    $(divInitialPosi).text(identify_type(divInitialPosi));
+    $(divInitialPosi).attr("onfocus", "Focusposition(this)")
+
+    td.append(divInitialPosi);
+    divInitialPosi = undefined;
+}
+function reset_Select(_ctc, td) {
+
+    var id_object = $(_ctc).attr('objectreplace');
+    var d = divInitialPosi;
+
+
+    $(_ctc).appendTo("#controles");
+    $(d).text(identify_type(d));
+    $(d).attr("onfocus", "Focusposition(this)")
+    $(d).attr('contenteditable', true);
+    td.append(d);
+    divInitialPosi = undefined;
+
+
+}
+function Focusposition(obj) {
+    var id_object = $(obj).attr('objectreplace');
+    var type = $(obj).attr('type');
+    var selectedobj = $(obj).attr('typeValue');
+    var td = $(obj).closest("td");
+
+    if ($('.datepicker').css('display') == undefined) {
+
+        if (id_object.toLowerCase().indexOf('fecha') > -1) {
+
+            if (selectedobj == 'datepicker') {
+                $('#' + id_object).find("input").datepicker('update', $(obj).text());
+            }
+
+            var setStartDate = $(obj).attr('setStartDate');
+
+            if (setStartDate != undefined) {
+                $('#' + id_object).find("input").datepicker('setStartDate', setStartDate);
+            }
+
+        }
+        $(obj).removeAttr('contenteditable');
+        // abre dentro del div el elemento posicion
+        divInitialPosi = $(obj).clone();
+        $('#' + id_object).find("input").val(position_Get_Text(divInitialPosi));
+        $(obj).remove();
+        $('#' + id_object).appendTo(td);
+        focus_element(divInitialPosi);
+
+    }
+}
+function focus_element(obj) {
+    var id_object = $(obj).attr('objectreplace');
+    var selectedobj = $(obj).attr('typeValue');
+
+
+    if ($('#' + id_object).find("input").length > 0) {
+        $('#' + id_object).find("input").focus();
+        $('#' + id_object).find("input").select();
+
+    } else {
+        var value = $(obj).text().trim();
+        if (selectedobj == 'value') {
+            $('#' + id_object).find("option:contains(" + value + ")").first().prop('selected', 'selected');
+        } else {
+            $('#' + id_object).find("option[value='" + value + "']").prop('selected', 'selected');
+        }
+        $('#' + id_object).find('select').show();
+        $('#' + id_object).find('select').focus();
+    }
+
+}
+
+function position_Get_Text(e) {
+    var value;
+
+    value = $(e).text();
+
+    return value;
+}
+function identify_type(e) {
+
+    var value;
+
+    var type = $(e).attr('type');
+    var selectedobj = $(e).attr('typeValue');
+    var _object_replace = $(e).attr('objectreplace');
+    switch (type) {
+
+        case "input":
+            value = $('#' + _object_replace).find('input').val();
+            break;
+        case "select":
+            if (selectedobj == 'value') {
+                value = $('#' + _object_replace).find('select option:selected').text();
+            }
+            else {
+                value = $('#' + _object_replace).find('select option:selected').val();
+            }
+            break;
+
+    }
+    return value;
+}
+
+//============================================================================================================================================================
+//                                   FINAL CONVERT POSITION
+//============================================================================================================================================================
+
+

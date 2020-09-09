@@ -13,42 +13,51 @@ namespace Mensaje.Servicios
     public class MensajesBI
     {
 
-        public Mensaje_Custom Get(int id)
+        public VerMensajeDTO Get(int id)
         {
+            VerMensajeDTO objResultado = new VerMensajeDTO();
             ColegioContext objCnn = new ColegioContext();
             Mensaje_Custom obj_response = new Mensaje_Custom();
 
-            obj_response = (from mensaje in objCnn.mensajes
-                            join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
-                            where mensaje.MenId == id
-                            select new Mensaje_Custom
-                            {
-                                MenAsunto = mensaje.MenAsunto,
-                                MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
-                                MenUsuario = mensaje.MenUsuario,
-                                MenClase = mensaje.MenClase,
-                                MenEmpId = mensaje.MenEmpId,
-                                MenFecha = mensaje.MenFecha,
-                                MenId = mensaje.MenId,
-                                MenMensaje = mensaje.MenMensaje,
-                                MenOkRecibido = mensaje.MenOkRecibido,
-                                MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
-                                MenSendTo = mensaje.MenSendTo,
-                                MenTipoMsn = mensaje.MenTipoMsn,
-                                usuario = _usuario,
-                                MenCategoriaId = mensaje.MenCategoriaId,
-                                MenEstado = mensaje.MenEstado,
-                                MenFechaMaxima = mensaje.MenFechaMaxima
-                            }).FirstOrDefault();
+            objResultado._mensaje = (from mensaje in objCnn.mensajes
+                                     join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
+                                     where mensaje.MenId == id
+                                     select new Mensaje_Custom
+                                     {
+                                         MenAsunto = mensaje.MenAsunto,
+                                         MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
+                                         MenUsuario = mensaje.MenUsuario,
+                                         MenClase = mensaje.MenClase,
+                                         MenEmpId = mensaje.MenEmpId,
+                                         MenFecha = mensaje.MenFecha,
+                                         MenId = mensaje.MenId,
+                                         MenMensaje = mensaje.MenMensaje,
+                                         MenOkRecibido = mensaje.MenOkRecibido,
+                                         MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
+                                         MenSendTo = mensaje.MenSendTo,
+                                         MenTipoMsn = mensaje.MenTipoMsn,
+                                         usuario = _usuario,
+                                         MenCategoriaId = mensaje.MenCategoriaId,
+                                         MenEstado = mensaje.MenEstado,
+                                         MenFechaMaxima = mensaje.MenFechaMaxima
+                                     }).FirstOrDefault();
 
-            obj_response.adjuntos = (from a in objCnn.adjuntos
-                                     join adjmsj in objCnn.adjuntos_mensajes on a.AjdId equals adjmsj.AdjMenAdjuntoId
-                                     where adjmsj.AdjMsnMensajeId == obj_response.MenId
-                                     select a
+            objResultado._mensaje.adjuntos = (from a in objCnn.adjuntos
+                                              join adjmsj in objCnn.adjuntos_mensajes on a.AjdId equals adjmsj.AdjMenAdjuntoId
+                                              where adjmsj.AdjMsnMensajeId == obj_response.MenId
+                                              select a
                                      );
 
-            return obj_response;
+            
+            if (objResultado._mensaje.MenReplicaIdMsn>0)
+            {
+                objResultado.replicas = Get(objResultado._mensaje.MenReplicaIdMsn);
+            }
+
+            return objResultado;
         }
+
+        
 
         public CrearMensajeCustom SaveBorrador(CrearMensajeCustom request)
         {
@@ -114,11 +123,32 @@ namespace Mensaje.Servicios
                 {
                     request.mensaje.MenBloquearRespuesta = 0;
                     var mensaje_original = objCnn.mensajes.Find(request.mensaje.MenReplicaIdMsn);
+
+
+                    request.mensaje.MenClase = mensaje_original.MenClase;
+
+
                     if (request.mensaje.MenFecha > mensaje_original.MenFechaMaxima)
                     {
                         objResultado.codigo = -1;
                         objResultado.respuesta = "No se puede responder el mensaje porque se venció la fecha limite establecida.";
                         return objResultado;
+                    }
+                }
+                else
+                {
+
+                    //se obtiene la clase de acuerdo al tipo de usuario
+                    var tipo = objCnn.personas.Find(request.mensaje.MenUsuario);
+
+
+                    if (tipo.PerTipoPerfil == 1)
+                    {
+                        //docente
+                    }
+                    else
+                    {
+                        //estudiante
                     }
                 }
 

@@ -3,10 +3,13 @@ let tipo = '', _tipo_perfil = {}, _persona = -1, _usuario = '', _clave = '124',
     _profesor = {}, _estudiantes = {};
 
 function consltar_tipo_perfil() {
-
+    let tipo = Get_query_string('T');
     consultarAPI('Persona/Tipos', 'GET', response => {
 
-        _tipo_perfil = response.find(x => x.UsuPerId == obtener_session().tipo);
+        if (tipo == 'E')
+            _tipo_perfil = response.find(x => x.UsuPerId == 1);
+        else _tipo_perfil = response.find(x => x.UsuPerId == 2);
+
 
         if (obtener_session().tipo != 2) {
             $('.opcion-docente').removeClass('d-none');

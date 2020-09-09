@@ -1,5 +1,6 @@
 ﻿const _tipo_mensaje = { borradores: -2, eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
 let _mensaje_context = {}, data_mensajes = [], id_bandeja = -1, _is_recibido = 0, _sesion = {};//39;
+_adjuntos_cargados = [];
 let _this_ctx = undefined;
 let _times = 0;
 let iniciales_usuario = (nombre, apellidos) => {
@@ -169,8 +170,16 @@ function limpiar_mensaje_leido() {
     document.getElementById('MenMensaje').innerHTML = "";
     document.getElementById('DivIniciales').textContent = "";
 }
-function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
+function armar_para_redactar(_sent_to) {
+    let _html = '';
+    _sent_to.forEach(c => {
+        _html += c.nombre + ';';
+    });
 
+    return _html;
+}
+function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
+    $('#DivAdjuntos').empty();
     reiniciar_reenviar();
     if ($('.panel').find('.actived').attr('borrador') == 'true') {
 
@@ -198,8 +207,9 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
         $('#modalverMensaje').modal('show');
         $('.container-kids__content').addClass('d-none');
-        renderizar_mensaje(response);
+        renderizar_mensaje(response._mensaje);
 
+        if (response.replicas != null) renderizar_replicas(response.replicas);
         if (response.adjuntos != null && response.adjuntos.length > 0)
             renderizar_adjuntos(response.adjuntos);
 
@@ -209,6 +219,57 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         renderizar_clases_bandeja();
         actualizar_bandeja_count();
     });
+}
+function renderizar_replicas(mensaje) {
+
+    $('#ContenedorMensaje').append(renderizar_mensaje_replica(mensaje._mensaje));
+
+    if (mensaje.replicas != null) {
+        renderizar_replicas(mensaje.replicas);
+    }
+}
+function renderizar_mensaje_replica(_mensaje) {
+    let _html = ``;
+
+    _html += `<div class="mensaje-detalle mt-2">
+                                        <div class="rounded-lg mensaje p-2" style="border:1px solid #ebebeb;border-radius:5px">
+                                            <div class="titulo-mensaje">
+                                                <div class="titulo-mensaje d-flex justify-content-between">
+                                                    <div class="d-flex pb-1">
+                                                        <div class="bg-secondary rounded-circle text-white">${ iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div>
+                                                        <div class=" ml-2">
+                                                            <div>
+                                                                <span style="font-size:20px">${ _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres}</span>
+                                                            </div>
+                                                            <div style="line-height:0.5">
+                                                                <label style="font-size:12px;">Para:</label>
+                                                                <label style="font-size:12px;" >${armar_para_redactar(JSON.parse(_mensaje.MenSendTo))}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                    <div>
+                                                        <span class="mensaje-fecha" style="font-size:14px" >Fecha de envío: ${ moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end w-100"></div>
+                                                <div class="d-flex justify-content-between mt-2">
+                                                    <div>
+                                                        <label class="">Asunto:</label>
+
+                                                        <span style="font-size:14px">${_mensaje.MenAsunto}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="lectura-mensaje pt-2" style="border-top:1px solid #ebebeb">${_mensaje.MenMensaje}</div>
+                                            </div>
+                                            <p class="d-none font-weight-bold m-0" id="spnAdjuntos">Adjuntos:</p>
+                                            <div id="DivAdjuntos" class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+    return _html;
 }
 function reiniciar_reenviar() {
     document.getElementById('MenMensaje').innerHTML = '';
@@ -236,6 +297,7 @@ function renderizar_mensaje(_mensaje) {
     document.getElementById('MenUsuario').textContent = _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres;
     document.getElementById('MenFecha').textContent = "Fecha de envío: " + moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
     document.getElementById('MenMensaje').innerHTML = _mensaje.MenMensaje;
+    document.getElementById('para_recibido').textContent = armar_para_redactar(JSON.parse(_mensaje.MenSendTo));
 
     $('#MenFechaMaxima').addClass('d-none');
     if (_mensaje.MenFechaMaxima != null && _mensaje.MenFechaMaxima != '') {
@@ -317,14 +379,14 @@ function ocultar_replica() {
 function replicar_mensaje() {
 
     $('#DivRespuesta').addClass('d-block').removeClass('d-none');
-    $('#enviarReplicaBtn').removeClass('d-none');
+    $('#enviarReplicaBtn,#AdjuntosReplicaBtn').removeClass('d-none');
 }
 function enviar_replica_mensaje() {
     let data = {};
     let mensaje = obtener_datos_replica();
     data.destinatarios = obtener_destinatarios();
     data.mensaje = mensaje;
-
+    data.adjuntos = obtener_adjuntos_al_mensaje();
     consultarAPI('Mensajes', 'POST', (response) => {
 
         if (response.codigo > 0) {
@@ -424,7 +486,7 @@ function renderizar_tipo_bandeja(_response, _attr) {
         _html += `<li class="list-group-item" onclick=ver_mensajes__tipo(this,${c.id},\"${_attr}"\)>`;
         _html += `<div class="d-flex justify-content-between">`;
         _html += `<div class="w-100">${c.Descripcion}</div>`;
-        _html += `<div style="color:#2E8CFF" class="">${c.Count}</div>`;
+        _html += `<div style="color:#2E8CFF" class="">${c.Count == 0 ? '' : c.Count}</div>`;
         _html += `<div>`;
         _html += `</li>`;
     });
@@ -549,6 +611,78 @@ function eliminar_mensaje() {
 
     $('#modalverMensaje').modal('hide');
     $('.container-kids__content').removeClass('d-none');
+}
+function adjuntar() {
+    $('#myInput').click();
+}
+function obtener_adjuntos_al_mensaje() {
+    return _adjuntos_cargados.map(c => c.AjdId);
+}
+function cargar_adjuntos() {
+
+    let _html = '';
+
+    _adjuntos_cargados.forEach(a => {
+        _html += `<div class="adjunto-mensaje rounded border p-2 mt-1 mr-1">`;
+        _html += `<a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${a.AjdId}">`;
+        _html += `<img style="width:30px" src="${_get_icono(a.AjdExtension)}" />`;;
+        _html += `${a.AdjNombre}${a.AjdExtension}</a>`
+
+        _html += `<button type="button" class="close" aria-label="Close" onclick="eliminar_adjunto(${a.AjdId},this)">`;
+        _html += '<span aria-hidden="true">&times;</span>';
+        _html += '</button></div>';
+    });
+    document.getElementById('DivAdjuntoreplica').innerHTML = _html;
+    //return _html;
+
+}
+function armar_url_adjuntos() {
+    let _url = '';
+    let _usuario = obtener_session().idusuario, _adjunto = 0;
+
+    _url += '?usuario=' + _usuario;
+    _url += '&adjunto=' + _adjunto;
+
+    return _url;
+}
+function subirAdjunto() {
+
+    let _url = window.location.href.toLowerCase().split('views')[0];
+
+    var formData = new FormData();
+    var file = $('#myInput')[0];
+    formData.append('file', file.files[0]);
+    $.ajax({
+        url: `${_url}api/Adjuntos${armar_url_adjuntos()}`,
+        type: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('sesion')}`,
+            'Accept': 'application/json',
+        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (_response) {
+
+            _adjuntos_cargados.push(_response);
+            cargar_adjuntos();
+        },
+        error: function () {
+            alert("Faild please try upload again");
+        }
+    });
+}
+function eliminar_adjunto(_id, _this) {
+    var _data = { id: _id };
+    consultarAPI('adjunto/eliminar', 'POST', () => {
+        $(_this).closest('.card').remove();
+        let _index = _adjuntos_cargados.findIndex(c => c.AjdId == _id);
+        _adjuntos_cargados.splice(_index, 1);
+
+
+        cargar_adjuntos();
+
+    }, _data);
 }
 (async function () {
     calcular_width_tabla();

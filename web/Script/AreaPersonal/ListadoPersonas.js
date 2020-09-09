@@ -62,6 +62,7 @@ function consultar_personas(_tipo) {
     consultarAPI(`Persona/all?tipo=${_tipo}`, 'GET', response => {
         data_personas = response;
         renderizar_datos(response);
+        ConvertPosicion();
     });
 }
 function renderizar_datos(response) {
@@ -77,22 +78,22 @@ function renderizar_datos(response) {
 function renderizar_tr(persona) {
     let _tr = '';
     let tipo = Get_query_string('T');
-    _tr += '<tr>';
+    _tr += '<tr id="' + persona.PerId + '">';
     _tr += '<td><div onblur="modificar_persona(this,' + persona.PerId + ')" contenteditable="true" id="PerNombres_' + persona.PerId + '">' + IsNull(persona.PerNombres) + '</div></td>';
     _tr += '<td><div onblur="modificar_persona(this,' + persona.PerId + ')" contenteditable="true" id="PerApellidos_' + persona.PerId + '">' + IsNull(persona.PerApellidos) + '</div></td>';
-    _tr += '<td style="width:60px"><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerTIpoDoc_' + persona.PerId + '">' + IsNull(persona.PerTIpoDoc) + '</div></td>';
+    _tr += '<td style="width:60px"><div contenteditable="true"  type="select" objectreplace="DivDdlTipoDoc" class="tdEditable" id="PerTIpoDoc_' + persona.PerId + '">' + IsNull(persona.PerTIpoDoc) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerDocumento_' + persona.PerId + '">' + IsNull(persona.PerDocumento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerEmail_' + persona.PerId + '">' + IsNull(persona.PerEmail) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerTelefono_' + persona.PerId + '">' + IsNull(persona.PerTelefono) + '</div></td>';
-    _tr += '<td style="width:65px"><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerGenero_' + persona.PerId + '">' + IsNull(persona.PerGenero) + '</div></td>';
-    _tr += '<td style="width:65px"><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerRH_' + persona.PerId + '">' + IsNull(persona.PerRH) + '</div></td>';
+    _tr += '<td style="width:65px"><div contenteditable="true"  type="select" objectreplace="DivDdlGenero" class="tdEditable" id="PerGenero_' + persona.PerId + '">' + IsNull(persona.PerGenero) + '</div></td>';
+    _tr += '<td style="width:65px"><div contenteditable="true" type="select" objectreplace="DdlRHPosicion" class="tdEditable" id="PerRH_' + persona.PerId + '">' + IsNull(persona.PerRH) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerEPS_' + persona.PerId + '">' + IsNull(persona.PerEPS) + '</div></td>';
-    _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerFechanacimiento_' + persona.PerId + '">' + IsNull(persona.PerFechanacimiento) + '</div></td>';
+    _tr += '<td><div contenteditable="true" type="select" objectreplace="DivCalendar" class="tdEditable" id="PerFechanacimiento_' + persona.PerId + '">' + IsNull(persona.PerFechanacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerLugarNacimiento_' + persona.PerId + '">' + IsNull(persona.PerLugarNacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerDireccion_' + persona.PerId + '">' + IsNull(persona.PerDireccion) + '</div></td>';
 
     if (tipo != 'E')
-        _tr += '<td id="PerTipoPerfil_' + persona.PerTipoPerfil + '" >' + persona.PerTipoPerfilDesc+'</td>';
+        _tr += '<td id="PerTipoPerfil_' + persona.PerTipoPerfil + '" >' + persona.PerTipoPerfilDesc + '</td>';
 
     _tr += '<td class="text-center" id="PerEstado_' + persona.PerId + '" >';
     _tr += '<div class="custom-control custom-switch">';
@@ -141,7 +142,7 @@ function eliminar_persona(_this, id) {
 }
 function guardar_cambios() {
 
-    const datos_persona = obtener_datos_persona(-1);
+    let datos_persona = obtener_datos_persona(-1);
     if (validar_campos_obligatorio_persona(datos_persona)) {
         window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
         consultarAPI('Personas', 'POST', response => {
@@ -150,6 +151,7 @@ function guardar_cambios() {
             } else {
                 datos_persona.PerId = response.codigo;
                 datos_persona.PerTipoPerfilDesc = _tipo_perfil.UsuPerDescripcion;
+                
                 data_personas.push(datos_persona);
                 let nuevo_tr = renderizar_tr(datos_persona);
 
@@ -157,6 +159,7 @@ function guardar_cambios() {
                 limpiar_registro_personas(-1);
                 $('#PerNombres_-1').focus();
                 eventos_listado_personas();
+                ConvertPosicion();
                 window.parent.mostrar_mensajes('', 'Se guardaron los cambios correctamente.', 'success', true, false, false, 'Aceptar');
             }
         }, datos_persona);
@@ -177,6 +180,7 @@ function obtener_datos_persona(posicion) {
     _data.PerEstado = 1;
     _data.PerTipoPerfil = _tipo_perfil.UsuPerId;
     _data.PerTipoDoc = $('#PerTipoDoc_' + posicion).find('option:selected').val();
+    _data.PerTIpoDoc = _data.PerTipoDoc;
     _data.PerGenero = $('#PerGenero_' + posicion).find('option:selected').val();
 
     _data.PerFechanacimiento = $('#PerFechanacimiento_' + posicion).val();
@@ -233,7 +237,7 @@ function obtener_datos_persona(posicion) {
     if (document.getElementById('PerDireccion_' + posicion).tagName.toLowerCase() == 'div') {
         _data.PerDireccion = document.getElementById('PerDireccion_' + posicion).textContent;
     } else {
-        _data.PerDireccion_ = document.getElementById('PerDireccion_' + posicion).value;
+        _data.PerDireccion = document.getElementById('PerDireccion_' + posicion).value;
     }
 
     return _data;
@@ -310,7 +314,50 @@ function limpiar_registro_personas(posicion) {
 }
 (async function () {
     await consltar_tipo_perfil();
-    consultar_personas(_tipo_perfil.UsuPerId);
+    if (_tipo_perfil.UsuPerId==2) 
+        consultar_personas(_tipo_perfil.UsuPerId);
+    else
+        consultar_personas(0);
+    
     asignar_control_fecha('PerFechanacimiento_-1');
+    asignar_control_fecha('txtfechaposicion');
     $('#PerNombres_-1').focus();
 })();
+
+/*
+ posicion change
+ */
+function UpdatePosicionDoc(_this, property) {
+    const id = $(_this).closest('tr').prop('id');
+    const _data = data_personas.findIndex(c => c.PerId == id);
+
+
+    if ($(_this).find('option:selected').val() != '') {
+
+        data_personas[_data][property] = $(_this).find('option:selected').val();
+
+        consultarAPI('Personas', 'PUT', function (response) {
+        }, data_personas[_data]);
+    } else {
+        $(_this).find(`option[value="${data_personas[_data][property]}"]`).prop('selected', 'selected');
+        mostrar_mensaje_validacion_error('El campo es obligatorio.');
+        setTimeout(() => {
+            $(_this).find('option').first().prop('selected', 'selected');
+        }, 100);
+    }
+
+
+}
+function changed_date(_date, _this) {
+    const id = $(`#${_this}`).closest('tr').prop('id');
+    const _data = data_personas.findIndex(c => c.PerId == id);
+    if (_date != '') {
+        data_personas[_data].PerFechanacimiento = _date;
+        consultarAPI('Personas', 'PUT', function (response) {
+        }, data_personas[_data]);
+    } else {
+        $(`#${_this}`).val(data_personas[_data].PerFechanacimiento);
+        mostrar_mensaje_validacion_error('El campo es obligatorio.');
+        Focusposition(divInitialPosi);
+    }
+}

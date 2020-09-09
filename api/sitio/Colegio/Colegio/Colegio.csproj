@@ -200,7 +200,6 @@
     <Compile Include="Autenticacion\TokenValidationHandler.cs" />
     <Compile Include="Controllers\AdjuntosController.cs" />
     <Compile Include="Controllers\BandejaEntradaController.cs" />
-    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />

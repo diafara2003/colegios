@@ -47,6 +47,17 @@ namespace Colegio.Controllers
         [Route("categoria")]
         public IEnumerable<Categorias> GetCategoria()
         {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(_empresa.PerIdEmpresa,_empresa.PerTipoPerfil);
+        }
+
+
+        [Route("categoria/maestro")]
+        public IEnumerable<Categorias> GetCategoriaMaestro()
+        {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            _empresa = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
             return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(_empresa.PerIdEmpresa);
         }
 
@@ -120,7 +131,7 @@ namespace Colegio.Controllers
                 new Mensaje.Servicios.GruposBL<Categorias>().Update(request);
             }
 
-            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(_empresa.PerIdEmpresa);
+            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(_empresa.PerIdEmpresa,_empresa.PerTipoPerfil);
         }
 
 
@@ -156,7 +167,7 @@ namespace Colegio.Controllers
 
             new Mensaje.Servicios.GruposBL<Categorias>().Delete(_categoria);
 
-            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(request.CatEmpresaId);
+            return new Mensaje.Servicios.GruposBL<Categorias>().GetCategorias(request.CatEmpresaId,_empresa.PerTipoPerfil);
         }
 
         [Route("cursos/eliminar")]

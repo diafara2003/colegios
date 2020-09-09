@@ -21,7 +21,7 @@ namespace Mensaje.Servicios
             IEnumerable<BandejaEntradaDTO> objlstResultado = new List<BandejaEntradaDTO>();
 
             ProcedureDTO.commandText = "MSN.[ConsultarMensaje]";
-            ProcedureDTO.parametros.Add("usuario", usuario);
+            ProcedureDTO.parametros.Add("usuario", usuario); 
             ProcedureDTO.parametros.Add("tipo", tipo);
 
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);

@@ -22,6 +22,11 @@
     <link href="../../Style/estandar.css" rel="stylesheet" />
 
     <style>
+        #tbodyDatos select, #tbodyDatos input {
+            height: 25px;
+            padding: 1px;
+        }
+
         .btn-icono {
             background-color: transparent;
             border-radius: 50%;
@@ -214,6 +219,52 @@
             </table>
 
         </div>
+    </div>
+    <div id="controles" class="d-none">
+        <div id="DivDdlTipoDoc">
+            <select class="form-control" id="DdlTipoDocPosicion" onchange="UpdatePosicionDoc(this,'PerTIpoDoc')">
+                <option value="">Seleccione</option>
+                <option class="opcion-docente" value="PP">Pasaporte</option>
+                <option class="opcion-estudiante" value="RC">Registro civil</option>
+                <option class="opcion-estudiante" value="TI">Tarjeta de identidad</option>
+                <option value="CC">Cédula de ciudadanía</option>
+                <option class="opcion-docente" value="CE">Cédula de extranjería</option>
+            </select>
+        </div>
+
+
+
+        <div id="DivDdlGenero">
+            <select class="form-control" id="DdlTipoDocPosicion" onchange="UpdatePosicionDoc(this,'PerGenero')">
+                <option value="">Seleccione</option>
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+            </select>
+        </div>
+        <div id="DivDdlGenero">
+            <select class="form-control" id="DdlRHPosicion" onchange="UpdatePosicionDoc(this,'PerRH')">
+                <option value="-1">Seleccione</option>
+                <option value="A-">A-</option>
+                <option value="A+">A+</option>
+                <option value="B-">B-</option>
+                <option value="B+">B+</option>
+                <option value="AB-">AB-</option>
+                <option value="AB+">AB+</option>
+                <option value="O-">O-</option>
+                <option value="O+">O+</option>
+            </select>
+        </div>
+
+
+        <div id="DivCalendar">
+            <div class="input-group  input-group-sm">
+                <input type="text" maxlength="15" class="form-control" id="txtfechaposicion" placeholder="Fecha de nacimiento" data-changed="changed_date">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><i class="far fa-calendar-alt"></i></span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>

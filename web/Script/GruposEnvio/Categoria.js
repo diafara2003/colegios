@@ -2,7 +2,7 @@
 
 
 function cargarCategorias() {
-    consultarAPI('autorizados/categoria', 'GET', (_response) => {
+    consultarAPI('autorizados/categoria/maestro', 'GET', (_response) => {
         _lstcategorias = _response;
         call_back_categorias(_response);
     });

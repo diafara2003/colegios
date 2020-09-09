@@ -32,6 +32,6 @@ BEGIN
 			INNER JOIN Clases on Claid=BanClaseId
 			INNER JOIN Materias ON MatID=ClaMateriaId
 			LEFT JOIN MSN.#CuentaNoLeido ON ID=BanClaseId 
-	WHERE	BanUsuario=@usuario and BanHoraLeido IS NULL
+	WHERE	BanUsuario=@usuario --and BanHoraLeido IS NULL
 	GROUP BY MatDescripcion,CtaNoLeido,BanClaseId
 END

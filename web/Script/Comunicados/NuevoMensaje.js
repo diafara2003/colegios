@@ -268,7 +268,7 @@ function renderizar_categorias(_response) {
 }
 async function consultar_categoria() {
 
-    consultarAPI('Categorias', 'GET', response => {
+    consultarAPI('autorizados/categoria', 'GET', response => {
         _Categorias = response;
         if (response.length > 0) {
             renderizar_categorias(response);
