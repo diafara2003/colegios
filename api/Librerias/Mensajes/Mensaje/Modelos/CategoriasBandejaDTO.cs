@@ -11,5 +11,6 @@ namespace Mensaje.Modelos
         public int id { get; set; }
         public int Count { get; set; }
         public string Descripcion { get; set; }
+        public string Color { get; set; }
     }
 }

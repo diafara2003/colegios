@@ -485,7 +485,7 @@ function renderizar_tipo_bandeja(_response, _attr) {
 
         _html += `<li class="list-group-item" onclick=ver_mensajes__tipo(this,${c.id},\"${_attr}"\)>`;
         _html += `<div class="d-flex justify-content-between">`;
-        _html += `<div class="w-100">${c.Descripcion}</div>`;
+        _html += `<div class="w-100">${c.Color != undefined ? `<i data-toggle="tooltip" style="color:${c.Color};" class="fas fa-tag"></i>` : ``}${c.Descripcion}</div>`;
         _html += `<div style="color:#2E8CFF" class="">${c.Count == 0 ? '' : c.Count}</div>`;
         _html += `<div>`;
         _html += `</li>`;

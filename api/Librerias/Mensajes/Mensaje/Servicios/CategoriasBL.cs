@@ -46,7 +46,8 @@ namespace Mensaje.Servicios
                             {
                                 id = (int)query["MenCategoriaId"],
                                 Count = (int)query["CtaNoLeido"],
-                                Descripcion = (string)query["CatDescripcion"]
+                                Descripcion = (string)query["CatDescripcion"],
+                                Color = (string)query["CatColor"],
                             });
 
             return objResultado;

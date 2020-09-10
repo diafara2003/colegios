@@ -91,6 +91,10 @@
     <Compile Include="Migrations\202008260155582_perfiles.designer.cs">
       <DependentUpon>202008260155582_perfiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009100056064_accesos.cs" />
+    <Compile Include="Migrations\202009100056064_accesos.designer.cs">
+      <DependentUpon>202009100056064_accesos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008260155582_perfiles.resx">
       <DependentUpon>202008260155582_perfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009100056064_accesos.resx">
+      <DependentUpon>202009100056064_accesos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

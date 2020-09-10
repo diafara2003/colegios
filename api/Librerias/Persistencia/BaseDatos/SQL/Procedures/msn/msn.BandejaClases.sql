@@ -4,7 +4,7 @@ IF EXISTS ( SELECT *
                    and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
 BEGIN
     DROP PROCEDURE msn.BandejaClases
-END
+END 
 go
 
 -- =============================================

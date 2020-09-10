@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelo\Accesos.cs" />
     <Compile Include="Modelo\Adjuntos.cs" />
     <Compile Include="Modelo\AreasMaterias.cs" />
     <Compile Include="Modelo\BandejaEntrada.cs" />

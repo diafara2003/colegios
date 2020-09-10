@@ -20,20 +20,22 @@ AS
 BEGIN
 
 	SELECT	COUNT(1) as CtaNoLeido,MenCategoriaId AS ID
+			
 	INTO	MSN.#CuentaNoLeido
 	FROM	msn.BandejaEntrada
 			INNER JOIN MSN.Mensajes ON BanMsnId=MenId
 			INNER JOIN MSN.Categorias ON CatId=MenCategoriaId
 	WHERE	BanUsuario=@usuario and BanHoraLeido IS NULL
-	GROUP BY MenCategoriaId
+	GROUP BY MenCategoriaId,CatColor
 
 	--SELECT * FROM MSN.#CuentaNoLeido
 
-	SELECT	MenCategoriaId,CatDescripcion,ISNULL(CtaNoLeido,0) AS CtaNoLeido			
+	SELECT	MenCategoriaId,CatDescripcion,ISNULL(CtaNoLeido,0) AS CtaNoLeido,
+			CatColor
 	FROM	msn.BandejaEntrada
 			INNER JOIN MSN.Mensajes ON BanMsnId=MenId
 			INNER JOIN MSN.Categorias ON CatId=MenCategoriaId
 			LEFT JOIN MSN.#CuentaNoLeido ON ID=MenCategoriaId
 	WHERE	BanUsuario=@usuario
-	GROUP BY CatDescripcion,CtaNoLeido,MenCategoriaId
+	GROUP BY CatDescripcion,CtaNoLeido,MenCategoriaId,CatColor
 END
