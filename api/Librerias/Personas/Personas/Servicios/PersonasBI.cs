@@ -65,7 +65,7 @@ namespace Persona.Servicios
 
             objSeccion = (from data in objCnn.personas
                           join tp in objCnn.usuario_perfi on data.PerTipoPerfil equals tp.UsuPerId
-                          where tipo == 0 ? tp.UsuPerId != 2 : tp.UsuPerId == tipo
+                          where (tipo == 0 ? tp.UsuPerId != 2 : tp.UsuPerId == tipo)
                             && data.PerIdEmpresa == empresa
                           select new CustomPersonasDTO()
                           {

@@ -86,7 +86,7 @@ function renderizar_tr(persona) {
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerEmail_' + persona.PerId + '">' + IsNull(persona.PerEmail) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerTelefono_' + persona.PerId + '">' + IsNull(persona.PerTelefono) + '</div></td>';
     _tr += '<td style="width:65px"><div contenteditable="true"  type="select" objectreplace="DivDdlGenero" class="tdEditable" id="PerGenero_' + persona.PerId + '">' + IsNull(persona.PerGenero) + '</div></td>';
-    _tr += '<td style="width:65px"><div contenteditable="true" type="select" objectreplace="DdlRHPosicion" class="tdEditable" id="PerRH_' + persona.PerId + '">' + IsNull(persona.PerRH) + '</div></td>';
+    _tr += '<td style="width:65px"><div contenteditable="true" type="select" objectreplace="DivDdlRH" class="tdEditable" id="PerRH_' + persona.PerId + '">' + IsNull(persona.PerRH) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerEPS_' + persona.PerId + '">' + IsNull(persona.PerEPS) + '</div></td>';
     _tr += '<td><div contenteditable="true" type="select" objectreplace="DivCalendar" class="tdEditable" id="PerFechanacimiento_' + persona.PerId + '">' + IsNull(persona.PerFechanacimiento) + '</div></td>';
     _tr += '<td><div contenteditable="true" onblur="modificar_persona(this,' + persona.PerId + ')" id="PerLugarNacimiento_' + persona.PerId + '">' + IsNull(persona.PerLugarNacimiento) + '</div></td>';
@@ -341,9 +341,9 @@ function UpdatePosicionDoc(_this, property) {
     } else {
         $(_this).find(`option[value="${data_personas[_data][property]}"]`).prop('selected', 'selected');
         mostrar_mensaje_validacion_error('El campo es obligatorio.');
-        setTimeout(() => {
-            $(_this).find('option').first().prop('selected', 'selected');
-        }, 100);
+        //setTimeout(() => {
+        //    $(_this).find('option').first().prop('selected', 'selected');
+        //}, 100);
     }
 
 
