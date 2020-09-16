@@ -21,6 +21,8 @@ namespace Colegio.Controllers
 
             return new Mensaje.Servicios.BandejaEntradaBI().Get(identity, tipo);
         }
+
+
         [Route("favorito")]
         [HttpGet]
         public bool MarcarFavorito(int id, int estado)

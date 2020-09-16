@@ -109,9 +109,29 @@ async function cargar_bandeja(tipo, _this) {
 
         data_mensajes = response;
         if (response.length > 0) {
-            response.forEach(_mensaje => {
-                _html += renderizar_bandeja(_mensaje);
+
+            var _agrupado = _.groupBy(response, 'CatDescripcion');
+
+            Object.keys(_agrupado).forEach(c => {
+
+                let _desc = c;
+
+                if (_desc == '') {
+                    _desc = "Sin Categoría";
+                }
+                
+                _html += '<tr>';
+                _html += `<td style="color:${_agrupado[c][0].MenColor}" onclick="ocultar_categoria(${_agrupado[c][0].MenCategoriaId},this)" colspan="3">${_desc}</td>`;
+                _html += `<td style="color:${_agrupado[c][0].MenColor}"> ${_agrupado[c].length}</td>`;
+                _html += '</tr>';
+                let _html_categoria = '';
+                _agrupado[c].forEach(m => {
+                    _html_categoria += renderizar_bandeja(m);
+                });
+                _html += _html_categoria;
+
             });
+
             setTimeout(c => { fixed_table_scroll('tblDatosMensajes'); }, 300);
         } else {
             _html = no_hay_mensajes();
@@ -162,6 +182,15 @@ function no_hay_mensajes() {
     _html += '</div></td></tr>';
 
     return _html;
+}
+function ocultar_categoria(_id, _this) {
+    if ($(_this).attr('closed') != undefined) {
+        $(_this).removeAttr('closed');
+        $(`#tbodydatos tr[categoria="${_id}"]`).fadeIn();
+    } else {
+        $(_this).attr('closed', 'true');
+        $(`#tbodydatos tr[categoria="${_id}"]`).fadeOut();
+    }
 }
 function limpiar_mensaje_leido() {
     document.getElementById('MenAsunto').textContent = "";

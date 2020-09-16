@@ -206,7 +206,7 @@ async function consultar_mensaje(id) {
 
     consultarAPI(`mensajes?id=${id}&bandeja=1`, 'GET', response => {
         // read_only();
-        cargar_mensaje(response);
+        cargar_mensaje(response._mensaje);
         if (response.adjuntos != null && response.adjuntos.length > 0) {
             _adjuntos_cargados = response.adjuntos;
             cargar_adjuntos();

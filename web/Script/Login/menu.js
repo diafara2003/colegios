@@ -216,8 +216,7 @@ function cargar_mensajes_no_leidos() {
     localStorage.removeItem('noleidos');
     consultarAPI('BandejaEntrada/mensajes/NoLeidoCount', 'GET', (_count) => {
         localStorage.setItem('noleidos', _count);
-        if (_count == 1) $('.badgeNoLeidos').css('left', '7px');
-        else $('.badgeNoLeidos').css('left', '5px');
+        
         $('.badgeNoLeidos').text(_count);
     });
 }

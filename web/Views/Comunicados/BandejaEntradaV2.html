@@ -29,7 +29,7 @@
 
     <style>
         #MenMensaje {
-            border-top: 1px solid #ebebeb;            
+            border-top: 1px solid #ebebeb;
             overflow: auto;
             max-height: calc(100vh - 317px);
         }
@@ -158,10 +158,14 @@
                                 </div>
                             </li>
                             <li class="list-group-item" onclick="cargar_bandeja('Enviados',this)">
+                                <!--onclick="cargar_bandeja('Enviados',this)"-->
                                 <button class="navbar-toggler btn-icono menu-panel" type="button">
                                     <i class="fas fa-share" style="font-size:16px !important"></i>
                                 </button>
-                                <span>Enviados</span>
+                               
+                                    <span>Enviados</span>
+                               
+                                
                             </li>
                             <li class="list-group-item">
                                 <button class="navbar-toggler btn-icono menu-panel" type="button" style="padding:10px 10px 10px 6px">
@@ -425,6 +429,7 @@
     <script src="../../Script/Librerias/moment.js"></script>
     <script src="../../Script/Librerias/quill.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"></script>
     <script src="../../Script/Comunicados/BandejaEntradaV2.js"></script>
 
 </body>
