@@ -49,7 +49,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Estudiantes</th>
+                                <th scope="col" class="text-center">Estudiantes</th>
                                 <th scope="col">Profesor</th>
                                 <th scope="col">Opciones</th>
                             </tr>
@@ -81,6 +81,28 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary  btn-sm" onclick="agregar_grupo()">Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Creación del grupo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Nombre del grupo:</label>
+                    <div class="input-group input-group-sm">
+                        <input type="text" maxlength="50" class="form-control" id="GrNombreEdit" placeholder="Descripción">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary  btn-sm" onclick="editar_registro()">Editar</button>
                 </div>
             </div>
         </div>

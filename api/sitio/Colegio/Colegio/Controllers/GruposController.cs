@@ -45,11 +45,22 @@ namespace Colegio.Controllers
 
             value.GrTemporada = temporada;
             value.GrEmpresa = _empresa.PerIdEmpresa;
-            value.GrId = 0;
 
-            new GruposGardenBL<Trasversales.Modelo.Grupos>().Add(value);
+            if (value.GrId > 0)
+            {
+                new GruposGardenBL<Trasversales.Modelo.Grupos>().Update(value);
+                return new ResponseDTO() { codigo = value.GrId, respuesta = "" };
+            }
+            else
+            {
+             
+                value.GrId = 0;
 
-            return new ResponseDTO() { codigo = 1, respuesta = "" };
+                var _result = new GruposGardenBL<Trasversales.Modelo.Grupos>().Add(value);
+
+                return new ResponseDTO() { codigo = _result.GrId, respuesta = "" };
+            }
+
         }
 
         // PUT: api/Grupos/5

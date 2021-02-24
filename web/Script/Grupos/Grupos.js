@@ -1,13 +1,16 @@
-﻿let _data_grupos = [];
+﻿let _data_grupos = [], idEdit = 0;
 
 
-function consultar_grupos() {
-    consultarAPI('Grupos', 'GET', function (response) {
-        _data_grupos = response;
-        renderizar_grupos(response);
+async function consultar_grupos() {
+    const response = await consultarAPI('Grupos', 'GET');
 
-        eventos_salones();
-    });
+    _data_grupos = response;
+    renderizar_grupos(response);
+
+    eventos_grupos();
+}
+function eventos_grupos() {
+
 }
 function renderizar_grupos(source) {
     let _html = '';
@@ -21,12 +24,12 @@ function renderizar_grupos(source) {
 function renderizar_tr_grupos(_item) {
 
     return `<tr>
-                <td>${_item.Nombre}</td>
-                <td class="text-left">${_item.Estudiantes}</td>
+                <td id="Nombre_${_item.IdGrupo}">${_item.Nombre}</td>
+                <td class="text-center">${_item.Estudiantes}</td>
                 <td>${_item.Profesores}</td>
                 <td class="text-left">
-                <button type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>
-                <button type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
+                <button onclick="editar(${_item.IdGrupo})" type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
+                <button onclick="eliminar(${_item.IdGrupo},this)" type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>                
                 </td>
             </tr>
         `;
@@ -38,33 +41,64 @@ function no_hay_grupos() {
         `;
 }
 async function agregar_grupo() {
-    const _result = await consultarAPI('Grupos', 'POST', undefined, armar_objeto());
+    const _result = await consultarAPI('Grupos', 'POST', undefined, armar_objeto(undefined, 'GrNombre'));
 
 
     $('#exampleModal').modal('hide');
 
     alertify.success('Grupo creado');
 
-    $('#tbltemporada').append(renderizar_tr_grupos({
+    const _nuevo_registro = {
         Nombre: document.getElementById('GrNombre').value,
         Estudiantes: 0,
-        Profesores: ''
-    }));
+        Profesores: '',
+        IdGrupo: _result.codigo
+    };
+
+    $('#tbltemporada').append(renderizar_tr_grupos(_nuevo_registro));
+
+
+    _data_grupos.push(_nuevo_registro);
 
     document.getElementById('GrNombre').value = '';
 
 }
-function armar_objeto() {
+function armar_objeto(id, id_text) {
     var myObject = {
         GrId: -1, GrEmpresa: 0, GrTemporada: 0, GrNombre: ''
     };
 
-
-    myObject.GrNombre = document.getElementById('GrNombre').value;
+    if (id != undefined) {
+        myObject.GrId = id;
+    }
+    myObject.GrNombre = document.getElementById(id_text).value;
 
     return myObject;
 }
+async function eliminar(id, _this) {
+    const _response = await consultarAPI(`grupos/${id}`, 'DELETE');
 
+    $(_this).closest('tr').remove();
+}
+async function editar(id) {
+    idEdit = id;
+    const _item = _data_grupos.find(c => c.IdGrupo == id);
+
+    document.getElementById('GrNombreEdit').value = _item.Nombre;
+    $('#modalEditar').modal('show');
+}
+async function editar_registro() {
+
+    const _item = _data_grupos.find(c => c.IdGrupo == idEdit);
+
+    _item.Nombre = document.getElementById('GrNombreEdit').value;
+
+    $(`#Nombre_${idEdit}`).text(_item.Nombre);
+
+    await consultarAPI(`grupos/${idEdit}`, 'POST', undefined, armar_objeto(_item.IdGrupo, 'GrNombreEdit'));
+    idEdit = 0;
+    $('#modalEditar').modal('hide');
+}
 consultar_grupos();
 
 var delay = alertify.get('notifier', 'delay');
