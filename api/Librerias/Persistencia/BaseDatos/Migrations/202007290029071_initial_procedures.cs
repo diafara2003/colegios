@@ -17,6 +17,7 @@
             Sql(MSN._msn___CrearMensaje_Bandeja_Entrada_);
             Sql(MSN.msn_BandejaClases);
             Sql(MSN.msn_CategoriasMensajesRecibido);
+            Sql(BaseDatos.Resources.Garden.Gargen__GetGrupos_);
         }
         
         public override void Down()

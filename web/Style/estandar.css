@@ -121,3 +121,33 @@ i {
         transform: rotate(360deg);
     }
 }
+
+
+
+
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+
+.alertify-notifier .ajs-message.ajs-success {
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}

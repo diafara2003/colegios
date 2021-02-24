@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Grupos\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
     <Compile Include="Controllers\GrupoEnvioController.cs" />
+    <Compile Include="Controllers\GruposController.cs" />
     <Compile Include="Controllers\MateriasController.cs" />
     <Compile Include="Controllers\MensajesController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -258,6 +260,10 @@
     <ProjectReference Include="..\..\..\Librerias\Grados\Grados\Grados.csproj">
       <Project>{1712087d-919c-47be-b2f0-ee8edd59b4ba}</Project>
       <Name>Grados</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Librerias\Grupos\Grupos\GruposGarden.csproj">
+      <Project>{2e60d410-9ad5-4c02-96f3-ab4af4413c76}</Project>
+      <Name>GruposGarden</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Librerias\Materias\Materia\Materia.csproj">
       <Project>{2f87c02c-05d5-46a8-8e24-7e21cac8470e}</Project>

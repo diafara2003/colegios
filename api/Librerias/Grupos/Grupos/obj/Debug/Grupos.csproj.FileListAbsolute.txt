@@ -1,0 +1,16 @@
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\Grupos.dll
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\Grupos.pdb
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\Grupos.csprojAssemblyReference.cache
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\Grupos.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\Grupos.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\Grupos.dll
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\Grupos.pdb

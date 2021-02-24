@@ -101,5 +101,8 @@ namespace BaseDatos.Contexto
         public DbSet<Adjuntos> adjuntos { get; set; }
         public DbSet<AdjuntosMensaje> adjuntos_mensajes { get; set; }
         public DbSet<Accesos> accesos { get; set; }
+
+        public DbSet<Grupos> grupos { get; set; }
+        public DbSet<Garden_Estudiantes> garden_estudiantes { get; set; }
     }
 }
