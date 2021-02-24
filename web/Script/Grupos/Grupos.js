@@ -68,5 +68,5 @@ function armar_objeto() {
 consultar_grupos();
 
 var delay = alertify.get('notifier', 'delay');
-alertify.set('notifier', 'delay', 9999);
+alertify.set('notifier', 'delay', 2);
 alertify.set('notifier', 'position', 'top-right');
