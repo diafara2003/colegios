@@ -64,15 +64,11 @@ namespace Persona.Servicios
                                   celular = data.PerTelefono == null ? string.Empty : data.PerTelefono,
                                   email = data.PerEmail == null ? string.Empty : data.PerEmail,
                                   id = data.PerId
-                              });
+                              }).ToList();
 
 
-            profesores.ToList().ForEach(c =>
-            {
-                objResult.Add(c);
-            });
 
-            objResult.ForEach(c =>
+            profesores.ForEach(c =>
             {
 
                 c.grupos = (from g in objCnn.grupos
@@ -86,7 +82,7 @@ namespace Persona.Servicios
                             });
             });
 
-            return objResult;
+            return profesores;
         }
 
         public void DeleteGrupo(int id)
