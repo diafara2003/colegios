@@ -12,37 +12,51 @@ using Utilidades.Servicios;
 
 namespace Grupo.Servicios
 {
-    public class GruposGardenBL<T>: EntityGenerics<T> where T : class
+    public class GruposGardenBL<T> : EntityGenerics<T> where T : class
     {
-        public IEnumerable<ConsultaGruposDTO> Get(int empresa, int temporada,string id="")
+        public IEnumerable<ConsultaGruposDTO> Get(int empresa, int temporada, string id = "")
         {
             ColegioContext objCnn = new ColegioContext();
             Dictionary<string, object> objParametros = new Dictionary<string, object>();
 
 
-            objParametros.Add("empresa", empresa);
-            objParametros.Add("temporada", temporada);
-            objParametros.Add("id", id);
+         
 
-            DataTable result = objCnn.ExecuteStoreQuery(new BaseDatos.Modelos.ProcedureDTO()
+            List<ConsultaGruposDTO> objresult = (from data in objCnn.grupos
+                                                 select new ConsultaGruposDTO()
+                                                 {
+                                                     Estudiantes = 0,
+                                                     IdGrupo = data.GrId,
+                                                     Nombre = data.GrNombre
+                                                 }).ToList();
+
+
+            
+
+            objresult.ForEach(c =>
             {
-                commandText = "Gargen.GetGrupos",
-                parametros = objParametros
+
+                c.Estudiantes = objCnn.grupos_estudiantes.Count(e => e.GruEstGrupo == c.IdGrupo);
+
+
+                c.profesores = (from p in objCnn.personas
+                                join gp in objCnn.grupos_profesor on p.PerId equals gp.GruProProfesor
+                                where gp.GruProGrupo == c.IdGrupo
+                                select new ConsultaProfesorDTO
+                                {
+                                    id = p.PerId,
+                                    nombre = p.PerNombres,
+                                    apellido = p.PerApellidos == null ? string.Empty : p.PerApellidos,
+                                    celular = p.PerTelefono == null ? string.Empty : p.PerTelefono,
+                                    email = p.PerEmail == null ? string.Empty : p.PerEmail,
+                                });
             });
 
-
-            return (from data in result.AsEnumerable()
-                    select new ConsultaGruposDTO()
-                    {
-                        Estudiantes = (int)data["Estudiantes"],
-                        IdGrupo = (int)data["IdGrupo"],
-                        Nombre = (string)data["Nombre"],
-                        Profesores = (string)data["Profesores"],
-                    });
+            return objresult;
 
         }
 
 
-        
+
     }
 }

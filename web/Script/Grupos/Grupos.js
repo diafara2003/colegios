@@ -26,13 +26,22 @@ function renderizar_tr_grupos(_item) {
     return `<tr>
                 <td id="Nombre_${_item.IdGrupo}">${_item.Nombre}</td>
                 <td class="text-center">${_item.Estudiantes}</td>
-                <td>${_item.Profesores}</td>
+                <td>${renderizar__profesor(_item.profesores)}</td>
                 <td class="text-left">
                 <button onclick="editar(${_item.IdGrupo})" type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
                 <button onclick="eliminar(${_item.IdGrupo},this)" type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>                
                 </td>
             </tr>
         `;
+}
+function renderizar__profesor(_profesor) {
+    let _html = ''
+
+    if (_profesor != null && _profesor.length > 0)
+        _profesor.forEach(c => _html += `<div class="d-block">${c.nombre} ${c.apellido}</div>`);
+
+
+    return _html;
 }
 function no_hay_grupos() {
     return `<tr>

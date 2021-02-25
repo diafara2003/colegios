@@ -21,7 +21,16 @@ namespace Colegio.Controllers
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
 
-            return new GruposGardenBL<Trasversales.Modelo.Grupos>().Get(_empresa.PerIdEmpresa, temporada);
+            try
+            {
+                return new GruposGardenBL<Trasversales.Modelo.Grupos>().Get(_empresa.PerIdEmpresa, temporada);
+            }
+            catch (Exception e)
+            {
+
+                return new List<ConsultaGruposDTO>();
+            }
+            
         }
 
         // GET: api/Grupos/5
@@ -31,7 +40,16 @@ namespace Colegio.Controllers
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
 
-            return new GruposGardenBL<Trasversales.Modelo.Grupos>().Get(_empresa.PerIdEmpresa, temporada, id: id).FirstOrDefault();
+            try
+            {
+                return new GruposGardenBL<Trasversales.Modelo.Grupos>().Get(_empresa.PerIdEmpresa, temporada, id: id).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            
         }
 
         // POST: api/Grupos
