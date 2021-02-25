@@ -68,7 +68,7 @@ namespace Menu.Servicios
             objSeccion.Add(op_mensajeria);
 
 
-
+            
             SeccionCustom op_grupos = (from data in objCnn.seccion
                                            where data.SecDescripcion.Equals("Grupos")
                                            select new SeccionCustom()
@@ -82,6 +82,20 @@ namespace Menu.Servicios
 
 
             objSeccion.Add(op_grupos);
+
+            SeccionCustom op_profesores = (from data in objCnn.seccion
+                                       where data.SecDescripcion.Equals("Profesores")
+                                       select new SeccionCustom()
+                                       {
+                                           SeccionId = data.SeccionId,
+                                           SecDescripcion = data.SecDescripcion,
+                                           SecIcono = data.SecIcono,
+                                           SecRuta = data.SecRuta,
+                                           opcion = (from query in objCnn.opcion where query.OpSeccionId == data.SeccionId select query)
+                                       }).FirstOrDefault();
+
+
+            objSeccion.Add(op_profesores);
             return objSeccion;
         }
     }

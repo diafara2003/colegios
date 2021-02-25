@@ -500,3 +500,9 @@ function identify_type(e) {
 //============================================================================================================================================================
 
 
+
+if (alertify) {
+    var delay = alertify.get('notifier', 'delay');
+    alertify.set('notifier', 'delay', 2);
+    alertify.set('notifier', 'position', 'top-right');
+}

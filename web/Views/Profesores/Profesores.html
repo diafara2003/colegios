@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="es">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="comunicacion de colegios" />
+    <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
+    <title>Inicio</title>
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <title>Grupos</title>
+    <style>
+        .modal-dialog {
+            min-width: 800px;
+        }
+
+        .list-group {
+            max-height: 150px;
+            overflow: auto;
+        }
+
+            .list-group li {
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container  mt-2 ">
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Configuración de profesores</header>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
+                <div class="text-right">
+                    <button type="button"onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear profesor</button>
+                </div>
+                <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2">
+                    <table class="table table-hover table-sm mt-4">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Celular</th>
+                                <th scope="col">Grupos</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbltemporada"></tbody>
+                        <tfoot class="bg-light">
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Creación profesor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Nombre del profesor:</label>
+                            <div class="input-group input-group-sm">
+                                <input type="text" maxlength="50" class="form-control" id="nombre_-1" placeholder="Descripción">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>Apellido del profesor:</label>
+                            <div class="input-group input-group-sm">
+                                <input type="text" maxlength="50" class="form-control" id="apellido_-1" placeholder="Descripción">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <label>Correo del profesor:</label>
+                            <div class="input-group input-group-sm">
+                                <input type="email" maxlength="50" class="form-control" id="email_-1" placeholder="Descripción">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>Celular del profesor:</label>
+                            <div class="input-group input-group-sm">
+                                <input type="number" maxlength="10" class="form-control" id="celular_-1" placeholder="Descripción">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <label>Grupos:</label>
+                            <ul class="list-group list-group-flush"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary  btn-sm" onclick="agregar_profesores()">Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Creación del grupo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Nombre del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" maxlength="50" class="form-control" id="nombre_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Apellido del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" maxlength="50" class="form-control" id="apellido_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label>Correo del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="email" maxlength="50" class="form-control" id="email_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Celular del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="number" maxlength="10" class="form-control" id="celular_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label>Grupos:</label>
+                                <ul class="list-group list-group-flush"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary  btn-sm" onclick="editar_registro()">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/Profesores/profesores.js"></script>
+
+</body>
+</html>

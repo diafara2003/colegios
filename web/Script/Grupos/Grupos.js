@@ -101,6 +101,3 @@ async function editar_registro() {
 }
 consultar_grupos();
 
-var delay = alertify.get('notifier', 'delay');
-alertify.set('notifier', 'delay', 2);
-alertify.set('notifier', 'position', 'top-right');

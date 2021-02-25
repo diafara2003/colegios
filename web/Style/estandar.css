@@ -151,3 +151,11 @@ i {
     border-radius: 4px;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
+
+
+.alertify-notifier .ajs-message.ajs-error {
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
+

@@ -66,6 +66,8 @@
     <Compile Include="Modelo\GruposEnvioAutorizadoCursos.cs" />
     <Compile Include="Modelo\GruposEnvioAutorizadoGrados.cs" />
     <Compile Include="Modelo\GruposEnvioDet.cs" />
+    <Compile Include="Modelo\GruposEstudiantes.cs" />
+    <Compile Include="Modelo\GruposProfesor.cs" />
     <Compile Include="Modelo\LoginAuditoria.cs" />
     <Compile Include="Modelo\Materias.cs" />
     <Compile Include="Modelo\GruposEnvioColores.cs" />

@@ -30,3 +30,5 @@ C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.Co
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.pdb
+C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.dll
+C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.pdb

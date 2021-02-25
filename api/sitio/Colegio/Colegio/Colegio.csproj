@@ -211,6 +211,7 @@
     <Compile Include="Controllers\MensajesController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\SalonesController.cs" />
     <Compile Include="Controllers\TemporadaController.cs" />
     <Compile Include="Controllers\TipoPerfilController.cs" />
