@@ -34,6 +34,11 @@
             .list-group li {
                 cursor: pointer;
             }
+
+        .input-group-append button {
+            padding: 0px 13px;            
+            height: 32px;
+        }
     </style>
 </head>
 <body>
@@ -47,11 +52,28 @@
 
 
         <div class="row">
-
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
-                <div class="text-right">
-                    <button type="button" onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear estudiante</button>
+                <div class="row justify-content-between">
+
+                    <div class="input-group col-md-6 col-8">
+                        <label class="mt-2 mr-1">Buscar estudiante</label>
+                        <input class="form-control py-2" type="search" placeholder="buscar" id="example-search-input" >
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+
+                    <div class="col-4 text-right">
+                        <div>
+                            <button type="button" onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear estudiante</button>
+                        </div>
+                    </div>
                 </div>
+
+
+
                 <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2">
                     <table class="table table-hover table-sm mt-4">
 
@@ -60,7 +82,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellidos</th>
                                 <th scope="col">Grupo</th>
-                                <th scope="col">Estado</th>                                
+                                <th scope="col">Estado</th>
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
@@ -68,6 +90,63 @@
                         <tfoot class="bg-light">
                         </tfoot>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar profesor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Nombre del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" maxlength="50" class="form-control" id="nombre_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Apellido del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" maxlength="50" class="form-control" id="apellido_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label>Correo del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="email" maxlength="50" class="form-control" id="email_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Celular del profesor:</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="number" maxlength="10" class="form-control" id="celular_Edit" placeholder="Descripción">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label>Grupos:</label>
+                                <ul class="list-group list-group-flush"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary  btn-sm" onclick="editar_registro()">Editar</button>
                 </div>
             </div>
         </div>

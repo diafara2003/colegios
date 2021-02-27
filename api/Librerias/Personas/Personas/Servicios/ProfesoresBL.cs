@@ -56,7 +56,7 @@ namespace Persona.Servicios
 
             var profesores = (from data in objCnn.personas
                               where data.PerIdEmpresa == empresa && data.PerEstado
-                               && data.PerTipoPerfil == 2
+                               && data.PerTipoPerfil == 1
                               select new ConsultaProfesorDTO
                               {
                                   nombre = data.PerNombres,

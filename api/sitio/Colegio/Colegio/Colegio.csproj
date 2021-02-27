@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ClasesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
     <Compile Include="Controllers\GrupoEnvioController.cs" />
     <Compile Include="Controllers\GruposController.cs" />

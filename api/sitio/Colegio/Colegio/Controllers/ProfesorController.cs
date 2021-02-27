@@ -70,7 +70,7 @@ namespace Colegio.Controllers
                 obj.PerTelefono = value.celular;
                 obj.PerIdEmpresa = _empresa.PerIdEmpresa;
                 obj.PerEstado = true;
-                obj.PerTipoPerfil = 2;
+                obj.PerTipoPerfil = 1;
 
 
                 obj = new ProfesoresBL<Personas>().Add(obj);

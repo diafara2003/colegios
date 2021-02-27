@@ -35,6 +35,16 @@ namespace BaseDatos.Contexto
         }
 
 
+        public void UpdateEntity<T>(T modelo) where T : class
+        {
+            
+            base.Entry<T>(modelo).State = EntityState.Modified;
+
+            base.SaveChanges();
+            
+        }
+
+
         public IEnumerable<T> GetAllEntity<T>() where T : class
         {
             return base.Set<T>();
