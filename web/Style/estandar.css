@@ -133,6 +133,7 @@ i {
     border-radius: 35px;
     font-size: 24px;
     line-height: 1.33;
+    
 }
 
 .btn-circle {
@@ -143,6 +144,7 @@ i {
     text-align: center;
     font-size: 12px;
     line-height: 1.42857;
+    border: 1px solid #bcc2ef;
 }
 
 
