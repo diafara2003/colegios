@@ -49,5 +49,18 @@ namespace Colegio.Controllers
             return new EstudiantesBL<Estudiantes>().Save(request, _empresa.PerIdEmpresa);
 
         }
+
+        [HttpPut]
+        public ResponseDTO Update(ActualizarGrupoEstudianteDTO request) {
+            return new EstudiantesBL<Estudiantes>().Update(request);
+
+        }
+
+        [HttpDelete]
+        public ResponseDTO Eliminar(int id) {
+            new EstudiantesBL<Estudiantes>().DeleteEstudiante(id);
+
+            return new ResponseDTO();
+        }
     }
 }

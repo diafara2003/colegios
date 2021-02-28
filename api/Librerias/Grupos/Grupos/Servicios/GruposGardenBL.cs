@@ -23,6 +23,7 @@ namespace Grupo.Servicios
          
 
             List<ConsultaGruposDTO> objresult = (from data in objCnn.grupos
+                                                 where data.GrEmpresa==empresa
                                                  select new ConsultaGruposDTO()
                                                  {
                                                      Estudiantes = 0,

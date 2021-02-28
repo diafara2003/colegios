@@ -55,3 +55,4 @@ C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.pd
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.Garden.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.Garden.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.gruposEstudianteProfesor.resources
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.parentesco.resources

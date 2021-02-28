@@ -12,5 +12,14 @@ namespace Persona.Modelos
         public Trasversales.Modelo.Estudiantes estudiante { get; set; }
         public CustomGrupo grupo { get; set; }
 
+
+
+    }
+
+    public class ActualizarGrupoEstudianteDTO {
+
+        public int id { get; set; }
+        public int idgrupo { get; set; }
+        public bool estado { get; set; }
     }
 }

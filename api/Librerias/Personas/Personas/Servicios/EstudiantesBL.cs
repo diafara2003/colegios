@@ -56,14 +56,39 @@ namespace Persona.Servicios
             obj.estudiante = objCnn.estudiantes.Where(c => c.EstIdPersona == idPersona).FirstOrDefault();
             obj.grupo = (from ge in objCnn.grupos_estudiantes
                          join g in objCnn.grupos on ge.GruEstGrupo equals g.GrId
-                         select new CustomGrupo
+                         where ge.GruEstEstudiante == idPersona
+                         select new CustomGrupo()
                          {
                              id = g.GrId,
                              nombre = g.GrNombre
-                         }).FirstOrDefault(); ;
+                         }).FirstOrDefault();
 
             return obj;
 
+        }
+
+        public ResponseDTO Update(ActualizarGrupoEstudianteDTO modelo)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            ResponseDTO objresultado = new ResponseDTO();
+
+
+            var grupo = objCnn.grupos_estudiantes.Where(c => c.GruEstEstudiante == modelo.id).FirstOrDefault();
+
+            grupo.GruEstGrupo = modelo.idgrupo;
+
+            var persona = objCnn.personas.Find(modelo.id);
+
+            persona.PerEstado = modelo.estado;
+
+
+            objCnn.SaveChanges();
+
+
+            objresultado.codigo = 1;
+            objresultado.respuesta = string.Empty;
+
+            return objresultado;
         }
 
 
@@ -72,6 +97,9 @@ namespace Persona.Servicios
 
             ColegioContext objCnn = new ColegioContext();
 
+            modelo.persona.PerIdEmpresa = empresa;
+            modelo.persona.PerTipoPerfil = 2;
+            modelo.persona.PerEstado = true;
 
             if (modelo.persona.PerId == 0)
             {
@@ -83,6 +111,7 @@ namespace Persona.Servicios
 
 
                 modelo.estudiante.EstIdPersona = modelo.persona.PerId;
+                modelo.estudiante.EstNombresEstudiante = modelo.persona.PerNombres + ' ' + modelo.persona.PerApellidos;
 
                 objCnn.estudiantes.Add(modelo.estudiante);
 
@@ -97,15 +126,18 @@ namespace Persona.Servicios
             else
             {
 
+
+
                 objCnn.UpdateEntity<Personas>(modelo.persona);
                 objCnn.UpdateEntity<Estudiantes>(modelo.estudiante);
 
 
                 objCnn.grupos_estudiantes.Where(c => c.GruEstEstudiante == modelo.persona.PerId).ToList().ForEach(c => objCnn.Entry(c).State = EntityState.Deleted);
 
-                objCnn.grupos_estudiantes.Add(new GruposEstudiantes() { 
-                GruEstEstudiante=modelo.persona.PerId,
-                GruEstGrupo= modelo.grupo.id
+                objCnn.grupos_estudiantes.Add(new GruposEstudiantes()
+                {
+                    GruEstEstudiante = modelo.persona.PerId,
+                    GruEstGrupo = modelo.grupo.id
                 });
 
                 objCnn.SaveChanges();

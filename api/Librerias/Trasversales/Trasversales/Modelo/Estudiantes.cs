@@ -30,6 +30,7 @@ namespace Trasversales.Modelo
         [MaxLength(50)]
         public string EstTeleEmpresaMama { get; set; }
 
+        public string EstParentestoAcudiente1 { get; set; }
 
         [MaxLength(50)]
         public string EstNombresPapa { get; set; }
@@ -38,7 +39,7 @@ namespace Trasversales.Modelo
         [MaxLength(50)]
         public string EstTelefonoPapa { get; set; }
         [MaxLength(50)]
-        public string EstCorreoPapa { get; set; }        
+        public string EstCorreoPapa { get; set; }
         [MaxLength(50)]
         public string EstEmpresaPapa { get; set; }
         [MaxLength(50)]
@@ -47,18 +48,6 @@ namespace Trasversales.Modelo
         public string EstTeleEmpresaPapa { get; set; }
 
 
-        [MaxLength(50)]
-        public string EstNombresAcuediente { get; set; }
-        [MaxLength(50)]
-        public string EstApellidosAcudiente { get; set; }
-        [MaxLength(50)]
-        public string EstTelefonoAcudiente { get; set; }        
-        [MaxLength(50)]
-        public string EstEmpresaAcudiente { get; set; }
-        [MaxLength(50)]
-        public string EstCargoAcudiente { get; set; }
-        [MaxLength(50)]
-        public string EstTeleEmpresaAcudiente { get; set; }
-
+        public string EstParentestoAcudiente2 { get; set; }
     }
 }

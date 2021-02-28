@@ -103,6 +103,10 @@
     <Compile Include="Migrations\202102250030200_gruposEstudianteProfesor.designer.cs">
       <DependentUpon>202102250030200_gruposEstudianteProfesor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102281531259_parentesco.cs" />
+    <Compile Include="Migrations\202102281531259_parentesco.designer.cs">
+      <DependentUpon>202102281531259_parentesco.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102250030200_gruposEstudianteProfesor.resx">
       <DependentUpon>202102250030200_gruposEstudianteProfesor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102281531259_parentesco.resx">
+      <DependentUpon>202102281531259_parentesco.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>
