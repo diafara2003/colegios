@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using Trasversales.Modelo;
+using Utilidades.Servicios;
 
 namespace Colegio.Controllers
 {
@@ -17,6 +18,8 @@ namespace Colegio.Controllers
         // GET: api/Grupos
         public IEnumerable<ConsultaGruposDTO> Get()
         {
+
+            Utilidad.EnviarMensajeCorreo();
             var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
