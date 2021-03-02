@@ -38,5 +38,7 @@ namespace Trasversales.Modelo
         public string PerLugarNacimiento { get; set; }
         public string PerDireccion { get; set; }
 
+        public string PerTipoAcudiente { get; set; }
+
     }
 }

@@ -1,70 +1,96 @@
 ﻿let objEstudiante = {
-    persona: {
-        PerId: 0,
-        PerNombres: '',
-        PerApellidos: '',
-        PerDocumento: '',
-        PerFechanacimiento: '',
-        PerGenero: ''
-    },
+    acudientes: [],
     estudiante: {
         EstId: 0,
-        EstIdPersona: 0,
-        EstNombresEstudiante: '',
-
-
-        EstNombresMama: '',
-        EstApellidosMama: '',
-        EstTelefonoMama: '',
-        EstCorreoMama: '',
-        EstParentestoAcudiente1: '',
-
-
-        EstNombresPapa: '',
-        EstApellidosPapa: '',
-        EstTelefonoPapa: '',
-        EstCorreoPapa: '',
-        EstParentestoAcudiente2: '',
+        EstNombres: '',
+        EstApellidos: '',
+        EstFechaNacimineto: '',
+        EstRC: '',
+        EstRH: '',
+        EstAseguradora: '',
+        EstAlergias: '',
+        EstMedicamentos: '',
+        EstObs: '',
+        EstDireccion: '',
+        EstTelefono: '',
+        Acudiente1: 0,
+        Acudiente2: 0
     },
     grupo: {
         id: 0,
         nombre: ''
     }
 };
+let _acudiente1 = {
+    PerId: 0,
+    PerNombres: '',
+    PerApellidos: '',
+    PerEmail: '',
+    PerTelefono: '',
+    PerTipoAcudiente: ''
+
+};
+let _acudiente2 = {
+    PerId: 0,
+    PerNombres: '',
+    PerApellidos: '',
+    PerEmail: '',
+    PerTelefono: '',
+    PerTipoAcudiente: ''
+
+};
 
 async function consultar_estudiante(id) {
     objEstudiante = await consultarAPI('Estudiantes/' + id, 'GET', undefined);
 
     cargar_estudiante();
+
+
+    _acudiente1 = objEstudiante.acudientes[0];
+
+    if (objEstudiante.acudientes.length == 2)
+        _acudiente2 = objEstudiante.acudientes[1];
+
+
     $('#Btnguardar').removeAttr('disabled');
 
 }
 function cargar_estudiante() {
+
+
+    const parts = objEstudiante.estudiante.EstFechaNacimineto.split(/[- :]/);
+    const wanted = `${parts[0]}-${parts[1]}-${parts[2].split('T')[0]}`;
     /*estudiante*/
-    document.getElementById('PerNombres').value = objEstudiante.persona.PerNombres;
-    document.getElementById('PerApellidos').value = objEstudiante.persona.PerApellidos;
-    document.getElementById('PerDocumento').value = objEstudiante.persona.PerDocumento;
-    document.getElementById('PerFechanacimiento').value = objEstudiante.persona.PerFechanacimiento;
-    $('#PerGenero').find(`option[value="${objEstudiante.persona.PerGenero}"]`).attr('selected', 'selected');
+    document.getElementById('EstNombres').value = objEstudiante.estudiante.EstNombres;
+    document.getElementById('EstApellidos').value = objEstudiante.estudiante.EstApellidos;
+    document.getElementById('EstRC').value = objEstudiante.estudiante.EstRC;
+    document.getElementById('EstFechaNacimineto').value = wanted;
+    $('#EstRH').find(`option[value="${objEstudiante.estudiante.EstRH}"]`).attr('selected', 'selected');
+
+    document.getElementById('EstAseguradora').value = objEstudiante.estudiante.EstAseguradora;
+    document.getElementById('EstAlergias').value = objEstudiante.estudiante.EstAlergias;
+    document.getElementById('EstMedicamentos').value = objEstudiante.estudiante.EstMedicamentos;
+
 
     /*grupo*/
     $('#ddlgrupo').find(`option[value="${objEstudiante.grupo.id}"]`).attr('selected', 'selected');
 
     /*acudiente */
-    document.getElementById('EstNombresMama').value = objEstudiante.estudiante.EstNombresMama;
-    document.getElementById('EstApellidosMama').value = objEstudiante.estudiante.EstApellidosMama;
-    document.getElementById('EstCorreoMama').value = objEstudiante.estudiante.EstCorreoMama;
-    document.getElementById('EstTelefonoMama').value = objEstudiante.estudiante.EstTelefonoMama;
-    $('#EstParentestoAcudiente1').find(`option[value="${objEstudiante.estudiante.EstParentestoAcudiente1}"]`).attr('selected', 'selected');
+    document.getElementById('PerNombres_1').value = objEstudiante.acudientes[0].PerNombres;
+    document.getElementById('PerApellidos_1').value = objEstudiante.acudientes[0].PerApellidos;
+    document.getElementById('PerEmail_1').value = objEstudiante.acudientes[0].PerEmail;
+    document.getElementById('PerTelefono_1').value = objEstudiante.acudientes[0].PerTelefono;
+    $('#PerTipoAcudiente_1').find(`option[value="${objEstudiante.acudientes[0].PerTipoAcudiente}"]`).attr('selected', 'selected');
 
 
-    /*acudiente 2*/
-    document.getElementById('EstApellidosPapa').value = objEstudiante.estudiante.EstApellidosPapa;
-    document.getElementById('EstCorreoPapa').value = objEstudiante.estudiante.EstCorreoPapa;
-    document.getElementById('EstNombresPapa').value = objEstudiante.estudiante.EstNombresPapa;
-    document.getElementById('EstTelefonoPapa').value = objEstudiante.estudiante.EstTelefonoPapa;
-    $('#EstParentestoAcudiente2').find(`option[value="${objEstudiante.estudiante.EstParentestoAcudiente2}"]`).attr('selected', 'selected');
-
+    if (objEstudiante.acudientes.length == 2) {
+        /*acudiente 2*/
+        document.getElementById('PerNombres_2').value = objEstudiante.acudientes[1].PerNombres;
+        document.getElementById('PerApellidos_2').value = objEstudiante.acudientes[1].PerApellidos;
+        document.getElementById('PerEmail_2').value = objEstudiante.acudientes[1].PerEmail;
+        document.getElementById('PerTelefono_2').value = objEstudiante.acudientes[1].PerTelefono;
+        $('#PerTipoAcudiente_2').find(`option[value="${objEstudiante.acudientes[1].PerTipoAcudiente}"]`).attr('selected', 'selected');
+    }
 }
 async function consultar_grupos() {
     const response = await consultarAPI('Grupos', 'GET');
@@ -89,19 +115,21 @@ async function habilitar_boton_agregar() {
 
 }
 function validar_campos_obligatorios() {
-    if (objEstudiante.persona.PerNombres == '') return false;
-    if (objEstudiante.persona.PerApellidos == '') return false;
-    if (objEstudiante.persona.PerDocumento == '') return false;
+    if (objEstudiante.estudiante.EstNombres == '') return false;
+    if (objEstudiante.estudiante.EstApellidos == '') return false;
+    if (objEstudiante.estudiante.EstRC == '') return false;
+    if (objEstudiante.estudiante.EstRH == '') return false;
+    if (objEstudiante.estudiante.EstFechaNacimineto == '') return false;
 
 
+    if (objEstudiante.acudientes[0].PerEmail == '') return false;
+    else if (validar_correo(objEstudiante.acudientes[0].PerEmail == '')) return false;
 
-    if (objEstudiante.estudiante.EstCorreoMama == '') return false;
-    else if (validar_correo(objEstudiante.estudiante.EstCorreoMama == '')) return false;
-
-    if (objEstudiante.estudiante.EstNombresMama == '') return false;
-    if (objEstudiante.estudiante.EstApellidosMama == '') return false;
-    if (objEstudiante.estudiante.EstParentestoAcudiente1 == '') return false;
-    if (objEstudiante.estudiante.EstTelefonoMama == '') return false;
+    if (objEstudiante.acudientes[0].PerNombres == '') return false;
+    if (objEstudiante.acudientes[0].PerApellidos == '') return false;
+    if (objEstudiante.acudientes[0].PerTipoAcudiente == '') return false;
+    if (objEstudiante.acudientes[0].PerEmail == '') return false;
+    if (objEstudiante.acudientes[0].PerTelefono == '') return false;
 
 
     if (objEstudiante.grupo.id <= 0) return false;
@@ -114,28 +142,38 @@ function validar_campos_obligatorios() {
 function obtener_datos_formulario() {
 
     /*estudiante*/
-    objEstudiante.persona.PerNombres = document.getElementById('PerNombres').value;
-    objEstudiante.persona.PerApellidos = document.getElementById('PerApellidos').value;
-    objEstudiante.persona.PerDocumento = document.getElementById('PerDocumento').value;
-    objEstudiante.persona.PerFechanacimiento = document.getElementById('PerFechanacimiento').value;
-    objEstudiante.persona.PerGenero = $('#PerGenero').find('option:selected').val();
+    objEstudiante.estudiante.EstNombres = document.getElementById('EstNombres').value;
+    objEstudiante.estudiante.EstApellidos = document.getElementById('EstApellidos').value;
+    objEstudiante.estudiante.EstFechaNacimineto = document.getElementById('EstFechaNacimineto').value;
+    objEstudiante.estudiante.EstRC = document.getElementById('EstRC').value;
+    objEstudiante.estudiante.EstAseguradora = document.getElementById('EstAseguradora').value;
+    objEstudiante.estudiante.EstAlergias = document.getElementById('EstAlergias').value;
+    objEstudiante.estudiante.EstMedicamentos = document.getElementById('EstMedicamentos').value;
+    objEstudiante.estudiante.EstRH = $('#EstRH').find('option:selected').val();
 
     /*grupo*/
     objEstudiante.grupo.id = $('#ddlgrupo').find('option:selected').val();
 
     /*acudiente */
-    objEstudiante.estudiante.EstNombresMama = document.getElementById('EstNombresMama').value;
-    objEstudiante.estudiante.EstApellidosMama = document.getElementById('EstApellidosMama').value;
-    objEstudiante.estudiante.EstCorreoMama = document.getElementById('EstCorreoMama').value;
-    objEstudiante.estudiante.EstTelefonoMama = document.getElementById('EstTelefonoMama').value;
-    objEstudiante.estudiante.EstParentestoAcudiente1 = $('#EstParentestoAcudiente1').find('option:selected').val();
+    _acudiente1.PerNombres = document.getElementById('PerNombres_1').value;
+    _acudiente1.PerApellidos = document.getElementById('PerApellidos_1').value;
+    _acudiente1.PerEmail = document.getElementById('PerEmail_1').value;
+    _acudiente1.PerTelefono = document.getElementById('PerTelefono_1').value;
+    _acudiente1.PerTipoAcudiente = $('#PerTipoAcudiente_1').find('option:selected').val();
+
+    objEstudiante.acudientes = [];
+    objEstudiante.acudientes.push(_acudiente1);
+
 
     /*acudiente 2*/
-    objEstudiante.estudiante.EstApellidosPapa = document.getElementById('EstApellidosPapa').value;
-    objEstudiante.estudiante.EstCorreoPapa = document.getElementById('EstCorreoPapa').value;
-    objEstudiante.estudiante.EstNombresPapa = document.getElementById('EstNombresPapa').value;
-    objEstudiante.estudiante.EstTelefonoPapa = document.getElementById('EstTelefonoPapa').value;
-    objEstudiante.estudiante.EstParentestoAcudiente2 = $('#EstParentestoAcudiente2').find('option:selected').val();
+    _acudiente2.PerNombres = document.getElementById('PerNombres_2').value;
+    _acudiente2.PerApellidos = document.getElementById('PerApellidos_2').value;
+    _acudiente2.PerEmail = document.getElementById('PerEmail_2').value;
+    _acudiente2.PerTelefono = document.getElementById('PerTelefono_2').value;
+    _acudiente2.PerTipoAcudiente = $('#PerTipoAcudiente_2').find('option:selected').val();
+
+
+    if (_acudiente2.PerEmail != '') objEstudiante.acudientes.push(_acudiente2);
 }
 async function agregar_estudiante() {
     obtener_datos_formulario();
@@ -143,12 +181,20 @@ async function agregar_estudiante() {
         const _result = await consultarAPI('Estudiantes', 'POST', undefined, objEstudiante);
 
 
-        if (objEstudiante.persona.PerId == 0) alertify.success('Estudiante creado correctamente');
+        if (objEstudiante.estudiante.EstId == 0) alertify.success('Estudiante creado correctamente');
         else alertify.success('Estudiante modificado correctamente');
 
-        objEstudiante.persona.PerId = _result.persona.PerId;
         objEstudiante.estudiante.EstId = _result.estudiante.EstId;
-        objEstudiante.estudiante.EstIdPersona = _result.estudiante.EstIdPersona;
+        objEstudiante.estudiante.Acudiente1 = _result.estudiante.EstIdPersona;
+        objEstudiante.acudientes[0].PerId = _result.acudientes[0].PerId;
+        _acudiente1.PerId = _result.estudiante.Acudiente1;
+
+        if (objEstudiante.acudientes.length == 2) {
+            objEstudiante.acudientes[1].PerId = _result.acudientes[1].PerId;
+            objEstudiante.estudiante.Acudiente2 = _result.estudiante.Acudiente2;
+            _acudiente2.PerId = _result.estudiante.Acudiente2;
+        }
+
 
     }
 }
@@ -169,7 +215,7 @@ if (mm < 10) {
 }
 
 today = yyyy + '-' + mm + '-' + dd;
-document.getElementById("PerFechanacimiento").setAttribute("max", today);
+document.getElementById("EstFechaNacimineto").setAttribute("max", today);
 
 
 (async () => {
@@ -179,5 +225,5 @@ document.getElementById("PerFechanacimiento").setAttribute("max", today);
 
     const _id = Get_query_string('id')
     if (_id != undefined) consultar_estudiante(_id);
-    
+
 })();

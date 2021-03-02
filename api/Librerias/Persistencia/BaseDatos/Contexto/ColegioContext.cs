@@ -116,5 +116,6 @@ namespace BaseDatos.Contexto
         public DbSet<Garden_Estudiantes> garden_estudiantes { get; set; }
         public DbSet<GruposEstudiantes> grupos_estudiantes { get; set; }
         public DbSet<GruposProfesor> grupos_profesor { get; set; }
+        public DbSet<EstudianteJardin> estudiante_jardin { get; set; }
     }
 }

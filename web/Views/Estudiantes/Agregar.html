@@ -111,29 +111,52 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="exampleInputEmail1">Nombres  <span class="text-danger">*</span></label>
-                                    <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="PerNombres" aria-describedby="emailHelp" placeholder="Nombres">
+                                    <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="EstNombres" aria-describedby="emailHelp" placeholder="Nombres">
                                 </div>
                                 <div class="col-6">
                                     <label for="exampleInputEmail1">Apellidos <span class="text-danger">*</span></label>
-                                    <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="PerApellidos" aria-describedby="emailHelp" placeholder="Apellidos">
+                                    <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="EstApellidos" aria-describedby="emailHelp" placeholder="Apellidos">
                                 </div>
                                 <div class="col-6">
                                     <label for="exampleInputEmail1">Identificación <span class="text-danger">*</span></label>
-                                    <input maxlength="11" onblur="habilitar_boton_agregar()" onkeypress="return only_number(event)" type="text" class="form-control input-sm" id="PerDocumento" aria-describedby="emailHelp" placeholder="Identificación">
+                                    <input maxlength="11" onblur="habilitar_boton_agregar()" onkeypress="return only_number(event)" type="text" class="form-control input-sm" id="EstRC" aria-describedby="emailHelp" placeholder="Identificación">
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleInputEmail1">Fecha de nacimiento</label>
-                                    <input type="date" class="form-control input-sm" id="PerFechanacimiento" aria-describedby="emailHelp" placeholder="Fecha de nacimiento">
+                                    <label for="exampleInputEmail1">Fecha de nacimiento <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control input-sm" id="EstFechaNacimineto" aria-describedby="emailHelp" placeholder="Fecha de nacimiento">
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleInputEmail1">Genero <span class="text-danger">*</span></label>
-                                    <select onblur="habilitar_boton_agregar()" class="form-control input-sm" id="PerGenero">
-                                        <option value="">Seleccione</option>
-                                        <option value="M">Niño</option>
-                                        <option value="F">Niña</option>
+                                    <label for="exampleInputEmail1">Grupo sanguineo <span class="text-danger">*</span></label>
+                                    <select onblur="habilitar_boton_agregar()" class="form-control input-sm" id="EstRH">
+                                        <option value="-1">Seleccione</option>
+                                        <option value="A-">A-</option>
+                                        <option value="A+">A+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="O+">O+</option>
                                     </select>
                                 </div>
-                                <div class="col-6"></div>
+                                <div class="col-6">
+                                    <label for="exampleInputEmail1">Aseguradora </label>
+                                    <input maxlength="11" onblur="habilitar_boton_agregar()" type="text" class="form-control input-sm" id="EstAseguradora" placeholder="Identificación">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="exampleInputEmail1">Alergias </label>
+                                    <textarea maxlength="50" class="form-control" id="EstAlergias" rows="3"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label for="exampleInputEmail1">Medicamentos </label>
+                                    <textarea class="form-control" maxlength="50" id="EstMedicamentos" rows="3"></textarea>
+                                </div>
+                                <!--<div class="col-12">
+                                    <label for="exampleInputEmail1">Comentarios adicionales</label>
+                                    <textarea class="form-control" maxlength="50" id="EstObs" rows="3"></textarea>
+                                </div>-->
+
                                 <div class="col-12 mt-2">
                                     <h6>Asignación de grupos</h6>
                                 </div>
@@ -164,7 +187,7 @@
                                 <div class="col-6">
                                     <div class="p-2">
                                         <label for="exampleInputEmail1">Correo del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="EstCorreoMama" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
                                     </div>
 
 
@@ -172,7 +195,7 @@
                                 <div class="col-6">
                                     <div class="p-2">
                                         <label for="exampleInputEmail1">Nombre del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="EstNombresMama" aria-describedby="emailHelp" placeholder="Nombre del acudiente">
+                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="PerNombres_1" aria-describedby="emailHelp" placeholder="Nombre del acudiente">
 
                                     </div>
 
@@ -181,7 +204,7 @@
 
                                     <div class="p-2">
                                         <label for="exampleInputEmail1">Apellido del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="EstApellidosMama" aria-describedby="emailHelp" placeholder="Apellido del acudiente">
+                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="PerApellidos_1" aria-describedby="emailHelp" placeholder="Apellido del acudiente">
 
                                     </div>
 
@@ -191,7 +214,7 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Parentesco  <span class="text-danger">*</span></label>
-                                        <select onblur="habilitar_boton_agregar()" class="form-control input-sm" id="EstParentestoAcudiente1">
+                                        <select onblur="habilitar_boton_agregar()" class="form-control input-sm" id="PerTipoAcudiente_1">
                                             <option value="-1">Seleccione un Parentesco</option>
                                             <option value="ma">Mamá</option>
                                             <option value="pa">Papá</option>
@@ -203,13 +226,21 @@
 
                                 </div>
                                 <div class="col-6">
-
                                     <div class="p-2">
-
                                         <label for="exampleInputEmail1">Celular del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="habilitar_boton_agregar()"  onkeypress="return only_number(event)" maxlength="10" type="text" class="form-control input-sm" id="EstTelefonoMama" aria-describedby="emailHelp" placeholder="Celular del acudiente">
+                                        <input onblur="habilitar_boton_agregar()" onkeypress="return only_number(event)" maxlength="10" type="text" class="form-control input-sm" id="PerTelefono_1" aria-describedby="emailHelp" placeholder="Celular del acudiente">
                                     </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-2">
+                                        <label></label>
+                                        <input type="button" onclick="agregar_estudiante()" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente1" value="Restablecer contraseña" />
+                                    </div>
+                                </div>
 
+
+                                <div class="col-12 mt-2 ml-3">
+                                    <div class="border mr-4"></div>
                                 </div>
 
 
@@ -221,7 +252,7 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Correo del acudiente</label>
-                                        <input type="text" class="form-control input-sm" maxlength="20" id="EstCorreoPapa" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <input type="text" class="form-control input-sm" maxlength="20" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
                                     </div>
 
                                 </div>
@@ -230,7 +261,7 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Nombre del acudiente  </label>
-                                        <input type="text" class="form-control input-sm" maxlength="20" id="EstNombresPapa" aria-describedby="emailHelp" placeholder="Nombre del acudiente">
+                                        <input type="text" class="form-control input-sm" maxlength="20" id="PerNombres_2" aria-describedby="emailHelp" placeholder="Nombre del acudiente">
                                     </div>
 
                                 </div>
@@ -238,7 +269,7 @@
 
                                     <div class="p-2">
                                         <label for="exampleInputEmail1">Apellido del acudiente</label>
-                                        <input type="text" class="form-control input-sm" maxlength="20" id="EstApellidosPapa" aria-describedby="emailHelp" placeholder="Apellido del acudiente">
+                                        <input type="text" class="form-control input-sm" maxlength="20" id="PerApellidos_2" aria-describedby="emailHelp" placeholder="Apellido del acudiente">
 
                                     </div>
                                 </div>
@@ -247,7 +278,7 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Parentesco </label>
-                                        <select class="form-control input-sm" id="EstParentestoAcudiente2">
+                                        <select class="form-control input-sm" id="PerTipoAcudiente_2">
                                             <option value="-1">Seleccione un Parentesco</option>
                                             <option value="ma">Mamá</option>
                                             <option value="pa">Papá</option>
@@ -263,10 +294,21 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Celular del acudiente </label>
-                                        <input type="text" class="form-control input-sm"  onkeypress="return only_number(event)" maxlength="10" id="EstTelefonoPapa" aria-describedby="emailHelp" placeholder="Celular del acudiente">
+                                        <input type="text" class="form-control input-sm" onkeypress="return only_number(event)" maxlength="10" id="PerTelefono_2" aria-describedby="emailHelp" placeholder="Celular del acudiente">
                                     </div>
 
                                 </div>
+                                <div class="col-6">
+                                    <div class="p-2">
+                                        <label></label>
+                                        <input type="button" onclick="agregar_estudiante()" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente2" value="Restablecer contraseña" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4 ml-3 pb-3">
+                                    <div class="border mr-4"></div>
+                                </div>
+
                                 <div class="col-12 text-center">
                                     <button type="button" onclick="agregar_estudiante()" class="btn btn-primary btn-sm" id="Btnguardar" disabled>Guardar</button>
                                 </div>

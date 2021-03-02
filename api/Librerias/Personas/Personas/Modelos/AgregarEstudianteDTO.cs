@@ -8,8 +8,8 @@ namespace Persona.Modelos
 {
    public class AgregarEstudianteDTO
     {
-        public Trasversales.Modelo.Personas persona { get; set; }
-        public Trasversales.Modelo.Estudiantes estudiante { get; set; }
+        public IList<Trasversales.Modelo.Personas> acudientes { get; set; }
+        public Trasversales.Modelo.EstudianteJardin estudiante { get; set; }
         public CustomGrupo grupo { get; set; }
 
 

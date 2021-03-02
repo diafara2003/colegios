@@ -107,6 +107,18 @@
     <Compile Include="Migrations\202102281531259_parentesco.designer.cs">
       <DependentUpon>202102281531259_parentesco.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103020214006_estudiantes_jardin.cs" />
+    <Compile Include="Migrations\202103020214006_estudiantes_jardin.designer.cs">
+      <DependentUpon>202103020214006_estudiantes_jardin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103020216597_estudiantes_personas.cs" />
+    <Compile Include="Migrations\202103020216597_estudiantes_personas.designer.cs">
+      <DependentUpon>202103020216597_estudiantes_personas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103020232443_estudiantes_jardin_estado.cs" />
+    <Compile Include="Migrations\202103020232443_estudiantes_jardin_estado.designer.cs">
+      <DependentUpon>202103020232443_estudiantes_jardin_estado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,6 +187,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102281531259_parentesco.resx">
       <DependentUpon>202102281531259_parentesco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103020214006_estudiantes_jardin.resx">
+      <DependentUpon>202103020214006_estudiantes_jardin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103020216597_estudiantes_personas.resx">
+      <DependentUpon>202103020216597_estudiantes_personas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103020232443_estudiantes_jardin_estado.resx">
+      <DependentUpon>202103020232443_estudiantes_jardin_estado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

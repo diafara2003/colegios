@@ -20,17 +20,16 @@ namespace Persona.Servicios
             List<ConsultaEstudiantesDTO> obj = new List<ConsultaEstudiantesDTO>();
             ColegioContext objCnn = new ColegioContext();
 
-            obj = (from e in objCnn.estudiantes
-                   join p in objCnn.personas on e.EstIdPersona equals p.PerId
-                   join gp in objCnn.grupos_estudiantes on e.EstIdPersona equals gp.GruEstEstudiante
+            obj = (from e in objCnn.estudiante_jardin
+                   join gp in objCnn.grupos_estudiantes on e.EstId equals gp.GruEstEstudiante
                    join g in objCnn.grupos on gp.GruEstGrupo equals g.GrId
-                   where p.PerIdEmpresa == empresa && p.PerTipoPerfil == 2
+                   where e.EstEmpresa == empresa
                    select new ConsultaEstudiantesDTO()
                    {
-                       id = p.PerId,
-                       nombres = p.PerNombres,
-                       apellidos = p.PerApellidos,
-                       estado = p.PerEstado,
+                       id = e.EstId,
+                       nombres = e.EstNombres,
+                       apellidos = e.EstApellidos,
+                       estado = e.EstEstado,
                        grupo = new CustomGrupo()
                        {
                            id = g.GrId,
@@ -48,12 +47,22 @@ namespace Persona.Servicios
         {
 
             AgregarEstudianteDTO obj = new AgregarEstudianteDTO();
+
+            obj.acudientes = new List<Personas>();
+
             ColegioContext objCnn = new ColegioContext();
 
 
 
-            obj.persona = objCnn.personas.Find(idPersona);
-            obj.estudiante = objCnn.estudiantes.Where(c => c.EstIdPersona == idPersona).FirstOrDefault();
+            obj.estudiante = objCnn.estudiante_jardin.Find(idPersona);
+
+
+            obj.acudientes.Add(objCnn.personas.Find(obj.estudiante.Acudiente1));
+
+            if (obj.estudiante.Acudiente2 > 0) obj.acudientes.Add(objCnn.personas.Find(obj.estudiante.Acudiente2));
+
+
+
             obj.grupo = (from ge in objCnn.grupos_estudiantes
                          join g in objCnn.grupos on ge.GruEstGrupo equals g.GrId
                          where ge.GruEstEstudiante == idPersona
@@ -77,9 +86,9 @@ namespace Persona.Servicios
 
             grupo.GruEstGrupo = modelo.idgrupo;
 
-            var persona = objCnn.personas.Find(modelo.id);
+            var persona = objCnn.estudiante_jardin.Find(modelo.id);
 
-            persona.PerEstado = modelo.estado;
+            // persona.PerEstado = modelo.estado;
 
 
             objCnn.SaveChanges();
@@ -97,27 +106,43 @@ namespace Persona.Servicios
 
             ColegioContext objCnn = new ColegioContext();
 
-            modelo.persona.PerIdEmpresa = empresa;
-            modelo.persona.PerTipoPerfil = 2;
-            modelo.persona.PerEstado = true;
-
-            if (modelo.persona.PerId == 0)
+            if (modelo.estudiante.EstId == 0)
             {
+                modelo.acudientes.ToList().ForEach(c =>
+                {
+
+                    c.PerIdEmpresa = empresa;
+                    c.PerTipoPerfil = 3;
+                    c.PerEstado = true;
+                    c.PerUsuario = c.PerEmail;
+                    c.PerClave = c.PerTelefono;
 
 
-                objCnn.personas.Add(modelo.persona);
+                    objCnn.personas.Add(c);
+
+
+                });
+
+                objCnn.SaveChanges();
+
+                modelo.estudiante.EstEmpresa = empresa;
+                modelo.estudiante.EstEstado = true;
+                modelo.estudiante.Acudiente1 = modelo.acudientes.FirstOrDefault().PerId;
+
+                if (modelo.acudientes.Count() == 2)
+                    modelo.estudiante.Acudiente2 = modelo.acudientes[1].PerId;
+
+
+                objCnn.estudiante_jardin.Add(modelo.estudiante);
 
                 objCnn.SaveChanges();
 
 
-                modelo.estudiante.EstIdPersona = modelo.persona.PerId;
-                modelo.estudiante.EstNombresEstudiante = modelo.persona.PerNombres + ' ' + modelo.persona.PerApellidos;
 
-                objCnn.estudiantes.Add(modelo.estudiante);
 
                 objCnn.grupos_estudiantes.Add(new GruposEstudiantes()
                 {
-                    GruEstEstudiante = modelo.persona.PerId,
+                    GruEstEstudiante = modelo.estudiante.EstId,
                     GruEstGrupo = modelo.grupo.id
                 });
 
@@ -128,15 +153,17 @@ namespace Persona.Servicios
 
 
 
-                objCnn.UpdateEntity<Personas>(modelo.persona);
-                objCnn.UpdateEntity<Estudiantes>(modelo.estudiante);
+                modelo.acudientes.ToList().ForEach(c => objCnn.UpdateEntity<Personas>(c));
 
 
-                objCnn.grupos_estudiantes.Where(c => c.GruEstEstudiante == modelo.persona.PerId).ToList().ForEach(c => objCnn.Entry(c).State = EntityState.Deleted);
+                objCnn.UpdateEntity<EstudianteJardin>(modelo.estudiante);
+
+
+                objCnn.grupos_estudiantes.Where(c => c.GruEstEstudiante == modelo.estudiante.EstId).ToList().ForEach(c => objCnn.Entry(c).State = EntityState.Deleted);
 
                 objCnn.grupos_estudiantes.Add(new GruposEstudiantes()
                 {
-                    GruEstEstudiante = modelo.persona.PerId,
+                    GruEstEstudiante = modelo.estudiante.EstId,
                     GruEstGrupo = modelo.grupo.id
                 });
 
@@ -156,16 +183,14 @@ namespace Persona.Servicios
 
             var persona = objCnn.personas.Find(id);
 
-            objCnn.grupos_estudiantes.Where(c => c.GruEstEstudiante == id).ToList().ForEach(c =>
-            {
+            objCnn.grupos_estudiantes.Where(c => c.GruEstEstudiante == id).ToList().ForEach(c => objCnn.grupos_estudiantes.Remove(c));
 
-                objCnn.grupos_estudiantes.Remove(c);
-            });
 
-            var estudiante = objCnn.estudiantes.Where(c => c.EstIdPersona == id).FirstOrDefault();
 
-            objCnn.estudiantes.Remove(estudiante);
+            var estudiante = objCnn.estudiante_jardin.Where(c => c.EstId == id).FirstOrDefault();
 
+
+            objCnn.estudiante_jardin.Remove(estudiante);
             objCnn.personas.Remove(persona);
 
             objCnn.SaveChanges();
