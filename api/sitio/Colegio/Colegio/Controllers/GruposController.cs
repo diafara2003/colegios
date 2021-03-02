@@ -19,7 +19,7 @@ namespace Colegio.Controllers
         public IEnumerable<ConsultaGruposDTO> Get()
         {
 
-            Utilidad.EnviarMensajeCorreo();
+           // Utilidad.EnviarMensajeCorreo();
             var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();

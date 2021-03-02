@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -31,11 +32,14 @@ namespace Utilidades.Servicios
             return xml;
         }
 
-        public static string EnviarMensajeCorreo() {
+        public static string EnviarMensajeCorreo(List<string> correos) {
             //Creando objeto MailMessage
             MailMessage email = new MailMessage();
-            email.To.Add(new MailAddress("diafara2003@gmail.com"));
-            email.To.Add(new MailAddress("cachar@gmail.com"));
+
+
+            correos.ForEach(c => email.To.Add(new MailAddress(c)));
+
+            
             email.From = new MailAddress("Notificaciones@comunicatecolegios.com");
             email.Subject = "Registro de padre";
             email.Body = "Cualquier contenido en <b>HTML</b> para enviarlo por correo electrónico.";
