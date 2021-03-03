@@ -51,7 +51,7 @@
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
                 <div class="text-right">
-                    <button type="button"onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear profesor</button>
+                    <button type="button" onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear profesor</button>
                 </div>
                 <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2">
                     <table class="table table-hover table-sm mt-4">
@@ -91,13 +91,13 @@
                         <div class="col-6">
                             <label>Nombre del profesor:</label>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="50" class="form-control" id="nombre_-1" placeholder="Descripción">
+                                <input type="text" maxlength="50" class="form-control" id="nombre_-1" placeholder="Nombre del profesor">
                             </div>
                         </div>
                         <div class="col-6">
                             <label>Apellido del profesor:</label>
                             <div class="input-group input-group-sm">
-                                <input type="text" maxlength="50" class="form-control" id="apellido_-1" placeholder="Descripción">
+                                <input type="text" maxlength="50" class="form-control" id="apellido_-1" placeholder="Apellido del profesor">
                             </div>
                         </div>
                     </div>
@@ -105,13 +105,13 @@
                         <div class="col-6">
                             <label>Correo del profesor:</label>
                             <div class="input-group input-group-sm">
-                                <input type="email" maxlength="50" class="form-control" id="email_-1" placeholder="Descripción">
+                                <input type="email" maxlength="50" class="form-control" id="email_-1" placeholder="Correo del profesor">
                             </div>
                         </div>
                         <div class="col-6">
                             <label>Celular del profesor:</label>
                             <div class="input-group input-group-sm">
-                                <input type="number" maxlength="10" class="form-control" id="celular_-1" placeholder="Descripción">
+                                <input type="text" onkeypress="return only_number(event)" maxlength="10" class="form-control" id="celular_-1" placeholder="Celular del profesor">
                             </div>
                         </div>
 
@@ -145,13 +145,13 @@
                             <div class="col-6">
                                 <label>Nombre del profesor:</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control" id="nombre_Edit" placeholder="Descripción">
+                                    <input type="text" maxlength="50" class="form-control" id="nombre_Edit" placeholder="Nombre del profesor">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label>Apellido del profesor:</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" maxlength="50" class="form-control" id="apellido_Edit" placeholder="Descripción">
+                                    <input type="text" maxlength="50" class="form-control" id="apellido_Edit" placeholder="Apellido del profesor">
                                 </div>
                             </div>
                         </div>
@@ -159,13 +159,13 @@
                             <div class="col-6">
                                 <label>Correo del profesor:</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="email" maxlength="50" class="form-control" id="email_Edit" placeholder="Descripción">
+                                    <input type="email" maxlength="50" class="form-control" id="email_Edit" placeholder="Correo del profesor">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label>Celular del profesor:</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="number" maxlength="10" class="form-control" id="celular_Edit" placeholder="Descripción">
+                                    <input type="text" onkeypress="return only_number(event)" maxlength="10" class="form-control" id="celular_Edit" placeholder="Celular del profesor">
                                 </div>
                             </div>
 
@@ -186,6 +186,7 @@
         </div>
     </div>
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/popper.min.js"></script>
     <script src="../../Script/Librerias/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>

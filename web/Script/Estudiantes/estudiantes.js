@@ -65,7 +65,7 @@ async function consultar_estudiantes() {
     renderizar_estudiantes(response);
 
 
-
+    $('[data-toggle="tooltip"]').tooltip();
 }
 function renderizar_estudiantes(source) {
     let _html = '';
@@ -85,8 +85,8 @@ function renderizar_tr_estudiantes(_item) {
                 <td id="celular_${_item.id}">${renderizar_grupos(_item.grupo.id)}</td>
                 <td id="grupos_${_item.id}">${_renderizar_estado(_item.estado)}</td>                
                 <td class="text-left">                
-                <button onclick="editar(${_item.id})" type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
-                <button onclick="eliminar(${_item.id},this)" type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>                
+                <button title="Editar" data-toggle="tooltip" onclick="editar(${_item.id})" type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
+                <button title="Eliminar" data-toggle="tooltip" onclick="eliminar(${_item.id},this)" type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>                
                 </td>
             </tr>
         `;

@@ -14,6 +14,8 @@ namespace Persona.Servicios
     public class ProfesoresBL<T> : EntityGenerics<T> where T : class
     {
 
+       
+
         public ConsultaProfesorDTO Get(int empresa, int temporada, int id)
         {
             ColegioContext objCnn = new ColegioContext();

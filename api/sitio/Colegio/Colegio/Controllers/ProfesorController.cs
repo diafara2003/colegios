@@ -20,7 +20,7 @@ namespace Colegio.Controllers
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
 
-            var _result= new ProfesoresBL<Profesores>().Get(_empresa.PerIdEmpresa, temporada);
+            var _result = new ProfesoresBL<Profesores>().Get(_empresa.PerIdEmpresa, temporada);
 
             return _result;
         }
@@ -48,6 +48,17 @@ namespace Colegio.Controllers
             if (value.id > 0)
             {
 
+
+                //se valida que el correo no exista en el sistema
+                if (new PersonasBI().ExisteCorreo(value.email,value.id))
+                {
+                    return new ResponseDTO()
+                    {
+                        codigo = -1,
+                        respuesta = "El correo ya existe en el sistema"
+                    };
+                }
+
                 var _persona = new ProfesoresBL<Personas>().SelectById(value.id);
 
                 _persona.PerNombres = value.nombre;
@@ -60,6 +71,17 @@ namespace Colegio.Controllers
 
             else
             {
+                ProfesoresBL<Personas> objPErsona = new ProfesoresBL<Personas>();
+
+
+                if (new PersonasBI().ExisteCorreo(value.email))
+                {
+                    return new ResponseDTO()
+                    {
+                        codigo = -1,
+                        respuesta = "El correo ya existe en el sistema"
+                    };
+                }
 
                 Personas obj = new Personas();
 
@@ -71,9 +93,10 @@ namespace Colegio.Controllers
                 obj.PerIdEmpresa = _empresa.PerIdEmpresa;
                 obj.PerEstado = true;
                 obj.PerTipoPerfil = 1;
+                obj.PerClave = Utilidades.Servicios.Utilidad.GenerarclaveRandom();
+                obj.PerUsuario = obj.PerEmail;
 
-
-                obj = new ProfesoresBL<Personas>().Add(obj);
+                objPErsona.Add(obj);
 
                 value.id = obj.PerId;
 

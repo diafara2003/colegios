@@ -12,7 +12,25 @@ namespace Persona.Servicios
 {
     public class PersonasBI
     {
+        public bool ExisteCorreo(string correo)
+        {
 
+            ColegioContext objCnn = new ColegioContext();
+            var correos = (from p in objCnn.personas where p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
+
+
+            return correos.Count() == 0 ? false : true;
+        }
+
+        public bool ExisteCorreo(string correo, int id)
+        {
+
+            ColegioContext objCnn = new ColegioContext();
+            var correos = (from p in objCnn.personas where p.PerId != id && p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
+
+
+            return correos.Count() == 0 ? false : true;
+        }
         public IEnumerable<UsuarioPerfil> GetPerfi()
         {
 
@@ -358,7 +376,7 @@ namespace Persona.Servicios
             ResponseDTO obj = new ResponseDTO();
 
             ColegioContext objCnn = new ColegioContext();
-           
+
 
 
             var _persona = objCnn.personas.Find(id);
@@ -374,7 +392,7 @@ namespace Persona.Servicios
 
             correos.Add(_persona.PerEmail);
 
-            Utilidad.EnviarMensajeCorreo(correos,_persona.PerClave);
+            Utilidad.EnviarMensajeCorreo(correos, _persona.PerClave);
 
             objCnn.Entry(_persona).State = EntityState.Modified;
             objCnn.SaveChanges();

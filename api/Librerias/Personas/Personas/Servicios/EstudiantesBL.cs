@@ -101,13 +101,24 @@ namespace Persona.Servicios
         }
 
 
-        public AgregarEstudianteDTO Save(AgregarEstudianteDTO modelo, int empresa)
+        public ResponseAgregarEstudianteDTO Save(AgregarEstudianteDTO modelo, int empresa)
         {
+            ResponseAgregarEstudianteDTO objResultado = new ResponseAgregarEstudianteDTO();
 
             ColegioContext objCnn = new ColegioContext();
+            objResultado.resultado = new ResponseDTO();
 
             if (modelo.estudiante.EstId == 0)
             {
+
+                foreach (var item in modelo.acudientes)
+                {
+                    if (new PersonasBI().ExisteCorreo(item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+                }
+
+                if (objResultado.resultado.codigo == -1) return objResultado;
+
+
                 modelo.acudientes.ToList().ForEach(c =>
                 {
 
@@ -151,7 +162,12 @@ namespace Persona.Servicios
             else
             {
 
+                foreach (var item in modelo.acudientes)
+                {
+                    if (new PersonasBI().ExisteCorreo(item.PerEmail,item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+                }
 
+                if (objResultado.resultado.codigo == -1) return objResultado;
 
                 modelo.acudientes.ToList().ForEach(c => objCnn.UpdateEntity<Personas>(c));
 
@@ -170,9 +186,9 @@ namespace Persona.Servicios
                 objCnn.SaveChanges();
 
             }
-
-
-            return modelo;
+            objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+            objResultado.modelo = modelo;
+            return objResultado;
         }
 
         public void DeleteEstudiante(int id)

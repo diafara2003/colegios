@@ -181,18 +181,24 @@ async function agregar_estudiante() {
         const _result = await consultarAPI('Estudiantes', 'POST', undefined, objEstudiante);
 
 
+        if (_result.resultado.codigo == -1) {
+
+            alertify.error(_result.resultado.respuesta);
+            return;
+        }
+
         if (objEstudiante.estudiante.EstId == 0) alertify.success('Estudiante creado correctamente');
         else alertify.success('Estudiante modificado correctamente');
 
-        objEstudiante.estudiante.EstId = _result.estudiante.EstId;
-        objEstudiante.estudiante.Acudiente1 = _result.estudiante.EstIdPersona;
-        objEstudiante.acudientes[0].PerId = _result.acudientes[0].PerId;
-        _acudiente1.PerId = _result.estudiante.Acudiente1;
+        objEstudiante.estudiante.EstId = _result.modelo.estudiante.EstId;
+        objEstudiante.estudiante.Acudiente1 = _result.modelo.estudiante.EstIdPersona;
+        objEstudiante.acudientes[0].PerId = _result.modelo.acudientes[0].PerId;
+        _acudiente1.PerId = _result.modelo.estudiante.Acudiente1;
 
         if (objEstudiante.acudientes.length == 2) {
-            objEstudiante.acudientes[1].PerId = _result.acudientes[1].PerId;
-            objEstudiante.estudiante.Acudiente2 = _result.estudiante.Acudiente2;
-            _acudiente2.PerId = _result.estudiante.Acudiente2;
+            objEstudiante.acudientes[1].PerId = _result.modelo.acudientes[1].PerId;
+            objEstudiante.estudiante.Acudiente2 = _result.modelo.estudiante.Acudiente2;
+            _acudiente2.PerId = _result.modelo.estudiante.Acudiente2;
         }
 
 

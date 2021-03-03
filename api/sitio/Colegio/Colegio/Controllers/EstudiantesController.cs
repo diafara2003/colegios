@@ -40,7 +40,7 @@ namespace Colegio.Controllers
         }
 
         [HttpPost]
-        public AgregarEstudianteDTO Post(AgregarEstudianteDTO request)
+        public ResponseAgregarEstudianteDTO Post(AgregarEstudianteDTO request)
         {
             var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);

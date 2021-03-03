@@ -119,6 +119,10 @@
     <Compile Include="Migrations\202103020232443_estudiantes_jardin_estado.designer.cs">
       <DependentUpon>202103020232443_estudiantes_jardin_estado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103030149488_ingreso_persona.cs" />
+    <Compile Include="Migrations\202103030149488_ingreso_persona.designer.cs">
+      <DependentUpon>202103030149488_ingreso_persona.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103020232443_estudiantes_jardin_estado.resx">
       <DependentUpon>202103020232443_estudiantes_jardin_estado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103030149488_ingreso_persona.resx">
+      <DependentUpon>202103030149488_ingreso_persona.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -40,6 +40,9 @@ function renderizar_profesores(source) {
     else _html = no_hay_grupos();
 
     document.getElementById('tbltemporada').innerHTML = _html;
+
+
+    $('[data-toggle="tooltip"]').tooltip();
 }
 function renderizar_tr_profesores(_item) {
 
@@ -50,11 +53,21 @@ function renderizar_tr_profesores(_item) {
                 <td id="celular_${_item.id}">${_item.celular}</td>
                 <td id="grupos_${_item.id}">${renderizar_grupos_profesor(_item.grupos)}</td>
                 <td class="text-left">
-                <button onclick="editar(${_item.id})" type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
-                <button onclick="eliminar(${_item.id},this)" type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>                
+                <button title="Editar" data-toggle="tooltip" onclick="editar(${_item.id})" type="button" class="btn btn-default btn-circle"><i class="fas fa-edit"></i></button>
+                <button title="Enviar correo" data-toggle="tooltip" onclick="enviarCorreo(${_item.id},this)" type="button" class="btn btn-default btn-circle"><i class="far fa-envelope"></i></button>                
+                <button title="Eliminar" data-toggle="tooltip"  onclick="eliminar(${_item.id},this)" type="button" class="btn btn-default btn-circle"><i class="fas fa-trash"></i></button>                                
                 </td>
             </tr>
         `;
+}
+async function enviarCorreo(_id) {
+
+    const _result = await consultarAPI('Persona/EnviarCorreo?id=' + _id, 'GET');
+
+    if (_result.codigo == 1)
+        alertify.success(_result.respuesta);
+    else
+        alertify.error(_result.respuesta);
 }
 function renderizar_grupos_profesor(_grupos) {
     let _html = ''
@@ -93,6 +106,11 @@ async function agregar_profesores() {
 
         const _result = await consultarAPI('Profesor', 'POST', undefined, _objeto);
 
+
+        if (_result.codigo == -1) {
+            alertify.error(_result.respuesta);
+            return;
+        }
 
         $('#exampleModal').modal('hide');
 
@@ -151,11 +169,17 @@ function validar(_object) {
 
         alertify.error('Correo invalido');
         return false;
+    } else if (_object.email == '') {
+        alertify.error('correo del profesor obligatorio');
+        return false;
     }
 
-    if (_object.nombre == '' ) {
-
+    if (_object.nombre == '') {
         alertify.error('Nombre del profesor obligatorio');
+        return false;
+    }
+    if (_object.apellido == '') {
+        alertify.error('Apellido del profesor obligatorio');
         return false;
     }
 
@@ -197,9 +221,15 @@ async function editar_registro() {
     if (validar(_objeto)) {
         const _item = _data_profesores.find(c => c.id == idEdit);
 
+        const _result= await consultarAPI(`Profesor/${idEdit}`, 'POST', undefined, _objeto);
+
+        if (_result.codigo == -1) {
+            alertify.error(_result.respuesta);
+            return;
+        }
         actualizar_objeto(_objeto);
 
-        await consultarAPI(`Profesor/${idEdit}`, 'POST', undefined, _objeto);
+     
         idEdit = 0;
         $('#modalEditar').modal('hide');
 
@@ -210,7 +240,7 @@ function actualizar_objeto(_objeto) {
     const _item = _data_profesores.findIndex(c => c.id == idEdit);
 
     _data_profesores[0] = _objeto;
-    
+
 
     $(`#nombre_${idEdit}`).text(_objeto.nombre);
     $(`#apellido_${idEdit}`).text(_objeto.apellido);
