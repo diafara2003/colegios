@@ -363,6 +363,17 @@ namespace Persona.Servicios
 
             correos.Add(_persona.PerEmail);
 
+            if (string.IsNullOrEmpty(_persona.PerClave)) {
+                _persona.PerClave = Utilidad.GenerarclaveRandom();
+
+
+                objCnn.Entry(_persona).State= EntityState.Modified ;
+
+                objCnn.SaveChanges();
+
+            }
+            
+
             Utilidad.EnviarMensajeCorreo(correos, _persona.PerClave);
 
 
