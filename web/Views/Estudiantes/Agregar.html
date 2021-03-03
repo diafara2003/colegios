@@ -187,7 +187,7 @@
                                 <div class="col-6">
                                     <div class="p-2">
                                         <label for="exampleInputEmail1">Correo del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <input onblur="habilitar_boton_agregar()" maxlength="30" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
                                     </div>
 
 
@@ -231,10 +231,20 @@
                                         <input onblur="habilitar_boton_agregar()" onkeypress="return only_number(event)" maxlength="10" type="text" class="form-control input-sm" id="PerTelefono_1" aria-describedby="emailHelp" placeholder="Celular del acudiente">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-2">
                                     <div class="p-2">
                                         <label></label>
-                                        <input type="button" onclick="agregar_estudiante()" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente1" value="Restablecer contraseña" />
+                                        <button title="Enviar correo" data-toggle="tooltip" type="button" onclick="enviarCorreo(1)" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente1">
+                                            <i class="far fa-envelope"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="p-2">
+                                        <label></label>
+                                        <button title="Restablecer contraseña" data-toggle="tooltip" type="button" onclick="restablecer_contraseña(1)" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente1">
+                                            <i class="fas fa-reply"></i>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -252,7 +262,7 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Correo del acudiente</label>
-                                        <input type="text" class="form-control input-sm" maxlength="20" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <input type="text" class="form-control input-sm" maxlength="30" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
                                     </div>
 
                                 </div>
@@ -298,10 +308,20 @@
                                     </div>
 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-2">
                                     <div class="p-2">
                                         <label></label>
-                                        <input type="button" onclick="agregar_estudiante()" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente2" value="Restablecer contraseña" />
+                                        <button title="Enviar correo" data-toggle="tooltip" type="button" onclick="enviarCorreo(2)" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente1">
+                                            <i class="far fa-envelope"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="p-2">
+                                        <label></label>
+                                        <button title="Restablecer contraseña" data-toggle="tooltip" type="button" onclick="restablecer_contraseña(2)" class=" form-control btn btn-primary btn-sm mt-2" id="Btnacudiente1">
+                                            <i class="fas fa-reply"></i>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -328,6 +348,7 @@
     </div>
 
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/popper.min.js"></script>
     <script src="../../Script/Librerias/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>

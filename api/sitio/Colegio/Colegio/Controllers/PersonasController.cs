@@ -15,6 +15,19 @@ namespace Colegio.Controllers
     {
 
         [HttpGet]
+        [Route("EnviarCorreo")]
+        public ResponseDTO GetEnviarCorreo(int id) {
+            return new PersonasBI().EnviarCorreo(id);
+        }
+
+        [HttpGet]
+        [Route("Restablecer")]
+        public ResponseDTO GetRestablecer(int id)
+        {
+            return new PersonasBI().RestablecerContrasena(id);
+        }
+
+        [HttpGet]
         [Route("perfiles")]
         public IEnumerable<UsuarioPerfil> GetUsuariosPerfiles()
         {

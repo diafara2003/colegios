@@ -198,8 +198,34 @@ async function agregar_estudiante() {
 
     }
 }
+async function enviarCorreo(_type) {
+    let _id = 0;
 
 
+    if (_type == 1) _id = objEstudiante.acudientes[0].PerId;
+    else if (objEstudiante.acudientes.length == 2) _id = objEstudiante.acudientes[1].PerId;
+
+    const _result = await consultarAPI('Persona/EnviarCorreo?id=' + _id, 'GET');
+
+    if (_result.codigo == 1)
+        alertify.success(_result.respuesta);
+    else
+        alertify.error(_result.respuesta);
+
+}
+async function restablecer_contraseña(_type) {
+    let _id = 0;
+
+    if (_type == 1) _id = objEstudiante.acudientes[0].PerId;
+    else if (objEstudiante.acudientes.length == 2) _id = objEstudiante.acudientes[1].PerId;
+
+    const _result = await consultarAPI('Persona/Restablecer?id=' + _id, 'GET');
+
+    if (_result.codigo == 1)
+        alertify.success(_result.respuesta);
+    else
+        alertify.error(_result.respuesta);
+}
 
 
 
@@ -226,4 +252,5 @@ document.getElementById("EstFechaNacimineto").setAttribute("max", today);
     const _id = Get_query_string('id')
     if (_id != undefined) consultar_estudiante(_id);
 
+    $('[data-toggle="tooltip"]').tooltip();
 })();

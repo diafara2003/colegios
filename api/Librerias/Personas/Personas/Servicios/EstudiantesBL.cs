@@ -116,7 +116,7 @@ namespace Persona.Servicios
                     c.PerEstado = true;
                     c.PerUsuario = c.PerEmail;
                     c.PerClave = c.PerTelefono;
-
+                    c.PerIngreso = false;
 
                     objCnn.personas.Add(c);
 

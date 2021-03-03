@@ -6,6 +6,7 @@ using System.Linq;
 using Trasversales.Modelo;
 using System.Data;
 using Persona.Modelos;
+using Utilidades.Servicios;
 
 namespace Persona.Servicios
 {
@@ -195,6 +196,15 @@ namespace Persona.Servicios
                         select data).FirstOrDefault();
 
 
+            if (_persona != null && !_persona.PerIngreso)
+            {
+                _persona.PerIngreso = true;
+
+                objCnn.Entry(_persona).State = EntityState.Modified;
+                objCnn.SaveChanges();
+            }
+
+
             return _persona;
 
         }
@@ -317,5 +327,64 @@ namespace Persona.Servicios
             objresponse.respuesta = "";
             return objresponse;
         }
+
+
+        public ResponseDTO EnviarCorreo(int id)
+        {
+            ResponseDTO obj = new ResponseDTO();
+
+            ColegioContext objCnn = new ColegioContext();
+
+
+            var _persona = objCnn.personas.Find(id);
+
+            List<string> correos = new List<string>();
+
+
+            if (string.IsNullOrEmpty(_persona.PerEmail)) return new ResponseDTO() { codigo = -1, respuesta = "No existe un correo para enviar" };
+
+            correos.Add(_persona.PerEmail);
+
+            Utilidad.EnviarMensajeCorreo(correos, _persona.PerClave);
+
+
+            obj.codigo = 1;
+            obj.respuesta = "Correo enviado";
+
+            return obj;
+        }
+        public ResponseDTO RestablecerContrasena(int id)
+        {
+            ResponseDTO obj = new ResponseDTO();
+
+            ColegioContext objCnn = new ColegioContext();
+           
+
+
+            var _persona = objCnn.personas.Find(id);
+
+            _persona.PerClave = Utilidad.GenerarclaveRandom();
+            _persona.PerIngreso = false;
+
+
+            List<string> correos = new List<string>();
+
+
+            if (string.IsNullOrEmpty(_persona.PerEmail)) return new ResponseDTO() { codigo = -1, respuesta = "No existe un correo para enviar" };
+
+            correos.Add(_persona.PerEmail);
+
+            Utilidad.EnviarMensajeCorreo(correos,_persona.PerClave);
+
+            objCnn.Entry(_persona).State = EntityState.Modified;
+            objCnn.SaveChanges();
+
+            obj.codigo = 1;
+            obj.respuesta = "Correo enviado";
+
+            return obj;
+        }
+
+
     }
 }

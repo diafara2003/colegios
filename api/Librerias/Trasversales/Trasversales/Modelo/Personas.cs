@@ -40,5 +40,7 @@ namespace Trasversales.Modelo
 
         public string PerTipoAcudiente { get; set; }
 
+        public bool PerIngreso { get; set; }
+
     }
 }
