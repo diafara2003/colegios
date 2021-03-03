@@ -113,7 +113,7 @@ namespace Persona.Servicios
 
                 foreach (var item in modelo.acudientes)
                 {
-                    if (new PersonasBI().ExisteCorreo(item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+                    if (new PersonasBI().ExisteCorreo(empresa,item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
                 }
 
                 if (objResultado.resultado.codigo == -1) return objResultado;
@@ -164,7 +164,7 @@ namespace Persona.Servicios
 
                 foreach (var item in modelo.acudientes)
                 {
-                    if (new PersonasBI().ExisteCorreo(item.PerEmail,item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+                    if (new PersonasBI().ExisteCorreo(empresa,item.PerEmail,item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
                 }
 
                 if (objResultado.resultado.codigo == -1) return objResultado;

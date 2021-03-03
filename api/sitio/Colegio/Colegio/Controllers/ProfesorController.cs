@@ -50,7 +50,7 @@ namespace Colegio.Controllers
 
 
                 //se valida que el correo no exista en el sistema
-                if (new PersonasBI().ExisteCorreo(value.email,value.id))
+                if (new PersonasBI().ExisteCorreo(_empresa.PerIdEmpresa, value.email,value.id))
                 {
                     return new ResponseDTO()
                     {
@@ -74,7 +74,7 @@ namespace Colegio.Controllers
                 ProfesoresBL<Personas> objPErsona = new ProfesoresBL<Personas>();
 
 
-                if (new PersonasBI().ExisteCorreo(value.email))
+                if (new PersonasBI().ExisteCorreo(_empresa.PerIdEmpresa,value.email))
                 {
                     return new ResponseDTO()
                     {

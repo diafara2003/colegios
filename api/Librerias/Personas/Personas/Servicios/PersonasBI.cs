@@ -12,21 +12,21 @@ namespace Persona.Servicios
 {
     public class PersonasBI
     {
-        public bool ExisteCorreo(string correo)
+        public bool ExisteCorreo(int empresa,string correo)
         {
 
             ColegioContext objCnn = new ColegioContext();
-            var correos = (from p in objCnn.personas where p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
+            var correos = (from p in objCnn.personas where p.PerIdEmpresa == empresa &&  p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
 
 
             return correos.Count() == 0 ? false : true;
         }
 
-        public bool ExisteCorreo(string correo, int id)
+        public bool ExisteCorreo(int empresa,string correo, int id)
         {
 
             ColegioContext objCnn = new ColegioContext();
-            var correos = (from p in objCnn.personas where p.PerId != id && p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
+            var correos = (from p in objCnn.personas where  p.PerIdEmpresa==empresa && p.PerId != id && p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
 
 
             return correos.Count() == 0 ? false : true;
