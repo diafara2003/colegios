@@ -95,6 +95,7 @@ namespace Colegio.Controllers
                 obj.PerTipoPerfil = 1;
                 obj.PerClave = Utilidades.Servicios.Utilidad.GenerarclaveRandom();
                 obj.PerUsuario = obj.PerEmail;
+                obj.PerIngreso = false;
 
                 objPErsona.Add(obj);
 
