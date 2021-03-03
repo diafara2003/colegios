@@ -113,7 +113,7 @@ namespace Persona.Servicios
 
                 foreach (var item in modelo.acudientes)
                 {
-                    if (new PersonasBI().ExisteCorreo(empresa,item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+                    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
                 }
 
                 if (objResultado.resultado.codigo == -1) return objResultado;
@@ -126,7 +126,7 @@ namespace Persona.Servicios
                     c.PerTipoPerfil = 3;
                     c.PerEstado = true;
                     c.PerUsuario = c.PerEmail;
-                    c.PerClave = c.PerTelefono;
+                    c.PerClave = string.IsNullOrEmpty(c.PerTelefono) ? Utilidad.GenerarclaveRandom() : c.PerTelefono;
                     c.PerIngreso = false;
 
                     objCnn.personas.Add(c);
@@ -164,7 +164,7 @@ namespace Persona.Servicios
 
                 foreach (var item in modelo.acudientes)
                 {
-                    if (new PersonasBI().ExisteCorreo(empresa,item.PerEmail,item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ya existe en el sistema" };
+                    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail, item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ya existe en el sistema" };
                 }
 
                 if (objResultado.resultado.codigo == -1) return objResultado;
