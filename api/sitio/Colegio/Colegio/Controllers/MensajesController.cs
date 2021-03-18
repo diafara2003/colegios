@@ -16,6 +16,15 @@ namespace Colegio.Controllers
     {
 
 
+        [Route("Chat")]
+        [HttpGet]
+        public List<Mensaje_Custom> GetChat(int id)
+        {
+           
+            return new Mensaje.Servicios.MensajesBI().GetChat(id);
+        }
+
+
         // GET: api/Mensajes/5
         public VerMensajeDTO Get(int id,int Bandeja)
         {

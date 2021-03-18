@@ -13,6 +13,44 @@ namespace Mensaje.Servicios
     public class MensajesBI
     {
 
+        public List<Mensaje_Custom> GetChat(int id)
+        {
+            List<Mensaje_Custom> obj = new List<Mensaje_Custom>();
+            ColegioContext objCnn = new ColegioContext();
+
+            Mensaje_Custom _mensaje = (from mensaje in objCnn.mensajes
+                                       join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
+                                       where mensaje.MenId == id
+                                       select new Mensaje_Custom
+                                       {
+                                           MenAsunto = mensaje.MenAsunto,
+                                           MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
+                                           MenUsuario = mensaje.MenUsuario,
+                                           MenClase = mensaje.MenClase,
+                                           MenEmpId = mensaje.MenEmpId,
+                                           MenFecha = mensaje.MenFecha,
+                                           MenId = mensaje.MenId,
+                                           MenMensaje = mensaje.MenMensaje,
+                                           MenOkRecibido = mensaje.MenOkRecibido,
+                                           MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
+                                           MenSendTo = mensaje.MenSendTo,
+                                           MenTipoMsn = mensaje.MenTipoMsn,
+                                           usuario = _usuario,
+                                           MenCategoriaId = mensaje.MenCategoriaId,
+                                           MenEstado = mensaje.MenEstado,
+                                           MenFechaMaxima = mensaje.MenFechaMaxima
+                                       }).FirstOrDefault();
+
+            obj.Add(_mensaje);
+            if (_mensaje.MenReplicaIdMsn > 0)
+                obj.Add(Get(_mensaje.MenReplicaIdMsn)._mensaje);
+
+
+            return obj;
+
+
+        }
+
         public VerMensajeDTO Get(int id)
         {
             VerMensajeDTO objResultado = new VerMensajeDTO();
@@ -48,8 +86,8 @@ namespace Mensaje.Servicios
                                               select a
                                      );
 
-            
-            if (objResultado._mensaje.MenReplicaIdMsn>0)
+
+            if (objResultado._mensaje.MenReplicaIdMsn > 0)
             {
                 objResultado.replicas = Get(objResultado._mensaje.MenReplicaIdMsn);
             }
@@ -57,7 +95,7 @@ namespace Mensaje.Servicios
             return objResultado;
         }
 
-        
+
 
         public CrearMensajeCustom SaveBorrador(CrearMensajeCustom request)
         {
