@@ -265,7 +265,9 @@ function renderizar_mensaje_replica(_mensaje) {
                                             <div class="titulo-mensaje">
                                                 <div class="titulo-mensaje d-flex justify-content-between">
                                                     <div class="d-flex pb-1">
-                                                        <div class="bg-secondary rounded-circle text-white">${ iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div>
+                                                        <div class="bg-secondary rounded-circle text-white" style="display:flex;justify-content:center;align-items:center;width:45px">
+
+                        <div>${ iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div></div>
                                                         <div class=" ml-2">
                                                             <div>
                                                                 <span style="font-size:20px">${ _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres}</span>
