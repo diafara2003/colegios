@@ -250,7 +250,9 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     });
 }
 function renderizar_replicas(mensaje) {
-
+    $('#ContenedorMensaje').find('.mensaje-detalle').each(function (index, value) {
+        if (index != 0) $(this).remove();
+    });
     $('#ContenedorMensaje').append(renderizar_mensaje_replica(mensaje._mensaje));
 
     if (mensaje.replicas != null) {
