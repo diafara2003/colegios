@@ -24,7 +24,7 @@ function buscar_personas(_this) {
             return;
         }
 
-        consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter=${_value}&temporada=${_sesion.temporada}&empresa=${_sesion.empresa}`, 'GET', (response) => {
+        consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter=${_value}, 'GET', (response) => {
             $('#DivResultados').css('display', 'block');
             _data_source_ac = response;
             renderizar_resultados_ac(response);

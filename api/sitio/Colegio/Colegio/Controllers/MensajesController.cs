@@ -41,14 +41,18 @@ namespace Colegio.Controllers
 
         [Route("destinatarios")]
         [HttpGet]
-        public IEnumerable<AcEnvioCorreoPersonas> Getdestinatarios(int idusuario, string filter, string temporada, string empresa)
+        public IEnumerable<AcEnvioCorreoPersonas> Getdestinatarios(int idusuario, string filter="")
         {
+            var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
+            var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
+
             if (filter == null)
             {
                 filter = string.Empty;
             }
 
-            return new MensajesBI().GetAcEnvioCorreoPersonas(idusuario, filter, temporada, empresa);
+            return new MensajesBI().GetAcEnvioCorreoPersonas(idusuario, filter, temporada.ToString(), _empresa.PerIdEmpresa.ToString());
         }
 
         // POST: api/Mensajes
