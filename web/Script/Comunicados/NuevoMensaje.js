@@ -24,7 +24,7 @@ function buscar_personas(_this) {
             return;
         }
 
-        consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter=${_value}, 'GET', (response) => {
+        consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter=${_value}`, 'GET', (response) => {
             $('#DivResultados').css('display', 'block');
             _data_source_ac = response;
             renderizar_resultados_ac(response);
@@ -74,19 +74,19 @@ function renderizar_seleccionado(_i) {
     $('#DivResultados').css('display', 'none');
 }
 function renderizar_html_seleccionado(persona, _id_deleted) {
-    let _html = '';
-    _html += '<div class="desti-seleccionado">';
-    _html += '<span class="desti-cuerpo">';
-    _html += '<div class="imageArea">';
+    let _html = ``;
+    _html += `<div class="desti-seleccionado">`;
+    _html += `<span class="desti-cuerpo">`;
+    _html += `<div class="imageArea">`;
     _html += `<div class="desti-nombre" style="background-color:${persona.GrEnColorBurbuja}" aria-hidden="true">`;
     _html += `<span>${iniciales(persona.PerApellidos, persona.PerNombres)}</span>`;
-    _html += '</div></div>';
+    _html += `</div ></div >`;
     _html += `<div style="display:block;ine-height: 0px"><span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
     _html += `<small>${persona.CurDescripcion}</small></div>`;
     if (_id_deleted)
         _html += `<button style="margin-top:1px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
-    _html += '</span>';
-    _html += '</div>';
+    _html += `</span>`;
+_html += `</div>`;
 
     return _html;
 }

@@ -45,6 +45,7 @@
     <Compile Include="Modelo\Adjuntos.cs" />
     <Compile Include="Modelo\AreasMaterias.cs" />
     <Compile Include="Modelo\BandejaEntrada.cs" />
+    <Compile Include="Modelo\Canal.cs" />
     <Compile Include="Modelo\CategoriaPerfil.cs" />
     <Compile Include="Modelo\Categorias.cs" />
     <Compile Include="Modelo\Clases.cs" />
