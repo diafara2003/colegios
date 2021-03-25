@@ -14,7 +14,19 @@ namespace Colegio.Controllers
     [RoutePrefix("Mensajes")]
     public class MensajesController : ApiController
     {
-
+        /*
+         
+    DECLARE @id int =3
+    ;WITH _msn (id)
+    AS
+    (
+    SELECT MenId from msn.Mensajes where MenId=@id
+        UNION ALL
+    SELECT  MenReplicaIdMsn from msn.Mensajes
+            INNER JOIN _msn on _msn.id=MenId 
+    )
+    SELECT * FROM _MSN
+         */
 
         [Route("Chat")]
         [HttpGet]
@@ -56,7 +68,7 @@ namespace Colegio.Controllers
         }
 
         // POST: api/Mensajes
-        public ResponseDTO Post(CrearMensajeCustom request)
+        public Mensaje_Custom Post(CrearMensajeCustom request)
         {
             return new Mensaje.Servicios.MensajesBI().Save(request);
         }
