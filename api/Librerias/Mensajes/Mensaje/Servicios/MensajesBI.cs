@@ -20,7 +20,7 @@ namespace Mensaje.Servicios
             BaseDatos.Modelos.ProcedureDTO ProcedureDTO = new BaseDatos.Modelos.ProcedureDTO();
 
             ProcedureDTO.commandText = "msn.ConsultarMensajes";
-            ProcedureDTO.parametros.Add("@id", id);
+            ProcedureDTO.parametros.Add("id", id);
 
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
 
