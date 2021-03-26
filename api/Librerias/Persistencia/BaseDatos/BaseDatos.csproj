@@ -225,6 +225,7 @@
     <Content Include="SQL\Procedures\Garden\Gargen.[GetGrupos].sql" />
     <Content Include="SQL\Procedures\msn\msn.BandejaClases.sql" />
     <Content Include="SQL\Procedures\msn\msn.CategoriasMensajesRecibido.sql" />
+    <Content Include="SQL\Procedures\msn\[msn].ConsultarMensajes.sql" />
     <Content Include="SQL\Procedures\msn\[msn].[AcEnvioCorreoPersonas].sql" />
     <Content Include="SQL\Procedures\msn\[msn].[ConsultarMensaje].sql" />
     <Content Include="SQL\Procedures\msn\[msn].[CrearMensaje_Bandeja_Entrada].sql" />

@@ -30,7 +30,7 @@ namespace Colegio.Controllers
 
         [Route("Chat")]
         [HttpGet]
-        public List<Mensaje_Custom> GetChat(int id)
+        public IEnumerable<Mensaje_Custom> GetChat(int id)
         {
            
             return new Mensaje.Servicios.MensajesBI().GetChat(id);
@@ -68,7 +68,7 @@ namespace Colegio.Controllers
         }
 
         // POST: api/Mensajes
-        public Mensaje_Custom Post(CrearMensajeCustom request)
+        public ResponseDTO Post(CrearMensajeCustom request)
         {
             return new Mensaje.Servicios.MensajesBI().Save(request);
         }

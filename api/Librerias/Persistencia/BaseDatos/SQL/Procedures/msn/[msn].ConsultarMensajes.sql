@@ -24,6 +24,14 @@ BEGIN
     SELECT  MenReplicaIdMsn from msn.Mensajes
             INNER JOIN _msn on _msn.id=MenId 
     )
-    SELECT * FROM _MSN
+    
+	SELECT	MenId,MenAsunto,MenBloquearRespuesta,MenUsuario,MenClase,
+			MenEmpId,MenFecha,MenMensaje,MenOkRecibido,MenSendTo,
+			MenUsuario,
+			MenTipoMsn,MenCategoriaId,MenEstado,MenFechaMaxima,
+			PerNombres,PerApellidos,PerDocumento,PerEmail
+	FROM	_MSN
+			INNER JOIN MSN.Mensajes ON MENID=ID
+			INNER JOIN DP.PERSONAS ON MenUsuario=PerId
 END
 GO

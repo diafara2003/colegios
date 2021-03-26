@@ -13,40 +13,44 @@ namespace Mensaje.Servicios
     public class MensajesBI
     {
 
-        public List<Mensaje_Custom> GetChat(int id)
+        public IEnumerable<Mensaje_Custom> GetChat(int id)
         {
             List<Mensaje_Custom> obj = new List<Mensaje_Custom>();
             ColegioContext objCnn = new ColegioContext();
+            BaseDatos.Modelos.ProcedureDTO ProcedureDTO = new BaseDatos.Modelos.ProcedureDTO();
 
-            Mensaje_Custom _mensaje = (from mensaje in objCnn.mensajes
-                                       join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
-                                       where mensaje.MenId == id
-                                       select new Mensaje_Custom
-                                       {
-                                           MenAsunto = mensaje.MenAsunto,
-                                           MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
-                                           MenUsuario = mensaje.MenUsuario,
-                                           MenClase = mensaje.MenClase,
-                                           MenEmpId = mensaje.MenEmpId,
-                                           MenFecha = mensaje.MenFecha,
-                                           MenId = mensaje.MenId,
-                                           MenMensaje = mensaje.MenMensaje,
-                                           MenOkRecibido = mensaje.MenOkRecibido,
-                                           MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
-                                           MenSendTo = mensaje.MenSendTo,
-                                           MenTipoMsn = mensaje.MenTipoMsn,
-                                           usuario = _usuario,
-                                           MenCategoriaId = mensaje.MenCategoriaId,
-                                           MenEstado = mensaje.MenEstado,
-                                           MenFechaMaxima = mensaje.MenFechaMaxima
-                                       }).FirstOrDefault();
+            ProcedureDTO.commandText = "msn.ConsultarMensajes";
+            ProcedureDTO.parametros.Add("@id", id);
 
-            obj.Add(_mensaje);
-            if (_mensaje.MenReplicaIdMsn > 0)
-                obj.Add(Get(_mensaje.MenReplicaIdMsn)._mensaje);
+            DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
+
+            return (from query in result.AsEnumerable()
+                    select new Mensaje_Custom()
+                    {
+                        MenAsunto = (string)query["MenAsunto"],
+                        MenBloquearRespuesta = (byte)query["MenBloquearRespuesta"],
+                        MenCategoriaId = (int)query["MenCategoriaId"],
+                        MenClase = (int)query["MenClase"],
+                        MenEstado = (int)query["MenEstado"],
+                        MenFecha = (DateTime)query["MenFecha"],
+                        MenFechaMaxima = (DateTime)query["MenFecha"],
+                        MenMensaje = (string)query["MenMensaje"],
+                        MenId = (int)query["MenId"],
+                        MenOkRecibido = (byte)query["MenOkRecibido"],
+                        MenSendTo = (string)query["MenSendTo"],
+                        MenUsuario = (int)query["MenUsuario"],
+                        usuario = new Personas()
+                        {
+                            PerApellidos = (string)query["PerApellidos"],
+                            PerNombres = (string)query["PerNombres"],
+                            PerDocumento = (string)query["PerDocumento"],
+                            PerEmail = (string)query["PerEmail"],
+                        }
+                    });
 
 
-            return obj;
+
+
 
 
         }
