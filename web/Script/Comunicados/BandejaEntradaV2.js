@@ -119,7 +119,7 @@ async function cargar_bandeja(tipo, _this) {
                 if (_desc == '') {
                     _desc = "Sin Categoría";
                 }
-                
+
                 _html += '<tr>';
                 _html += `<td style="color:${_agrupado[c][0].MenColor}" onclick="ocultar_categoria(${_agrupado[c][0].MenCategoriaId},this)" colspan="3">${_desc}</td>`;
                 _html += `<td style="color:${_agrupado[c][0].MenColor}"> ${_agrupado[c].length}</td>`;
@@ -269,10 +269,10 @@ function renderizar_mensaje_replica(_mensaje) {
                                                     <div class="d-flex pb-1">
                                                         <div class="bg-secondary rounded-circle text-white" style="display:flex;justify-content:center;align-items:center;width:45px">
 
-                        <div>${ iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div></div>
+                        <div>${iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div></div>
                                                         <div class=" ml-2">
                                                             <div>
-                                                                <span style="font-size:20px">${ _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres}</span>
+                                                                <span style="font-size:20px">${_mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres}</span>
                                                             </div>
                                                             <div style="line-height:0.5">
                                                                 <label style="font-size:12px;">Para:</label>
@@ -281,7 +281,7 @@ function renderizar_mensaje_replica(_mensaje) {
                                                         </div>
                                                     </div>                                                    
                                                     <div>
-                                                        <span class="mensaje-fecha" style="font-size:14px" >Fecha de envío: ${ moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
+                                                        <span class="mensaje-fecha" style="font-size:14px" >Fecha de envío: ${moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex justify-content-end w-100"></div>
@@ -330,7 +330,8 @@ function renderizar_mensaje(_mensaje) {
     document.getElementById('MenUsuario').textContent = _mensaje.usuario.PerApellidos + ' ' + _mensaje.usuario.PerNombres;
     document.getElementById('MenFecha').textContent = "Fecha de envío: " + moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A");
     document.getElementById('MenMensaje').innerHTML = _mensaje.MenMensaje;
-    document.getElementById('para_recibido').textContent = armar_para_redactar(JSON.parse(_mensaje.MenSendTo));
+    if (_mensaje.MenSendTo != '')
+        document.getElementById('para_recibido').textContent = armar_para_redactar(JSON.parse(_mensaje.MenSendTo));
 
     $('#MenFechaMaxima').addClass('d-none');
     if (_mensaje.MenFechaMaxima != null && _mensaje.MenFechaMaxima != '') {
@@ -634,9 +635,9 @@ function eliminar_mensaje() {
     consultarAPI('BandejaEntrada/mensajes/cambioEstado', 'POST', () => {
 
     }, {
-            idBandeja: id_bandeja,
-            Estado: -1
-        });
+        idBandeja: id_bandeja,
+        Estado: -1
+    });
 
     let index = data_mensajes.findIndex(c => c.BanId == id_bandeja);
     data_mensajes.splice(index, 1);

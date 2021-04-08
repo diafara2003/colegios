@@ -32,7 +32,7 @@ namespace Colegio.Controllers
         [HttpGet]
         public IEnumerable<Mensaje_Custom> GetChat(int id)
         {
-           
+          
             return new Mensaje.Servicios.MensajesBI().GetChat(id);
         }
 

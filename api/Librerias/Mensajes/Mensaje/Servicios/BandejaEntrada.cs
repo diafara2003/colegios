@@ -34,7 +34,7 @@ namespace Mensaje.Servicios
                                    MenCategoriaId = (int)data["MenCategoriaId"],
                                    BanClaseId = (int)data["BanClaseId"],
                                    BanDestacado = (int)data["BanDestacado"],
-                                   MenAsunto = (string)data["MenAsunto"],
+                                   MenAsunto = data["MenAsunto"] is DBNull? "":(string)data["MenAsunto"],
                                    MenBloquearRespuesta = (byte)data["MenBloquearRespuesta"],
                                    MenFecha = (string)data["MenFecha"],
                                    MenMensaje = (string)data["MenMensaje"],
