@@ -168,7 +168,7 @@ namespace Mensaje.Servicios
 
 
                     request.mensaje.MenClase = mensaje_original.MenClase;
-                    request.mensaje.MenAsunto = mensaje_original.MenAsunto;
+                    request.mensaje.MenAsunto ="RV-"+ mensaje_original.MenAsunto;
 
 
                     if (request.mensaje.MenFecha > mensaje_original.MenFechaMaxima)
