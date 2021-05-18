@@ -60,3 +60,4 @@ C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Mi
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.estudiantes_personas.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.estudiantes_jardin_estado.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.ingreso_persona.resources
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.loginPhone.resources

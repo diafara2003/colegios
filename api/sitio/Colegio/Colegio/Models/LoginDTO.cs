@@ -11,4 +11,6 @@ namespace Colegio.Models
         public string password { get; set; }
 
     }
+
+    
 }

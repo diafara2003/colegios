@@ -12,21 +12,21 @@ namespace Persona.Servicios
 {
     public class PersonasBI
     {
-        public bool ExisteCorreo(int empresa,string correo)
+        public bool ExisteCorreo(int empresa, string correo)
         {
 
             ColegioContext objCnn = new ColegioContext();
-            var correos = (from p in objCnn.personas where p.PerIdEmpresa == empresa &&  p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
+            var correos = (from p in objCnn.personas where p.PerIdEmpresa == empresa && p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
 
 
             return correos.Count() == 0 ? false : true;
         }
 
-        public bool ExisteCorreo(int empresa,string correo, int id)
+        public bool ExisteCorreo(int empresa, string correo, int id)
         {
 
             ColegioContext objCnn = new ColegioContext();
-            var correos = (from p in objCnn.personas where  p.PerIdEmpresa==empresa && p.PerId != id && p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
+            var correos = (from p in objCnn.personas where p.PerIdEmpresa == empresa && p.PerId != id && p.PerEmail.ToLower().Equals(correo.ToLower()) select p);
 
 
             return correos.Count() == 0 ? false : true;
@@ -363,16 +363,17 @@ namespace Persona.Servicios
 
             correos.Add(_persona.PerEmail);
 
-            if (string.IsNullOrEmpty(_persona.PerClave)) {
+            if (string.IsNullOrEmpty(_persona.PerClave))
+            {
                 _persona.PerClave = Utilidad.GenerarclaveRandom();
 
 
-                objCnn.Entry(_persona).State= EntityState.Modified ;
+                objCnn.Entry(_persona).State = EntityState.Modified;
 
                 objCnn.SaveChanges();
 
             }
-            
+
 
             Utilidad.EnviarMensajeCorreo(correos, _persona.PerClave);
 
@@ -412,6 +413,36 @@ namespace Persona.Servicios
             obj.respuesta = "Correo enviado";
 
             return obj;
+        }
+
+        public ResponseDTO CreartokenPhone(LoginPhone modelo)
+        {
+            ResponseDTO objresponse = new ResponseDTO();
+
+
+            try
+            {
+                ColegioContext objCnn = new ColegioContext();
+
+                var _token = objCnn.loginPhone.Where(c => c.TokenFCM == modelo.TokenFCM);
+
+                if (_token == null || _token.Count() == 0) {
+
+                    objCnn.loginPhone.Add(modelo);
+
+                    objCnn.SaveChanges();
+                }                
+
+            }
+            catch (Exception e)
+            {
+                objresponse.codigo = -1;
+                objresponse.respuesta = e.Message;
+
+            }
+
+            return objresponse;
+
         }
 
 

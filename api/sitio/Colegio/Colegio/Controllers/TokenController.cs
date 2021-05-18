@@ -23,7 +23,7 @@ namespace Colegio.Controllers
             return Ok($" IPrincipal-user: {identity.Name} - IsAuthenticated: {identity.IsAuthenticated}");
         }
 
-   
+
         [AllowAnonymous]
         [HttpPost]
         [Route("validacion")]
@@ -44,6 +44,19 @@ namespace Colegio.Controllers
 
             return objresponse;
         }
+
+
+        [HttpPost]
+        [Route("tokenFCM")]
+        public ResponseDTO PostTokenPhone(LoginPhone request)
+        {
+
+            ResponseDTO objresponse = new ResponseDTO();
+            new Persona.Servicios.PersonasBI().CreartokenPhone(request);
+
+            return objresponse;
+        }
+
 
         public Personas CheckUser(string username, string password)
         {

@@ -71,6 +71,7 @@
     <Compile Include="Modelo\GruposEstudiantes.cs" />
     <Compile Include="Modelo\GruposProfesor.cs" />
     <Compile Include="Modelo\LoginAuditoria.cs" />
+    <Compile Include="Modelo\LoginPhone.cs" />
     <Compile Include="Modelo\Materias.cs" />
     <Compile Include="Modelo\GruposEnvioColores.cs" />
     <Compile Include="Modelo\Mensajes.cs" />
