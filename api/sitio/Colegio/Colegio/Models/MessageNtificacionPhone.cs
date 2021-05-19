@@ -7,9 +7,14 @@ namespace Colegio.Models
 {
     public class MessageNotificacionPhone
     {
-        public string token { get; set; }
-        public string data { get; set; }
+        public string priority { get; set; }
+        public DataMessage data { get; set; }
         public Notificacions notification { get; set; }
+        public List<string> to { get; set; }
+    }
+
+    public class DataMessage {
+        public int mensaje { get; set; }
     }
 
     public class Notificacions {
@@ -18,3 +23,4 @@ namespace Colegio.Models
 
     }
 }
+

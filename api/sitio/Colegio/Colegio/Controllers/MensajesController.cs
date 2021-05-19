@@ -81,11 +81,29 @@ namespace Colegio.Controllers
 
             var _notificaciones = new Mensaje.Servicios.MensajesBI().EnviarNotificacionNuevoMensaje(data.destinatarios, data.mensaje.MenId);
 
-
+            /*
+ {
+	"notificacion":{
+		body:'texto de la notificacion',
+		"title":"titulo"
+	},
+	"priority":"high".
+	data:{
+		"mensaje":10
+	},
+	to:""
+}
+ */
 
             var _data = new MessageNotificacionPhone();
 
-            var json = JsonConvert.SerializeObject(_data);
+            _data.notification = new Notificacions();
+            _data.notification.title = "Nuevo mensaje";
+            _data.notification.body = data.mensaje.MenAsunto;
+            _data.priority = "high";
+            _notificaciones.ForEach(c => _data.to.Add(c.TokenFCM));
+
+            var json = "{" + JsonConvert.SerializeObject(_data) + "}";
 
 
             var client = new RestClient("https://fcm.googleapis.com/fcm/send");
