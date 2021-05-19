@@ -232,3 +232,5 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.pdb
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.xml

@@ -244,6 +244,8 @@ namespace Mensaje.Servicios
 
                 objResultado.codigo = 1;
                 objResultado.respuesta = "mensaje creado correctamente";
+
+              //  EnviarNotificacionNuevoMensaje(request.destinatarios,request.mensaje.MenId);
             }
             catch (Exception e)
             {
@@ -254,6 +256,24 @@ namespace Mensaje.Servicios
 
         }
 
+        public List<LoginPhone> EnviarNotificacionNuevoMensaje(List<Destinarario> destinatarios, int IdMensaje)
+        {
+
+            //se obtiene los token de los usuario del mensaje
+            ColegioContext objCnn = new ColegioContext();
+            List<LoginPhone> _notificationUser = new List<LoginPhone>();
+
+            destinatarios.ForEach(c =>
+            {
+                var _token = objCnn.loginPhone.Where(x => x.UsuarioId == c.id);
+
+                if (_token != null && _token.Count() > 0) _token.ToList().ForEach(t => _notificationUser.Add(t));
+
+            });
+            return _notificationUser;
+
+
+        }
 
 
         public IEnumerable<AcEnvioCorreoPersonas> GetAcEnvioCorreoPersonas(int idusuario, string filter, string temporada, string empresa)
