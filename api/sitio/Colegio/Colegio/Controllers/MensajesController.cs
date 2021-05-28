@@ -97,21 +97,29 @@ namespace Colegio.Controllers
 
             var _data = new MessageNotificacionPhone();
 
+            _data.data = new DataMessage();
+            _data.data.mensaje = data.mensaje.MenId;
             _data.notification = new Notificacions();
             _data.notification.title = "Nuevo mensaje";
             _data.notification.body = data.mensaje.MenAsunto;
             _data.priority = "high";
-            _notificaciones.ForEach(c => _data.to.Add(c.TokenFCM));
 
-            var json = "{" + JsonConvert.SerializeObject(_data) + "}";
+            _notificaciones.ForEach(c =>            {
 
+                _data.to = c.TokenFCM;
 
-            var client = new RestClient("https://fcm.googleapis.com/fcm/send");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("authorization", "key=AAAA2ylY_P4:APA91bEI8fnGtvurVbN__wrUeq2FAsSV7NBhb2pM935h26O1jS4ZwKULbUAaDvlxHNmI6QGuEhPJyEVGJbHYfZFQRozxU4rF0inDw9wJ74HckH5Yov4t0owzdPfEnSCMp_vwdCtY1lnd");
-            request.AddParameter("undefined", json);
+                var json = JsonConvert.SerializeObject(_data);
 
-            client.Execute(request);
+                var client = new RestClient("https://fcm.googleapis.com/fcm/send");
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("postman-token", "eb7f9bd7-7cc5-1d7e-e366-5cc07f982bd8");
+                request.AddHeader("cache-control", "no-cache");
+                request.AddHeader("authorization", "key=AAAA2ylY_P4:APA91bEI8fnGtvurVbN__wrUeq2FAsSV7NBhb2pM935h26O1jS4ZwKULbUAaDvlxHNmI6QGuEhPJyEVGJbHYfZFQRozxU4rF0inDw9wJ74HckH5Yov4t0owzdPfEnSCMp_vwdCtY1lnd");
+                request.AddHeader("content-type", "application/json");
+                request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+                IRestResponse response = client.Execute(request);
+            });
 
             return _response;
         }

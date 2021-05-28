@@ -195,13 +195,13 @@
 
                                 </div>
                             </li>
-                            <li class="list-group-item" onclick="cargar_bandeja('eliminados',this)">
+                            <li class="list-group-item d-none" onclick="cargar_bandeja('eliminados',this)">
                                 <button class="navbar-toggler btn-icono menu-panel" type="button">
                                     <i class="fas fa-trash" style="font-size:16px !important"></i>
                                 </button>
                                 <span>Eliminados</span>
                             </li>
-                            <li class="list-group-item" borrador="true" onclick="cargar_bandeja('borradores',this)">
+                            <li class="list-group-item d-none" borrador="true" onclick="cargar_bandeja('borradores',this)">
                                 <button class="navbar-toggler btn-icono menu-panel" type="button">
                                     <i class="far fa-file" style="font-size:16px !important"></i>
                                 </button>
@@ -321,7 +321,7 @@
                                         <div class="d-flex justify-content-between w-100">
                                             <div class="d-flex">
 
-                                                <div class=" mr-1">
+                                                <div class=" mr-1 d-none">
                                                     <button onclick="eliminar_mensaje()" data-toggle="tooltip" title="Eliminar" type="button" class="btn btn-light btn-sm rounded-sm"><i class="fas fa-trash"></i> </button>
                                                 </div>
                                                 <div class=" mr-1">

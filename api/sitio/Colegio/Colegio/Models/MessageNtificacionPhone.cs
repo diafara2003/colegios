@@ -10,7 +10,7 @@ namespace Colegio.Models
         public string priority { get; set; }
         public DataMessage data { get; set; }
         public Notificacions notification { get; set; }
-        public List<string> to { get; set; }
+        public string to { get; set; }
     }
 
     public class DataMessage {
