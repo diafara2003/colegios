@@ -65,6 +65,10 @@
         cursor: pointer;
     }
     
+    .row-select:hover {
+        background: #ebebeb;
+    }
+    
     .body-selected .row-select span {
         padding-right: 20px;
         text-overflow: ellipsis;
