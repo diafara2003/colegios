@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="es">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="comunicacion de colegios" />
+    <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
+
+    <title>Bandeja de entrada</title>
+
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <link href="../../Style/quill.snow.css" rel="stylesheet" />
+    <link href="../../Style/Comunicados/BandejaEntradaV3.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    <div class="container-fluid pl-0">
+        <div class="w-100">
+            <div class="bar-message">
+                <div class="select-staff">
+                    <div class="selected" onclick="ver_otras_bandejas()">
+                        <span>Mis mensajes</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="ddlmsnBandeja" class="hidden-select">
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                        <div class="row-select"> <span class="">Gustavo Andres Alonso Teran </span>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-round btn-green btn-add">
+                    <i class="fas fa-plus"></i>
+                    <span class="text-btn">Nuevo Mensaje</span>
+                </div>
+                <div class="search-messages step-search">
+                    <div class="search" id="search-general">
+                        <input id="buscargrado" class="input-search" onfocus="focus_input_busqueda(this)" onblur="blur_input_busqueda(this)" max="30" type="text" placeholder="Buscar">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex w-100">
+                <div class="menu-left">
+                    <div class="content-menu">
+                        <div class="box-menu">
+                            <div class="active menu-op">
+                                <div class="item-menu" onclick="cargar_bandeja('bandeja',this)">
+                                    <div class="box-item">
+                                        <div>
+                                            <i class="far fa-envelope-open"></i>
+                                        </div>
+                                        <div class="label-item"><span>Recibidos</span>
+                                            <span style="padding-left: calc(100% - 79px);" id="countNoLeidos"></span>
+                                            <div class="unseen-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="menu-op">
+                                <div class="item-menu " onclick="cargar_bandeja('Enviados',this)">
+                                    <div class="box-item">
+                                        <div>
+                                            <i class="fas fa-share"></i>
+                                        </div>
+                                        <div class="label-item"><span>Enviados</span>
+                                            <div class="unseen-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="menu-op d-none">
+                                <div class="item-menu ">
+                                    <div class="box-item" onclick="ver_destacados(this)">
+                                        <div>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="label-item"><span>Destacados</span>
+                                            <div class="unseen-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100">
+                    <div class="messages-tm">
+                        <table class="tab-panel">
+                            <tbody id="tbodyDatos"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none">
+        <div id="editor"></div>
+    </div>
+
+
+    <div class="d-none">
+        <input type="file" id="myInput" onchange="subirAdjunto()" />
+    </div>
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/sweetalert2@9.js"></script>
+    <script src="../../Script/Librerias/popper.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/quill.min.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"></script>
+    <script src="../../Script/Comunicados/Bandejaentradav3.js"></script>
+
+</body>
+
+</html>

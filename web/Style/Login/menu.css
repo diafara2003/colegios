@@ -1,142 +1,94 @@
-﻿a {
-    color: white;
+﻿html {
+    margin-left: 80px;
+}
+
+nav {
+    box-shadow: 1px 1px 4px #c2cfdc;
+}
+
+.alerta-mensaje {
+    width: 34px;
+    height: 34px;
     cursor: pointer;
 }
 
-.dropdown-toggle {
-    cursor: pointer;
-}
-
-.navbar-toggler {
-    border: 1px solid white;
-}
-
-a:hover {
-    color: white;
-}
-
-.swal2-icon {
-    font-size: 12px;
-}
-
-.swal2-title {
-    font-size: 22px;
-}
-
-.nav-item {
-    border-bottom: 1px solid #343a40;
-}
-
-    .nav-item:hover {
-        border-bottom: 1px solid white;
-    }
-
-.active {
-    border-bottom: 1px solid white;
-}
-
-.imgcontainer {
-    border: 1px solid #6c757d;
-    width: 46px;
-    height: 46px;
-    cursor: pointer;
-    padding-left: 9px;
-    padding-bottom: 5px;
+.numero {
+    /*padding: 2px;*/
+    position: absolute;
+    top: -6px;
+    left: 22px;
+    background-color: blue;
+    text-align: center;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
 }
 
-    .imgcontainer:hover {
-        border: 1px solid #666666;
-    }
-
-        .imgcontainer:hover .fa-user {
-            color: #666666;
-        }
-
-.logo-colegio {
-    width: 120px;
-    height: 51px;
-}
-
-.avatar {
+.numero span {
+    position: relative;
+    top: -3px;
+    font-size: 13px;
+    /* text-align: center; */
+    color: white;
+    font-weight: bold;
 }
 
 .menu {
-    width: 100%;
-    height: calc(100vh - 69px);
-    border: 1px solid #ebebeb;
-    position: absolute;
-    z-index: 9;
-    display: none;
-    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 75px;
+    height: 100%;
+    background: #eeeeee;
+    font-size: 16px;
+    font-family: sans-serif;
 }
 
-
-.opcion {
-    cursor: pointer;
-}
-
-    .opcion:hover {
-        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
-        background-color: #ebebeb;
-    }
-
-.menu-opcion-active {
-    opacity: 0.5;
-    /*background-color: #D8D8D8 !important;*/
-}
-
-
-.element-animation-show {
-    animation: animationFramesshow ease 1s;
-    animation-iteration-count: 1;
-    transform-origin: 50% 50%;
-    /* transform: translate(-100px, 0px); */
-}
-
-.element-animation-hide {
-    animation: animationFrameshide ease 1s;
-    animation-iteration-count: 1;
-    transform-origin: 50% 50%;
-    /* transform: translate(-100px, 0px); */
-}
-
-.fa-bars {
+.menu__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pad: 15px 0;
+    text-decoration: none;
     color: #666666;
-    font-size: 27px;
-    cursor: pointer;
-    padding-top: 5px;
+    transition: background 0.3s;
 }
 
-.imgcontainer .fa-user {
-    font-size: 29px;
+.menu__item>i {
+    font-size: 24px;
+    padding: 10px;
 }
 
-.fixed-top {
-    padding: 0 5px 0 5px;
+.menu__item:hover {
+    background: #dddddd;
 }
 
-
-@keyframes animationFrameshide {
-    0% {
-        opacity: 1;
-        transform: translate(0px, 0px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(-1000px, 0px);
-    }
+.menu__item:hover::after {
+    opacity: 1;
+    visibility: visible;
 }
 
-@keyframes animationFramesshow {
-    0% {
-        opacity: 0;
-        transform: translate(-1000px, 0px);
-    }
+.menu__item::after {
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100%;
+    content: attr(data-tooltip);
+    margin-left: 5px;
+    white-space: nowrap;
+    padding: 7px 12px;
+    font-size: 0.9em;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
 
-    100% {
-        opacity: 1;
-        transform: translate(0px, 0px);
-    }
+.menu__item--active {
+    color: #999;
+    background: #dddddd;
 }

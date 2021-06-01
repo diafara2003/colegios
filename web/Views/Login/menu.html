@@ -12,124 +12,26 @@
     <meta name="description" content="comunicacion de colegios" />
     <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
     <title>Inicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
     <link href="../../Style/bootstrap.css" rel="stylesheet">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
     <link href="../../Style/Login/menu.css" rel="stylesheet" />
-    <style>
-        .alerta-mensaje {
-            width: 34px;
-            height: 34px;
-            cursor: pointer;
-        }
-
-        .numero {
-            /*padding: 2px;*/
-            position: absolute;
-            top: -6px;
-            left: 22px;
-            background-color: blue;
-            text-align:center;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-        }
-
-            .numero span {
-                position: relative;
-                top: -3px;
-                font-size: 13px;
-                /* text-align: center; */
-                color: white;
-                font-weight: bold;
-            }
-
-        
-    </style>
 
 </head>
 
 <body>
-    <header>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 
-            <a class="navbar-brand" href="#"><img class="logo-colegio" id="MenuImgLogoColegio" /></a>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <nav class="menu" id="opciones_menu">
+        <a href="#" class="menu__item" data-tooltip="home">
+            <i class="fas fa-home"></i>
+        </a>
 
-                <!--<ul class="navbar-nav ml-5" id="opciones_menu">-->
-                <ul class="navbar-nav ml-5" id="opciones_menu">
-                    <li class="nav-item"><span style="color:white"><i style="color:white" class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones... </span></li>
-                </ul>
-            </div>
-            <div>
-
-                <div class="btn-group d-lg-block d-md-none d-sm-none d-none">
-                    <div class="d-flex">
-                        <div class="dropdown">
-                            <div class="rounded-circle bg-light p-1 alerta-mensaje" onclick="ver_no_leidos()">
-                                <div class="bg-danger text-white numero">
-                                    <span class="badgeNoLeidos"></span>
-                                </div>
-
-                                <div class="rounded-circle bg-secondary text-white" style="width:30px;height:30px;margin-top: -2px;margin-left: -2px">
-                                    <div style="padding-top: 4px;padding-left: 6px;">
-                                        <i class="far fa-bell" style="font-size:20px"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" onclick=ver_opcion(this,'../comunicados/bandejaentrada.html')>Mensajes recibidos <span class="badgeNoLeidos"></span> </a>
-
-                            </div>
-                        </div>
-                        <div>
-                            <button id="DivNombreUsu" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="text-light spnnombreUsuario"></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="DivNombreUsu">
-                                <button class="dropdown-item" type="button" onclick="actualizar_datos()"><i class="fas fa-user-edit" style="margin-right:3px"></i>Actualizar datos</button>
-                                <button class="dropdown-item" type="button" onclick="cambiar_clave()"><i class="fas fa-key" style="margin-right:3px"></i>Cambiar contraseña</button>
-                                <button class="dropdown-item" type="button" onclick="cerrar_session()"><i class="fas fa-sign-out-alt" style="margin-right:3px"></i>Cerrar sesión</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-group d-lg-none d-md-block d-sm-block d-block">
-                <span class="text-light spnnombreUsuario"></span>
-            </div>
-
-            <div class="d-flex justify-content-end">
-
-                <div>
-                    <button class="navbar-toggler" style="width:56px;" type="button" onclick="menu()">
-                        <i style="color:white" class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div>
-        <section>
-            <div class="menu shadow-lg p-3" id="menu_movil">
-            </div>
-        </section>
-
-        <section>
-
-            <div class="opcion-frame">
-
-                <div class="p-1" style="margin-top:60px">
-
-                    <iframe id="framrePage" width="100%" title="Inline Frame Example" allowfullscreen="true" frameborder="0"
-                            src=""></iframe>
-
-                </div>
-            </div>
-        </section>
+    </nav>
+    <div class="opcion-frame">
+        <iframe id="framrePage" width="100%" title="Inline Frame Example" style="height: calc(100vh - 9px);" allowfullscreen="true" frameborder="0" src=""></iframe>
     </div>
+
+
 
 
 
@@ -142,10 +44,10 @@
     <script src="../../Script/Librerias/sweetalert2@9.js"></script>
     <script src="../../Script/Login/menu.js"></script>
     <script>
-        document.addEventListener('gesturestart', function (e) {
+        document.addEventListener('gesturestart', function(e) {
             e.preventDefault();
         });
-        document.addEventListener('touchmove', function (event) {
+        document.addEventListener('touchmove', function(event) {
             event = event.originalEvent || event;
             if (event.scale > 1) {
                 event.preventDefault();

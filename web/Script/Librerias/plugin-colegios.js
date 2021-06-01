@@ -35,14 +35,14 @@
                 callback(_result);
             }
             return _result;
-        }
-        else {
+        } else {
             paginar_sesion();
         }
     } catch (e) {
 
     }
 }
+
 function paginar_sesion() {
     localStorage.clear();
     let _inital = document.location.hostname;
@@ -53,20 +53,22 @@ function paginar_sesion() {
         window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
 
 }
+
 function GetDateNow() {
     return moment(new Date()).format("DD/MM/YYYY");
 }
+
 function mostrar_panel() {
 
 
     if ($('.panel').css('display') == 'none') {
         $('.panel').show('slow')
-    }
-    else {
+    } else {
         $('.panel').hide('slow')
     }
 
 }
+
 function selectText(_this) {
     var doc = document;
     var element = _this;
@@ -82,6 +84,7 @@ function selectText(_this) {
         selection.addRange(range);
     }
 }
+
 function only_number(evt) {
 
     var charCode = (evt.which) ? evt.which : event.keyCode
@@ -90,12 +93,14 @@ function only_number(evt) {
 
     return true;
 }
+
 function fixed_table_scroll(name_table) {
     $('#' + name_table).floatThead();
 
     return;
 
 }
+
 function Get_query_string(name) {
     var url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -105,6 +110,7 @@ function Get_query_string(name) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
 function validar_correo(str) {
     var patron = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
     if (patron.test(str)) {
@@ -113,6 +119,7 @@ function validar_correo(str) {
         return false;
     }
 }
+
 function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placeholder, fn_selected) {
 
     if (localStorage.getItem('sesion') == null || localStorage.getItem('sesion') == "") {
@@ -125,7 +132,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
 
 
     var options = {
-        url: function (whiting) {
+        url: function(whiting) {
             return `${_url}api/${_api}&filter=${whiting}`;
         },
         getValue: GetValueProperty,
@@ -133,7 +140,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         placeholder: placeholder,
         list: {
             maxNumberOfElements: 10,
-            onChooseEvent: function () {
+            onChooseEvent: function() {
                 let _selected = $(`#${id_input}`).getSelectedItemData()
                 $(`#${id_input}`).attr('result', JSON.stringify(_selected));
 
@@ -160,21 +167,23 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         }
     }
 
-    options.preparePostData = function (data) {
+    options.preparePostData = function(data) {
         data.phrase = $(`#${id_input}`).val();
         return data;
     };
     //http://easyautocomplete.com/guide#sec-template-links
 
-    $(`#${id_input}`).on('focus', function (e) {
+    $(`#${id_input}`).on('focus', function(e) {
         $(this).removeAttr('result');
     })
 
     $(`#${id_input}`).easyAutocomplete(options);
 }
+
 function IsNull(data) {
     return data == null ? "" : data;
 }
+
 function asignar_control_fecha(id) {
     $('#' + id).datepicker({
         format: "dd/mm/yyyy",
@@ -184,12 +193,12 @@ function asignar_control_fecha(id) {
         autoclose: true,
         todayHighlight: true,
         toggleActive: true
-    }).on('changeDate', function (ev) {
+    }).on('changeDate', function(ev) {
         const _select = ev.format(0, "dd/mm/yyyy");
         if ($(ev.target).attr('data-changed') != undefined)
             eval($(ev.target).attr('data-changed') + '("' + _select + '","' + ev.target.id + '")');
     });;
-    $('.input-group-append').click(function () {
+    $('.input-group-append').click(function() {
         $(event.target).closest('div.input-group').find('input').focus();
     });
 
@@ -199,6 +208,7 @@ function asignar_control_fecha(id) {
             eval($(event.target).attr('data-changed') + '("","' + event.target.id + '")');
     });
 }
+
 function obtener_session() {
     let _usuario = obtener_usuario_sesion();
     var _sesion = {};
@@ -209,9 +219,11 @@ function obtener_session() {
 
     return _sesion
 }
+
 function obtener_usuario_sesion() {
     return JSON.parse(localStorage.getItem('colegio'));
 }
+
 function cerrar_session() {
     localStorage.clear();
 
@@ -223,11 +235,15 @@ function cerrar_session() {
         window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
 
 }
+
 function groupBy(arr, prop) {
-    const map = new Map(Array.from(arr, obj => [obj[prop], []]));
+    const map = new Map(Array.from(arr, obj => [obj[prop],
+        []
+    ]));
     arr.forEach(obj => map.get(obj[prop]).push(obj));
     return Array.from(map.values());
 }
+
 function random_data(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -243,25 +259,32 @@ let _get_icono = (_extencion) => {
 
         case 'doc':
         case 'docx':
-            _icono = '../../Img/word.svg'; break;
+            _icono = '../../Img/word.svg';
+            break;
         case 'xls':
         case 'xlsx':
-            _icono = '../../Img/excel.svg'; break;
-        case 'pdf': _icono = '../../Img/pdf.svg'; break;
+            _icono = '../../Img/excel.svg';
+            break;
+        case 'pdf':
+            _icono = '../../Img/pdf.svg';
+            break;
         case '.zip':
-        case '.rar': _icon = '../../Img/comprimido.svg'; break;
+        case '.rar':
+            _icon = '../../Img/comprimido.svg';
+            break;
         default:
-            _icono = '../../Img/imagen.svg'; break;
+            _icono = '../../Img/imagen.svg';
+            break;
     }
 
     return _icono;
 }
 
-document.addEventListener('gesturestart', function (e) {
+document.addEventListener('gesturestart', function(e) {
     e.preventDefault();
 });
 
-document.addEventListener('touchmove', function (event) {
+document.addEventListener('touchmove', function(event) {
     event = event.originalEvent || event;
     if (event.scale > 1) {
         event.preventDefault();
@@ -272,9 +295,10 @@ document.addEventListener('touchmove', function (event) {
 //============================================================================================================================================================ 
 //                                                                  CONVERT POSITION
 var contexto, divInitialPosi = undefined;
+
 function ConvertPosicion() {
 
-    $(".tdEditable").on("focus", function () {
+    $(".tdEditable").on("focus", function() {
 
         // se remueve el atributo al div
         if ($('.datepicker').css('display') == undefined) {
@@ -288,7 +312,7 @@ function ConvertPosicion() {
 
 
             var selectedobj = $(this).attr('typeValue');
-            $('#' + id_object).on("focusout", function () {
+            $('#' + id_object).on("focusout", function() {
                 var _ctc = this;
                 var td = $(this).closest("td");
                 var d = divInitialPosi;
@@ -314,7 +338,7 @@ function ConvertPosicion() {
                             divInitialPosi = undefined;
                         } else {
                             $('#' + id_object).find("input").datepicker().off("hide");
-                            $('#' + id_object).find("input").datepicker().on("hide", function () {
+                            $('#' + id_object).find("input").datepicker().on("hide", function() {
                                 //  if (!isChrome)    {
                                 //  setTimeout(function () {
                                 var _e = $(_ctc).find('input').attr('cambio');
@@ -395,6 +419,7 @@ function focus_out_get_value(_ctc, id_object) {
     td.append(divInitialPosi);
     divInitialPosi = undefined;
 }
+
 function reset_Select(_ctc, td) {
 
     var id_object = $(_ctc).attr('objectreplace');
@@ -410,6 +435,7 @@ function reset_Select(_ctc, td) {
 
 
 }
+
 function Focusposition(obj) {
     var id_object = $(obj).attr('objectreplace');
     var type = $(obj).attr('type');
@@ -441,6 +467,7 @@ function Focusposition(obj) {
 
     }
 }
+
 function focus_element(obj) {
     var id_object = $(obj).attr('objectreplace');
     var selectedobj = $(obj).attr('typeValue');
@@ -470,6 +497,7 @@ function position_Get_Text(e) {
 
     return value;
 }
+
 function identify_type(e) {
 
     var value;
@@ -485,8 +513,7 @@ function identify_type(e) {
         case "select":
             if (selectedobj == 'value') {
                 value = $('#' + _object_replace).find('select option:selected').text();
-            }
-            else {
+            } else {
                 value = $('#' + _object_replace).find('select option:selected').val();
             }
             break;
@@ -501,7 +528,7 @@ function identify_type(e) {
 
 
 
-if (alertify) {
+if (typeof alertify != 'undefined') {
     var delay = alertify.get('notifier', 'delay');
     alertify.set('notifier', 'delay', 2);
     alertify.set('notifier', 'position', 'top-right');

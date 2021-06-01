@@ -18,217 +18,85 @@
     <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
     <link rel="stylesheet" href="Style/bootstrap.css">
     <link rel="stylesheet" href="Style/fontawesome/css/all.min.css" />
-    <style>
-        .form-login {
-            margin-top: 20%;
-            border: 1px solid #ebebeb;
-        }
+    <link href="Style/estandar.css" rel="stylesheet" />
+    <link href="Style/login/login.css" rel="stylesheet" />
 
-
-
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-            position: relative;
-        }
-
-        .avatar {
-            width: 40%;
-            border-radius: 50%;
-            border: 1px solid #ebebeb;
-        }
-
-        .sleep-password {
-            display: none;
-            border-bottom: 1px solid #ebebeb;
-            width: 100%;
-        }
-
-        .sleep-email {
-            border-bottom: 1px solid #ebebeb;
-            display: block;
-            width: 100%;
-        }
-
-
-        /* SM */
-        @media (min-width: 506px) {
-            .form-login {
-                /*height: 480px;*/
-                margin-top: 10%;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .sleep-email, .sleep-password {
-                width: 100%;
-            }
-        }
-
-        .element-animation {
-            animation: animationFrames ease 1s;
-            animation-iteration-count: 1;
-            transform-origin: 50% 50%;
-            /* transform: translate(-100px, 0px); */
-        }
-
-        @keyframes animationFrames {
-            0% {
-                opacity: 1;
-                transform: translate(0px, 0px);
-            }
-
-            20% {
-                opacity: 0.5;
-                transform: translate(20px, 0px);
-            }
-
-
-            100% {
-                opacity: 0;
-                transform: translate(-1000px, 0px);
-            }
-        }
-    </style>
-
-
-    <style>
-        /*.container-login {
-            margin-top: 40%;
-        }*/
-
-        .navbar {
-            border-bottom: 1px solid #ebebeb;
-        }
-
-        .logo-colegio {
-            width: 120px;
-            height: 51px;
-        }
-
-        .avatar {
-            width: 20%;
-        }
-
-
-        @media (max-width: 806px) {
-            .container-login {
-                margin-top: 5%;
-            }
-        }
-
-        .kids-background-image {
-            height: 100%;
-            left: -50%;
-            position: fixed;
-            top: 0;
-            width: 200%;
-            z-index: -9;
-        }
-
-            .kids-background-image img {
-                bottom: 0;
-                left: 50%;
-                min-height: 100%;
-                min-width: 50%;
-                position: absolute;
-                transform: translate(-50%,0%);
-            }
-
-        .fondo-login {
-            background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
-            border: 1px solid rgba(0, 0, 0, 0.7);
-            opacity: 0.85
-        }
-
-        .navbar {
-            border-bottom: 1px solid #343a40;
-            /*background: url(Img/banner.jpg);*/
-        }
-    </style>
 
 </head>
 
-<body class="bg-light">
-    <div class="kids-background-image">
+<body>
+    <div class="kids-background-image d-none">
         <!--<div class="kids-background-image">-->
         <!--<img src="Img/colegio1.jpg" />-->
-        
+
         <img src="Img/pencils-4966995_1280.jpg" />
     </div>
+
     <div class="container-fluid">
-        <div class="row d-flex">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 colegio-info" style="opacity:0.85">
-                <div class="navbar shadow-sm bg-dark p-0" >
-                    <a class="navbar-brand pl-2" href="#" >
-                        <!--<img class="logo-colegio" src="Img/colegio.png" />-->
-                        <img src="Img/LogoPNG.png" style="width:150px"/>
-                    </a>
-                    <a class="navbar-brand text-white d-none" href="#">Comunicate colegios</a>
+        <div class="row login-content">
+            <div class="col-md-6 col-12 ">
+                <div class="box-login">
+                    <div class="w-100">
+                        <div class="d-flex justify-content-center">
+                            <img src="Img/c3aa71b7-cd70-4234-8279-9f2b4d5195dd.jpg" />
+                        </div>
+                        <div class="d-flex justify-content-center">
+
+                            <div id="width-formulario">
+                                <h4 style="color: #ffc21d; font-weight: 500; font-size: 1.4em;">Directivos y profesores</h4>
+                                <h4 translate="login.titulo" class="ng-scope">¡Hola Bienvenido/a!</h4>
+                                <p class="upper-text">Por favor escribe tus datos para iniciar sesión</p>
+                                <form autocomplete="off" class="form-horizontal " id="#loginform" onsubmit="return false">
+                                    <div class="input-container input-login-device">
+                                        <input type="text" id="txtusuario" name="email" placeholder="Correo Electrónico" required="required" autocomplete="off">
+                                        <i class="far fa-envelope"></i>
+                                    </div>
+                                    <div class="input-container input-login-device">
+                                        <input id="passwordField" type="password" name="password" onkeypress="validar_enter(event)" id="txtclave" placeholder="Contraseña" required="required" autocomplete="off">
+                                        <i class="fas fa-lock"></i>
+
+                                    </div>
+                                    <div class="button-container">
+                                        <button id="btnLogin" onclick="validar_nombre_usuario(this)" class="login-button">
+                                            Ingresar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12 col-12 mt-2 " style="border-radius:10px;">
-                <div class="rounded shadow-sm container-login p-3 fondo-login">
-
-                    <div class="imgcontainer">
-                        <!--<img class="logo-colegio" src="Img/colegio.png" />-->
-                        <img src="Img/LogoPNG.png" />
-                    </div>
-                    <div class="p-3 text-center">
-                        <!--<small id="emailHelp" class="form-text text-muted">
-                            No compartiremos tus datos con nadie.
-                        </small>-->
-                    </div>
-
-                    <div class="form-group p-2">
-                        <label for="txtusuario" class="text-white">Documento de identidad</label>
-                        <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </div>
-                            <input type="text" autocomplete="off" onkeypress="validar_enter(event)" class="form-control" id="txtusuario" placeholder="Username">
+            <div class="col-md-6 col-12">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="Img/slide-login/imagen1.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Img/slide-login/imagen2.jpg" class="d-block w-100 " alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Img/slide-login/imagen3.jpg" class="d-block w-100 " alt="...">
                         </div>
                     </div>
-                    <div class="form-group p-2">
-                        <label for="txtclave" class="text-white">Contraseña</label>
-                        <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                            </div>
-                            <input type="password" autocomplete="off" onkeypress="validar_enter(event)" class="form-control" id="txtclave" placeholder="Contraseña">
-                        </div>
-                    </div>
-                    <div class="form-group p-2">
-                        <button type="button" class="btn btn-block btn-primary"
-                                id="btnLogin" onclick="validar_nombre_usuario(this)">
-                            Ingresar
-                        </button>
-
-                    </div>
-                    <div class="form-group p-2 text-center badge badge-danger text-wrap w-100 fade d-none" id="Div_error">
-                        <div class="">
-                            <label class="" id="lblmensajewe"></label>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
 
-
+    <div id="AlertMsn" class="alert alert-danger alert-dismissible fade" role="alert">
+        <strong>Usuario no encontrado</strong> Usuario o contraseña incorrecta
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
     <script src="Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="Script/Librerias/bootstrap.min.js"></script>
     <script src="Script/Librerias/plugin-colegios.js"></script>
     <script src="Script/Login/login.js"></script>
     <!--<script>
