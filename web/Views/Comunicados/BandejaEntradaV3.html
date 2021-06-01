@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="btn-round btn-green btn-add">
+                <div class="btn-round btn-green btn-add" onclick="nuevo_mensaje()">
                     <i class="fas fa-plus"></i>
                     <span class="text-btn">Nuevo Mensaje</span>
                 </div>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-100">
+                <div class="w-100" id="Bandejamensajes">
                     <div class="messages-tm">
                         <table class="tab-panel">
                             <tbody id="tbodyDatos"></tbody>
@@ -143,13 +143,75 @@
                     </div>
                 </div>
 
+                <div id="mensaje" class="w-100 d-none">
+
+                    <div class="messages-bar-tools-view  w-100">
+                        <div class="item-actions has-tooltip" onclick="volver()">
+                            <i class="fas fa-long-arrow-alt-left"></i>
+                            <span class="tooltip tooltip-without-border" role="tooltip">Volver</span>
+                        </div>
+                    </div>
+
+                    <div class="w-100">
+                        <div id="mostrarMensaje"></div>
+                    </div>
+
+                </div>
+
+                <div id="nuevo-mensaje" class="d-none w-100">
+                    <div class="messages-bar-tools-view d-flex align-items-center w-100">
+                        <div class="item-actions has-tooltip" onclick="volver()">
+                            <i class="fas fa-long-arrow-alt-left"></i>
+                            <span class="tooltip tooltip-without-border" role="tooltip">Volver</span>
+                        </div>
+                        <div class="btn-round btn-green" style="padding: 5px 20px !important"><span class="text-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar</span></div>
+                    </div>
+                    <div class="rounded shadow-sm p-2">
+                        <div class="col-lg-12">
+                            <div class="pt-2 d-flex">
+                                <div class="to">Para</div>
+                                <div class="d-flex flex-wrap">
+                                    <div class="d-flex flex-wrap">
+                                        <div id="divDestinatarios">
+
+                                        </div>
+                                        <div placeholder="Seleccione los destinatarios..." contenteditable="true" class="ml-2 text-destinatario" onkeyup="buscar_personas(this)" id="DivBusqueda"></div>
+                                    </div>
+
+                                    <div class="resultado-destinatarios ml-2 mt-1 shadow-sm" id="DivResultados" style="display: none;"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-2">
+
+                            <div class="pt-2 d-flex">
+                                <div class="to">Asunto</div>
+                                <div>
+                                    <div class="d-flex flex-wrap">
+
+                                        <div placeholder="Seleccione los destinatarios..." contenteditable="true" class="ml-2 text-destinatario" onkeyup="buscar_personas(this)" id="DivBusqueda"></div>
+                                    </div>
+
+                                    <div class="resultado-destinatarios ml-2 mt-1 shadow-sm" id="DivResultados" style="display: none;"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <div style="height:250px" id="editor"></div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="d-none">
-        <div id="editor"></div>
-    </div>
 
 
     <div class="d-none">

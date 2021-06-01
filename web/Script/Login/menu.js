@@ -59,7 +59,7 @@ function renderizar_menu(response) {
         </a>`;
     _html +=
         `<a href="#" onclick="cerrar_session()" class="menu__item" data-tooltip="Cerrar Sesión">
-            <i class="fas fa-sign-out-alt"></i>
+        <i class="fas fa-power-off"></i>
         </a>`;
 
 
