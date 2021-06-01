@@ -461,19 +461,16 @@
 
 * {
     font-family: 'Roboto', sans-serif;
-    color: #95989a;
 }
 
 body,
 input,
 select {
     font-size: 14px !important;
-    color: #95989a;
 }
 
 html,
 body {
-    color: #95989a;
     box-sizing: border-box;
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
@@ -513,12 +510,12 @@ i {
 
 .table th {
     border-top: none;
-    font-weight: 900;
+    font-weight: 500;
 }
 
 .card-header,
 .form-group label {
-    font-weight: 900;
+    font-weight: 500;
 }
 
 .table th,
