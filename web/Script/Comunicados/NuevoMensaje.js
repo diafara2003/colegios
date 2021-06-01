@@ -1,6 +1,9 @@
-﻿let _sesion = {};//39;
+﻿let _sesion = {}; //39;
 _adjuntos_cargados = [];
-let _data_source_ac = [], destinatarios = [], _sent_to = '', _Categorias = [];
+let _data_source_ac = [],
+    destinatarios = [],
+    _sent_to = '',
+    _Categorias = [];
 let iniciales = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
     return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
@@ -14,6 +17,7 @@ var quill = new Quill('#editor', {
 function descartar() {
     window.parent.cerrar_modal();
 }
+
 function buscar_personas(_this) {
     setTimeout(c => {
         let _value = _this.textContent;
@@ -33,6 +37,7 @@ function buscar_personas(_this) {
     }, 300);
 
 }
+
 function renderizar_resultados_ac(source) {
 
     let _html = '';
@@ -60,6 +65,7 @@ function renderizar_resultados_ac(source) {
 
     document.getElementById('DivResultados').innerHTML = _html;
 }
+
 function renderizar_seleccionado(_i) {
     let persona = _data_source_ac[_i];
 
@@ -73,6 +79,7 @@ function renderizar_seleccionado(_i) {
     $('#DivResultados').empty();
     $('#DivResultados').css('display', 'none');
 }
+
 function renderizar_html_seleccionado(persona, _id_deleted) {
     let _html = ``;
     _html += `<div class="desti-seleccionado">`;
@@ -86,10 +93,11 @@ function renderizar_html_seleccionado(persona, _id_deleted) {
     if (_id_deleted)
         _html += `<button style="margin-top:1px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
     _html += `</span>`;
-_html += `</div>`;
+    _html += `</div>`;
 
     return _html;
 }
+
 function set_sent_to() {
     let _data = [];
 
@@ -97,11 +105,13 @@ function set_sent_to() {
 
     return JSON.stringify(_data);
 }
+
 function eliminar_persona_selected(_this, id) {
     let _index = destinatarios.findIndex(p => p == id);
     destinatarios.splice(_index, 1);
     $(_this).closest('.desti-seleccionado').remove();
 }
+
 function armar_objeto_mensaje() {
     let data = {};
     let mensaje = obtener_datos();
@@ -110,6 +120,7 @@ function armar_objeto_mensaje() {
     data.adjuntos = obtener_adjuntos_al_mensaje();
     return data;
 }
+
 function enviar_mensaje() {
 
     let data = armar_objeto_mensaje();
@@ -127,17 +138,31 @@ function enviar_mensaje() {
 
     }
 }
+
 function obtener_adjuntos_al_mensaje() {
     return _adjuntos_cargados.map(c => c.AjdId);
 }
+
 function obtener_destinatarios() {
     return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
 }
+
 function obtener_datos() {
     var myobject = {
-        MenId: 0, MenEmpId: _sesion.empresa, MenUsuario: _sesion.idusuario, MenClase: 1, MenTipoMsn: 'E', MenAsunto: '',
-        MenMensaje: '', MenReplicaIdMsn: 0, MenOkRecibido: 0, MenSendTo: '', MenBloquearRespuesta: 0, MenCategoriaId: 0,
-        MenEstado: 0, MenFechaMaxima: null
+        MenId: 0,
+        MenEmpId: _sesion.empresa,
+        MenUsuario: _sesion.idusuario,
+        MenClase: 1,
+        MenTipoMsn: 'E',
+        MenAsunto: '',
+        MenMensaje: '',
+        MenReplicaIdMsn: 0,
+        MenOkRecibido: 0,
+        MenSendTo: '',
+        MenBloquearRespuesta: 0,
+        MenCategoriaId: 0,
+        MenEstado: 0,
+        MenFechaMaxima: null
     };
 
     let id = Get_query_string('id');
@@ -157,6 +182,7 @@ function obtener_datos() {
 
     return myobject;
 }
+
 function convertir_fecha(fecha) {
     const date = fecha.split('/');
 
@@ -177,6 +203,7 @@ function convertir_fecha(fecha) {
 
     return _m_date;
 }
+
 function validar_datos(_data) {
     let _result = true;
 
@@ -193,13 +220,14 @@ function validar_datos(_data) {
 
     return _result;
 }
+
 function mostrar_mensaje_validacion_error(mensaje) {
 
     window.parent.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar', '', '', '', () => {
-        
+
     });
 
-    
+
 }
 async function consultar_mensaje(id) {
     //se balida si el panel es borrador
@@ -214,6 +242,7 @@ async function consultar_mensaje(id) {
         $('#bodymensaje').css('display', 'block');
     });
 }
+
 function read_only() {
     $('[contenteditable="true"]').removeAttr('contenteditable');
 
@@ -222,6 +251,7 @@ function read_only() {
     quill.disable();
 
 }
+
 function cargar_mensaje(mensaje) {
     // $('.ql-editor')[0].innerHTML = mensaje.MenMensaje;
     quill.clipboard.dangerouslyPasteHTML(0, mensaje.MenMensaje);
@@ -256,6 +286,7 @@ function cargar_mensaje(mensaje) {
 
 
 }
+
 function renderizar_categorias(_response) {
     let _html = '<option value="-1">Seleccione una categoría para el mensaje</option>';
 
@@ -277,14 +308,17 @@ async function consultar_categoria() {
         }
     })
 }
+
 function cerrar_modal_nuevo_mensaje() {
     window.parent.cerrar_modal_nuevo();
 }
+
 function expandir_frame() {
     window.parent.expandar_modal();
     $('.fa-expand-alt').closest('a').addClass('d-none');
     $('.fa-compress-alt').closest('a').removeClass('d-none');
 }
+
 function colapsar_frame() {
     if (window.parent.colapsar_modal != undefined)
         window.parent.colapsar_modal();
@@ -292,9 +326,11 @@ function colapsar_frame() {
     $('.fa-compress-alt').closest('a').addClass('d-none');
     $('.fa-expand-alt').closest('a').removeClass('d-none');
 }
+
 function adjuntar() {
     $('#myInput').click();
 }
+
 function concatenar_id_adjuntos(_adjuntos) {
     let _url = "?id=";
 
@@ -303,6 +339,7 @@ function concatenar_id_adjuntos(_adjuntos) {
 
     return _url + id;
 }
+
 function cargar_adjuntos() {
 
     let _html = '';
@@ -321,15 +358,18 @@ function cargar_adjuntos() {
     //return _html;
 
 }
+
 function armar_url_adjuntos() {
     let _url = '';
-    let _usuario = obtener_session().idusuario, _adjunto = 0;
+    let _usuario = obtener_session().idusuario,
+        _adjunto = 0;
 
     _url += '?usuario=' + _usuario;
     _url += '&adjunto=' + _adjunto;
 
     return _url;
 }
+
 function subirAdjunto() {
 
     let _url = window.location.href.toLowerCase().split('views')[0];
@@ -347,16 +387,17 @@ function subirAdjunto() {
         data: formData,
         contentType: false,
         processData: false,
-        success: function (_response) {
+        success: function(_response) {
 
             _adjuntos_cargados.push(_response);
             cargar_adjuntos();
         },
-        error: function () {
+        error: function() {
             alert("Faild please try upload again");
         }
     });
 }
+
 function eliminar_adjunto(_id, _this) {
     var _data = { id: _id };
     consultarAPI('adjunto/eliminar', 'POST', () => {
@@ -369,6 +410,7 @@ function eliminar_adjunto(_id, _this) {
 
     }, _data);
 }
+
 function guardar_mensaje() {
 
     let data = armar_objeto_mensaje();
@@ -380,6 +422,7 @@ function guardar_mensaje() {
         }, data);
     }
 }
+
 function ddlCategorias(_this) {
     let selected = $(_this).find('option:selected').val();
 
@@ -393,7 +436,7 @@ function ddlCategorias(_this) {
 
     }
 }
-(function () {
+(function() {
     inicio();
 })();
 async function inicio() {

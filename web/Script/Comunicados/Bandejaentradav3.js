@@ -195,8 +195,9 @@ async function cargar_bandeja(tipo, _element) {
     data_mensajes = response;
     renderizar_mensajes_bandeja(response);
 
-    if (tipo == 'Enviados') $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
-    else $('#mostrarMensaje').css('max-height', 'calc(100vh - 343px)');
+    //if (tipo == 'Enviados')
+    $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
+    //else $('#mostrarMensaje').css('max-height', 'calc(100vh - 343px)');
 
 }
 
@@ -263,6 +264,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     $('#responderMensaje').addClass('d-none');
     $('.btn-enviar').addClass('d-none');
     $('.btn-responder').removeClass('d-none');
+    $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
 
     consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
         $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
@@ -449,6 +451,9 @@ function habilitar_responder() {
     $('#responderMensaje').removeClass('d-none');
     $('.btn-enviar').removeClass('d-none');
     $('.btn-responder').addClass('d-none');
+
+    $('#mostrarMensaje').css('max-height', 'calc(100vh - 345px)');
+
 }
 
 function convertir_fecha(fecha) {
