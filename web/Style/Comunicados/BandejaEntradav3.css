@@ -456,6 +456,11 @@
         padding: 0 10px 0 14px;
     }
     
+    .messages-bar-tools-view {
+        border-bottom: 1px solid #ebebeb;
+        ;
+    }
+    
     .item-actions {
         height: 35px;
         width: 35px;
