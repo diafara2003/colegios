@@ -6,6 +6,10 @@ nav {
     box-shadow: 1px 1px 4px #c2cfdc;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 .alerta-mensaje {
     width: 34px;
     height: 34px;
@@ -91,4 +95,8 @@ nav {
 .menu__item--active {
     color: #999;
     background: #dddddd;
+}
+
+.menu__item--active i {
+    color: var(--primary);
 }

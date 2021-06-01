@@ -14,6 +14,7 @@
     }
     
     .selected {
+        font-size: 14px;
         overflow: hidden;
         color: #95989a;
         background-color: #fff;
@@ -88,6 +89,10 @@
         cursor: pointer;
     }
     
+    .btn-round span {
+        color: white
+    }
+    
     .btn-add {
         padding-top: 9px!important;
         padding-bottom: 9px!important;
@@ -96,6 +101,7 @@
     
     .btn-round i {
         margin-right: 7px;
+        color: white;
     }
     
     .btn-add i,
@@ -226,6 +232,7 @@
     
     .content-menu .box-menu .item-menu .box-item .label-item span {
         overflow: hidden;
+        font-size: 14px;
         padding-top: 4px;
         text-overflow: ellipsis;
         white-space: nowrap;

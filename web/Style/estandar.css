@@ -461,21 +461,21 @@
 
 * {
     font-family: 'Roboto', sans-serif;
+    color: #95989a;
 }
 
 body,
 input,
 select {
-    font-size: 12px !important;
+    font-size: 14px !important;
+    color: #95989a;
 }
 
 html,
 body {
-    overflow: hidden;
-    min-height: 100% !important;
-    height: 100%;
+    color: #95989a;
     box-sizing: border-box;
-    font-size: 1em;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
@@ -511,6 +511,16 @@ i {
     border-bottom: 1px solid #369;
 }
 
+.table th {
+    border-top: none;
+    font-weight: 900;
+}
+
+.card-header,
+.form-group label {
+    font-weight: 900;
+}
+
 .table th,
 .table td {
     padding: 2px 5px 0 5px;
@@ -523,6 +533,15 @@ i {
 
 .floatThead-container {
     z-index: 1 !important;
+}
+
+.btn i {
+    color: white;
+}
+
+table tbody i,
+.btn-outline-secondary i {
+    color: #777 !important;
 }
 
 .btn-icono {
@@ -640,7 +659,7 @@ i {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #777;
+    background-color: rgb(165, 165, 165);
     border-radius: 20px;
     border: 3px solid #ebebeb;
 }

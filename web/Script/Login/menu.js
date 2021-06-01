@@ -71,8 +71,8 @@ function renderizar_menu(response) {
 
 
 function ver_no_leidos() {
-    _this = $('#opciones_menu').find('a').first();
-    ver_opcion(_this, '../comunicados/bandejaentradav2.html?noLeidos=true');
+
+    ver_opcion_ruta($('.fa-envelope').closest('a'), '../comunicados/bandejaentradav2.html?noLeidos=true');
 }
 
 
@@ -110,9 +110,27 @@ function ver_opcion(_this, _index) {
     } else {
         $('#framrePage').attr('src', _ruta);
     }
-    $('.active').removeClass('active');
+    $('.menu__item--active').removeClass('menu__item--active');
     if (_this != undefined)
-        $(_this).closest('li').addClass('active');
+        $(_this).addClass('menu__item--active');
+
+    if ($('.navbar-toggler').css('display') != 'none')
+        menu();
+
+}
+
+function ver_opcion_ruta(_this, _index) {
+    let _w = $(window).width();
+    const _ruta = _index;
+    if (_w <= 1000 && _ruta.toLowerCase().includes('bandejaentrada')) {
+
+        bandeja_movil();
+    } else {
+        $('#framrePage').attr('src', _ruta);
+    }
+    $('.menu__item--active').removeClass('menu__item--active');
+    if (_this != undefined)
+        $(_this).addClass('menu__item--active');
 
     if ($('.navbar-toggler').css('display') != 'none')
         menu();
@@ -188,13 +206,13 @@ function cargar_mensajes_no_leidos() {
 function actualizar_datos() {
     let _user = obtener_session().idusuario;
     if (obtener_session().tipo == 1)
-        ver_opcion(undefined, `../areapersonal/Personas.html?T=P&user=${_user}`);
+        ver_opcion_ruta($('.fa-user-edit').closest('a'), `../areapersonal/Personas.html?T=P&user=${_user}`);
     else
-        ver_opcion(undefined, `../areapersonal/Personas.html?T=E&user=${_user}`);
+        ver_opcion_ruta($('.fa-user-edit').closest('a'), `../areapersonal/Personas.html?T=E&user=${_user}`);
 }
 
 function cambiar_clave() {
-    ver_opcion(undefined, `../areapersonal/CambiarClave.html`);
+    ver_opcion_ruta($('.fa-key').closest('a'), `../areapersonal/CambiarClave.html`);
 }
 
 (function() {
