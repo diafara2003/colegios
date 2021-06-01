@@ -23,7 +23,32 @@ var quill = new Quill('#editor', {
     placeholder: '',
     theme: 'snow'
 });
+var responderMsn = new Quill('#responderMsnEditor', {
+    placeholder: '',
+    theme: 'snow'
+});
 let _times_glasses = 0;
+
+
+function buscar_mensajes(_this) {
+    let _text = _this.value;
+    let filtered = [];
+
+    if (_text == '') {
+        filtered = data_mensajes;
+    } else {
+        filtered = data_mensajes.filter(x => x.MenAsunto.toString().toLowerCase().indexOf(_text) > -1 ||
+            x.PerApellidos.toString().toLowerCase().indexOf(_text) > -1 ||
+            x.PerNombres.toString().toLowerCase().indexOf(_text) > -1 ||
+            x.MenMensaje.toString().toLowerCase().indexOf(_text) > -1);
+    }
+
+    $('#tbodyDatos').find('tr').addClass('d-none');
+
+    if (filtered.length > 0) filtered.forEach(c => $('#tbodyDatos').find(`tr[mensaje-id="${c.MenId}"]`).removeClass('d-none'))
+
+
+}
 
 function buscar_personas(_this) {
     setTimeout(c => {
@@ -90,10 +115,26 @@ function renderizar_seleccionado(_i) {
     $('#DivResultados').css('display', 'none');
 }
 
-function set_sent_to() {
+function set_sent_to(replica) {
     let _data = [];
-
-    destinatarios.forEach(_item => _data.push({ BG: _item.GrEnColorBurbuja, tipo: _item.tipo, id: _item.PerId, ocupacion: _item.CurDescripcion, nombre: _item.PerNombres, apellido: _item.PerApellidos }));
+    if (replica)
+        _data.push({
+            BG: '#68606c',
+            tipo: 2,
+            id: _mensaje_context.usuario.PerId,
+            ocupacion: 'respuesta',
+            nombre: _mensaje_context.usuario.PerNombres,
+            apellido: _mensaje_context.usuario.PerApellidos
+        });
+    else
+        destinatarios.forEach(_item => _data.push({
+            BG: _item.GrEnColorBurbuja,
+            tipo: _item.tipo,
+            id: _item.PerId,
+            ocupacion: _item.CurDescripcion,
+            nombre: _item.PerNombres,
+            apellido: _item.PerApellidos
+        }));
 
     return JSON.stringify(_data);
 }
@@ -151,8 +192,12 @@ async function cargar_bandeja(tipo, _element) {
 
     const response = await consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', undefined);
 
-
+    data_mensajes = response;
     renderizar_mensajes_bandeja(response);
+
+    if (tipo == 'Enviados') $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
+    else $('#mostrarMensaje').css('max-height', 'calc(100vh - 343px)');
+
 }
 
 function renderizar_mensajes_bandeja(_data) {
@@ -163,7 +208,7 @@ function renderizar_mensajes_bandeja(_data) {
 
 
             html += `
-        <tr categoria="${_mensaje.MenCategoriaId}" clase="${_mensaje.BanClaseId}" class="${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}">
+        <tr mensaje-id="${_mensaje.MenId}" categoria="${_mensaje.MenCategoriaId}" clase="${_mensaje.BanClaseId}" class="${_mensaje.BanHoraLeido == null ? 'sin-leer' : 'mensaje-leido '}">
             <td class="tr-tab-panel" onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">
 
                 <div class="xY-aux">
@@ -215,11 +260,17 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     document.getElementById('mostrarMensaje').innerHTML = '';
     id_bandeja = _idBandeja;
     _this_ctx = _this;
+    $('#responderMensaje').addClass('d-none');
+    $('.btn-enviar').addClass('d-none');
+    $('.btn-responder').removeClass('d-none');
 
     consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
         $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
 
+        _mensaje_context = response._mensaje;
+
         let _html = '';
+
         _html += renderizar_mensaje(response._mensaje);
 
         if (response.replicas != null) _html += renderizar_replicas(response.replicas);
@@ -298,7 +349,152 @@ function actualizar_bandeja_count() {
     }, 500)
 }
 
+function armar_objeto_mensaje(isReplica) {
+    let data = {};
+    let mensaje = obtener_datos(isReplica);
+    data.destinatarios = obtener_destinatarios(isReplica);
+    data.mensaje = mensaje;
+    data.adjuntos = obtener_adjuntos_al_mensaje();
+    return data;
+}
 
+
+function enviar_mensaje(isReplica) {
+
+    let data = armar_objeto_mensaje(isReplica);
+    if (validar_datos(data)) {
+        consultarAPI('Mensajes', 'POST', (response) => {
+
+        }, data, (error) => {
+            alert('mal');
+        });
+
+        window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
+            localStorage.removeItem("adjuntos-mensajes");
+            limpiar_mensaje_leido();
+            volver();
+        });
+
+    }
+}
+
+function limpiar_mensaje_leido() {
+    document.getElementById('MenAsunto').textContent = "";
+    document.getElementById('divDestinatarios').innerHTML = "";
+
+    quill.root.innerHTML = '';
+    responderMsn.root.innerHTML = '';
+}
+
+function obtener_adjuntos_al_mensaje() {
+    return _adjuntos_cargados.map(c => c.AjdId);
+}
+
+function obtener_destinatarios(isReplica) {
+    if (isReplica)
+        return [{ id: _mensaje_context.MenUsuario, tipo: _mensaje_context.MenTipoMsn }];
+    else
+        return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
+}
+
+function obtener_datos(replica) {
+    var myobject = {
+        MenId: 0,
+        MenEmpId: _sesion.empresa,
+        MenUsuario: _sesion.idusuario,
+        MenClase: 1,
+        MenTipoMsn: 'E',
+        MenAsunto: '',
+        MenMensaje: '',
+        MenReplicaIdMsn: 0,
+        MenOkRecibido: 0,
+        MenSendTo: '',
+        MenBloquearRespuesta: 0,
+        MenCategoriaId: 0,
+        MenEstado: 0,
+        MenFechaMaxima: null
+    };
+
+    let id = Get_query_string('id');
+
+    if (id != null && id != undefined) {
+        myobject.MenId = id;
+    }
+
+    if (replica) {
+        myobject.MenAsunto = _mensaje_context.MenAsunto;
+        myobject.MenReplicaIdMsn = _mensaje_context.MenId;
+        myobject.MenSendTo = _mensaje_context.MenSendTo;
+        myobject.MenCategoriaId = _mensaje_context.MenCategoriaId;
+    } else {
+        myobject.MenAsunto = document.getElementById('MenAsunto').textContent;
+    }
+
+
+    myobject.MenMensaje = replica ? responderMsn.root.innerHTML : quill.root.innerHTML;
+
+    // myobject.MenOkRecibido = $('#MenOkRecibido').is(':checked') ? 1 : 0;
+    // myobject.MenBloquearRespuesta = $('#MenBloquearRespuesta').is(':checked') ? 1 : 0;
+
+    myobject.MenSendTo = set_sent_to(replica);
+
+    // myobject.MenCategoriaId = $('#ddlCategoria').find('option:selected').val();
+    // if (document.getElementById('datetimepicker4').value != '')
+    //     myobject.MenFechaMaxima = convertir_fecha(document.getElementById('datetimepicker4').value).format('YYYY-MM-DD HH:mm');
+
+    return myobject;
+}
+
+function habilitar_responder() {
+    $('#responderMensaje').removeClass('d-none');
+    $('.btn-enviar').removeClass('d-none');
+    $('.btn-responder').addClass('d-none');
+}
+
+function convertir_fecha(fecha) {
+    const date = fecha.split('/');
+
+    const _date_format = `${date[0]}/${date[1]}/${date[2]}`;
+
+    let _m_date = moment();
+
+
+    _m_date.set("year", fecha.split('/')[2].split(' ')[0]);
+    _m_date.set("month", parseInt(date[1]) - 1);
+    _m_date.set("date", date[0]);
+
+    if (fecha.split(' ')[1].split(':').length > 0) {
+
+        _m_date.set("hour", fecha.split(' ')[1].split(':')[0]);
+        _m_date.set("minute", fecha.split(' ')[1].split(':')[1]);
+    }
+
+    return _m_date;
+}
+
+function validar_datos(_data) {
+    let _result = true;
+
+    if (_data.mensaje.MenAsunto == '') {
+        mostrar_mensaje_validacion_error('Asunto obligatorio.');
+        result = false;
+        return;
+    }
+    if (_data.mensaje.MenMensaje == '') {
+        mostrar_mensaje_validacion_error('No hay mensaje.');
+        result = false;
+        return;
+    }
+
+    return _result;
+}
+
+function mostrar_mensaje_validacion_error(mensaje) {
+
+    window.parent.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar', '', '', '', () => {
+
+    });
+}
 
 (async function() {
 

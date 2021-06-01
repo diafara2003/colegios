@@ -73,13 +73,14 @@
                         </div>
                     </div>
                 </div>
+                <div style="margin-right: 85px;"></div>
                 <div class="btn-round btn-green btn-add" onclick="nuevo_mensaje()">
                     <i class="fas fa-plus"></i>
                     <span class="text-btn">Nuevo Mensaje</span>
                 </div>
                 <div class="search-messages step-search">
                     <div class="search" id="search-general">
-                        <input id="buscargrado" class="input-search" onfocus="focus_input_busqueda(this)" onblur="blur_input_busqueda(this)" max="30" type="text" placeholder="Buscar">
+                        <input id="buscargrado" class="input-search" onfocus="focus_input_busqueda(this)" onkeyup="buscar_mensajes(this)" onblur="blur_input_busqueda(this)" max="30" type="text" placeholder="Buscar">
                         <i class="fas fa-search"></i>
                     </div>
                 </div>
@@ -145,15 +146,34 @@
 
                 <div id="mensaje" class="w-100 d-none">
 
-                    <div class="messages-bar-tools-view  w-100">
+                    <div class="messages-bar-tools-view d-flex align-items-center w-100">
                         <div class="item-actions has-tooltip" onclick="volver()">
                             <i class="fas fa-long-arrow-alt-left"></i>
                             <span class="tooltip tooltip-without-border" role="tooltip">Volver</span>
+                        </div>
+                        <div class="btn-round btn-green btn-responder" style="padding: 5px 20px !important" onclick="habilitar_responder()">
+                            <span class="text-btn">
+                                <i class="fas fa-envelope"></i>
+                            Responder</span>
+                        </div>
+
+                        <div class="btn-round btn-green btn-enviar d-none" style="padding: 5px 20px !important" onclick="enviar_mensaje(true)">
+                            <span class="text-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Enviar</span>
                         </div>
                     </div>
 
                     <div class="w-100">
                         <div id="mostrarMensaje"></div>
+
+
+                        <div id="responderMensaje" class="d-none mt-2 w-100">
+                            <div class="">
+                                <div style="height:150px" id="responderMsnEditor"></div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -164,9 +184,11 @@
                             <i class="fas fa-long-arrow-alt-left"></i>
                             <span class="tooltip tooltip-without-border" role="tooltip">Volver</span>
                         </div>
-                        <div class="btn-round btn-green" style="padding: 5px 20px !important"><span class="text-btn">
+                        <div class="btn-round btn-green" style="padding: 5px 20px !important" onclick="enviar_mensaje(false)">
+                            <span class="text-btn">
                             <i class="fas fa-paper-plane"></i>
-                            Enviar</span></div>
+                            Enviar</span>
+                        </div>
                     </div>
                     <div class="rounded shadow-sm p-2">
                         <div class="col-lg-12">
@@ -193,7 +215,7 @@
                                 <div>
                                     <div class="d-flex flex-wrap">
 
-                                        <div placeholder="Seleccione los destinatarios..." contenteditable="true" class="ml-2 text-destinatario" onkeyup="buscar_personas(this)" id="DivBusqueda"></div>
+                                        <div placeholder="Seleccione los destinatarios..." contenteditable="true" class="ml-2 text-destinatario" id="MenAsunto"></div>
                                     </div>
 
                                     <div class="resultado-destinatarios ml-2 mt-1 shadow-sm" id="DivResultados" style="display: none;"></div>

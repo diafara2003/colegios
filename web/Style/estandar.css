@@ -508,6 +508,15 @@ i {
     border-bottom: 1px solid #369;
 }
 
+.table,
+.card-header,
+.form-group label,
+.form-group input,
+.form-group select,
+.modal-title {
+    color: #95989a;
+}
+
 .table th {
     border-top: none;
     font-weight: 500;
