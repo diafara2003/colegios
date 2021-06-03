@@ -9,6 +9,11 @@
         transition: box-shadow .15s cubic-bezier(.4, 0, .2, 1);
     }
     
+    .select-staff {
+        width: 193px;
+        ;
+    }
+    
     .h-c-message .select-staff {
         width: 200px;
     }
@@ -44,7 +49,6 @@
     }
     
     .body-selected {
-        margin-top: 5px;
         background-color: #fff;
         box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
         font-size: .875rem;
@@ -755,4 +759,19 @@
     #mostrarMensaje {
         overflow: auto;
         max-height: calc(100vh - 343px);
+    }
+    
+    .folder-empty {
+        display: grid;
+        justify-content: center;
+        margin-top: 50px;
+        text-align: center;
+    }
+    
+    .folder-empty span {
+        margin-top: 15px;
+        color: #95989a;
+        text-align: center;
+        max-width: 220px;
+        line-height: normal;
     }

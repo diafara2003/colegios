@@ -207,6 +207,12 @@ textarea {
     width: calc(100% - 200px);
 }
 
+@media screen and (min-width: 1400px) {
+    .col-xl-6 {
+        max-width: 40%;
+    }
+}
+
 @media screen and (max-width:900px) {
     .login-content {
         height: auto !important;

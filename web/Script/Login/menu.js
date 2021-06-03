@@ -216,6 +216,7 @@ function cambiar_clave() {
 }
 
 (function() {
+
     //mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones...</span>');
     cargar_mensajes_no_leidos();
     cargar_opciones();

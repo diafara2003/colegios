@@ -15,6 +15,7 @@ let iniciales_usuario = (nombre, apellidos) => {
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
     return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
 }
+let _user_id = 0;
 
 
 
@@ -177,6 +178,7 @@ function blur_input_busqueda(_this) {
 }
 
 async function cargar_bandeja(tipo, _element) {
+    document.getElementById('tbodyDatos').innerHTML = '';
     $('.active').removeClass('active');
     $(_element).closest('.menu-op').addClass('active');
     $('#buscargrado').val('');
@@ -190,10 +192,19 @@ async function cargar_bandeja(tipo, _element) {
     }
 
 
-    const response = await consultarAPI(`BandejaEntrada/mensajes?tipo=${_tipo_mensaje[tipo]}`, 'GET', undefined);
+    const response = await consultarAPI(`BandejaEntrada/mensajes/usuario?usuario=${_user_id}&tipo=${_tipo_mensaje[tipo]}`, 'GET', undefined);
 
     data_mensajes = response;
-    renderizar_mensajes_bandeja(response);
+
+    if (response.length > 0) {
+        $('.folder-empty').addClass('d-none');
+        $('.messages-tm').removeClass('d-none');
+        renderizar_mensajes_bandeja(response);
+    } else {
+        $('.folder-empty').removeClass('d-none');
+        $('.messages-tm').addClass('d-none');
+    }
+
 
     //if (tipo == 'Enviados')
     $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
@@ -456,6 +467,40 @@ function habilitar_responder() {
 
 }
 
+async function consultar_propfesores() {
+    const response = await consultarAPI('Profesor', 'GET');
+
+    _data_profesores = response;
+
+
+    renderizar_profesores(response);
+}
+
+function renderizar_profesores(source) {
+    let _html = '';
+
+
+    source.forEach(item => {
+        _html += ` 
+        <div class="row-select" onclick="selected_profesor(${item.id})"> <span id="profesor_${item.id}" class="">${item.nombre} ${item.apellido}</span>
+            <div></div>
+        </div>`;
+
+    });
+
+    document.getElementById('ddlmsnBandeja').innerHTML = _html;
+}
+
+function selected_profesor(id) {
+    const _profesor = _data_profesores.find(c => c.id == id);
+
+    document.getElementById('spnNombreBandeja').textContent = `${_profesor.nombre} ${_profesor.apellido}`;
+
+    _user_id = _profesor.id;
+    $('.content-menu').find('.menu-op').eq(0).find('.item-menu').click();
+    ver_otras_bandejas();
+}
+
 function convertir_fecha(fecha) {
     const date = fecha.split('/');
 
@@ -502,9 +547,9 @@ function mostrar_mensaje_validacion_error(mensaje) {
 }
 
 (async function() {
-
+    _user_id = JSON.parse(localStorage.getItem("colegio")).PerId;
     window.parent.cargar_mensajes_no_leidos();
-
+    consultar_propfesores();
     cargar_bandeja('bandeja', $('.active')[0]);
 
     if (Get_query_string('noLeidos') == 'true') {
