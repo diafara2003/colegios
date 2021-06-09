@@ -492,7 +492,7 @@ function renderizar_profesores(source) {
     if (_user_default == undefined) {
         const _user_sesion = JSON.parse(localStorage.getItem("colegio"))
         _user_default = {
-            id: _user_id.PerId,
+            id: _user_sesion.PerId,
             apellido: _user_sesion.PerApellidos,
             nombre: _user_sesion.PerNombres
         };
