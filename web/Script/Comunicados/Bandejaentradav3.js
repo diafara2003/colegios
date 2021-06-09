@@ -478,7 +478,7 @@ async function consultar_propfesores() {
 
 function renderizar_profesores(source) {
     let _html = '';
-    const _user_default = source.find(c => c.id == _user_id);
+    let _user_default = source.find(c => c.id == _user_id);
 
     source.forEach(item => {
         /*if (item.id != _user_default.id)*/
