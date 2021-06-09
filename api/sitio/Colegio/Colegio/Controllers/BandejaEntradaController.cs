@@ -22,6 +22,15 @@ namespace Colegio.Controllers
             return new Mensaje.Servicios.BandejaEntradaBI().Get(identity, tipo);
         }
 
+        [Route("usuario")]
+        [HttpGet]
+        public IEnumerable<BandejaEntradaDTO> GetBandejaUsuario(int usuario=0,int tipo = 0)
+        {
+            return new Mensaje.Servicios.BandejaEntradaBI().Get(usuario, tipo);
+        }
+
+
+
 
         [Route("favorito")]
         [HttpGet]

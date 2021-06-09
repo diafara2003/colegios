@@ -244,7 +244,7 @@ function renderizar_mensajes_bandeja(_data) {
                                     <div class="bog">${_mensaje.MenAsunto}</div>
                                 </div>
                                 <div class="y2 gray-dark">
-                                    <div class="Zt">- ${$($.parseHTML( _mensaje.MenMensaje )).text() }
+                                    <div class="Zt">- ${$($.parseHTML(_mensaje.MenMensaje)).text()}
                                     </div>
                                 </div>
                             </div>
@@ -324,12 +324,12 @@ function renderizar_replicas(mensaje) {
 function renderizar_mensaje(_mensaje) {
 
     return `
-            <div class="messages-view ${(_mensaje.MenUsuario==_sesion.idusuario?'owner':'')}">
+            <div class="messages-view ${(_mensaje.MenUsuario == _sesion.idusuario ? 'owner' : '')}">
             <div class="messages-header">
                 <h2 class="title-vm">${_mensaje.MenAsunto} </h2>
             </div>
             <div class="messages-sent d-flex">
-                <div class="d-flex" style="width: 200px;border-right: 1px solid #ebebeb;">
+                <div class="d-flex" style="width: 200px;">
                     <div class="xYc">
                         <div class="photo-user">
                             <div>${iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div>
@@ -344,10 +344,10 @@ function renderizar_mensaje(_mensaje) {
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <span class="date-view">${ moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
+                    <span class="date-view">${moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
                 </div>
             </div>
-            <div class="messages-body">${ _mensaje.MenMensaje}</div>
+            <div class="messages-body">${_mensaje.MenMensaje}</div>
         </div>`;
 
 }
@@ -478,15 +478,18 @@ async function consultar_propfesores() {
 
 function renderizar_profesores(source) {
     let _html = '';
-
+    const _user_default = source.find(c => c.id == _user_id);
 
     source.forEach(item => {
-        _html += ` 
+        /*if (item.id != _user_default.id)*/
+            _html += ` 
         <div class="row-select" onclick="selected_profesor(${item.id})"> <span id="profesor_${item.id}" class="">${item.nombre} ${item.apellido}</span>
             <div></div>
         </div>`;
 
     });
+
+    document.getElementById('spnNombreBandeja').textContent = `${_user_default.nombre} ${_user_default.apellido}`;
 
     document.getElementById('ddlmsnBandeja').innerHTML = _html;
 }
@@ -546,7 +549,7 @@ function mostrar_mensaje_validacion_error(mensaje) {
     });
 }
 
-(async function() {
+(async function () {
     _user_id = JSON.parse(localStorage.getItem("colegio")).PerId;
     window.parent.cargar_mensajes_no_leidos();
     consultar_propfesores();
@@ -561,7 +564,7 @@ function mostrar_mensaje_validacion_error(mensaje) {
 
 })();
 
-(function(factory) {
+(function (factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
     } else if (typeof module === 'object' && typeof module.exports === 'object') {
