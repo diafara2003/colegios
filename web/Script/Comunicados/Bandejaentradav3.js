@@ -482,12 +482,21 @@ function renderizar_profesores(source) {
 
     source.forEach(item => {
         /*if (item.id != _user_default.id)*/
-            _html += ` 
+        _html += ` 
         <div class="row-select" onclick="selected_profesor(${item.id})"> <span id="profesor_${item.id}" class="">${item.nombre} ${item.apellido}</span>
             <div></div>
         </div>`;
 
     });
+
+    if (_user_default == undefined) {
+        const _user_sesion = JSON.parse(localStorage.getItem("colegio"))
+        _user_default = {
+            id: _user_id.PerId,
+            apellido: _user_sesion.PerApellidos,
+            nombre: _user_sesion.PerNombres
+        };
+    };
 
     document.getElementById('spnNombreBandeja').textContent = `${_user_default.nombre} ${_user_default.apellido}`;
 
@@ -549,7 +558,7 @@ function mostrar_mensaje_validacion_error(mensaje) {
     });
 }
 
-(async function () {
+(async function() {
     _user_id = JSON.parse(localStorage.getItem("colegio")).PerId;
     window.parent.cargar_mensajes_no_leidos();
     consultar_propfesores();
@@ -564,7 +573,7 @@ function mostrar_mensaje_validacion_error(mensaje) {
 
 })();
 
-(function (factory) {
+(function(factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
     } else if (typeof module === 'object' && typeof module.exports === 'object') {
