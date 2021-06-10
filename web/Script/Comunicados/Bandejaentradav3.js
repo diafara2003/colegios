@@ -298,6 +298,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 }
 
 function nuevo_mensaje() {
+    destinatarios = [];
     $('#Bandejamensajes, #mensaje').addClass('d-none');
     $('#nuevo-mensaje').removeClass('d-none');
 }
