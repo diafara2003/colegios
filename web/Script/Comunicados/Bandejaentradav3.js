@@ -104,7 +104,7 @@ function renderizar_resultados_ac(source) {
 
 function renderizar_seleccionado(_i) {
     let persona = _data_source_ac[_i];
-    let replica = _mensaje_context == undefined ? false : true;
+    let replica = _mensaje_context.usuario == undefined ? false : true;
     destinatarios.push(persona);
     set_sent_to(replica, persona);
 
