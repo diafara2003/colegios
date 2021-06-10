@@ -104,9 +104,9 @@ function renderizar_resultados_ac(source) {
 
 function renderizar_seleccionado(_i) {
     let persona = _data_source_ac[_i];
-
+    let replica = _mensaje_context == undefined ? false : true;
     destinatarios.push(persona);
-    set_sent_to(persona);
+    set_sent_to(replica, persona);
 
 
     $('#divDestinatarios').append(renderizar_html_seleccionado(persona, true));
