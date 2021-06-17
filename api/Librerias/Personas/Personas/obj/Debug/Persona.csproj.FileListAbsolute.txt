@@ -20,15 +20,14 @@ C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\BaseDatos.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\EntityFramework.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\EntityFramework.SqlServer.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\BaseDatos.pdb
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\BaseDatos.dll.config
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.pdb
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\EntityFramework.xml
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\EntityFramework.SqlServer.xml
-C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.pdb
-C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.dll
-C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.pdb

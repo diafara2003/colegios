@@ -29,7 +29,6 @@ C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Trasversales.pdb
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.pdb
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.xml
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.SqlServer.xml
-C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.dll

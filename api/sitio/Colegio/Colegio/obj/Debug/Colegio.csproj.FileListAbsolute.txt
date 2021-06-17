@@ -141,6 +141,7 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Empresa.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Excel.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\ExcelNumberFormat.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Grados.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\ICSharpCode.SharpZipLib.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Materia.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Mensaje.dll
@@ -159,6 +160,7 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Token
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.Web.Infrastructure.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Newtonsoft.Json.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Persona.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Salones.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IdentityModel.Tokens.Jwt.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IO.FileSystem.Primitives.dll
@@ -184,6 +186,7 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Clases.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Cursos.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Empresa.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Grados.pdb
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Materia.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Mensaje.pdb
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Menu.pdb
@@ -208,6 +211,7 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.CodeDom.Providers.D
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.JsonWebTokens.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Logging.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Tokens.xml
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IO.Packaging.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Newtonsoft.Json.xml
@@ -230,7 +234,3 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreComp
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.dll
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.pdb
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.dll
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.xml

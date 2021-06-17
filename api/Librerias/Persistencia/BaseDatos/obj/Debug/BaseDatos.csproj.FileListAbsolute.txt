@@ -45,15 +45,7 @@ C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Mi
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.sp_asignarclases.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.perfiles.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.accesos.resources
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.DBO.resources
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.MSN.resources
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.GenerateResource.cache
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.CoreCompileInputs.cache
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.CopyComplete
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.dll
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.pdb
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.Garden.resources
-C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.Garden.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.gruposEstudianteProfesor.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.parentesco.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.estudiantes_jardin.resources
@@ -61,3 +53,11 @@ C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Mi
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.estudiantes_jardin_estado.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.ingreso_persona.resources
 C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.loginPhone.resources
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.DBO.resources
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.Garden.resources
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.MSN.resources
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.GenerateResource.cache
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.pdb
