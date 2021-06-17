@@ -38,8 +38,21 @@ namespace Colegio.Controllers
         [HttpGet]
         public IEnumerable<Mensaje_Custom> GetChat(int id)
         {
-
+          
             return new Mensaje.Servicios.MensajesBI().GetChat(id);
+        }
+
+        [Route("marcarleido")]
+        [HttpGet]
+        public ResponseDTO MarcarLeido(int id,int bandeja) {
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            return new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
+            {
+                IdMensaje = id,
+                OkRecibido = 0,
+                IdBandeja = bandeja
+
+            }, identity);
         }
 
 
