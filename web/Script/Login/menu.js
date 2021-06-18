@@ -194,12 +194,13 @@ function nombres(nombre, apellido) {
     return _result;
 }
 
-function cargar_mensajes_no_leidos() {
+function cargar_mensajes_no_leidos(fn) {
     localStorage.removeItem('noleidos');
     consultarAPI('BandejaEntrada/mensajes/NoLeidoCount', 'GET', (_count) => {
         localStorage.setItem('noleidos', _count);
 
         $('.badgeNoLeidos').text(_count);
+        if (fn != undefined) fn(_count);
     });
 }
 

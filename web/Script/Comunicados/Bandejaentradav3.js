@@ -280,6 +280,8 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
         $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
 
+
+
         _mensaje_context = response._mensaje;
 
         let _html = '';
@@ -291,7 +293,9 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         document.getElementById('mostrarMensaje').innerHTML = _html;
 
         mostrar_mensaje();
-        window.parent.cargar_mensajes_no_leidos();
+        window.parent.cargar_mensajes_no_leidos(function(params) {
+            document.getElementById('countNoLeidos').textContent = params;
+        });
 
 
     });
