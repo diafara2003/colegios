@@ -33,3 +33,4 @@ C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.Cor
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.dll
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.pdb
+C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csprojAssemblyReference.cache

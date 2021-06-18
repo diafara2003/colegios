@@ -127,7 +127,7 @@ namespace Colegio.Controllers
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("postman-token", "eb7f9bd7-7cc5-1d7e-e366-5cc07f982bd8");
                 request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("authorization", "key=AAAA2ylY_P4:APA91bEI8fnGtvurVbN__wrUeq2FAsSV7NBhb2pM935h26O1jS4ZwKULbUAaDvlxHNmI6QGuEhPJyEVGJbHYfZFQRozxU4rF0inDw9wJ74HckH5Yov4t0owzdPfEnSCMp_vwdCtY1lnd");
+                request.AddHeader("authorization", "key=AAAALKQ9--M:APA91bFiGBnPwEOAgOI59JyrZ3wseoZOuBfUANDaGqmj1n2gB50iWcIN_lJetM_vCLbzL8WPAjpOcb8y0yWq0iWm-HE4IlTdAw_ZwlnO8ikG3naGSiOcaMkrw2giK1JYzAmVuk5c7yU-");
                 request.AddHeader("content-type", "application/json");
                 request.AddParameter("application/json", json, ParameterType.RequestBody);
 
