@@ -390,6 +390,10 @@ function enviar_mensaje(isReplica) {
         window.parent.parent.mostrar_mensajes('', 'Mensaje enviado correctamente', 'success', true, false, false, 'Aceptar', '', '', '', () => {
             localStorage.removeItem("adjuntos-mensajes");
             limpiar_mensaje_leido();
+            window.parent.cargar_mensajes_no_leidos(function(params) {
+                document.getElementById('countNoLeidos').textContent = params;
+            });
+
             volver();
         });
 
