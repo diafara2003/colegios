@@ -426,11 +426,22 @@ namespace Persona.Servicios
 
                 var _token = objCnn.loginPhone.Where(c => c.TokenFCM == modelo.TokenFCM);
 
-                if (_token == null || _token.Count() == 0) {
+                if (_token == null || _token.Count() == 0)
+                {
 
                     objCnn.loginPhone.Add(modelo);
 
                     objCnn.SaveChanges();
+                }
+                else {
+                    var _phone= objCnn.loginPhone.Where(c => modelo.UsuarioId == c.UsuarioId).FirstOrDefault();
+
+                    _phone.TokenFCM = modelo.TokenFCM;
+
+                    objCnn.Entry(_phone).State = EntityState.Modified;
+
+                    objCnn.SaveChanges();
+
                 }                
 
             }
