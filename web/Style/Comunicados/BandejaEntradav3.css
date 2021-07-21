@@ -799,5 +799,20 @@ a {
 }
 
 #editor {
-    height: 100vh !important;
+    height: calc(100vh - 350px);
+}
+
+.adjunto-mensaje {
+    width: 200px;
+    height: 46px;
+}
+
+#DivAdjunto {
+    display: flex;
+}
+
+.text-adjunto {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

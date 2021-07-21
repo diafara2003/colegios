@@ -45,8 +45,9 @@ namespace Mensaje.Servicios
                             PerNombres = (string)query["PerNombres"],
                             PerDocumento = (string)query["PerDocumento"],
                             PerEmail = (string)query["PerEmail"],
-                        }
-                    });
+                        },
+                        adjuntos = GetAdjuntos((int)query["MenId"])
+                    }); ;
 
 
 
@@ -84,11 +85,7 @@ namespace Mensaje.Servicios
                                          MenFechaMaxima = mensaje.MenFechaMaxima
                                      }).FirstOrDefault();
 
-            objResultado._mensaje.adjuntos = (from a in objCnn.adjuntos
-                                              join adjmsj in objCnn.adjuntos_mensajes on a.AjdId equals adjmsj.AdjMenAdjuntoId
-                                              where adjmsj.AdjMsnMensajeId == obj_response.MenId
-                                              select a
-                                     );
+            objResultado._mensaje.adjuntos = GetAdjuntos(id);
 
 
             if (objResultado._mensaje.MenReplicaIdMsn > 0)
@@ -99,7 +96,15 @@ namespace Mensaje.Servicios
             return objResultado;
         }
 
-
+        public IEnumerable<Adjuntos> GetAdjuntos(int msn)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            return (from a in objCnn.adjuntos
+                    join adjmsj in objCnn.adjuntos_mensajes on a.AjdId equals adjmsj.AdjMenAdjuntoId
+                    where adjmsj.AdjMsnMensajeId == msn
+                    select a
+                                     );
+        }
 
         public CrearMensajeCustom SaveBorrador(CrearMensajeCustom request)
         {
@@ -168,7 +173,7 @@ namespace Mensaje.Servicios
 
 
                     request.mensaje.MenClase = mensaje_original.MenClase;
-                    request.mensaje.MenAsunto ="RV-"+ mensaje_original.MenAsunto;
+                    request.mensaje.MenAsunto = "RV-" + mensaje_original.MenAsunto;
 
 
                     if (request.mensaje.MenFecha > mensaje_original.MenFechaMaxima)
@@ -245,7 +250,7 @@ namespace Mensaje.Servicios
                 objResultado.codigo = 1;
                 objResultado.respuesta = "mensaje creado correctamente";
 
-              //  EnviarNotificacionNuevoMensaje(request.destinatarios,request.mensaje.MenId);
+                //  EnviarNotificacionNuevoMensaje(request.destinatarios,request.mensaje.MenId);
             }
             catch (Exception e)
             {

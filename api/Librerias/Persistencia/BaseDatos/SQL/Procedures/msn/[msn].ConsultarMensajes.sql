@@ -11,7 +11,7 @@ go
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [msn].ConsultarMensajes
+CREATE PROCEDURE [msn].[ConsultarMensajes]
 	@id int
 AS
 BEGIN
@@ -33,6 +33,6 @@ BEGIN
 	FROM	_MSN
 			INNER JOIN MSN.Mensajes ON MENID=ID
 			INNER JOIN DP.PERSONAS ON MenUsuario=PerId
-	ORDER BY MENID ASC
+	order by MENID desc
 END
-GO
+

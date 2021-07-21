@@ -14,7 +14,7 @@ go
 -- msn.CategoriasMensajesRecibido  15
 -- =============================================
 CREATE PROCEDURE [msn].[CategoriasMensajesRecibido]
-	-- Add the parameters for the stored procedure here
+	-- Add the parameters for the stored procedure here 
 	@usuario int
 AS
 BEGIN

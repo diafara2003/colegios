@@ -259,21 +259,25 @@ let _get_icono = (_extencion) => {
 
         case 'doc':
         case 'docx':
-            _icono = '../../Img/word.svg';
+        case '.doc':
+        case '.docx':
+            _icono = '../../Img/icon/word.png';
             break;
         case 'xls':
         case 'xlsx':
-            _icono = '../../Img/excel.svg';
+        case '.xls':
+        case '.xlsx':
+            _icono = '../../Img/icon/excel.png';
             break;
         case 'pdf':
-            _icono = '../../Img/pdf.svg';
+            _icono = '../../Img/icon/pdf.png';
             break;
         case '.zip':
         case '.rar':
-            _icon = '../../Img/comprimido.svg';
+            _icono = '../../Img/icon/archivo-zip.png';
             break;
         default:
-            _icono = '../../Img/imagen.svg';
+            _icono = '../../Img/icon/imagen.png';
             break;
     }
 

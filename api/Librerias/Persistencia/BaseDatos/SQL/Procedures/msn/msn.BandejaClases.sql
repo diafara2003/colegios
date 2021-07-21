@@ -14,7 +14,7 @@ go
 -- msn.BandejaClases  15
 -- =============================================
 CREATE PROCEDURE [msn].[BandejaClases]
-	-- Add the parameters for the stored procedure here
+	-- Add the parameters for the stored procedure here 
 	@usuario int
 AS
 BEGIN

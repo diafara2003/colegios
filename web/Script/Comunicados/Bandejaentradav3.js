@@ -353,6 +353,7 @@ function renderizar_mensaje(_mensaje) {
                 </div>
             </div>
             <div class="messages-body">${_mensaje.MenMensaje}</div>
+            <div class="mt-2">${renderizar_html_adjuntos(_mensaje.adjuntos,false)}</div>
         </div>`;
 
 }
@@ -567,7 +568,93 @@ function mostrar_mensaje_validacion_error(mensaje) {
     });
 }
 
+function adjuntar() {
+    $('#myInput').click();
+}
+
+function armar_url_adjuntos() {
+    let _url = '';
+    let _usuario = obtener_session().idusuario,
+        _adjunto = 0;
+
+    _url += '?usuario=' + _usuario;
+    _url += '&adjunto=' + _adjunto;
+
+    return _url;
+}
+
+function subirAdjunto() {
+
+    let _url = window.location.href.toLowerCase().split('views')[0];
+
+    var formData = new FormData();
+    var file = $('#myInput')[0];
+    formData.append('file', file.files[0]);
+    $.ajax({
+        url: `${_url}api/Adjuntos${armar_url_adjuntos()}`,
+        type: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('sesion')}`,
+            'Accept': 'application/json',
+        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(_response) {
+
+            _adjuntos_cargados.push(_response);
+            cargar_adjuntos();
+        },
+        error: function() {
+            alert("Faild please try upload again");
+        }
+    });
+}
+
+function cargar_adjuntos() {
+
+
+
+    document.getElementById('DivAdjunto').innerHTML = renderizar_html_adjuntos(_adjuntos_cargados, true);
+    //return _html;
+
+}
+
+function renderizar_html_adjuntos(_source, isClose) {
+    let _html = '';
+    _source.forEach(a => {
+                _html += `
+        <div class="adjunto-mensaje rounded border p-2 m-1">
+            <div class="text-adjunto">
+                <a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${a.AjdId}">            
+                    <img style="width:30px" src="${_get_icono(a.AjdExtension)}" />
+                    ${a.AdjNombre}${a.AjdExtension}
+                </a>
+          ${isClose? 
+            ` <button type="button" class="close" aria-label="Close" onclick="eliminar_adjunto(${a.AjdId},this)">
+                <span aria-hidden="true">&times;</span>
+              </button>`:''} 
+        </div>`;
+    });
+
+    return _html;
+}
+
+function eliminar_adjunto(_id, _this) {
+    var _data = { id: _id };
+    $(_this).closest('.card').remove();
+    let _index = _adjuntos_cargados.findIndex(c => c.AjdId == _id);
+    _adjuntos_cargados.splice(_index, 1);
+
+
+    cargar_adjuntos();
+    consultarAPI('adjunto/eliminar', 'POST', undefined, _data);
+}
+
 (async function() {
+
+
+
     _user_id = JSON.parse(localStorage.getItem("colegio")).PerId;
     window.parent.cargar_mensajes_no_leidos();
     consultar_propfesores();

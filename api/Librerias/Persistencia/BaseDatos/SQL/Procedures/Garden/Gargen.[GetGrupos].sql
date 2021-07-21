@@ -52,4 +52,4 @@ BEGIN
 
 	select * from #TblgruposFinal
 END
-GO
+
