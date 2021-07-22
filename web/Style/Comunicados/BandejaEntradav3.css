@@ -803,7 +803,7 @@ a {
 }
 
 .adjunto-mensaje {
-    width: 200px;
+    width: auto;
     height: 46px;
 }
 
@@ -815,4 +815,8 @@ a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.close {
+    padding-top: 3px !important;
 }
