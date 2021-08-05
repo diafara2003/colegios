@@ -128,7 +128,7 @@ namespace Persona.Servicios
                     c.PerUsuario = c.PerEmail;
                     c.PerClave = string.IsNullOrEmpty(c.PerTelefono) ? Utilidad.GenerarclaveRandom() : c.PerTelefono;
                     c.PerIngreso = false;
-
+                    c.PerDocumento = c.PerEmail;
                     objCnn.personas.Add(c);
 
 

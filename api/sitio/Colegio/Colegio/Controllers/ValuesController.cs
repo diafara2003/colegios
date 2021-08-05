@@ -9,6 +9,7 @@ namespace Colegio.Controllers
 {
     public class ValuesController : ApiController
     {
+        [AllowAnonymous]
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -16,6 +17,7 @@ namespace Colegio.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         public string Get(int id)
         {
             return "value";

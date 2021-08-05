@@ -61,6 +61,7 @@ async function validar_nombre_usuario(_this) {
         window.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/menu.html';
 
     } else {
+        $(_this).removeAttr('disabled');
         $('#btnLogin').find('i').remove();
         $('#btnLogin').text('Ingresar');
         usuario_no_valido("El documento o contraseña no son válidos");
@@ -100,8 +101,8 @@ function ingresar(_this) {
 }
 //https://bootsnipp.com/snippets/dldxB
 
-$(document).ready(function() {
-    $('form').submit(function(e) {
+$(document).ready(function () {
+    $('form').submit(function (e) {
         e.preventDefault();
         // or return false;
     });

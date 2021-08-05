@@ -23,10 +23,10 @@
     }
 
 
-    let _url = window.location.href.toLowerCase().split('views')[0];
+    let _url = 'https://api.comunicatecolegios.com';
 
     try {
-        const response = await fetch(`${_url}api/${metodo}`, Init);
+        const response = await fetch(`${_url}/${metodo}`, Init);
 
         if (response.ok) {
             const _result = await response.json();
@@ -44,14 +44,7 @@
 }
 
 function paginar_sesion() {
-    localStorage.clear();
-    let _inital = document.location.hostname;
-
-    if (_inital.includes('localhost'))
-        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
-    else
-        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
-
+    cerrar_session();
 }
 
 function GetDateNow() {
@@ -128,12 +121,12 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         return;
     }
 
-    let _url = window.location.href.toLowerCase().split('views')[0];
+    let _url = 'https://api.comunicatecolegios.com';
 
 
     var options = {
         url: function(whiting) {
-            return `${_url}api/${_api}&filter=${whiting}`;
+            return `${_url}/${_api}&filter=${whiting}`;
         },
         getValue: GetValueProperty,
         requestDelay: 500,
@@ -227,13 +220,11 @@ function obtener_usuario_sesion() {
 function cerrar_session() {
     localStorage.clear();
 
-    let _inital = document.location.hostname;
-
-    if (_inital.includes('localhost'))
-        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
-    else
-        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
-
+    if (window.parent.cerrar_sesion_marco == undefined) cerrar_marco(window.parent);
+    else window.parent.cerrar_sesion_marco();
+}
+function cerrar_marco(window) {
+    if (window.cerrar_sesion_marco == undefined) cerrar_marco(window.parent);
 }
 
 function groupBy(arr, prop) {

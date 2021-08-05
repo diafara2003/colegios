@@ -143,12 +143,12 @@ namespace BaseDatos.Resources {
         ///-- Create date: &lt;Create Date,,&gt;
         ///-- Description:	&lt;Description,,&gt;
         ///-- =============================================
-        ///CREATE PROCEDURE [msn].ConsultarMensajes
+        ///CREATE PROCEDURE [msn].[ConsultarMensajes]
         ///	@id int
         ///AS
         ///BEGIN
         ///  
-        ///    ;WI [resto de la cadena truncado]&quot;;.
+        ///    ; [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string _msn__ConsultarMensajes {
             get {

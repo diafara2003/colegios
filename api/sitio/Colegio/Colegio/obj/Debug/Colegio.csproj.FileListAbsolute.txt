@@ -234,3 +234,6 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreComp
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Cors.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.xml

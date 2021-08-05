@@ -587,13 +587,13 @@ function armar_url_adjuntos() {
 
 function subirAdjunto() {
 
-    let _url = window.location.href.toLowerCase().split('views')[0];
+    let _url = 'https://api.comunicatecolegios.com';
 
     var formData = new FormData();
     var file = $('#myInput')[0];
     formData.append('file', file.files[0]);
     $.ajax({
-        url: `${_url}api/Adjuntos${armar_url_adjuntos()}`,
+        url: `${_url}/Adjuntos${armar_url_adjuntos()}`,
         type: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('sesion')}`,

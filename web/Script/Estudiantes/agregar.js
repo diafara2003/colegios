@@ -161,6 +161,7 @@ function obtener_datos_formulario() {
     _acudiente1.PerTelefono = document.getElementById('PerTelefono_1').value;
     _acudiente1.PerTipoAcudiente = $('#PerTipoAcudiente_1').find('option:selected').val();
 
+
     objEstudiante.acudientes = [];
     objEstudiante.acudientes.push(_acudiente1);
 

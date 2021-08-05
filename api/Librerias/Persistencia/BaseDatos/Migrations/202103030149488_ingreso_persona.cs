@@ -7,6 +7,7 @@
     {
         public override void Up()
         {
+            Sql(BaseDatos.Resources.Garden.Gargen__GetGrupos_);
         }
         
         public override void Down()

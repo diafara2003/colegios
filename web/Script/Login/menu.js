@@ -43,6 +43,8 @@ function renderizar_menu(response) {
     for (var i = 0; i < response.length; i++) {
         const element = response[i];
 
+        if (element == null) continue;
+
         _html +=
             `<a href="#" onclick="ver_opcion(this, ${i} )" class="menu__item" data-tooltip="${element.SecDescripcion}">
                     <i class="${element.SecIcono}"></i>
@@ -58,7 +60,7 @@ function renderizar_menu(response) {
             <i class="fas fa-key"></i>
         </a>`;
     _html +=
-        `<a href="#" onclick="cerrar_session()" class="menu__item" data-tooltip="Cerrar Sesión">
+        `<a href="#" onclick="cerrar_session_sin_error()" class="menu__item" data-tooltip="Cerrar Sesión">
         <i class="fas fa-power-off"></i>
         </a>`;
 
@@ -134,6 +136,34 @@ function ver_opcion_ruta(_this, _index) {
 
     if ($('.navbar-toggler').css('display') != 'none')
         menu();
+}
+
+function cerrar_sesion_marco() {
+    $('#framrePage').attr('src', '');
+    
+
+
+    mostrar_mensajes('', 'Ha ocurrido un error en el sistema, y se debe cerrar la sesión', 'error', true, false, false, 'Aceptar', '', '', '', () => {
+
+        let _inital = document.location.hostname;
+
+        if (_inital.includes('localhost'))
+            window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
+        else
+            window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
+
+    });
+
+}
+function cerrar_session_sin_error() {
+    $('#framrePage').attr('src', '');
+
+    let _inital = document.location.hostname;
+
+    if (_inital.includes('localhost'))
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + 'localhost/colegios';
+    else
+        window.location.href = window.location.href.toLowerCase().split(_inital)[0] + _inital;
 }
 
 function bandeja_movil() {

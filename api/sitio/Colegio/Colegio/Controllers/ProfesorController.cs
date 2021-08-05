@@ -65,6 +65,7 @@ namespace Colegio.Controllers
                 _persona.PerApellidos = value.apellido;
                 _persona.PerEmail = value.email;
                 _persona.PerTelefono = value.celular;
+                _persona.PerDocumento = value.email;
 
                 new ProfesoresBL<Personas>().Update(_persona);
             }
