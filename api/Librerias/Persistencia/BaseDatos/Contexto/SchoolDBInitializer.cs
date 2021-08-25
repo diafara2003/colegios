@@ -69,7 +69,7 @@ namespace BaseDatos.Contexto
                 SecRuta = "../grupos/grupos.html"
             });
 
-            context.seccion.AddRange(defaultStandards);
+          //  context.seccion.AddRange(defaultStandards);
 
             IList<UsuarioPerfil> defaultStandardsPerfil = new List<UsuarioPerfil>();
 
@@ -82,7 +82,7 @@ namespace BaseDatos.Contexto
                 UsuPerDescripcion = "Estudiantes"
             });
 
-            context.usuario_perfi.AddRange(defaultStandardsPerfil);
+            //context.usuario_perfi.AddRange(defaultStandardsPerfil);
 
 
             context.empresas.Add(new Empresas()

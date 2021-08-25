@@ -582,7 +582,7 @@ function armar_url_adjuntos() {
     _url += '?usuario=' + _usuario;
     _url += '&adjunto=' + _adjunto;
 
-    return _url;
+    return '';
 }
 
 function subirAdjunto() {
@@ -628,10 +628,11 @@ function renderizar_html_adjuntos(_source, isClose) {
                 _html += `
         <div class="adjunto-mensaje rounded border p-2 m-1">
             <div class="text-adjunto">
-                <a href="${window.location.href.toLowerCase().split('views')[0]}api/adjunto/descargar?id=${a.AjdId}">            
+                <a href="https://api.comunicatecolegios.com/adjunto/descargar?id=${a.AjdId}">            
                     <img style="width:30px" src="${_get_icono(a.AjdExtension)}" />
                     ${a.AdjNombre}${a.AjdExtension}
                 </a>
+               </div>
           ${isClose? 
             ` <button type="button" class="close" aria-label="Close" onclick="eliminar_adjunto(${a.AjdId},this)">
                 <span aria-hidden="true">&times;</span>

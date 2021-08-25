@@ -27,6 +27,8 @@ namespace BaseDatos.Contexto
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            
         }
 
         public T GetEntity<T>(int _id) where T : class
