@@ -34,7 +34,7 @@ let _times_glasses = 0;
 function buscar_mensajes(_this) {
     let _text = _this.value;
     let filtered = [];
-
+    debugger;
     if (_text == '') {
         filtered = data_mensajes;
     } else {
@@ -626,7 +626,7 @@ function renderizar_html_adjuntos(_source, isClose) {
     let _html = '';
     _source.forEach(a => {
                 _html += `
-        <div class="adjunto-mensaje rounded border p-2 m-1">
+        <div class="adjunto-mensaje rounded border p-2 m-1 d-flex">
             <div class="text-adjunto">
                 <a href="https://api.comunicatecolegios.com/adjunto/descargar?id=${a.AjdId}">            
                     <img style="width:30px" src="${_get_icono(a.AjdExtension)}" />
