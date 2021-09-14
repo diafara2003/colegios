@@ -64,7 +64,14 @@ function renderizar_menu(response) {
         <i class="fas fa-power-off"></i>
         </a>`;
 
-
+    _html +=
+        ` <a style="position:absolute;top:calc(100% - 58px);padding-left:10px" href="#" class="menu__item" data-tooltip="Comunicate colegios">
+            <img style="width:50px" src="../../Img/logo.png" />
+        </a>`
+    /*
+     
+     
+*/
 
     $('#opciones_menu').append(_html);
 
@@ -178,20 +185,23 @@ function bandeja_desktop() {
 
 function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
-    $('.spnnombreUsuario').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
+    $('#userInfo').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
 }
 async function cargar_datos_empresa() {
     let _id_emp = obtener_session().empresa;
 
     const empresa = await consultarAPI('Empresa/' + _id_emp, 'GET');
 
+
+    document.getElementById('titleEmpresa').textContent = empresa.EmpNombre;
+
     let _url = window.location.href.toLowerCase().split('views')[0];
     const url = `${_url}api/Adjuntos${armar_url_adjuntos()}`;
-
+    empresa.EmpLogo = "https://dreamskindergarten.com/wp-content/uploads/2017/09/logo-dreams-kindergarten.png";
     if (empresa.EmpLogo != null) {
 
         try {
-            document.getElementById('MenuImgLogoColegio').src = `${_url}api/adjuntos/${empresa.EmpLogo}`;
+            document.getElementById('MenuImgLogoColegio').src = empresa.EmpLogo;//`${_url}api/adjuntos/${empresa.EmpLogo}`;
         } catch (e) {}
     } else {
         document.getElementById('imglogoColegio').src = '';
@@ -216,10 +226,10 @@ function nombres(nombre, apellido) {
     let _nombre = nombre.split(' ');
     let _apellido = ' ';
 
-    if (apellido != undefined) apellido.split(' ');
+    if (apellido == undefined) apellido = "";
 
 
-    _result = `${_nombre.length == 1 ? _nombre : _nombre[0]}  ${_apellido.length == 1 ? _apellido : _apellido[0]}`;
+    _result = `${_nombre.length == 1 ? _nombre : _nombre[0]}  ${apellido == '' ? '' : apellido}`;
 
     return _result;
 }
