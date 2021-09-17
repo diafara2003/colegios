@@ -4,7 +4,7 @@
     showCancelButton = false,
     confirmButtonText = '', confirmButtonAriaLabel = '',
     cancelButtonText = '', cancelButtonAriaLabel = '',
-    callBackAceptar = undefined, ) {
+    callBackAceptar = undefined,) {
     Swal.fire({
         title: titulo,
         icon: icono,
@@ -65,7 +65,7 @@ function renderizar_menu(response) {
         </a>`;
 
     _html +=
-        ` <a style="position:absolute;top:calc(100% - 58px);padding-left:10px" href="#" class="menu__item" data-tooltip="Comunicate colegios">
+        ` <a style="position:absolute;top:calc(100% - 58px);padding-left:10px" href="#"  data-tooltip="Comunicate colegios">
             <img style="width:50px" src="../../Img/logo.png" />
         </a>`
     /*
@@ -86,7 +86,7 @@ function ver_no_leidos() {
 
 
 function uuidv4() {
-    return 'xxxxxy'.replace(/[xy]/g, function(c) {
+    return 'xxxxxy'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0,
             v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(5);
@@ -113,12 +113,9 @@ function menu() {
 function ver_opcion(_this, _index) {
     let _w = $(window).width();
     const _ruta = _menu_op[_index].SecRuta;
-    if (_w <= 1000 && _ruta.toLowerCase().includes('bandejaentrada')) {
 
-        bandeja_movil();
-    } else {
-        $('#framrePage').attr('src', _ruta);
-    }
+    $('#framrePage').attr('src', _ruta);
+
     $('.menu__item--active').removeClass('menu__item--active');
     if (_this != undefined)
         $(_this).addClass('menu__item--active');
@@ -131,12 +128,9 @@ function ver_opcion(_this, _index) {
 function ver_opcion_ruta(_this, _index) {
     let _w = $(window).width();
     const _ruta = _index;
-    if (_w <= 1000 && _ruta.toLowerCase().includes('bandejaentrada')) {
 
-        bandeja_movil();
-    } else {
-        $('#framrePage').attr('src', _ruta);
-    }
+    $('#framrePage').attr('src', _ruta);
+
     $('.menu__item--active').removeClass('menu__item--active');
     if (_this != undefined)
         $(_this).addClass('menu__item--active');
@@ -147,7 +141,7 @@ function ver_opcion_ruta(_this, _index) {
 
 function cerrar_sesion_marco() {
     $('#framrePage').attr('src', '');
-    
+
 
 
     mostrar_mensajes('', 'Ha ocurrido un error en el sistema, y se debe cerrar la sesión', 'error', true, false, false, 'Aceptar', '', '', '', () => {
@@ -202,7 +196,7 @@ async function cargar_datos_empresa() {
 
         try {
             document.getElementById('MenuImgLogoColegio').src = empresa.EmpLogo;//`${_url}api/adjuntos/${empresa.EmpLogo}`;
-        } catch (e) {}
+        } catch (e) { }
     } else {
         document.getElementById('imglogoColegio').src = '';
     }
@@ -256,7 +250,7 @@ function cambiar_clave() {
     ver_opcion_ruta($('.fa-key').closest('a'), `../areapersonal/CambiarClave.html`);
 }
 
-(function() {
+(function () {
 
     //mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Cargando opciones...</span>');
     cargar_mensajes_no_leidos();

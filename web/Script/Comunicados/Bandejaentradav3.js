@@ -165,6 +165,9 @@ function eliminar_persona_selected(_this, id) {
 }
 
 function ver_otras_bandejas() {
+
+    if (_sesion.tipo != 0) return;
+
     if ($('#ddlmsnBandeja').hasClass('body-selected')) $('#ddlmsnBandeja').addClass('hidden-select').removeClass('body-selected');
     else $('#ddlmsnBandeja').addClass('body-selected').removeClass('hidden-select');
 }
@@ -293,7 +296,7 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         document.getElementById('mostrarMensaje').innerHTML = _html;
 
         mostrar_mensaje();
-        window.parent.cargar_mensajes_no_leidos(function(params) {
+        window.parent.cargar_mensajes_no_leidos(function (params) {
             document.getElementById('countNoLeidos').textContent = params;
         });
 
@@ -353,7 +356,7 @@ function renderizar_mensaje(_mensaje) {
                 </div>
             </div>
             <div class="messages-body">${_mensaje.MenMensaje}</div>
-            <div class="mt-2">${renderizar_html_adjuntos(_mensaje.adjuntos,false)}</div>
+            <div class="mt-2">${renderizar_html_adjuntos(_mensaje.adjuntos, false)}</div>
         </div>`;
 
 }
@@ -393,7 +396,7 @@ function enviar_mensaje(isReplica) {
             document.getElementById('DivAdjunto').innerHTML = "";
             limpiar_mensaje_leido();
             _adjuntos_cargados = [];
-            window.parent.cargar_mensajes_no_leidos(function(params) {
+            window.parent.cargar_mensajes_no_leidos(function (params) {
                 document.getElementById('countNoLeidos').textContent = params;
             });
 
@@ -490,9 +493,17 @@ async function consultar_propfesores() {
 
 function renderizar_profesores(source) {
     let _html = '';
-    let _user_default = source.find(c => c.id == _user_id);
+    let _user_default = obtener_usuario_sesion();
+
+    if (_user_default.PerApellidos == null) _user_default.PerApellidos = "";
+
+    _html = ` 
+        <div class="row-select" onclick="selected_profesor(${_user_default.PerId})"> <span id="profesor_${_user_default.PerId}" class="">${_user_default.PerNombres} ${_user_default.PerApellidos}</span>
+            <div></div>
+        </div>`
 
     source.forEach(item => {
+        if (item.apellido == null) item.apellido = "";
         /*if (item.id != _user_default.id)*/
         _html += ` 
         <div class="row-select" onclick="selected_profesor(${item.id})"> <span id="profesor_${item.id}" class="">${item.nombre} ${item.apellido}</span>
@@ -504,19 +515,27 @@ function renderizar_profesores(source) {
     if (_user_default == undefined) {
         const _user_sesion = JSON.parse(localStorage.getItem("colegio"))
         _user_default = {
-            id: _user_sesion.PerId,
-            apellido: _user_sesion.PerApellidos,
-            nombre: _user_sesion.PerNombres
+            PerId: _user_sesion.PerId,
+            PerApellidos: _user_sesion.PerApellidos,
+            PerNombres: _user_sesion.PerNombres
         };
     };
+    if (_user_default.PerApellidos == null) _user_default.PerApellidos = "";
 
-    document.getElementById('spnNombreBandeja').textContent = `${_user_default.nombre} ${_user_default.apellido}`;
+    document.getElementById('spnNombreBandeja').textContent = `${_user_default.PerNombres} ${_user_default.PerApellidos}`;
 
     document.getElementById('ddlmsnBandeja').innerHTML = _html;
 }
 
 function selected_profesor(id) {
-    const _profesor = _data_profesores.find(c => c.id == id);
+    let _profesor = _data_profesores.find(c => c.id == id);
+    let _user_default = obtener_usuario_sesion();
+    if (_profesor == undefined) _profesor = {
+        nombre: _user_default.PerNombres,
+        apellido: _user_default.PerApellidos == null ? "" : _user_default.PerApellidos,
+        id: _user_default.PerId
+    };
+
 
     document.getElementById('spnNombreBandeja').textContent = `${_profesor.nombre} ${_profesor.apellido}`;
 
@@ -602,12 +621,12 @@ function subirAdjunto() {
         data: formData,
         contentType: false,
         processData: false,
-        success: function(_response) {
+        success: function (_response) {
 
             _adjuntos_cargados.push(_response);
             cargar_adjuntos();
         },
-        error: function() {
+        error: function () {
             alert("Faild please try upload again");
         }
     });
@@ -625,7 +644,7 @@ function cargar_adjuntos() {
 function renderizar_html_adjuntos(_source, isClose) {
     let _html = '';
     _source.forEach(a => {
-                _html += `
+        _html += `
         <div class="adjunto-mensaje rounded border p-2 m-1 d-flex">
             <div class="text-adjunto">
                 <a href="https://api.comunicatecolegios.com/adjunto/descargar?id=${a.AjdId}">            
@@ -633,10 +652,10 @@ function renderizar_html_adjuntos(_source, isClose) {
                     ${a.AdjNombre}${a.AjdExtension}
                 </a>
                </div>
-          ${isClose? 
-            ` <button type="button" class="close" aria-label="Close" onclick="eliminar_adjunto(${a.AjdId},this)">
+          ${isClose ?
+                ` <button type="button" class="close" aria-label="Close" onclick="eliminar_adjunto(${a.AjdId},this)">
                 <span aria-hidden="true">&times;</span>
-              </button>`:''} 
+              </button>`: ''} 
         </div>`;
     });
 
@@ -654,7 +673,7 @@ function eliminar_adjunto(_id, _this) {
     consultarAPI('adjunto/eliminar', 'POST', undefined, _data);
 }
 
-(async function() {
+(async function () {
 
 
 
@@ -670,9 +689,11 @@ function eliminar_adjunto(_id, _this) {
     $('[data-toggle="tooltip"]').tooltip()
     actualizar_bandeja_count();
 
+    if (_sesion.tipo != 0) $('.fa-chevron-down').remove();
+
 })();
 
-(function(factory) {
+(function (factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
     } else if (typeof module === 'object' && typeof module.exports === 'object') {
