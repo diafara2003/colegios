@@ -221,7 +221,7 @@ namespace Persona.Servicios
                 objCnn.Entry(_persona).State = EntityState.Modified;
                 objCnn.SaveChanges();
             }
-
+            if (_persona.PerApellidos == null) _persona.PerApellidos = "";
 
             return _persona;
 

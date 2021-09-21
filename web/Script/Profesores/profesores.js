@@ -5,9 +5,16 @@
 function abrir_modal_agregar() {
 
 
-    $('#exampleModal').find('ul.active').removeClass('active');
+    limpiar_datos_modal();
 
     $('#exampleModal').modal('show');
+}
+function limpiar_datos_modal() {
+    $('#exampleModal').find('.active').removeClass('active');
+    document.getElementById('nombre_-1').value = "";
+    document.getElementById('apellido_-1').value = "";
+    document.getElementById('email_-1').value = "";
+    document.getElementById('celular_-1').value = "";
 }
 async function consultar_grupos() {
     const response = await consultarAPI('Grupos', 'GET');
@@ -124,7 +131,7 @@ async function agregar_profesores() {
         _data_profesores.push(_objeto);
 
         set_input('-1', { nombre: '', apellido: '', email: '', celular: '' });
-
+        $('.active').removeClass('active');
     }
 
 }
@@ -192,6 +199,7 @@ async function eliminar(id, _this) {
 }
 async function editar(id) {
     idEdit = id;
+    $('.active').removeClass('active');
     const _item = _data_profesores.find(c => c.id == id);
 
     set_input('Edit', _item);
@@ -229,7 +237,7 @@ async function editar_registro() {
         }
         actualizar_objeto(_objeto);
 
-     
+        $('.active').removeClass('active');
         idEdit = 0;
         $('#modalEditar').modal('hide');
 

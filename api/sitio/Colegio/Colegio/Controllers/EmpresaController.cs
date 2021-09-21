@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Trasversales.Modelo;
 
 namespace Colegio.Controllers
 {
+    [RoutePrefix("empresas")]
+
     public class EmpresaController : ApiController
     {
         // GET: api/Empresa
@@ -31,8 +34,9 @@ namespace Colegio.Controllers
             
         }
 
-        // PUT: api/Empresa/5
-        public bool Put(EmpresaCustomDTO request)
+        [Route("modificar")]
+        [HttpPost]
+        public bool Modificar(EmpresaCustomDTO request)
         {
             return new EmpresaBL().UpdateCustom(request);
         }

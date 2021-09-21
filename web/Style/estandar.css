@@ -476,10 +476,21 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+h4 {
+color:var(--primary) !important;
+}
 
 i {
     cursor: pointer;
 }
+
+th {
+    color: var(--primary) !important;
+}
+
+    th i {
+        color: var(--primary) !important;
+    }
 
 .custom-control-label {
     padding-top: 3px;
@@ -503,10 +514,10 @@ i {
     border-bottom: 1px solid transparent;
 }
 
-[contenteditable=true]:focus,
-[contenteditable=true]:active {
-    border-bottom: 1px solid #369;
-}
+    [contenteditable=true]:focus,
+    [contenteditable=true]:active {
+        border-bottom: 1px solid #369;
+    }
 
 .table,
 .card-header,
@@ -517,10 +528,10 @@ i {
     color: #95989a;
 }
 
-.table th {
-    border-top: none;
-    font-weight: 500;
-}
+    .table th {
+        border-top: none;
+        font-weight: 500;
+    }
 
 .card-header,
 .form-group label {
@@ -559,25 +570,25 @@ table tbody i,
     outline: none;
 }
 
-.btn-icono:focus {
-    outline: none;
-}
+    .btn-icono:focus {
+        outline: none;
+    }
 
-.btn-icono:active {
-    outline: none;
-}
+    .btn-icono:active {
+        outline: none;
+    }
 
-.btn-icono:hover {
-    background-color: #ebebeb !important;
-}
+    .btn-icono:hover {
+        background-color: #ebebeb !important;
+    }
 
-.btn-icono:hover i {
-    /*color: buttonface;*/
-}
+        .btn-icono:hover i {
+            /*color: buttonface;*/
+        }
 
-.btn-icono i {
-    font-size: 13px;
-}
+    .btn-icono i {
+        font-size: 13px;
+    }
 
 .icon-tab {
     font-size: 17px;
@@ -591,31 +602,32 @@ table tbody i,
     height: 80px;
 }
 
-.lds-ring div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    margin: 8px;
-    border: 4px solid #fff;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: black transparent transparent transparent;
-}
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        margin: 8px;
+        border: 4px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: black transparent transparent transparent;
+    }
 
-.lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-}
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
 
-.lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-}
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
 
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -640,6 +652,10 @@ table tbody i,
     line-height: 1.42857;
     border: 1px solid #bcc2ef;
 }
+
+    .btn-circle i {
+        color: var(--primary) !important;
+    }
 
 .alertify-notifier .ajs-message.ajs-success {
     color: white;
@@ -670,6 +686,11 @@ table tbody i,
     border: 3px solid #ebebeb;
 }
 
-*::-webkit-scrollbar-thumb:hover {
-    background-color: #999;
+    *::-webkit-scrollbar-thumb:hover {
+        background-color: #999;
+    }
+
+.card-header {
+    background-color: var(--primary);
+    color: white !important;
 }

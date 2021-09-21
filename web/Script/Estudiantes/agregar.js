@@ -1,4 +1,5 @@
-﻿let objEstudiante = {
+﻿const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+let objEstudiante = {
     acudientes: [],
     estudiante: {
         EstId: 0,
@@ -83,7 +84,7 @@ function cargar_estudiante() {
     $('#PerTipoAcudiente_1').find(`option[value="${objEstudiante.acudientes[0].PerTipoAcudiente}"]`).attr('selected', 'selected');
 
 
-    if (objEstudiante.acudientes.length == 2) {
+    if (objEstudiante.acudientes.length == 2 && objEstudiante.acudientes[1] != null) {
         /*acudiente 2*/
         document.getElementById('PerNombres_2').value = objEstudiante.acudientes[1].PerNombres;
         document.getElementById('PerApellidos_2').value = objEstudiante.acudientes[1].PerApellidos;
@@ -98,6 +99,11 @@ async function consultar_grupos() {
     _data_grupos = response;
     renderizar_grupos(response);
 
+
+}
+function validar_correo_formulario(_this) {
+    if (!emailRegex.test(_this.value) && _this.value != '') alertify.error("El correo ingresado es invalido");
+    habilitar_boton_agregar();
 
 }
 function renderizar_grupos(_grupos) {
@@ -115,6 +121,8 @@ async function habilitar_boton_agregar() {
 
 }
 function validar_campos_obligatorios() {
+
+
     if (objEstudiante.estudiante.EstNombres == '') return false;
     if (objEstudiante.estudiante.EstApellidos == '') return false;
     if (objEstudiante.estudiante.EstRC == '') return false;
@@ -132,10 +140,12 @@ function validar_campos_obligatorios() {
     if (objEstudiante.acudientes[0].PerTelefono == '') return false;
 
 
+    if (!emailRegex.test(objEstudiante.acudientes[0].PerEmail)) return false;
+
+
+    if (objEstudiante.length == 2 && emailRegex.test(objEstudiante[1].PerEmail)) return false;
+
     if (objEstudiante.grupo.id <= 0) return false;
-
-
-
 
     return true;
 }
@@ -164,7 +174,7 @@ function obtener_datos_formulario() {
 
     objEstudiante.acudientes = [];
     objEstudiante.acudientes.push(_acudiente1);
-
+    if (_acudiente2 == null) _acudiente2 = {}
 
     /*acudiente 2*/
     _acudiente2.PerNombres = document.getElementById('PerNombres_2').value;
@@ -174,7 +184,7 @@ function obtener_datos_formulario() {
     _acudiente2.PerTipoAcudiente = $('#PerTipoAcudiente_2').find('option:selected').val();
 
 
-    if (_acudiente2.PerEmail != '') objEstudiante.acudientes.push(_acudiente2);
+    if (_acudiente2.PerEmail != '' && emailRegex.test(_acudiente2.PerEmail)) objEstudiante.acudientes.push(_acudiente2);
 }
 async function agregar_estudiante() {
     obtener_datos_formulario();
@@ -252,12 +262,16 @@ document.getElementById("EstFechaNacimineto").setAttribute("max", today);
 
 
 (async () => {
-
     await consultar_grupos();
 
-
     const _id = Get_query_string('id')
-    if (_id != undefined) consultar_estudiante(_id);
+    if (_id != undefined) {
+        consultar_estudiante(_id);
+        $('#Btnguardar').text('Editar estudiante')
+    } else $('#Btnguardar').text('Crear estudiante');
+
+
+
 
     $('[data-toggle="tooltip"]').tooltip();
 })();

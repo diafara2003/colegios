@@ -67,8 +67,9 @@ function active_list_empresa(_this) {
 async function modificar_empresa() {
     window.parent.mostrar_mensajes('', '<span><i class="fas fa-2x fa-circle-notch fa-spin mr-2"></i>Guardando cambios...</span>');
     const obtener_datos = obtener_datos_formulario();
-    await consultarAPI('Empresa', 'PUT', undefined, obtener_datos);
+    await consultarAPI('Empresas/modificar', 'POST', undefined, obtener_datos);
     window.parent.cerrar_mensaje();
+    $('.active').text(obtener_datos.empresa.EmpNombre);
 }
 function obtener_datos_formulario() {
     _data.empresa.EmpNombre = document.getElementById('EmpNombre').value;

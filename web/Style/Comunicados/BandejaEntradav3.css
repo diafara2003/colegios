@@ -3,7 +3,7 @@
     border: none;
     display: flex;
     height: 48px;
-    margin: 30px 16px 15px 0 !important;
+    margin: 10px 16px 15px 0 !important;
     padding: 0 16px 0 26px;
     -webkit-transition: box-shadow .15s cubic-bezier(.4, 0, .2, 1);
     transition: box-shadow .15s cubic-bezier(.4, 0, .2, 1);
@@ -791,7 +791,7 @@ a {
 
 .messages-tm {
     overflow: auto;
-    height: calc(100vh - 93px);
+    height: calc(100vh - 73px);
 }
 
 .messages-sent {

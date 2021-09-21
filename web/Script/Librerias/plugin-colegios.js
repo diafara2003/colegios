@@ -23,7 +23,7 @@
     }
 
 
-    let _url = 'http://localhost/Colegios/api';
+    let _url = 'https://api.comunicatecolegios.com';
 
     try {
         const response = await fetch(`${_url}/${metodo}`, Init);
@@ -121,7 +121,7 @@ function autocomplete(id_input, _api, GetValueProperty, SecondProperty, placehol
         return;
     }
 
-    let _url = 'http://localhost/Colegios/api';
+    let _url = 'https://api.comunicatecolegios.com';
 
 
     var options = {

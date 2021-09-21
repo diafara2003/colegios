@@ -56,6 +56,9 @@ async function validar_nombre_usuario(_this) {
     }, undefined, true);
 
     if (response != null) {
+
+        if (response.usuario.PerApellidos == null) response.usuario.PerApellidos = "";
+
         localStorage.setItem("sesion", response.token);
         localStorage.setItem("colegio", JSON.stringify(response.usuario));
         window.location.href = window.location.href.toLowerCase().split('views')[0] + 'views/login/menu.html';

@@ -49,28 +49,38 @@ function no_hay_grupos() {
             </tr>
         `;
 }
+function modelIsValid(_value) {
+    
+    if (_data_grupos.find(c => c.Nombre.toLowerCase() == _value.toLowerCase()) == null) return true;
+    else return false;
+}
 async function agregar_grupo() {
-    const _result = await consultarAPI('Grupos', 'POST', undefined, armar_objeto(undefined, 'GrNombre'));
+
+    if (modelIsValid(document.getElementById('GrNombre').value)) {
+
+        const _result = await consultarAPI('Grupos', 'POST', undefined, armar_objeto(undefined, 'GrNombre'));
 
 
-    $('#exampleModal').modal('hide');
+        $('#exampleModal').modal('hide');
 
-    alertify.success('Grupo creado');
+        alertify.success('Grupo creado');
 
-    const _nuevo_registro = {
-        Nombre: document.getElementById('GrNombre').value,
-        Estudiantes: 0,
-        Profesores: '',
-        IdGrupo: _result.codigo
-    };
+        const _nuevo_registro = {
+            Nombre: document.getElementById('GrNombre').value,
+            Estudiantes: 0,
+            Profesores: '',
+            IdGrupo: _result.codigo
+        };
 
-    $('#tbltemporada').append(renderizar_tr_grupos(_nuevo_registro));
+        $('#tbltemporada').append(renderizar_tr_grupos(_nuevo_registro));
 
 
-    _data_grupos.push(_nuevo_registro);
+        _data_grupos.push(_nuevo_registro);
 
-    document.getElementById('GrNombre').value = '';
-
+        document.getElementById('GrNombre').value = '';
+    } else 
+        alertify.error('El grupo ya existe');
+    
 }
 function armar_objeto(id, id_text) {
     var myObject = {

@@ -49,7 +49,7 @@ namespace Menu.Servicios
              }).ToList().ForEach(c =>
              {
 
-                 if (objSeccion.Find(o => o.SecDescripcion.Equals(c.SecDescripcion)) == null)
+                 if (objSeccion.Find(o => o.SeccionId == c.SeccionId) == null)
                      objSeccion.Add(c);
              });
 
@@ -68,23 +68,9 @@ namespace Menu.Servicios
             objSeccion.Add(op_mensajeria);
 
 
-            
+
             SeccionCustom op_grupos = (from data in objCnn.seccion
-                                           where data.SecDescripcion.Equals("Grupos")
-                                           select new SeccionCustom()
-                                           {
-                                               SeccionId = data.SeccionId,
-                                               SecDescripcion = data.SecDescripcion,
-                                               SecIcono = data.SecIcono,
-                                               SecRuta = data.SecRuta,
-                                               opcion = (from query in objCnn.opcion where query.OpSeccionId == data.SeccionId select query)
-                                           }).FirstOrDefault();
-
-
-            objSeccion.Add(op_grupos);
-
-            SeccionCustom op_profesores = (from data in objCnn.seccion
-                                       where data.SecDescripcion.Equals("Profesores")
+                                       where data.SecDescripcion.Equals("Grupos")
                                        select new SeccionCustom()
                                        {
                                            SeccionId = data.SeccionId,
@@ -95,11 +81,10 @@ namespace Menu.Servicios
                                        }).FirstOrDefault();
 
 
-            objSeccion.Add(op_profesores);
+            objSeccion.Add(op_grupos);
 
-
-            SeccionCustom op_Estudiantes = (from data in objCnn.seccion
-                                           where data.SecDescripcion.Equals("Estudiantes")
+            SeccionCustom op_profesores = (from data in objCnn.seccion
+                                           where data.SecDescripcion.Equals("Profesores")
                                            select new SeccionCustom()
                                            {
                                                SeccionId = data.SeccionId,
@@ -110,8 +95,26 @@ namespace Menu.Servicios
                                            }).FirstOrDefault();
 
 
+            objSeccion.Add(op_profesores);
+
+
+            SeccionCustom op_Estudiantes = (from data in objCnn.seccion
+                                            where data.SecDescripcion.Equals("Estudiantes")
+                                            select new SeccionCustom()
+                                            {
+                                                SeccionId = data.SeccionId,
+                                                SecDescripcion = data.SecDescripcion,
+                                                SecIcono = data.SecIcono,
+                                                SecRuta = data.SecRuta,
+                                                opcion = (from query in objCnn.opcion where query.OpSeccionId == data.SeccionId select query)
+                                            }).FirstOrDefault();
+
+
             objSeccion.Add(op_Estudiantes);
-            return objSeccion;
+            return objSeccion
+                            .GroupBy(p => p.SeccionId)
+                            .Select(g => g.First())
+                            .ToList();
         }
     }
 }

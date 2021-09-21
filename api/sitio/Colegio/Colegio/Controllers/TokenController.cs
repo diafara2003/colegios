@@ -61,6 +61,9 @@ namespace Colegio.Controllers
         public Personas CheckUser(string username, string password)
         {
             var persona = new Persona.Servicios.PersonasBI().GetUser(username, password);
+
+            if (persona.PerApellidos == null) persona.PerApellidos = "";
+
             return persona;
         }
     }

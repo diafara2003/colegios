@@ -108,12 +108,17 @@ namespace Persona.Servicios
             ColegioContext objCnn = new ColegioContext();
             objResultado.resultado = new ResponseDTO();
 
+
+
+
             if (modelo.estudiante.EstId == 0)
             {
 
+                
+
                 foreach (var item in modelo.acudientes)
                 {
-                    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = 1, respuesta = string.Empty };
+                    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ingresado " + item.PerEmail + " ya existe en el sistema." };
                 }
 
                 if (objResultado.resultado.codigo == -1) return objResultado;
@@ -126,7 +131,7 @@ namespace Persona.Servicios
                     c.PerTipoPerfil = 3;
                     c.PerEstado = true;
                     c.PerUsuario = c.PerEmail;
-                    c.PerClave = string.IsNullOrEmpty(c.PerTelefono) ? Utilidad.GenerarclaveRandom() : c.PerTelefono;
+                    c.PerClave = Utilidad.GenerarclaveRandom();
                     c.PerIngreso = false;
                     c.PerDocumento = c.PerEmail;
                     objCnn.personas.Add(c);
@@ -169,8 +174,36 @@ namespace Persona.Servicios
 
                 if (objResultado.resultado.codigo == -1) return objResultado;
 
-                modelo.acudientes.ToList().ForEach(c => objCnn.UpdateEntity<Personas>(c));
+                modelo.acudientes.ToList().ForEach(c => {
 
+
+                    if (c.PerId == 0) {
+
+                        c.PerIdEmpresa = empresa;
+                        c.PerTipoPerfil = 3;
+                        c.PerEstado = true;
+                        c.PerUsuario = c.PerEmail;
+                        c.PerClave = Utilidad.GenerarclaveRandom();
+                        c.PerIngreso = false;
+                        c.PerDocumento = c.PerEmail;
+
+                        objCnn.personas.Add(c);
+
+                        objCnn.SaveChanges();
+
+                    }
+
+                    else {
+                        c.PerUsuario = c.PerEmail;
+                        c.PerDocumento = c.PerEmail;
+
+                        objCnn.UpdateEntity<Personas>(c);
+                    }
+
+                });
+
+                if (modelo.acudientes.Count() == 2)
+                    modelo.estudiante.Acudiente2 = modelo.acudientes[1].PerId;
 
                 objCnn.UpdateEntity<EstudianteJardin>(modelo.estudiante);
 

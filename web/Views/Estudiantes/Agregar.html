@@ -62,7 +62,7 @@
 </head>
 <body>
 
-    <div class="container  mt-2 ">
+    <div class="container-md  mt-2 ">
 
         <div class="row mb-2">
             <div class="col-12">
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label for="exampleInputEmail1">Aseguradora </label>
-                                    <input maxlength="11" onblur="habilitar_boton_agregar()" type="text" class="form-control input-sm" id="EstAseguradora" placeholder="Identificación">
+                                    <input maxlength="11" onkeypress="return only_number(event)" onblur="habilitar_boton_agregar()" type="text" class="form-control input-sm" id="EstAseguradora" placeholder="Identificación">
                                 </div>
 
                                 <div class="col-12">
@@ -187,7 +187,7 @@
                                 <div class="col-6">
                                     <div class="p-2">
                                         <label for="exampleInputEmail1">Correo del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="habilitar_boton_agregar()" maxlength="30" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <input onblur="validar_correo_formulario(this)" maxlength="30" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
                                     </div>
 
 
@@ -262,7 +262,7 @@
                                     <div class="p-2">
 
                                         <label for="exampleInputEmail1">Correo del acudiente</label>
-                                        <input type="text" class="form-control input-sm" maxlength="30" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <input type="text" class="form-control input-sm" maxlength="30" onblur="validar_correo_formulario(this)" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
                                     </div>
 
                                 </div>

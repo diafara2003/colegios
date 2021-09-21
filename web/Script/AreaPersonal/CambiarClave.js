@@ -1,6 +1,7 @@
 ﻿let iniciales = (nombre, apellidos) => {
+
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
-    return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
+    return `${nombre.substr(0, 1).toUpperCase()}${(apellidos == "" || apellidos == null ? "" : apellidos.substr(0, 1).toUpperCase())}`;
 }
 
 function actualizar() {
