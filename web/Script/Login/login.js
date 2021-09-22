@@ -47,8 +47,8 @@ async function validar_nombre_usuario(_this) {
     let _dataform = $('form').serialize().split('&');
 
 
-    let _documento = _dataform[0].split('=')[1];
-    let _clave = _dataform[1].split('=')[1];
+    let _documento = decodeURIComponent(_dataform[0].split('=')[1])
+    let _clave = decodeURIComponent(_dataform[1].split('=')[1])
 
     const response = await consultarAPI(`login/validacion`, 'POST', undefined, {
         username: _documento,
