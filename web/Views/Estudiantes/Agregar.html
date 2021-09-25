@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
     <link href="../../Style/estandar.css" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet' />
     <title>Grupos</title>
     <style>
 
@@ -57,7 +58,6 @@
         h6 {
             color: #87b4e4 !important
         }
-
     </style>
 </head>
 <body>
@@ -66,7 +66,13 @@
 
         <div class="row mb-2">
             <div class="col-12">
-                <header class="card-header">Agregar Estudiante</header>
+                <header class="card-header">
+
+                    <i onclick="regresar()" class='bx bx-arrow-to-left bx-border-circle'></i>
+
+                    <i onclick="nuevo_estudiante()" class='bx bx-plus-medical bx-border-circle'></i>
+                    Agregar Estudiante
+                </header>
             </div>
         </div>
 

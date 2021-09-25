@@ -243,7 +243,12 @@ async function restablecer_contraseña(_type) {
     else
         alertify.error(_result.respuesta);
 }
-
+function nuevo_estudiante() {
+    window.location.reload();
+}
+function regresar() {
+    window.location.href = `${window.location.href.split('views')[0]}/views/estudiantes/estudiantes.html`;
+}
 
 
 var today = new Date();
