@@ -281,6 +281,44 @@ namespace Mensaje.Servicios
         }
 
 
+        public IEnumerable<ObtenerAcudientesgrupos> GetObtenerAcudientesgrupos(int id, int empresa)
+        {
+
+            ColegioContext objCnn = new ColegioContext();
+            ProcedureDTO ProcedureDTO = new ProcedureDTO();
+
+            ProcedureDTO.commandText = "msn.ObtenerAcudientesgrupos";
+            ProcedureDTO.parametros.Add("id", id);
+            ProcedureDTO.parametros.Add("empresa", empresa);
+
+
+            DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
+
+            return (from data in result.AsEnumerable()
+                    select new ObtenerAcudientesgrupos()
+                    {
+                        PerIdA1 = (int)data["PerIdA1"],
+                        PerNombresA1 = (string)data["PerNombresA1"],
+                        PerApellidosA1 = (string)data["PerApellidosA1"],
+                        TipoA1 = (string)data["TipoA1"],
+
+
+                        PerIdA2 = data["PerIdA2"] is DBNull ? 0 : (int)data["PerIdA2"],
+                        PerNombresA2 = data["PerNombresA2"] is DBNull ? "" : (string)data["PerNombresA2"],
+                        PerApellidosA2 = data["PerApellidosA2"] is DBNull ? "" : (string)data["PerApellidosA2"],
+                        TipoA2 = data["TipoA2"] is DBNull ? "" : (string)data["TipoA2"],
+
+
+                        color = (string)data["color"],
+
+                        EstNombres = (string)data["EstNombres"],
+                        EstApellidos = data["EstApellidos"] is DBNull ? "" : (string)data["EstApellidos"],
+
+                    });
+
+        }
+
+
         public IEnumerable<AcEnvioCorreoPersonas> GetAcEnvioCorreoPersonas(int idusuario, string filter, string temporada, string empresa)
         {
 

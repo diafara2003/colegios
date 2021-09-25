@@ -261,7 +261,7 @@ i, h4, .nav__name, .nav__dropdown-item {
 /*===== Active link =====*/
 .menu__item--active {
     color: #060606 !important;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
     .menu__item--active i {
@@ -391,4 +391,10 @@ i, h4, .nav__name, .nav__dropdown-item {
     text-transform: uppercase;
     float: left;
     cursor: pointer;
+}
+
+
+.name-empresa {
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

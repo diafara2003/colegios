@@ -1,4 +1,6 @@
 const _tipo_mensaje = { borradores: -2, eliminados: -1, bandeja: 0, Enviados: 1, NoLeidos: 2 }
+let _tipoSelected = "Enviados";
+let readonly = false;
 let _mensaje_context = {},
     data_mensajes = [],
     id_bandeja = -1,
@@ -12,6 +14,7 @@ let _data_source_ac = [],
 let _this_ctx = undefined;
 let _times = 0;
 let iniciales_usuario = (nombre, apellidos) => {
+    if (apellidos == null) apellidos = "";
     //apellidos = apellidos == "" ? nombre.substr(0, 3) : apellidos;
     return `${nombre.substr(0, 1).toUpperCase()}${apellidos.substr(0, 1).toUpperCase()}`;
 }
@@ -50,27 +53,124 @@ function buscar_mensajes(_this) {
 
 
 }
+async function buscar_personas() {
+    $('#cargando').css('display', 'block');
+    $('#RegistroPrincipal, #EnvioGrupos').empty();
 
-function buscar_personas(_this) {
-    setTimeout(c => {
-        let _value = _this.textContent;
+    const data = await consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter= `, 'GET');
+    _data_source_ac = data;
 
-        if (_value == "") {
-            $('#DivResultados').empty();
-            $('#DivResultados').css('display', 'none');
-            return;
-        }
 
-        consultarAPI(`Mensajes/destinatarios?idusuario=${_sesion.idusuario}&filter=${_value}`, 'GET', (response) => {
-            $('#DivResultados').css('display', 'block');
-            _data_source_ac = response;
-            renderizar_resultados_ac(response);
-        });
+    if (_sesion.tipo == 0) {
+        $('#RegistroPrincipal').append(renderizar_modal_destinatarios(data.find(c => c.tipo == -40), false));
 
-    }, 300);
+
+        $('#RegistroPrincipal').append(renderizar_modal_destinatarios({
+            PerId: 0,
+            tipo: -30,
+            GrEnColorRGB: '#43AC34',
+            GrEnColorObs: 'Planta educativa',
+            PerNombres: 'Planta educativa',
+            PerApellidos: ''
+        }, true));
+
+        data.filter(c => c.tipo == -20).forEach(x => $('#EnvioGrupos').append(renderizar_modal_destinatarios(x, true)));
+
+    }
+
+    $('#cargando').css('display', 'none');
 
 }
+function renderizar_modal_destinatarios(item, showIcon) {
+    if (item.PerApellidos == null) item.PerApellidos = "";
 
+    return `
+            <div class="mt-1" >
+               <div class="d-flex align-items-center hover-item p-1" >
+                     <div><input type="checkbox" value="" id="check_${item.PerId}"></div>
+                     <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
+                     <div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>
+                    ${(showIcon ? `
+                        <div class="pl-2" onclick="ver_detalles(${item.PerId},${item.tipo})">
+                            <i class='bx bx-down-arrow-alt'></i>
+                        </div>
+                    ` : ``)}
+                </div>
+            <div style="display:none" id="destinatario_detalle_${item.PerId}" class="detalle-grupos pl-4"></div>
+             </div>`;
+}
+async function ver_detalles(id, tipo) {
+    $(`#destinatario_detalle_${id}`).empty();
+
+    $(`#destinatario_detalle_${id}`).toggle();
+
+
+    if ($(`#destinatario_detalle_${id}`).css('display') == 'block') {
+
+        $(`#destinatario_detalle_${id}`).append(`<i class='bx bx-loader bx-spin  bx-md'></i>`);
+
+        if (tipo == -30)
+            _data_source_ac.filter(c => c.tipo == tipo).forEach(x => {
+                $(`#destinatario_detalle_${id}`).find('.bx-loader').remove();
+                $(`#destinatario_detalle_${id}`).append(renderizar_detalle(x));
+            });
+        if (tipo == -20) {
+            const _info_grupos = await consultarAPI(`Mensajes/info/grupo?idgrupo=${id}`, 'GET');
+
+            _info_grupos.forEach(c => {
+                $(`#destinatario_detalle_${id}`).find('.bx-loader').remove();
+                $(`#destinatario_detalle_${id}`).append(renderizar_info_grupo(c));
+            });
+        }
+    }
+
+
+
+
+}
+function renderizar_detalle(item) {
+    return `
+            <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
+                <div><input type="checkbox" value="" id="checkDetail_${item.PerId}"></div>
+                <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
+                <div class="d-block pl-2">
+                    <div class="">${item.PerNombres} ${item.PerApellidos}</div>
+                    <div class="text-muted">${item.CurDescripcion}</div>
+                </div>
+            </div>`;
+}
+function renderizar_info_grupo(item) {
+    let _html = '';
+
+    _html = `
+            <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
+                <div><input type="checkbox" value="" id="checkDetail_${item.PerIdA1}"></div>
+                <div class="photo-user" style="color:white;border:1px solid ${item.color};background:${item.color}">${iniciales_usuario(item.PerNombresA1, item.PerApellidosA1)}</div>
+                <div class="d-block pl-2">
+                    <div class="">
+                        ${item.PerNombresA1} ${item.PerApellidosA1}
+                        <span class="text-muted">(${item.TipoA1})</span>
+                    </div>
+                     <div class="text-muted">${item.EstNombres} ${item.EstApellidos}</div>
+                </div>
+            </div>`;
+
+    if (item.PerIdA2 > 0)
+        _html += `
+          <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
+                <div><input type="checkbox" value="" id="checkDetail_${item.PerIdA1}"></div>
+                <div class="photo-user" style="color:white;border:1px solid ${item.color};background:${item.color}">${iniciales_usuario(item.PerNombresA2, item.PerApellidosA2)}</div>
+                <div class="d-block pl-2">
+                    <div class="">
+                        ${item.PerNombresA2} ${item.PerApellidosA2}
+                        <span class="text-muted">(${item.TipoA1})</span>
+                    </div>
+                    <div class="text-muted">${item.EstNombres} ${item.EstApellidos}</div>
+                </div>
+            </div>`;
+
+    return _html;
+}
 function renderizar_resultados_ac(source) {
 
     let _html = '';
@@ -101,7 +201,6 @@ function renderizar_resultados_ac(source) {
 
     document.getElementById('DivResultados').innerHTML = _html;
 }
-
 function renderizar_seleccionado(_i) {
     let persona = _data_source_ac[_i];
     let replica = _mensaje_context.usuario == undefined ? false : true;
@@ -115,7 +214,6 @@ function renderizar_seleccionado(_i) {
     $('#DivResultados').empty();
     $('#DivResultados').css('display', 'none');
 }
-
 function set_sent_to(replica) {
     let _data = [];
     if (replica)
@@ -139,7 +237,6 @@ function set_sent_to(replica) {
 
     return JSON.stringify(_data);
 }
-
 function renderizar_html_seleccionado(persona, _id_deleted) {
     let _html = ``;
     _html += `<div class="desti-seleccionado">`;
@@ -157,13 +254,11 @@ function renderizar_html_seleccionado(persona, _id_deleted) {
 
     return _html;
 }
-
 function eliminar_persona_selected(_this, id) {
     let _index = destinatarios.findIndex(p => p == id);
     destinatarios.splice(_index, 1);
     $(_this).closest('.desti-seleccionado').remove();
 }
-
 function ver_otras_bandejas() {
 
     if (_sesion.tipo != 0) return;
@@ -171,15 +266,12 @@ function ver_otras_bandejas() {
     if ($('#ddlmsnBandeja').hasClass('body-selected')) $('#ddlmsnBandeja').addClass('hidden-select').removeClass('body-selected');
     else $('#ddlmsnBandeja').addClass('body-selected').removeClass('hidden-select');
 }
-
 function focus_input_busqueda(_this) {
     $('#search-general').addClass('focus-search');
 }
-
 function blur_input_busqueda(_this) {
     $('#search-general').removeClass('focus-search');
 }
-
 async function cargar_bandeja(tipo, _element) {
     document.getElementById('tbodyDatos').innerHTML = '';
     $('.active').removeClass('active');
@@ -193,6 +285,7 @@ async function cargar_bandeja(tipo, _element) {
         $('#btnMensajesOpciones').removeClass('d-none').addClass('d-flex');
         $('#BtnModalMensaje').removeClass('w-100 justify-content-end');
     }
+    _tipoSelected = _tipo_mensaje[tipo]
 
 
     const response = await consultarAPI(`BandejaEntrada/mensajes/usuario?usuario=${_user_id}&tipo=${_tipo_mensaje[tipo]}`, 'GET', undefined);
@@ -214,7 +307,6 @@ async function cargar_bandeja(tipo, _element) {
     //else $('#mostrarMensaje').css('max-height', 'calc(100vh - 343px)');
 
 }
-
 function renderizar_mensajes_bandeja(_data) {
     let html = '';
     for (const key in _data) {
@@ -269,7 +361,6 @@ function renderizar_mensajes_bandeja(_data) {
     document.getElementsByClassName("xY-aux")[0].style.borderTop = "1px solid #ebebeb";
 
 }
-
 function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 
     document.getElementById('mostrarMensaje').innerHTML = '';
@@ -277,7 +368,13 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     _this_ctx = _this;
     $('#responderMensaje').addClass('d-none');
     $('.btn-enviar').addClass('d-none');
-    $('.btn-responder').removeClass('d-none');
+
+    if (_tipoSelected == _tipo_mensaje.Enviados) $('.btn-responder').addClass('d-none');
+    else $('.btn-responder').removeClass('d-none');
+
+
+    if (readonly) $('.btn-responder').addClass('d-none');
+
     $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
 
     consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
@@ -303,23 +400,19 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 
     });
 }
-
 function nuevo_mensaje() {
     destinatarios = [];
     $('#Bandejamensajes, #mensaje').addClass('d-none');
     $('#nuevo-mensaje').removeClass('d-none');
 }
-
 function mostrar_mensaje() {
     $('#mensaje').removeClass('d-none');
     $('#Bandejamensajes, #nuevo-mensaje').addClass('d-none');
 }
-
 function volver() {
     $('#mensaje, #nuevo-mensaje').addClass('d-none');
     $('#Bandejamensajes').removeClass('d-none');
 }
-
 function renderizar_replicas(mensaje) {
     let html = '';
     html = renderizar_mensaje(mensaje._mensaje);
@@ -328,8 +421,9 @@ function renderizar_replicas(mensaje) {
     }
     return html;
 }
-
 function renderizar_mensaje(_mensaje) {
+
+    if (_mensaje.usuario.PerApellidos == null) _mensaje.usuario.PerApellidos = "";
 
     return `
             <div class="messages-view ${(_mensaje.MenUsuario == _sesion.idusuario ? 'owner' : '')}">
@@ -360,7 +454,6 @@ function renderizar_mensaje(_mensaje) {
         </div>`;
 
 }
-
 function actualizar_bandeja_count() {
     let _inter = setInterval(C => {
         if (localStorage.getItem('noleidos') != undefined) {
@@ -370,7 +463,6 @@ function actualizar_bandeja_count() {
         }
     }, 500)
 }
-
 function armar_objeto_mensaje(isReplica) {
     let data = {};
     let mensaje = obtener_datos(isReplica);
@@ -379,8 +471,6 @@ function armar_objeto_mensaje(isReplica) {
     data.adjuntos = obtener_adjuntos_al_mensaje();
     return data;
 }
-
-
 function enviar_mensaje(isReplica) {
 
     let data = armar_objeto_mensaje(isReplica);
@@ -405,7 +495,6 @@ function enviar_mensaje(isReplica) {
 
     }
 }
-
 function limpiar_mensaje_leido() {
     document.getElementById('MenAsunto').textContent = "";
     document.getElementById('divDestinatarios').innerHTML = "";
@@ -413,18 +502,15 @@ function limpiar_mensaje_leido() {
     quill.root.innerHTML = '';
     responderMsn.root.innerHTML = '';
 }
-
 function obtener_adjuntos_al_mensaje() {
     return _adjuntos_cargados.map(c => c.AjdId);
 }
-
 function obtener_destinatarios(isReplica) {
     if (isReplica)
         return [{ id: _mensaje_context.MenUsuario, tipo: _mensaje_context.MenTipoMsn }];
     else
         return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
 }
-
 function obtener_datos(replica) {
     var myobject = {
         MenId: 0,
@@ -472,7 +558,6 @@ function obtener_datos(replica) {
 
     return myobject;
 }
-
 function habilitar_responder() {
     $('#responderMensaje').removeClass('d-none');
     $('.btn-enviar').removeClass('d-none');
@@ -481,7 +566,6 @@ function habilitar_responder() {
     $('#mostrarMensaje').css('max-height', 'calc(100vh - 345px)');
 
 }
-
 async function consultar_propfesores() {
     const response = await consultarAPI('Profesor', 'GET');
 
@@ -490,7 +574,6 @@ async function consultar_propfesores() {
 
     renderizar_profesores(response);
 }
-
 function renderizar_profesores(source) {
     let _html = '';
     let _user_default = obtener_usuario_sesion();
@@ -526,7 +609,6 @@ function renderizar_profesores(source) {
 
     document.getElementById('ddlmsnBandeja').innerHTML = _html;
 }
-
 function selected_profesor(id) {
     let _profesor = _data_profesores.find(c => c.id == id);
     let _user_default = obtener_usuario_sesion();
@@ -536,14 +618,32 @@ function selected_profesor(id) {
         id: _user_default.PerId
     };
 
+    if (_profesor.id == _user_default.PerId) {
+        _user_id = _user_default.PerId;
+        readonly = false;
+    }
+    else {
+        _user_id = _profesor.id;
+        readonly = true;
+    }
+
+    mode_readOnly();
 
     document.getElementById('spnNombreBandeja').textContent = `${_profesor.nombre} ${_profesor.apellido}`;
 
-    _user_id = _profesor.id;
+
     $('.content-menu').find('.menu-op').eq(0).find('.item-menu').click();
     ver_otras_bandejas();
 }
+function mode_readOnly() {
+    if (readonly) {
 
+        $('#btnEnviar').addClass('d-none');
+    }
+    else {
+        $('#btnEnviar').removeClass('d-none');
+    }
+}
 function convertir_fecha(fecha) {
     const date = fecha.split('/');
 
@@ -564,7 +664,6 @@ function convertir_fecha(fecha) {
 
     return _m_date;
 }
-
 function validar_datos(_data) {
     let _result = true;
 
@@ -581,18 +680,15 @@ function validar_datos(_data) {
 
     return _result;
 }
-
 function mostrar_mensaje_validacion_error(mensaje) {
 
     window.parent.parent.mostrar_mensajes('', mensaje, 'error', true, false, false, 'Aceptar', '', '', '', () => {
 
     });
 }
-
 function adjuntar() {
     $('#myInput').click();
 }
-
 function armar_url_adjuntos() {
     let _url = '';
     let _usuario = obtener_session().idusuario,
@@ -603,7 +699,6 @@ function armar_url_adjuntos() {
 
     return '';
 }
-
 function subirAdjunto() {
 
     let _url = 'https://api.comunicatecolegios.com';
@@ -631,7 +726,6 @@ function subirAdjunto() {
         }
     });
 }
-
 function cargar_adjuntos() {
 
 
@@ -640,7 +734,6 @@ function cargar_adjuntos() {
     //return _html;
 
 }
-
 function renderizar_html_adjuntos(_source, isClose) {
     let _html = '';
     _source.forEach(a => {
@@ -661,7 +754,6 @@ function renderizar_html_adjuntos(_source, isClose) {
 
     return _html;
 }
-
 function eliminar_adjunto(_id, _this) {
     var _data = { id: _id };
     $(_this).closest('.card').remove();
@@ -672,6 +764,21 @@ function eliminar_adjunto(_id, _this) {
     cargar_adjuntos();
     consultarAPI('adjunto/eliminar', 'POST', undefined, _data);
 }
+async function abrir_Destinatarios() {
+
+    $('#modalDestinatario').addClass('d-block').removeClass('d-none');
+    //if ($('#DivResultados').css('display') == 'block') $('#DivResultados').css('display', 'none');
+    //else
+    //    if ($('#DivResultados').find('.ul-profesores').find('li').length == 0)
+    await buscar_personas();
+    //    else $('#DivResultados').css('display', 'block');
+
+
+}
+function cerrar_modal_destinatario() {
+    $('#modalDestinatario').removeClass('d-block').addClass('d-none');
+}
+
 
 (async function () {
 

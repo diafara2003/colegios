@@ -86,6 +86,17 @@ namespace Colegio.Controllers
             return new MensajesBI().GetAcEnvioCorreoPersonas(idusuario, filter, temporada.ToString(), _empresa.PerIdEmpresa.ToString());
         }
 
+
+        [HttpGet]
+        [Route("info/grupo")]
+        public IEnumerable<ObtenerAcudientesgrupos> GetObtenerAcudientesgrupos(int idgrupo) {
+            var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
+            var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
+
+            return new MensajesBI().GetObtenerAcudientesgrupos(idgrupo,_empresa.PerIdEmpresa);
+        }
+
         // POST: api/Mensajes
         public ResponseDTO Post(CrearMensajeCustom data)
         {

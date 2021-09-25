@@ -121,7 +121,7 @@
 .search-messages {
     display: flex;
     white-space: nowrap;
-    width: calc(100vw - 482px);
+    width: calc(100vw - 523px);
 }
 
 .search {
@@ -822,3 +822,82 @@ a {
 .close {
     padding-top: 3px !important;
 }
+
+
+.modal-destinatario {
+    display: none;
+    width: calc(50%);
+    height: calc(100vh - 101px);
+    background: white;
+    position: absolute;
+    top: 12px;
+    border: 1px solid rgb(235, 235, 235);
+    box-shadow: rgb(223 223 223) 0px 0px 20px 3px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    border-radius: 6px;
+    margin-right: auto;
+}
+
+.modal-destinatario-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ebebeb
+}
+
+
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: #000;
+    background: transparent;
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5;
+    outline: none;
+}
+
+    .btn-close:hover {
+        color: var(--gray);
+        text-decoration: none;
+        opacity: 1;
+    }
+
+.bg-colegio {
+    background: red;
+    border: 1px solid red;
+    color: white;
+}
+
+.bg-planta {
+    background: #43AD33;
+    border: 1px solid #43AD33;
+    color: white;
+}
+
+.bg-grupos {
+    background: #FC7E1A;
+    border: 1px solid #FC7E1A;
+    color: white;
+}
+
+
+.text-muted {
+    color: #6c757d !important;
+    font-size: 12px;
+    line-height: 9px;
+}
+
+.hover-item {
+    background: white;
+    transition: background 0.4s;
+}
+
+    .hover-item:hover {
+        background: #ebebeb;
+        cursor: pointer;
+        border-radius: 5px;
+    }
