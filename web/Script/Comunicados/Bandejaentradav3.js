@@ -73,10 +73,12 @@ async function buscar_personas() {
             PerNombres: 'Planta educativa',
             PerApellidos: ''
         }, true));
-
+    }
+    if (_sesion.tipo == 3)
+        data.forEach(c => $('#EnvioGrupos').append(renderizar_modal_destinatarios(c, false)));
+    else
         data.filter(c => c.tipo == -20).forEach(x => $('#EnvioGrupos').append(renderizar_modal_destinatarios(x, true)));
 
-    }
 
     $('#cargando').css('display', 'none');
 
