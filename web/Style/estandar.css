@@ -476,8 +476,9 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+
 h4 {
-color:var(--primary) !important;
+    color: var(--primary) !important;
 }
 
 i {
@@ -693,4 +694,16 @@ table tbody i,
 .card-header {
     background-color: var(--primary);
     color: white !important;
+}
+
+
+.border-circle {
+    border: .07em solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 21px;
+    height: 21px;
+    margin: 0 2px;
 }
