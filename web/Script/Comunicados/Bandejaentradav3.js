@@ -87,9 +87,9 @@ function renderizar_modal_destinatarios(item, showIcon) {
     if (item.PerApellidos == null) item.PerApellidos = "";
 
     return `
-            <div class="mt-1" >
+            <div class="mt-1" id_destinatario="${item.PerId}">
                <div class="d-flex align-items-center hover-item p-1" >
-                     <div><input type="checkbox" value="" id="check_${item.PerId}"></div>
+                     <div><input type="checkbox" value="" onclick="checked_destinatarios(this,${item.tipo},${item.PerId})" id="check_${item.tipo}"></div>
                      <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
                      <div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>
                     ${(showIcon ? `
@@ -114,14 +114,25 @@ async function ver_detalles(id, tipo) {
         if (tipo == -30)
             _data_source_ac.filter(c => c.tipo == tipo).forEach(x => {
                 $(`#destinatario_detalle_${id}`).find('.bx-loader').remove();
-                $(`#destinatario_detalle_${id}`).append(renderizar_detalle(x));
+
+                let _parend_checked = false;
+
+                if ($('#check_-30').is(':checked') || $('#check_-40').is(':checked'))
+                    _parend_checked = true;
+
+                $(`#destinatario_detalle_${id}`).append(renderizar_detalle(x, _parend_checked));
             });
         if (tipo == -20) {
             const _info_grupos = await consultarAPI(`Mensajes/info/grupo?idgrupo=${id}`, 'GET');
 
+            let _parend_checked = false;
+
+            if ($('#check_-20').is(':checked') || $('#check_-40').is(':checked'))
+                _parend_checked = true;
+
             _info_grupos.forEach(c => {
                 $(`#destinatario_detalle_${id}`).find('.bx-loader').remove();
-                $(`#destinatario_detalle_${id}`).append(renderizar_info_grupo(c));
+                $(`#destinatario_detalle_${id}`).append(renderizar_info_grupo(c, _parend_checked));
             });
         }
     }
@@ -130,10 +141,10 @@ async function ver_detalles(id, tipo) {
 
 
 }
-function renderizar_detalle(item) {
+function renderizar_detalle(item, _readonly_grupos) {
     return `
             <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
-                <div><input type="checkbox" value="" id="checkDetail_${item.PerId}"></div>
+                <div><input type="checkbox" ${(_readonly_grupos ? ' checked="checked" readonly="readonly" disabled="disabled" ' : '')} id="checkDetail_${item.PerId}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
                 <div class="d-block pl-2">
                     <div class="">${item.PerNombres} ${item.PerApellidos}</div>
@@ -141,12 +152,14 @@ function renderizar_detalle(item) {
                 </div>
             </div>`;
 }
-function renderizar_info_grupo(item) {
+function renderizar_info_grupo(item, _readonly_grupos) {
     let _html = '';
+
+
 
     _html = `
             <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
-                <div><input type="checkbox" value="" id="checkDetail_${item.PerIdA1}"></div>
+                <div><input type="checkbox" value="" ${(_readonly_grupos ? ' checked="checked" readonly="readonly" disabled="disabled" ' : '')} id="checkDetail_${item.PerIdA1}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.color};background:${item.color}">${iniciales_usuario(item.PerNombresA1, item.PerApellidosA1)}</div>
                 <div class="d-block pl-2">
                     <div class="">
@@ -160,7 +173,7 @@ function renderizar_info_grupo(item) {
     if (item.PerIdA2 > 0)
         _html += `
           <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
-                <div><input type="checkbox" value="" id="checkDetail_${item.PerIdA1}"></div>
+                <div><input type="checkbox" value="" ${(_readonly_grupos ? ' checked="checked" readonly="readonly" disabled="disabled" ' : '')} id="checkDetail_${item.PerIdA1}" id="checkDetail_${item.PerIdA1}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.color};background:${item.color}">${iniciales_usuario(item.PerNombresA2, item.PerApellidosA2)}</div>
                 <div class="d-block pl-2">
                     <div class="">
@@ -172,6 +185,53 @@ function renderizar_info_grupo(item) {
             </div>`;
 
     return _html;
+}
+
+function checked_destinatarios(_this, _type, id) {
+    if (_type == -40) {
+        if ($(_this).is(':checked')) {
+            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').not(_this).attr('checked', 'checked');
+            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').not(_this).attr('readonly', 'readonly');
+            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').not(_this).attr('disabled', 'disabled');
+            $(_this).attr('checked', 'checked');
+
+        } else {
+            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').prop('checked', false);
+            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').removeAttr('readonly');
+            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').removeAttr('disabled');
+
+        }
+
+    } else if (_type == -30) {
+
+        if ($(_this).is(':checked')) {
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).attr('checked', 'checked');
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).attr('readonly', 'readonly');
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).attr('disabled', 'disabled');
+            $(_this).attr('checked', 'checked');
+
+        } else {
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').removeAttr('checked');
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').removeAttr('readonly');
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').removeAttr('disabled');
+
+        }
+    }
+    else if (_type == -20) {
+
+        if ($(_this).is(':checked')) {
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).attr('checked', 'checked');
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).attr('readonly', 'readonly');
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).attr('disabled', 'disabled');
+            $(_this).attr('checked', 'checked');
+
+        } else {
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').removeAttr('checked');
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').removeAttr('readonly');
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').removeAttr('disabled');
+
+        }
+    }
 }
 function renderizar_resultados_ac(source) {
 
@@ -240,6 +300,7 @@ function set_sent_to(replica) {
     return JSON.stringify(_data);
 }
 function renderizar_html_seleccionado(persona, _id_deleted) {
+    _id_deleted = false;
     let _html = ``;
     _html += `<div class="desti-seleccionado">`;
     _html += `<span class="desti-cuerpo">`;
@@ -248,7 +309,7 @@ function renderizar_html_seleccionado(persona, _id_deleted) {
     _html += `<span>${iniciales_usuario(persona.PerApellidos, persona.PerNombres)}</span>`;
     _html += `</div ></div >`;
     _html += `<div style="display:block;ine-height: 0px"><span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
-    _html += `<small>${persona.CurDescripcion}</small></div>`;
+    _html += `${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small>${persona.CurDescripcion}</small>`}</div>`;
     if (_id_deleted)
         _html += `<button style="margin-top:1px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
     _html += `</span>`;
@@ -772,12 +833,52 @@ async function abrir_Destinatarios() {
     //if ($('#DivResultados').css('display') == 'block') $('#DivResultados').css('display', 'none');
     //else
     //    if ($('#DivResultados').find('.ul-profesores').find('li').length == 0)
-    await buscar_personas();
+    if (_data_source_ac.length == 0)
+        await buscar_personas();
     //    else $('#DivResultados').css('display', 'block');
 
 
 }
 function cerrar_modal_destinatario() {
+
+    destinatarios = [];
+    $('#divDestinatarios').empty();
+    //se obtiene los checked selecionados
+    if ($('#check_-40').is(':checked')) {
+        const persona = _data_source_ac.find(c => c.tipo == -40);
+        destinatarios.push(persona);
+        $('#divDestinatarios').append(renderizar_html_seleccionado(persona, true));
+    } else {
+
+        if ($('#check_-30').is(':checked')) {
+            let _plantaEducativa = {
+                PerId: 0,
+                tipo: -30,
+                GrEnColorRGB: '#43AC34',
+                GrEnColorBurbuja: '#43AC34',
+                GrEnColorObs: 'Planta educativa',
+                PerNombres: 'Planta educativa',
+                PerApellidos: ''
+            };
+            destinatarios.push(_plantaEducativa);
+            $('#divDestinatarios').append(renderizar_html_seleccionado(_plantaEducativa, true));
+        }
+
+        /*grupos*/
+        $('#EnvioGrupos').find('input').each(function () {
+            if ($(this).is(':checked')) {
+                let _id = $(this).closest('div.mt-1').attr('id_destinatario');
+                const _info = _data_source_ac.find(c => c.PerId == _id && c.tipo == -20);
+                destinatarios.push(_info);
+                $('#divDestinatarios').append(renderizar_html_seleccionado(_info, true));
+            }
+        });
+
+
+    }
+
+
+
     $('#modalDestinatario').removeClass('d-block').addClass('d-none');
 }
 

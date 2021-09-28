@@ -838,6 +838,9 @@ a {
     margin-left: auto;
     border-radius: 6px;
     margin-right: auto;
+    z-index: 999;
+    
+    
 }
 
 .modal-destinatario-header {
