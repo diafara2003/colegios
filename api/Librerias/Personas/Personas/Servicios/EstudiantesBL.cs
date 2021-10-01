@@ -35,7 +35,7 @@ namespace Persona.Servicios
                            id = g.GrId,
                            nombre = g.GrNombre
                        }
-                   }).ToList();
+                   }).OrderBy(c=>c.grupo.id).OrderBy(c=> c.id).ToList();
 
             return obj;
 
@@ -191,16 +191,22 @@ namespace Persona.Servicios
 
                         objCnn.SaveChanges();
 
+                       
+
                     }
 
                     else {
                         c.PerUsuario = c.PerEmail;
                         c.PerDocumento = c.PerEmail;
+                        
 
                         objCnn.UpdateEntity<Personas>(c);
                     }
 
                 });
+
+
+                modelo.estudiante.Acudiente1 = modelo.acudientes[0].PerId;
 
                 if (modelo.acudientes.Count() == 2)
                     modelo.estudiante.Acudiente2 = modelo.acudientes[1].PerId;

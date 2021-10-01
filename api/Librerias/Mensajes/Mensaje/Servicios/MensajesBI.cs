@@ -183,22 +183,7 @@ namespace Mensaje.Servicios
                         return objResultado;
                     }
                 }
-                else
-                {
-
-                    //se obtiene la clase de acuerdo al tipo de usuario
-                    var tipo = objCnn.personas.Find(request.mensaje.MenUsuario);
-
-
-                    if (tipo.PerTipoPerfil == 1)
-                    {
-                        //docente
-                    }
-                    else
-                    {
-                        //estudiante
-                    }
-                }
+               
 
 
                 int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;

@@ -2,6 +2,7 @@ const _tipo_mensaje = { borradores: -2, eliminados: -1, bandeja: 0, Enviados: 1,
 let _tipoSelected = "Enviados";
 let readonly = false;
 let _mensaje_context = {},
+    acudiente = [],
     data_mensajes = [],
     id_bandeja = -1,
     _is_recibido = 0,
@@ -62,7 +63,7 @@ async function buscar_personas() {
 
 
     if (_sesion.tipo == 0) {
-        $('#RegistroPrincipal').append(renderizar_modal_destinatarios(data.find(c => c.tipo == -40), false));
+        $('#RegistroPrincipal').append(renderizar_modal_destinatarios(data.find(c => c.tipo == -40), false, 'colegio'));
 
 
         $('#RegistroPrincipal').append(renderizar_modal_destinatarios({
@@ -72,28 +73,32 @@ async function buscar_personas() {
             GrEnColorObs: 'Planta educativa',
             PerNombres: 'Planta educativa',
             PerApellidos: ''
-        }, true));
+        }, true, 'planta'));
     }
     if (_sesion.tipo == 3)
-        data.forEach(c => $('#EnvioGrupos').append(renderizar_modal_destinatarios(c, false)));
+        data.forEach((c, index) => $('#EnvioGrupos').append(renderizar_modal_destinatarios(c, false, 'grupo', index)));
     else
-        data.filter(c => c.tipo == -20).forEach(x => $('#EnvioGrupos').append(renderizar_modal_destinatarios(x, true)));
+        data.filter(c => c.tipo == -20).forEach(x => $('#EnvioGrupos').append(renderizar_modal_destinatarios(x, true, 'grupo_detalle')));
 
 
     $('#cargando').css('display', 'none');
 
 }
-function renderizar_modal_destinatarios(item, showIcon) {
+function renderizar_modal_destinatarios(item, showIcon, tipo, index) {
     if (item.PerApellidos == null) item.PerApellidos = "";
 
     return `
-            <div class="mt-1" id_destinatario="${item.PerId}">
+            <div class="mt-1 grupo-class" id_destinatario="${item.PerId}">
                <div class="d-flex align-items-center hover-item p-1" >
-                     <div><input type="checkbox" value="" onclick="checked_destinatarios(this,${item.tipo},${item.PerId})" id="check_${item.tipo}"></div>
+                     <div><input tipo="${tipo}" ${tipo}="${(_sesion.tipo == 3 ? index : item.PerId)}"  type="checkbox" value="" onclick="checked_destinatarios(this,${item.tipo},${item.PerId})" id="check_${item.tipo}"></div>
                      <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
-                     <div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>
+                    ${(_sesion.tipo != 3 ? `<div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>` :
+            `<div>
+                        <div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>
+                        <div class="pl-2 text-muted" style="color:${item.GrEnColorRGB}">${item.CurDescripcion}</div>
+                    <div>`)}
                     ${(showIcon ? `
-                        <div class="pl-2" onclick="ver_detalles(${item.PerId},${item.tipo})">
+                        <div class="pl-2" onclick="ver_detalles(this,${item.PerId},${item.tipo})">
                             <i class='bx bx-down-arrow-alt'></i>
                         </div>
                     ` : ``)}
@@ -101,11 +106,14 @@ function renderizar_modal_destinatarios(item, showIcon) {
             <div style="display:none" id="destinatario_detalle_${item.PerId}" class="detalle-grupos pl-4"></div>
              </div>`;
 }
-async function ver_detalles(id, tipo) {
+async function ver_detalles(_this, id, tipo) {
     $(`#destinatario_detalle_${id}`).empty();
 
     $(`#destinatario_detalle_${id}`).toggle();
 
+
+    if ($(_this).find('i.bx-down-arrow-alt').length > 0) $(_this).find('i.bx-down-arrow-alt').addClass('bx-up-arrow-alt').removeClass('bx-down-arrow-alt');
+    else $(_this).find('i.bx-up-arrow-alt').addClass('bx-down-arrow-alt').removeClass('bx-up-arrow-alt')
 
     if ($(`#destinatario_detalle_${id}`).css('display') == 'block') {
 
@@ -127,7 +135,7 @@ async function ver_detalles(id, tipo) {
 
             let _parend_checked = false;
 
-            if ($('#check_-20').is(':checked') || $('#check_-40').is(':checked'))
+            if ($(_this).closest('.align-items-center').find('input[type="checkbox"]').first().is(':checked') || $('#check_-40').is(':checked'))
                 _parend_checked = true;
 
             _info_grupos.forEach(c => {
@@ -142,9 +150,13 @@ async function ver_detalles(id, tipo) {
 
 }
 function renderizar_detalle(item, _readonly_grupos) {
+
+    if (acudiente.find(c => c.PerId == item.PerIdA1) == null) acudiente.push();
+
+
     return `
             <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
-                <div><input type="checkbox" ${(_readonly_grupos ? ' checked="checked" readonly="readonly" disabled="disabled" ' : '')} id="checkDetail_${item.PerId}" /></div>
+                <div><input onclick="status_check_planta(this)" tipo="profesores" profesores="${item.PerId}" type="checkbox" ${(_readonly_grupos ? ' checked="checked" ' : '')} id="checkDetail_${item.PerId}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
                 <div class="d-block pl-2">
                     <div class="">${item.PerNombres} ${item.PerApellidos}</div>
@@ -152,14 +164,48 @@ function renderizar_detalle(item, _readonly_grupos) {
                 </div>
             </div>`;
 }
+function status_check_planta(_this) {
+
+    let all_checked = true;
+
+
+    $(_this).closest('.detalle-grupos').find('input[type="checkbox"]').each(function () {
+        if (!$(this).is(':checked')) all_checked = false;
+    });
+
+    if (all_checked) $('[id_destinatario="0"]').find('.align-items-center').find('input[type="checkbox"]').first().prop('checked', true);
+    else $('[id_destinatario="0"]').find('.align-items-center').find('input[type="checkbox"]').first().prop('checked', false);
+
+}
+function status_check(_this) {
+
+    //se verifica que todo este checkeado
+    let all_checked = true;
+
+
+    $(_this).closest('.detalle-grupos').find('input[type="checkbox"]').each(function () {
+        if (!$(this).is(':checked')) all_checked = false;
+    });
+
+    if (all_checked) $(_this).closest('.grupo-class').find('.align-items-center').find('input[type="checkbox"]').first().prop('checked', true);
+    else $(_this).closest('.grupo-class').find('.align-items-center').find('input[type="checkbox"]').first().prop('checked', false);
+
+}
 function renderizar_info_grupo(item, _readonly_grupos) {
     let _html = '';
 
-
+    const acudiiente1 = {
+        GrEnColorBurbuja: item.color,
+        PerNombres: item.PerNombresA1,
+        PerApellidos: item.PerApellidosA1,
+        CurDescripcion: `${item.EstNombres} ${item.EstApellidos}`,
+        PerId: item.PerIdA1
+    };
+    if (acudiente.find(c => c.PerId == item.PerIdA1) == null) acudiente.push(acudiiente1);
 
     _html = `
             <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
-                <div><input type="checkbox" value="" ${(_readonly_grupos ? ' checked="checked" readonly="readonly" disabled="disabled" ' : '')} id="checkDetail_${item.PerIdA1}" /></div>
+                <div><input onclick="status_check(this)"  tipo="acudiente" acudiente="${item.PerIdA1}" type="checkbox" value="" ${(_readonly_grupos ? ' checked="checked" ' : '')} id="checkDetail_${item.PerIdA1}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.color};background:${item.color}">${iniciales_usuario(item.PerNombresA1, item.PerApellidosA1)}</div>
                 <div class="d-block pl-2">
                     <div class="">
@@ -170,10 +216,21 @@ function renderizar_info_grupo(item, _readonly_grupos) {
                 </div>
             </div>`;
 
-    if (item.PerIdA2 > 0)
+    if (item.PerIdA2 > 0) {
+
+        const acudiiente2 = {
+            GrEnColorBurbuja: item.color,
+            PerNombres: item.PerNombresA2,
+            PerApellidos: item.PerApellidosA2,
+            CurDescripcion: `${item.EstNombres} ${item.EstApellidos}`,
+            PerId: item.PerIdA2
+        };
+
+        if (acudiente.find(c => c.PerId == item.PerIdA2) == null) acudiente.push(acudiiente2);
+
         _html += `
           <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
-                <div><input type="checkbox" value="" ${(_readonly_grupos ? ' checked="checked" readonly="readonly" disabled="disabled" ' : '')} id="checkDetail_${item.PerIdA1}" id="checkDetail_${item.PerIdA1}" /></div>
+                <div><input onclick="status_check(this)" tipo="acudiente" acudiente="${item.PerIdA2}" type="checkbox" value="" ${(_readonly_grupos ? ' checked="checked"  ' : '')} id="checkDetail_${item.PerIdA1}" id="checkDetail_${item.PerIdA1}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.color};background:${item.color}">${iniciales_usuario(item.PerNombresA2, item.PerApellidosA2)}</div>
                 <div class="d-block pl-2">
                     <div class="">
@@ -183,54 +240,36 @@ function renderizar_info_grupo(item, _readonly_grupos) {
                     <div class="text-muted">${item.EstNombres} ${item.EstApellidos}</div>
                 </div>
             </div>`;
-
+    }
     return _html;
 }
 
 function checked_destinatarios(_this, _type, id) {
     if (_type == -40) {
-        if ($(_this).is(':checked')) {
-            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').not(_this).attr('checked', 'checked');
-            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').not(_this).attr('readonly', 'readonly');
-            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').not(_this).attr('disabled', 'disabled');
-            $(_this).attr('checked', 'checked');
+        if ($(_this).is(':checked')) $('#EnvioGrupos, [id_destinatario="0"]').addClass('d-none');
+        else $('#EnvioGrupos, [id_destinatario="0"]').removeClass('d-none');
 
-        } else {
-            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').prop('checked', false);
-            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').removeAttr('readonly');
-            $('#RegistroPrincipal, #EnvioGrupos').find('input[type="checkbox"]').removeAttr('disabled');
-
-        }
+        $('#EnvioGrupos, [id_destinatario="0"]').find('input[type="checkbox"]').prop('checked', false);
 
     } else if (_type == -30) {
 
         if ($(_this).is(':checked')) {
-            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).attr('checked', 'checked');
-            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).attr('readonly', 'readonly');
-            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).attr('disabled', 'disabled');
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').not(_this).prop('checked', true);
+
             $(_this).attr('checked', 'checked');
 
-        } else {
-            $('#destinatario_detalle_0').find('input[type="checkbox"]').removeAttr('checked');
-            $('#destinatario_detalle_0').find('input[type="checkbox"]').removeAttr('readonly');
-            $('#destinatario_detalle_0').find('input[type="checkbox"]').removeAttr('disabled');
-
-        }
+        } else
+            $('#destinatario_detalle_0').find('input[type="checkbox"]').prop('checked', false);
     }
     else if (_type == -20) {
 
         if ($(_this).is(':checked')) {
-            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).attr('checked', 'checked');
-            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).attr('readonly', 'readonly');
-            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).attr('disabled', 'disabled');
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').not(_this).prop('checked', true);
+
             $(_this).attr('checked', 'checked');
 
-        } else {
-            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').removeAttr('checked');
-            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').removeAttr('readonly');
-            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').removeAttr('disabled');
-
-        }
+        } else
+            $(_this).closest('div.mt-1').find('.detalle-grupos').find('input[type="checkbox"]').prop('checked', false);
     }
 }
 function renderizar_resultados_ac(source) {
@@ -299,21 +338,26 @@ function set_sent_to(replica) {
 
     return JSON.stringify(_data);
 }
-function renderizar_html_seleccionado(persona, _id_deleted) {
+function renderizar_html_seleccionado(persona, _id_deleted, color) {
+
+    if (color == undefined || color == null) color = "";
+
     _id_deleted = false;
     let _html = ``;
-    _html += `<div class="desti-seleccionado">`;
-    _html += `<span class="desti-cuerpo">`;
-    _html += `<div class="imageArea">`;
-    _html += `<div class="desti-nombre" style="background-color:${persona.GrEnColorBurbuja}" aria-hidden="true">`;
-    _html += `<span>${iniciales_usuario(persona.PerApellidos, persona.PerNombres)}</span>`;
-    _html += `</div ></div >`;
-    _html += `<div style="display:block;ine-height: 0px"><span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>`;
-    _html += `${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small>${persona.CurDescripcion}</small>`}</div>`;
-    if (_id_deleted)
-        _html += `<button style="margin-top:1px" type="button" onclick="eliminar_persona_selected(this,${persona.PerId})" class="btn-icono"><i class="fas fa-times"></i></button>`;
-    _html += `</span>`;
-    _html += `</div>`;
+    _html += `<div class="desti-seleccionado" ${color == "" ? "" : `style ="background-color:rgb(186 231 187) !important"`}>
+                <span class="desti-cuerpo">
+                    <div class="imageArea">
+                        <div class="desti-nombre" style="background-color:${persona.GrEnColorBurbuja}">
+                            <span>${iniciales_usuario(persona.PerApellidos, persona.PerNombres)}</span>
+                        </div>
+                    </div>
+                    <div style="display:block">
+                        <span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>
+                        ${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small>${persona.CurDescripcion}</small>`}
+                    </div>                    
+                </span>
+            </div>`;
+
 
     return _html;
 }
@@ -424,7 +468,7 @@ function renderizar_mensajes_bandeja(_data) {
     document.getElementsByClassName("xY-aux")[0].style.borderTop = "1px solid #ebebeb";
 
 }
-function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
+async function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 
     document.getElementById('mostrarMensaje').innerHTML = '';
     id_bandeja = _idBandeja;
@@ -440,28 +484,49 @@ function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 
     $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
 
-    consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET', response => {
-        $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
+    const response = await consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET');
 
 
+    $(_this).closest('tr').addClass('mensaje-leido').removeClass('sin-leer');
 
-        _mensaje_context = response._mensaje;
 
-        let _html = '';
+    let _html_sent_to = '';
+    _mensaje_context = response._mensaje;
 
-        _html += renderizar_mensaje(response._mensaje);
+    let _html = '';
 
-        if (response.replicas != null) _html += renderizar_replicas(response.replicas);
+    if (response.replicas == null && _idBandeja == 0) {
 
-        document.getElementById('mostrarMensaje').innerHTML = _html;
+        let _sent_to = JSON.parse(response._mensaje.MenSendTo);
 
-        mostrar_mensaje();
-        window.parent.cargar_mensajes_no_leidos(function (params) {
-            document.getElementById('countNoLeidos').textContent = params;
+        _sent_to.forEach(x => {
+
+            _html_sent_to += renderizar_html_seleccionado({
+                GrEnColorBurbuja: x.BG,
+                PerApellidos: x.apellido,
+                PerNombres: x.nombre,
+                PerId: x.id,
+                CurDescripcion: x.ocupacion,
+                tipo: x.tipo
+            }, false, 'rgb(186 231 187)');
+
         });
+    }
+
+    _html += renderizar_mensaje(response._mensaje, _html_sent_to);
+
+    if (response.replicas != null) _html += renderizar_replicas(response.replicas);
 
 
+
+    document.getElementById('mostrarMensaje').innerHTML = _html;
+
+    mostrar_mensaje();
+    window.parent.cargar_mensajes_no_leidos(function (params) {
+        document.getElementById('countNoLeidos').textContent = params;
     });
+
+
 }
 function nuevo_mensaje() {
     destinatarios = [];
@@ -484,37 +549,64 @@ function renderizar_replicas(mensaje) {
     }
     return html;
 }
-function renderizar_mensaje(_mensaje) {
+function renderizar_mensaje(_mensaje, sent_to) {
+
+    if (sent_to == undefined || sent_to == null) sent_to = '';
 
     if (_mensaje.usuario.PerApellidos == null) _mensaje.usuario.PerApellidos = "";
 
+
     return `
             <div class="messages-view ${(_mensaje.MenUsuario == _sesion.idusuario ? 'owner' : '')}">
-            <div class="messages-header">
-                <h2 class="title-vm">${_mensaje.MenAsunto} </h2>
-            </div>
-            <div class="messages-sent d-flex">
-                <div class="d-flex" style="width: 200px;">
-                    <div class="xYc">
-                        <div class="photo-user">
-                            <div>${iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div>
+                <div>
+                     ${(sent_to == '' ? '' : `
+                        <div class="mensaje-sent-to mb-2 pb-2">
+                            <div>
+                                <h6>Para:</h6>
+                            </div>
+                          ${sent_to}
                         </div>
-                    </div>
-                    <div class="yXc xYc d-flex align-items-center">
-                        <div class="w-100">
-                            <div class="name-from">
-                                <span class="bA4"><span>${_mensaje.usuario.PerApellidos} ${_mensaje.usuario.PerNombres}</span></span>
+
+                    `)}
+                </div>
+
+                <div class="messages-header">
+                    ${(sent_to == '' ? `${_mensaje.MenAsunto}` : `
+
+                    <div>
+                        <div>
+                            <h6>Asunto:</h6>
+                        </div>
+                        <div> <h2 class="title-vm">${_mensaje.MenAsunto} </h2></div>
+                    </div>`)}
+                   
+                </div>
+                <div class="messages-sent d-flex">
+                   
+                      ${(sent_to == '' ? `
+                      <div class="d-flex" style="width: 200px;">
+                        <div class="xYc">
+                            <div class="photo-user">
+                                <div>${iniciales_usuario(_mensaje.usuario.PerNombres, _mensaje.usuario.PerApellidos)}</div>
                             </div>
                         </div>
-                    </div>
+                        <div class="yXc xYc d-flex align-items-center">
+                            <div class="w-100">
+                                <div class="name-from">
+                                    <span class="bA4"><span>${_mensaje.usuario.PerApellidos} ${_mensaje.usuario.PerNombres}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="date-view">${moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
+                        </div>
+                      </div>`: '')}
+                   
+                  
                 </div>
-                <div class="d-flex align-items-center">
-                    <span class="date-view">${moment(_mensaje.MenFecha).format("DD/MM/YYYY HH:mm A")}</span>
-                </div>
-            </div>
-            <div class="messages-body">${_mensaje.MenMensaje}</div>
-            <div class="mt-2">${renderizar_html_adjuntos(_mensaje.adjuntos, false)}</div>
-        </div>`;
+                <div class="messages-body">${_mensaje.MenMensaje}</div>
+                <div class="mt-2">${renderizar_html_adjuntos(_mensaje.adjuntos, false)}</div>
+            </div>`;
 
 }
 function actualizar_bandeja_count() {
@@ -537,7 +629,8 @@ function armar_objeto_mensaje(isReplica) {
 function enviar_mensaje(isReplica) {
 
     let data = armar_objeto_mensaje(isReplica);
-    if (validar_datos(data)) {
+
+    if (validar_datos(data, isReplica)) {
         consultarAPI('Mensajes', 'POST', (response) => {
 
         }, data, (error) => {
@@ -727,7 +820,7 @@ function convertir_fecha(fecha) {
 
     return _m_date;
 }
-function validar_datos(_data) {
+function validar_datos(_data, isReplica) {
     let _result = true;
 
     if (_data.mensaje.MenAsunto == '') {
@@ -737,6 +830,12 @@ function validar_datos(_data) {
     }
     if (_data.mensaje.MenMensaje == '') {
         mostrar_mensaje_validacion_error('No hay mensaje.');
+        result = false;
+        return;
+    }
+
+    if (destinatarios.length == 0 && !isReplica) {
+        mostrar_mensaje_validacion_error('Los destinatarios son obligatorios.');
         result = false;
         return;
     }
@@ -840,17 +939,18 @@ async function abrir_Destinatarios() {
 
 }
 function cerrar_modal_destinatario() {
-
+    let planta_checked = false;
     destinatarios = [];
     $('#divDestinatarios').empty();
     //se obtiene los checked selecionados
-    if ($('#check_-40').is(':checked')) {
+    if ($('[tipo="colegio"]').is(':checked')) {
         const persona = _data_source_ac.find(c => c.tipo == -40);
         destinatarios.push(persona);
         $('#divDestinatarios').append(renderizar_html_seleccionado(persona, true));
     } else {
 
-        if ($('#check_-30').is(':checked')) {
+        if ($('[tipo="planta"]').is(':checked')) {
+            planta_checked = true;
             let _plantaEducativa = {
                 PerId: 0,
                 tipo: -30,
@@ -862,10 +962,33 @@ function cerrar_modal_destinatario() {
             };
             destinatarios.push(_plantaEducativa);
             $('#divDestinatarios').append(renderizar_html_seleccionado(_plantaEducativa, true));
+        } else {
+            $('[tipo="profesores"]').each(function () {
+                if ($(this).is(':checked')) {
+                    let _id = $(this).attr('profesores');
+
+                    const _info = _data_source_ac.find(c => c.PerId == _id);
+                    _info.tipo = 35;
+                    destinatarios.push(_info);
+                    $('#divDestinatarios').append(renderizar_html_seleccionado(_info, true));
+
+                }
+            });
         }
 
-        /*grupos*/
-        $('#EnvioGrupos').find('input').each(function () {
+        /*PLANTA EDUCATIVA
+         else if ($(this).attr('tipo') == "profesores" && !planta_checked) {
+                    let _id = $(this).attr('profesores');
+                    const _info = _data_source_ac.find(c => c.PerId == _id);
+                    _info.tipo = 35;
+                    destinatarios.push(_info);
+                    $('#divDestinatarios').append(renderizar_html_seleccionado(_info, true));
+                    _planta_cheked = true;
+                }
+         * */
+
+        /*encabezado grupos*/
+        $('[tipo="grupo_detalle"]').each(function () {
             if ($(this).is(':checked')) {
                 let _id = $(this).closest('div.mt-1').attr('id_destinatario');
                 const _info = _data_source_ac.find(c => c.PerId == _id && c.tipo == -20);
@@ -875,8 +998,38 @@ function cerrar_modal_destinatario() {
         });
 
 
+        /*detalles grupos*/
+        $('[tipo="acudiente"]').each(function () {
+            if ($(this).is(':checked')) {
+
+                let _parent = $(this).closest('.grupo-class').find('[tipo="grupo_detalle"]').is(':checked');
+                if ($(this).attr('tipo') == "acudiente" && !_parent) {
+                    let _acudiente = acudiente.find(c => c.PerId == $(this).attr('acudiente'));
+                    _acudiente.tipo = -25;
+                    destinatarios.push(_acudiente);
+                    $('#divDestinatarios').append(renderizar_html_seleccionado(_acudiente, true));
+                }
+
+            }
+        });
+
+
     }
 
+
+    //acudiente
+    if (_sesion.tipo == 3) {
+        $('[tipo="grupo"]').each(function () {
+            if ($(this).is(':checked')) {
+
+                let _acudiente = _data_source_ac[$(this).attr('grupo')];
+                _acudiente.tipo = -30;
+                destinatarios.push(_acudiente);
+                $('#divDestinatarios').append(renderizar_html_seleccionado(_acudiente, true));
+
+            }
+        });
+    }
 
 
     $('#modalDestinatario').removeClass('d-block').addClass('d-none');

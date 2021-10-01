@@ -198,6 +198,8 @@ async function agregar_estudiante() {
             return;
         }
 
+        $('#Btnguardar').text('Guardar');
+
         if (objEstudiante.estudiante.EstId == 0) alertify.success('Estudiante creado correctamente');
         else alertify.success('Estudiante modificado correctamente');
 
@@ -272,7 +274,7 @@ document.getElementById("EstFechaNacimineto").setAttribute("max", today);
     const _id = Get_query_string('id')
     if (_id != undefined) {
         consultar_estudiante(_id);
-        $('#Btnguardar').text('Editar estudiante')
+        $('#Btnguardar').text('Guardar')
     } else $('#Btnguardar').text('Crear estudiante');
 
 

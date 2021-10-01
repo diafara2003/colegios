@@ -839,8 +839,6 @@ a {
     border-radius: 6px;
     margin-right: auto;
     z-index: 999;
-    
-    
 }
 
 .modal-destinatario-header {
@@ -904,3 +902,19 @@ a {
         cursor: pointer;
         border-radius: 5px;
     }
+
+.mensaje-sent-to {
+    display: block;
+}
+
+.texto-burbuja {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 139px;
+}
+
+
+.messages-header {
+    padding-bottom: 10px;
+}
