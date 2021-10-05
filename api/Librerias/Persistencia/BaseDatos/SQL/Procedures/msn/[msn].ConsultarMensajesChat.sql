@@ -29,7 +29,8 @@ BEGIN
 			MenEmpId,MenFecha,MenMensaje,MenOkRecibido,MenSendTo,
 			
 			MenTipoMsn,MenCategoriaId,MenEstado,MenFechaMaxima,
-			PerNombres,PerApellidos,PerDocumento,PerEmail,
+			PerNombres,isnull(PerApellidos,'') PerApellidos,PerDocumento, 
+            isnull(PerEmail,'')PerEmail,
             0 BanEstudianteId,
             @bandeja BanId,
 
@@ -47,18 +48,22 @@ BEGIN
    
     declare @EstNombres varchar(200),@EstApellidos varchar(200),@EstId int
  
-    SELECT  @EstNombres=E.EstNombres,@EstApellidos=e.EstApellidos,
-            @EstId=EstId
+    SELECT  @EstNombres=isnull(E.EstNombres,''),
+            @EstApellidos=isnull(e.EstApellidos,''),
+            @EstId=isnull(EstId,0)
     FROM    MSN.Bandejaentrada 
             INNER JOIN Gargen.EstudianteJardin E ON EstId=BanEstudianteId
     WHERE   BanId=@bandeja and isnull(BanEstudianteId,0)>0
 
     
-    UPDATE  #TblMensaje
-    SET     BanEstudianteId=@EstId,
-            EstNombres=@EstNombres,
-            EstApellidos=@EstApellidos
-    FROM    #TblMensaje            
+    if(@EstId IS NOT NULL) begin
+        UPDATE  #TblMensaje
+        SET     BanEstudianteId=@EstId,
+                EstNombres=@EstNombres,
+                EstApellidos=@EstApellidos
+        FROM    #TblMensaje            
+    end
+    
     
 
     SELECT  *

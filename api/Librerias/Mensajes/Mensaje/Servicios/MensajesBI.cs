@@ -21,7 +21,7 @@ namespace Mensaje.Servicios
 
             ProcedureDTO.commandText = "msn.ConsultarMensajesChat";
             ProcedureDTO.parametros.Add("id", id);
-            ProcedureDTO.parametros.Add("bandeja", id);
+            ProcedureDTO.parametros.Add("bandeja", bandeja);
 
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
 

@@ -199,7 +199,8 @@ function renderizar_info_grupo(item, _readonly_grupos) {
         PerNombres: item.PerNombresA1,
         PerApellidos: item.PerApellidosA1,
         CurDescripcion: `${item.EstNombres} ${item.EstApellidos}`,
-        PerId: item.PerIdA1
+        PerId: item.PerIdA1,
+        idEst: item.EstId
     };
     if (acudiente.find(c => c.PerId == item.PerIdA1) == null) acudiente.push(acudiiente1);
 
@@ -223,7 +224,8 @@ function renderizar_info_grupo(item, _readonly_grupos) {
             PerNombres: item.PerNombresA2,
             PerApellidos: item.PerApellidosA2,
             CurDescripcion: `${item.EstNombres} ${item.EstApellidos}`,
-            PerId: item.PerIdA2
+            PerId: item.PerIdA2,
+            idEst: item.EstId
         };
 
         if (acudiente.find(c => c.PerId == item.PerIdA2) == null) acudiente.push(acudiiente2);
@@ -532,6 +534,9 @@ function nuevo_mensaje() {
     destinatarios = [];
     $('#Bandejamensajes, #mensaje').addClass('d-none');
     $('#nuevo-mensaje').removeClass('d-none');
+
+    $('#txtBloquearRespuesta').prop('checked', false);
+    $('.btn-bloquear-respuesta').removeClass('d-none');
 }
 function mostrar_mensaje() {
     $('#mensaje').removeClass('d-none');
@@ -554,6 +559,9 @@ function renderizar_mensaje(_mensaje, sent_to) {
     if (sent_to == undefined || sent_to == null) sent_to = '';
 
     if (_mensaje.usuario.PerApellidos == null) _mensaje.usuario.PerApellidos = "";
+
+    if (_mensaje.MenBloquearRespuesta == 1) $('.btn-responder').addClass('d-none').removeClass('d-block');
+    else $('.btn-responder').removeClass('d-none').addClass('d-block');
 
 
     return `
@@ -670,7 +678,7 @@ function obtener_destinatarios(isReplica) {
         if (_sesion.tipo == 1)
             return [{ id: _mensaje_context.Estudiante, tipo: '-28', estudiante: _mensaje_context.Estudiante }];
         else return [{ id: _mensaje_context.MenUsuario, tipo: '-35', estudiante: 0 }];
-    }else {
+    } else {
 
         return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo, estudiante: (_item.idEst == undefined || _item.idEst == null) ? 0 : _item.idEst } });
     }
@@ -687,7 +695,7 @@ function obtener_datos(replica) {
         MenReplicaIdMsn: 0,
         MenOkRecibido: 0,
         MenSendTo: '',
-        MenBloquearRespuesta: 0,
+        MenBloquearRespuesta: $('#txtBloquearRespuesta').is(':checked'),
         MenCategoriaId: 0,
         MenEstado: 0,
         MenFechaMaxima: null
@@ -1060,6 +1068,9 @@ function cerrar_modal_destinatario() {
     _sesion = obtener_session();
     $('[data-toggle="tooltip"]').tooltip()
     actualizar_bandeja_count();
+
+    if (_sesion.tipo != 0)
+        $('.btn-bloquear-respuesta').remove();
 
     if (_sesion.tipo != 0) $('.fa-chevron-down').remove();
 
