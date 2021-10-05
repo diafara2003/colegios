@@ -16,7 +16,7 @@
 
             Sql(MSN.msn_BandejaClases);
             Sql(MSN.msn_CategoriasMensajesRecibido);
-            Sql(MSN._msn__ConsultarMensajes);
+            Sql(MSN._msn__ConsultarMensajesChat);
             Sql(MSN._msn___AcEnvioCorreoPersonas_);
             Sql(MSN._msn___ConsultarMensaje_);
             Sql(MSN._msn___CrearMensaje_Bandeja_Entrada_);

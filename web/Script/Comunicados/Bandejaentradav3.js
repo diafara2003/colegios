@@ -394,7 +394,7 @@ async function cargar_bandeja(tipo, _element) {
     }
     _tipoSelected = _tipo_mensaje[tipo]
 
-
+    window.parent.cargar_mensajes_no_leidos();
     const response = await consultarAPI(`BandejaEntrada/mensajes/usuario?usuario=${_user_id}&tipo=${_tipo_mensaje[tipo]}`, 'GET', undefined);
 
     data_mensajes = response;
@@ -428,15 +428,18 @@ function renderizar_mensajes_bandeja(_data) {
                 <div class="xY-aux">
                     <div class="xYc">
                         <div class="photo-user" >
-                            <div>JU</div>
+                            <div>${iniciales_usuario(_mensaje.PerApellidos, _mensaje.PerNombres)}</div>
                         </div>
                     </div>
                     <div class="yXc xYc">
                         <div class="w-100">
                             <div class="name-from">
-                                <span class="bA4"><span>${_mensaje.PerApellidos} ${_mensaje.PerNombres}</span></span>
+                                <div class="bA4">
+                                    <span>${_mensaje.PerApellidos} ${_mensaje.PerNombres}</span>
+                                    <span class="text-muted">${_mensaje.tipoAcudiente == '' ? '' : `(${_mensaje.tipoAcudiente})`}</span>
+                                </div>                                
                             </div>
-
+                            <div class="text-muted font-weight-bold" style="line-height:12px;padding-left:10px">${_mensaje.EstNombres} ${_mensaje.EstApellidos}</div>
                         </div>
                     </div>
                     <div class="xY affair">
@@ -491,13 +494,13 @@ async function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 
 
     let _html_sent_to = '';
-    _mensaje_context = response._mensaje;
+    _mensaje_context = response.find(c => c.MenId == _id);
 
     let _html = '';
 
-    if (response.replicas == null && _idBandeja == 0) {
+    if (response.length == 1 && _tipoSelected != 0) {
 
-        let _sent_to = JSON.parse(response._mensaje.MenSendTo);
+        let _sent_to = JSON.parse(response[0].MenSendTo);
 
         _sent_to.forEach(x => {
 
@@ -513,10 +516,7 @@ async function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
         });
     }
 
-    _html += renderizar_mensaje(response._mensaje, _html_sent_to);
-
-    if (response.replicas != null) _html += renderizar_replicas(response.replicas);
-
+    response.forEach(c => _html += renderizar_mensaje(c, _html_sent_to));
 
 
     document.getElementById('mostrarMensaje').innerHTML = _html;
@@ -593,8 +593,11 @@ function renderizar_mensaje(_mensaje, sent_to) {
                         <div class="yXc xYc d-flex align-items-center">
                             <div class="w-100">
                                 <div class="name-from">
-                                    <span class="bA4"><span>${_mensaje.usuario.PerApellidos} ${_mensaje.usuario.PerNombres}</span></span>
+                                    <div class="bA4">
+                                        <span>${_mensaje.usuario.PerApellidos} ${_mensaje.usuario.PerNombres}</span>
+                                    </div>
                                 </div>
+                                <div class="text-muted" style="line-height:12px;padding-left:10px">${_mensaje.EstNombres} ${_mensaje.EstApellidos}</div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
@@ -632,7 +635,8 @@ function enviar_mensaje(isReplica) {
 
     if (validar_datos(data, isReplica)) {
         consultarAPI('Mensajes', 'POST', (response) => {
-
+            destinatarios = [];
+            $('#modalDestinatario').find('input[type="checkbox"]').prop('checked', false);
         }, data, (error) => {
             alert('mal');
         });
@@ -662,10 +666,14 @@ function obtener_adjuntos_al_mensaje() {
     return _adjuntos_cargados.map(c => c.AjdId);
 }
 function obtener_destinatarios(isReplica) {
-    if (isReplica)
-        return [{ id: _mensaje_context.MenUsuario, tipo: _mensaje_context.MenTipoMsn }];
-    else
-        return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo } });
+    if (isReplica) {
+        if (_sesion.tipo == 1)
+            return [{ id: _mensaje_context.Estudiante, tipo: '-28', estudiante: _mensaje_context.Estudiante }];
+        else return [{ id: _mensaje_context.MenUsuario, tipo: '-35', estudiante: 0 }];
+    }else {
+
+        return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo, estudiante: (_item.idEst == undefined || _item.idEst == null) ? 0 : _item.idEst } });
+    }
 }
 function obtener_datos(replica) {
     var myobject = {
@@ -928,6 +936,7 @@ function eliminar_adjunto(_id, _this) {
 }
 async function abrir_Destinatarios() {
 
+
     $('#modalDestinatario').addClass('d-block').removeClass('d-none');
     //if ($('#DivResultados').css('display') == 'block') $('#DivResultados').css('display', 'none');
     //else
@@ -1004,7 +1013,8 @@ function cerrar_modal_destinatario() {
 
                 let _parent = $(this).closest('.grupo-class').find('[tipo="grupo_detalle"]').is(':checked');
                 if ($(this).attr('tipo') == "acudiente" && !_parent) {
-                    let _acudiente = acudiente.find(c => c.PerId == $(this).attr('acudiente'));
+                    let _acudiente = { ...acudiente.find(c => c.PerId == $(this).attr('acudiente')) };
+                    _acudiente.CurDescripcion = $(this).closest('.align-items-center').find('.text-muted').last().text();
                     _acudiente.tipo = -25;
                     destinatarios.push(_acudiente);
                     $('#divDestinatarios').append(renderizar_html_seleccionado(_acudiente, true));
@@ -1023,7 +1033,6 @@ function cerrar_modal_destinatario() {
             if ($(this).is(':checked')) {
 
                 let _acudiente = _data_source_ac[$(this).attr('grupo')];
-                _acudiente.tipo = -30;
                 destinatarios.push(_acudiente);
                 $('#divDestinatarios').append(renderizar_html_seleccionado(_acudiente, true));
 

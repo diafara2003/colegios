@@ -13,14 +13,15 @@ namespace Mensaje.Servicios
     public class MensajesBI
     {
 
-        public IEnumerable<Mensaje_Custom> GetChat(int id)
+        public IEnumerable<Mensaje_Custom> GetChat(int id,int bandeja)
         {
             List<Mensaje_Custom> obj = new List<Mensaje_Custom>();
             ColegioContext objCnn = new ColegioContext();
             BaseDatos.Modelos.ProcedureDTO ProcedureDTO = new BaseDatos.Modelos.ProcedureDTO();
 
-            ProcedureDTO.commandText = "msn.ConsultarMensajes";
+            ProcedureDTO.commandText = "msn.ConsultarMensajesChat";
             ProcedureDTO.parametros.Add("id", id);
+            ProcedureDTO.parametros.Add("bandeja", id);
 
             DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
 
@@ -39,14 +40,18 @@ namespace Mensaje.Servicios
                         MenOkRecibido = (byte)query["MenOkRecibido"],
                         MenSendTo = (string)query["MenSendTo"],
                         MenUsuario = (int)query["MenUsuario"],
+                        Estudiante = (int)query["BanEstudianteId"],
+                        bandeja = (int)query["BanId"],
                         usuario = new Personas()
-                        {
+                        {                            
                             PerApellidos = (string)query["PerApellidos"],
                             PerNombres = (string)query["PerNombres"],
                             PerDocumento = (string)query["PerDocumento"],
                             PerEmail = (string)query["PerEmail"],
                         },
-                        adjuntos = GetAdjuntos((int)query["MenId"])
+                        adjuntos = GetAdjuntos((int)query["MenId"]),
+                        EstApellidos = (string)query["EstApellidos"],
+                        EstNombres = (string)query["EstNombres"],
                     }); ;
 
 
@@ -56,46 +61,7 @@ namespace Mensaje.Servicios
 
         }
 
-        public VerMensajeDTO Get(int id)
-        {
-            VerMensajeDTO objResultado = new VerMensajeDTO();
-            ColegioContext objCnn = new ColegioContext();
-            Mensaje_Custom obj_response = new Mensaje_Custom();
-
-            objResultado._mensaje = (from mensaje in objCnn.mensajes
-                                     join _usuario in objCnn.personas on mensaje.MenUsuario equals _usuario.PerId
-                                     where mensaje.MenId == id
-                                     select new Mensaje_Custom
-                                     {
-                                         MenAsunto = mensaje.MenAsunto,
-                                         MenBloquearRespuesta = mensaje.MenBloquearRespuesta,
-                                         MenUsuario = mensaje.MenUsuario,
-                                         MenClase = mensaje.MenClase,
-                                         MenEmpId = mensaje.MenEmpId,
-                                         MenFecha = mensaje.MenFecha,
-                                         MenId = mensaje.MenId,
-                                         MenMensaje = mensaje.MenMensaje,
-                                         MenOkRecibido = mensaje.MenOkRecibido,
-                                         MenReplicaIdMsn = mensaje.MenReplicaIdMsn,
-                                         MenSendTo = mensaje.MenSendTo,
-                                         MenTipoMsn = mensaje.MenTipoMsn,
-                                         usuario = _usuario,
-                                         MenCategoriaId = mensaje.MenCategoriaId,
-                                         MenEstado = mensaje.MenEstado,
-                                         MenFechaMaxima = mensaje.MenFechaMaxima
-                                     }).FirstOrDefault();
-
-            objResultado._mensaje.adjuntos = GetAdjuntos(id);
-
-
-            if (objResultado._mensaje.MenReplicaIdMsn > 0)
-            {
-                objResultado.replicas = Get(objResultado._mensaje.MenReplicaIdMsn);
-            }
-
-            return objResultado;
-        }
-
+     
         public IEnumerable<Adjuntos> GetAdjuntos(int msn)
         {
             ColegioContext objCnn = new ColegioContext();
@@ -233,14 +199,14 @@ namespace Mensaje.Servicios
                 //por cada destinatario se inserta en la tabla bandeja de entrada
 
                 objResultado.codigo = 1;
-                objResultado.respuesta = "mensaje creado correctamente";
+                objResultado.respuesta = _xml_destinatarios;
 
                 //  EnviarNotificacionNuevoMensaje(request.destinatarios,request.mensaje.MenId);
             }
             catch (Exception e)
             {
                 objResultado.codigo = -1;
-                objResultado.respuesta = e.Message;
+                objResultado.respuesta = e.InnerException.Message;
             }
             return objResultado;
 
@@ -296,6 +262,8 @@ namespace Mensaje.Servicios
 
                         color = (string)data["color"],
 
+
+                        EstId = (int)data["EstId"],
                         EstNombres = (string)data["EstNombres"],
                         EstApellidos = data["EstApellidos"] is DBNull ? "" : (string)data["EstApellidos"],
 
@@ -331,6 +299,7 @@ namespace Mensaje.Servicios
                                    GrEnColorRGB = (string)data["GrEnColorRGB"],
                                    GrEnColorBurbuja = (string)data["GrEnColorBurbuja"],
                                    GrEnColorObs = (string)data["GrEnColorObs"],
+                                   idEst = (int)data["idEst"],
                                });
             return objlstResultado;
         }
@@ -358,3 +327,4 @@ namespace Mensaje.Servicios
         }
     }
 }
+

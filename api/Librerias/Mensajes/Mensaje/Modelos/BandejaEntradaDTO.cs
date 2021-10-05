@@ -22,5 +22,10 @@ namespace Mensaje.Modelos
         public int TieneAdjuntos { get; set; }
         public string CatDescripcion { get; set; }
 
+
+        public string EstNombres { get; set; }
+        public string EstApellidos { get; set; }
+        public string tipoAcudiente { get; set; }
+
     }
 }

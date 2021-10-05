@@ -36,10 +36,17 @@ namespace Colegio.Controllers
 
         [Route("Chat")]
         [HttpGet]
-        public IEnumerable<Mensaje_Custom> GetChat(int id)
+        public IEnumerable<Mensaje_Custom> GetChat(int id,int bandeja)
         {
-          
-            return new Mensaje.Servicios.MensajesBI().GetChat(id);
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
+            {
+                IdMensaje = id,
+                OkRecibido = 0,
+                IdBandeja = bandeja
+
+            }, identity);
+            return new Mensaje.Servicios.MensajesBI().GetChat(id, bandeja);
         }
 
         [Route("marcarleido")]
@@ -57,17 +64,17 @@ namespace Colegio.Controllers
 
 
         // GET: api/Mensajes/5
-        public VerMensajeDTO Get(int id, int Bandeja)
+        public IEnumerable<Mensaje_Custom> Get(int id, int bandeja)
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
             {
                 IdMensaje = id,
                 OkRecibido = 0,
-                IdBandeja = Bandeja
+                IdBandeja = bandeja
 
             }, identity);
-            return new Mensaje.Servicios.MensajesBI().Get(id);
+            return new Mensaje.Servicios.MensajesBI().GetChat(id, bandeja);
         }
 
         [Route("destinatarios")]

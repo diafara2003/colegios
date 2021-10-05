@@ -20,7 +20,7 @@ namespace BaseDatos.Contexto
         public ColegioContext() : base("name=colegioapp")
         {           
            // Database.SetInitializer(new CreateDatabaseIfNotExists<ColegioContext>());
-             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ColegioContext, Configuration>());
 
         }
 

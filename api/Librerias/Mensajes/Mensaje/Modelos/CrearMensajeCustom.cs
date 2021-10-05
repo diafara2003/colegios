@@ -18,6 +18,8 @@ namespace Mensaje.Modelos
     public class Destinarario {
         public int id { get; set; }
         public int tipo { get; set; }
+
+        public int estudiante { get; set; }
     }
 
     public class RecibidoDTO {

@@ -46,6 +46,11 @@ namespace Mensaje.Servicios
                                    TieneAdjuntos = (int)data["TieneAdjuntos"],
                                    CatDescripcion=(string)data["CatDescripcion"],
                                    BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() : (DateTime)data["BanHoraLeido"],
+
+
+                                   EstNombres = (string)data["EstNombres"],
+                                   EstApellidos = (string)data["EstApellidos"],
+                                   tipoAcudiente = (string)data["tipoAcudiente"],
                                });
 
             return objlstResultado;

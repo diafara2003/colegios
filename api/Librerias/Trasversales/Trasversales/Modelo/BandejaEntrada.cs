@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Trasversales.Modelo
 {
-    [Table("BandejaEntrada",Schema ="msn")]
+    [Table("BandejaEntrada", Schema = "msn")]
     public class BandejaEntrada
     {
         [Key]
@@ -21,5 +21,6 @@ namespace Trasversales.Modelo
         public DateTime? BanOkRecibidoFecha { get; set; }
         public int? BanClaseId { get; set; }
         public int? BanDestacado { get; set; }
+//        public int? BanEstudianteId { get; set; }
     }
 }

@@ -27,22 +27,32 @@ namespace Colegio.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("validacion")]
-        public AutenticacionDTO GetLogin(LoginDTO request)
+        public IHttpActionResult GetLogin(LoginDTO request)
         {
             AutenticacionDTO objresponse = new AutenticacionDTO();
 
-            objresponse.usuario = CheckUser(request.username, request.password);
-
-            if (objresponse.usuario != null)
+            try
             {
-                objresponse.token = JwtManager.GenerateToken(objresponse.usuario);
-            }
-            else
-            {
-                objresponse = null;
-            }
+           
+                objresponse.usuario = CheckUser(request.username, request.password);
 
-            return objresponse;
+                if (objresponse.usuario != null)
+                {
+                    objresponse.token = JwtManager.GenerateToken(objresponse.usuario);
+                }
+                else
+                {
+                    objresponse = null;
+                }
+
+                return Ok(objresponse);
+            }
+            catch (Exception x)
+            {
+
+                return InternalServerError(x);
+            }
+          
         }
 
 

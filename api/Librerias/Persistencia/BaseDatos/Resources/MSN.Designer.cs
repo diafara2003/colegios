@@ -132,10 +132,10 @@ namespace BaseDatos.Resources {
         /// <summary>
         ///   Busca una cadena traducida similar a IF EXISTS ( SELECT * 
         ///            FROM   sysobjects 
-        ///            WHERE  id = object_id(N&apos;[msn].ConsultarMensajes&apos;) 
+        ///            WHERE  id = object_id(N&apos;[msn].ConsultarMensajesChat&apos;) 
         ///                   and OBJECTPROPERTY(id, N&apos;IsProcedure&apos;) = 1 )
         ///BEGIN
-        ///    DROP PROCEDURE [msn].ConsultarMensajes
+        ///    DROP PROCEDURE [msn].ConsultarMensajesChat
         ///END
         ///go
         ///-- =============================================
@@ -143,16 +143,14 @@ namespace BaseDatos.Resources {
         ///-- Create date: &lt;Create Date,,&gt;
         ///-- Description:	&lt;Description,,&gt;
         ///-- =============================================
-        ///CREATE PROCEDURE [msn].[ConsultarMensajes]
+        ///CREATE PROCEDURE [msn].[ConsultarMensajesChat]
         ///	@id int
         ///AS
-        ///BEGIN
-        ///  
-        ///    ; [resto de la cadena truncado]&quot;;.
+        ///BEGI [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string _msn__ConsultarMensajes {
+        internal static string _msn__ConsultarMensajesChat {
             get {
-                return ResourceManager.GetString("_msn__ConsultarMensajes", resourceCulture);
+                return ResourceManager.GetString("_msn__ConsultarMensajesChat", resourceCulture);
             }
         }
         

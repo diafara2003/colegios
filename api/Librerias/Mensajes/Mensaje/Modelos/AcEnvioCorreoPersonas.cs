@@ -12,5 +12,6 @@ namespace Mensaje.Modelos
         public string GrEnColorRGB { get; set; }
         public string GrEnColorObs { get; set; }
         public string GrEnColorBurbuja { get; set; }
+        public int idEst { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace Mensaje.Modelos
 
         public string EstNombres { get; set; }
         public string EstApellidos { get; set; }
+        public int EstId { get; set; }
 
     }
 }

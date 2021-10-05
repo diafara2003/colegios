@@ -124,8 +124,8 @@
   <data name="msn_CategoriasMensajesRecibido" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sql\procedures\msn\msn.categoriasmensajesrecibido.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="_msn__ConsultarMensajes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\sql\procedures\msn\[msn].consultarmensajes.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="_msn__ConsultarMensajesChat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sql\procedures\msn\[msn].consultarmensajeschat.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="_msn___AcEnvioCorreoPersonas_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sql\procedures\msn\[msn].[acenviocorreopersonas].sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
