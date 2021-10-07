@@ -30,5 +30,7 @@ namespace Trasversales.Modelo
         public string MenSendTo { get; set; }
         public int MenEstado { get; set; }
         public DateTime? MenFechaMaxima { get; set; }
+
+      //  public int? MenEstudiante { get; set; }
     }
 }

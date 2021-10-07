@@ -26,6 +26,7 @@ namespace Mensaje.Modelos
         public string EstNombres { get; set; }
         public string EstApellidos { get; set; }
         public string tipoAcudiente { get; set; }
+        public string MenSendTo { get; set; }
 
     }
 }

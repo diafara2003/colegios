@@ -45,6 +45,7 @@ namespace Mensaje.Servicios
                                    BanOkRecibido = (byte)data["BanOkRecibido"],
                                    TieneAdjuntos = (int)data["TieneAdjuntos"],
                                    CatDescripcion=(string)data["CatDescripcion"],
+                                   MenSendTo = data["MenSendTo"] is DBNull ? "" : (string)data["MenSendTo"],
                                    BanHoraLeido = data["BanHoraLeido"] is DBNull ? new Nullable<DateTime>() : (DateTime)data["BanHoraLeido"],
 
 

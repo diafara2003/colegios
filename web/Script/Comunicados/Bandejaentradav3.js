@@ -319,15 +319,18 @@ function renderizar_seleccionado(_i) {
 }
 function set_sent_to(replica) {
     let _data = [];
-    if (replica)
-        _data.push({
-            BG: '#68606c',
-            tipo: 2,
-            id: _mensaje_context.usuario.PerId,
-            ocupacion: 'respuesta',
+    if (replica) {
+        if (_sesion.tipo == 3) _data.push({
+            BG: '#43AC34',
+            tipo: -35,
+            id: _mensaje_context.MenUsuario,
+            ocupacion: '',
             nombre: _mensaje_context.usuario.PerNombres,
             apellido: _mensaje_context.usuario.PerApellidos
         });
+        else JSON.parse(_mensaje_context.MenSendTo).filter(c => c.id != _sesion.idusuario).forEach(c => _data.push(c));
+    }
+
     else
         destinatarios.forEach(_item => _data.push({
             BG: _item.GrEnColorBurbuja,
@@ -396,7 +399,9 @@ async function cargar_bandeja(tipo, _element) {
     }
     _tipoSelected = _tipo_mensaje[tipo]
 
-    window.parent.cargar_mensajes_no_leidos();
+    window.parent.cargar_mensajes_no_leidos(function (params) {
+        document.getElementById('countNoLeidos').textContent = params;
+    });
     const response = await consultarAPI(`BandejaEntrada/mensajes/usuario?usuario=${_user_id}&tipo=${_tipo_mensaje[tipo]}`, 'GET', undefined);
 
     data_mensajes = response;
@@ -416,6 +421,26 @@ async function cargar_bandeja(tipo, _element) {
     //else $('#mostrarMensaje').css('max-height', 'calc(100vh - 343px)');
 
 }
+function renderizar_sent_to(_data) {
+    const _sent_to = JSON.parse(_data);
+    let _result = `<div class="sent_to_mensaje">`;
+
+    for (var i = 0; i < _sent_to.length; i++) {
+        const _item = _sent_to[i];
+
+
+        _result += renderizar_html_seleccionado({
+            GrEnColorBurbuja: _item.BG,
+            PerApellidos: _item.apellido,
+            PerNombres: _item.nombre,
+            CurDescripcion: _item.ocupacion
+        }, false);
+    }
+
+    _result += `</div>`;
+
+    return _result;
+}
 function renderizar_mensajes_bandeja(_data) {
     let html = '';
     for (const key in _data) {
@@ -428,6 +453,8 @@ function renderizar_mensajes_bandeja(_data) {
             <td class="tr-tab-panel" onclick="consultar_mensaje(this,${_mensaje.MenId},${_mensaje.BanId},${_mensaje.BanOkRecibido})">
 
                 <div class="xY-aux">
+                   
+                    ${(_tipoSelected == 1 ? renderizar_sent_to(_mensaje.MenSendTo) : `
                     <div class="xYc">
                         <div class="photo-user" >
                             <div>${iniciales_usuario(_mensaje.PerApellidos, _mensaje.PerNombres)}</div>
@@ -443,7 +470,8 @@ function renderizar_mensajes_bandeja(_data) {
                             </div>
                             <div class="text-muted font-weight-bold" style="line-height:12px;padding-left:10px">${_mensaje.EstNombres} ${_mensaje.EstApellidos}</div>
                         </div>
-                    </div>
+                    </div> `)}
+                   
                     <div class="xY affair">
                         <div class="xS">
                             <div class="xT">
@@ -516,6 +544,12 @@ async function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
             }, false, 'rgb(186 231 187)');
 
         });
+    }
+
+
+    if (_tipoSelected == 1) {
+
+        response[response.length-1]
     }
 
     response.forEach(c => _html += renderizar_mensaje(c, _html_sent_to));
@@ -677,7 +711,11 @@ function obtener_destinatarios(isReplica) {
     if (isReplica) {
         if (_sesion.tipo == 1)
             return [{ id: _mensaje_context.Estudiante, tipo: '-28', estudiante: _mensaje_context.Estudiante }];
-        else return [{ id: _mensaje_context.MenUsuario, tipo: '-35', estudiante: 0 }];
+        else {
+
+            if (_sesion.tipo == 3) return [{ id: _mensaje_context.MenUsuario, tipo: '-35', estudiante: _mensaje_context.Estudiante }];
+            else return [{ id: _mensaje_context.MenUsuario, tipo: '-35', estudiante: 0 }];
+        }
     } else {
 
         return destinatarios.map(_item => { return { id: _item.PerId, tipo: _item.tipo, estudiante: (_item.idEst == undefined || _item.idEst == null) ? 0 : _item.idEst } });
@@ -1058,7 +1096,9 @@ function cerrar_modal_destinatario() {
 
 
     _user_id = JSON.parse(localStorage.getItem("colegio")).PerId;
-    window.parent.cargar_mensajes_no_leidos();
+    window.parent.cargar_mensajes_no_leidos(function (params) {
+        document.getElementById('countNoLeidos').textContent = params;
+    });
     consultar_propfesores();
     cargar_bandeja('bandeja', $('.active')[0]);
 
