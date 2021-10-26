@@ -320,15 +320,15 @@ function renderizar_seleccionado(_i) {
 function set_sent_to(replica) {
     let _data = [];
     if (replica) {
-        if (_sesion.tipo == 3) _data.push({
-            BG: '#43AC34',
+        _data.push({
+            BG: _mensaje_context.usuario.PerTipoPerfil == 1 ? '#43AC34' : _mensaje_context.usuario.PerTipoPerfil == 0 ? 'red' : '#09BBF9',
             tipo: -35,
             id: _mensaje_context.MenUsuario,
             ocupacion: '',
             nombre: _mensaje_context.usuario.PerNombres,
             apellido: _mensaje_context.usuario.PerApellidos
         });
-        else JSON.parse(_mensaje_context.MenSendTo).filter(c => c.id != _sesion.idusuario).forEach(c => _data.push(c));
+        //  else JSON.parse(_mensaje_context.MenSendTo).filter(c => c.id != _sesion.idusuario).forEach(c => _data.push(c));
     }
 
     else
@@ -343,7 +343,8 @@ function set_sent_to(replica) {
 
     return JSON.stringify(_data);
 }
-function renderizar_html_seleccionado(persona, _id_deleted, color) {
+function renderizar_html_seleccionado(persona, _id_deleted, color, _plus) {
+    if (_plus == undefined) _plus = false;
 
     if (color == undefined || color == null) color = "";
 
@@ -356,10 +357,12 @@ function renderizar_html_seleccionado(persona, _id_deleted, color) {
                             <span>${iniciales_usuario(persona.PerApellidos, persona.PerNombres)}</span>
                         </div>
                     </div>
+                  ${(_plus ? '' : `
                     <div style="display:block">
                         <span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>
                         ${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small>${persona.CurDescripcion}</small>`}
-                    </div>                    
+                    </div>`)}
+                    
                 </span>
             </div>`;
 
@@ -425,17 +428,40 @@ function renderizar_sent_to(_data) {
     const _sent_to = JSON.parse(_data);
     let _result = `<div class="sent_to_mensaje">`;
 
-    for (var i = 0; i < _sent_to.length; i++) {
-        const _item = _sent_to[i];
+    if (_sent_to.length > 2) {
+        for (var i = 0; i < 2; i++) {
+            const _item = _sent_to[i];
 
 
+            _result += renderizar_html_seleccionado({
+                GrEnColorBurbuja: _item.BG,
+                PerApellidos: _item.apellido,
+                PerNombres: _item.nombre,
+                CurDescripcion: _item.ocupacion
+            }, false);
+        }
         _result += renderizar_html_seleccionado({
-            GrEnColorBurbuja: _item.BG,
-            PerApellidos: _item.apellido,
-            PerNombres: _item.nombre,
-            CurDescripcion: _item.ocupacion
-        }, false);
+            GrEnColorBurbuja: '#43AC34',
+            PerNombres: (_sent_to.length - 2).toString(),
+            PerApellidos: `+${(_sent_to.length - 2)}`,
+            CurDescripcion: ''
+        }, false,'',true);
     }
+
+    else {
+        for (var i = 0; i < _sent_to.length; i++) {
+            const _item = _sent_to[i];
+
+
+            _result += renderizar_html_seleccionado({
+                GrEnColorBurbuja: _item.BG,
+                PerApellidos: _item.apellido,
+                PerNombres: _item.nombre,
+                CurDescripcion: _item.ocupacion
+            }, false);
+        }
+    }
+
 
     _result += `</div>`;
 
@@ -549,7 +575,7 @@ async function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
 
     if (_tipoSelected == 1) {
 
-        response[response.length-1]
+        response[response.length - 1]
     }
 
     response.forEach(c => _html += renderizar_mensaje(c, _html_sent_to));
@@ -710,7 +736,7 @@ function obtener_adjuntos_al_mensaje() {
 function obtener_destinatarios(isReplica) {
     if (isReplica) {
         if (_sesion.tipo == 1)
-            return [{ id: _mensaje_context.Estudiante, tipo: '-28', estudiante: _mensaje_context.Estudiante }];
+            return [{ id: _mensaje_context.usuario.PerTipoPerfil == 3 ? _mensaje_context.Estudiante : _mensaje_context.MenUsuario, tipo: _mensaje_context.usuario.PerTipoPerfil == 3 ? '-28' : '-35', estudiante: _mensaje_context.Estudiante }];
         else {
 
             if (_sesion.tipo == 3) return [{ id: _mensaje_context.MenUsuario, tipo: '-35', estudiante: _mensaje_context.Estudiante }];
