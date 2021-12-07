@@ -166,7 +166,9 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IdentityModel.Tokens.J
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IO.FileSystem.Primitives.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IO.Packaging.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Net.Http.Formatting.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Cors.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Helpers.dll
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.WebHost.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Mvc.dll
@@ -214,10 +216,11 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Microsoft.IdentityModel.Token
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.IO.Packaging.xml
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Newtonsoft.Json.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Net.Http.Formatting.xml
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Helpers.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.xml
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.xml
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\Newtonsoft.Json.xml
+C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Helpers.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.WebHost.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Mvc.xml
 C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Optimization.xml
@@ -234,6 +237,3 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreComp
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Cors.dll
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.dll
-C:\colegios\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.xml

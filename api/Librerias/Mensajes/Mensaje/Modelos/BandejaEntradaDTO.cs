@@ -27,6 +27,7 @@ namespace Mensaje.Modelos
         public string EstApellidos { get; set; }
         public string tipoAcudiente { get; set; }
         public string MenSendTo { get; set; }
+        public int BanEstudianteId { get; set; }
 
     }
 }

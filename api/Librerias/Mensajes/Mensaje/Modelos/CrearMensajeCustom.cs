@@ -15,6 +15,16 @@ namespace Mensaje.Modelos
 
     }
 
+    public class ResponseCrearMensaje {
+        public ResponseCrearMensaje()
+        {
+            this.notificaciones = new List<LoginPhone>();
+        }
+
+        public ResponseDTO resultado { get; set; }
+        public List<LoginPhone> notificaciones { get; set; }
+    }
+
     public class Destinarario {
         public int id { get; set; }
         public int tipo { get; set; }

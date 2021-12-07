@@ -13,12 +13,12 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ColegioContext context)
         {
-            return;
+           return;
             List<GruposEnvioColores> grupoColores = new List<GruposEnvioColores>();
 
 

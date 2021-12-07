@@ -7,13 +7,14 @@ using BaseDatos.Modelos;
 using Trasversales.Modelo;
 using System.Data;
 using Utilidades.Servicios;
-
+using System.Data;
+using System.Linq;
 namespace Mensaje.Servicios
 {
     public class MensajesBI
     {
 
-        public IEnumerable<Mensaje_Custom> GetChat(int id,int bandeja)
+        public IEnumerable<Mensaje_Custom> GetChat(int id, int bandeja)
         {
             List<Mensaje_Custom> obj = new List<Mensaje_Custom>();
             ColegioContext objCnn = new ColegioContext();
@@ -43,7 +44,7 @@ namespace Mensaje.Servicios
                         Estudiante = (int)query["BanEstudianteId"],
                         bandeja = (int)query["BanId"],
                         usuario = new Personas()
-                        {                            
+                        {
                             PerApellidos = (string)query["PerApellidos"],
                             PerNombres = (string)query["PerNombres"],
                             PerDocumento = (string)query["PerDocumento"],
@@ -61,7 +62,7 @@ namespace Mensaje.Servicios
 
         }
 
-     
+
         public IEnumerable<Adjuntos> GetAdjuntos(int msn)
         {
             ColegioContext objCnn = new ColegioContext();
@@ -125,9 +126,10 @@ namespace Mensaje.Servicios
         }
 
 
-        public ResponseDTO Save(CrearMensajeCustom request)
+        public ResponseCrearMensaje Save(CrearMensajeCustom request)
         {
             ColegioContext objCnn = new ColegioContext();
+            ResponseCrearMensaje _response = new ResponseCrearMensaje();
             ResponseDTO objResultado = new ResponseDTO();
             try
             {
@@ -146,10 +148,11 @@ namespace Mensaje.Servicios
                     {
                         objResultado.codigo = -1;
                         objResultado.respuesta = "No se puede responder el mensaje porque se venció la fecha limite establecida.";
-                        return objResultado;
+                        _response.resultado = objResultado;
+                        return _response;
                     }
                 }
-               
+
 
 
                 int empresa = objCnn.personas.Where(c => c.PerId == request.mensaje.MenUsuario).FirstOrDefault().PerIdEmpresa;
@@ -185,6 +188,7 @@ namespace Mensaje.Servicios
 
 
                 string _xml_destinatarios = Utilidad.ObjectToXMLGeneric<List<Destinarario>>(request.destinatarios);
+
                 objCnn = new ColegioContext();
                 ProcedureDTO ProcedureDTO = new ProcedureDTO();
                 IEnumerable<AcEnvioCorreoPersonas> objlstResultado = new List<AcEnvioCorreoPersonas>();
@@ -201,14 +205,22 @@ namespace Mensaje.Servicios
                 objResultado.codigo = 1;
                 objResultado.respuesta = _xml_destinatarios;
 
-                //  EnviarNotificacionNuevoMensaje(request.destinatarios,request.mensaje.MenId);
+                _response.notificaciones = (from data in result.AsEnumerable()
+                                            select new LoginPhone()
+                                            {
+                                                LgId=(int)data["LgId"],
+                                                UsuarioId = (int)data["UsuarioId"],
+                                                TokenFCM = (string)data["TokenFCM"],
+                                            }).ToList();
             }
             catch (Exception e)
             {
                 objResultado.codigo = -1;
                 objResultado.respuesta = e.InnerException.Message;
             }
-            return objResultado;
+
+            _response.resultado = objResultado;
+            return _response;
 
         }
 

@@ -89,6 +89,8 @@ namespace Colegio.Controllers
                 obj.PerId = 0;
                 obj.PerNombres = value.nombre;
                 obj.PerApellidos = value.apellido;
+                obj.PerDocumento = value.email;
+                obj.PerTIpoDoc = value.email;
                 obj.PerEmail = value.email;
                 obj.PerTelefono = value.celular;
                 obj.PerIdEmpresa = _empresa.PerIdEmpresa;

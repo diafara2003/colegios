@@ -433,17 +433,7 @@ namespace Persona.Servicios
 
                     objCnn.SaveChanges();
                 }
-                else {
-                    var _phone= objCnn.loginPhone.Where(c => modelo.UsuarioId == c.UsuarioId).FirstOrDefault();
-
-                    _phone.TokenFCM = modelo.TokenFCM;
-
-                    objCnn.Entry(_phone).State = EntityState.Modified;
-
-                    objCnn.SaveChanges();
-
-                }                
-
+              
             }
             catch (Exception e)
             {

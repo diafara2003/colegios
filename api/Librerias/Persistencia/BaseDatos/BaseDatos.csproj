@@ -51,81 +51,18 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexto\ColegioContext.cs" />
     <Compile Include="Contexto\SchoolDBInitializer.cs" />
-    <Compile Include="Migrations\202007290028018_initial.cs" />
-    <Compile Include="Migrations\202007290028018_initial.designer.cs">
-      <DependentUpon>202007290028018_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202111300205224_NuevoHosting.cs" />
+    <Compile Include="Migrations\202111300205224_NuevoHosting.designer.cs">
+      <DependentUpon>202111300205224_NuevoHosting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202007290029071_initial_procedures.cs" />
-    <Compile Include="Migrations\202007290029071_initial_procedures.designer.cs">
-      <DependentUpon>202007290029071_initial_procedures.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008022350170_mensajes.cs" />
-    <Compile Include="Migrations\202008022350170_mensajes.designer.cs">
-      <DependentUpon>202008022350170_mensajes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008090447274_perfil_empresas.cs" />
-    <Compile Include="Migrations\202008090447274_perfil_empresas.designer.cs">
-      <DependentUpon>202008090447274_perfil_empresas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008090501028_perfil_estado.cs" />
-    <Compile Include="Migrations\202008090501028_perfil_estado.designer.cs">
-      <DependentUpon>202008090501028_perfil_estado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008171702478_AreaMateriasEmpresa.cs" />
-    <Compile Include="Migrations\202008171702478_AreaMateriasEmpresa.designer.cs">
-      <DependentUpon>202008171702478_AreaMateriasEmpresa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008171710305_SalonesXEmpresa.cs" />
-    <Compile Include="Migrations\202008171710305_SalonesXEmpresa.designer.cs">
-      <DependentUpon>202008171710305_SalonesXEmpresa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008171717341_sp_asignarclases.cs" />
-    <Compile Include="Migrations\202008171717341_sp_asignarclases.designer.cs">
-      <DependentUpon>202008171717341_sp_asignarclases.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008260155582_perfiles.cs" />
-    <Compile Include="Migrations\202008260155582_perfiles.designer.cs">
-      <DependentUpon>202008260155582_perfiles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009100056064_accesos.cs" />
-    <Compile Include="Migrations\202009100056064_accesos.designer.cs">
-      <DependentUpon>202009100056064_accesos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102240136405_Garden.cs" />
-    <Compile Include="Migrations\202102240136405_Garden.designer.cs">
-      <DependentUpon>202102240136405_Garden.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102250030200_gruposEstudianteProfesor.cs" />
-    <Compile Include="Migrations\202102250030200_gruposEstudianteProfesor.designer.cs">
-      <DependentUpon>202102250030200_gruposEstudianteProfesor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102281531259_parentesco.cs" />
-    <Compile Include="Migrations\202102281531259_parentesco.designer.cs">
-      <DependentUpon>202102281531259_parentesco.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103020214006_estudiantes_jardin.cs" />
-    <Compile Include="Migrations\202103020214006_estudiantes_jardin.designer.cs">
-      <DependentUpon>202103020214006_estudiantes_jardin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103020216597_estudiantes_personas.cs" />
-    <Compile Include="Migrations\202103020216597_estudiantes_personas.designer.cs">
-      <DependentUpon>202103020216597_estudiantes_personas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103020232443_estudiantes_jardin_estado.cs" />
-    <Compile Include="Migrations\202103020232443_estudiantes_jardin_estado.designer.cs">
-      <DependentUpon>202103020232443_estudiantes_jardin_estado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103030149488_ingreso_persona.cs" />
-    <Compile Include="Migrations\202103030149488_ingreso_persona.designer.cs">
-      <DependentUpon>202103030149488_ingreso_persona.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105182324364_loginPhone.cs" />
-    <Compile Include="Migrations\202105182324364_loginPhone.designer.cs">
-      <DependentUpon>202105182324364_loginPhone.cs</DependentUpon>
+    <Compile Include="Migrations\202111300212289_Procedures.cs" />
+    <Compile Include="Migrations\202111300212289_Procedures.designer.cs">
+      <DependentUpon>202111300212289_Procedures.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
@@ -157,66 +94,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007290028018_initial.resx">
-      <DependentUpon>202007290028018_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111300205224_NuevoHosting.resx">
+      <DependentUpon>202111300205224_NuevoHosting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007290029071_initial_procedures.resx">
-      <DependentUpon>202007290029071_initial_procedures.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008022350170_mensajes.resx">
-      <DependentUpon>202008022350170_mensajes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008090447274_perfil_empresas.resx">
-      <DependentUpon>202008090447274_perfil_empresas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008090501028_perfil_estado.resx">
-      <DependentUpon>202008090501028_perfil_estado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008171702478_AreaMateriasEmpresa.resx">
-      <DependentUpon>202008171702478_AreaMateriasEmpresa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008171710305_SalonesXEmpresa.resx">
-      <DependentUpon>202008171710305_SalonesXEmpresa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008171717341_sp_asignarclases.resx">
-      <DependentUpon>202008171717341_sp_asignarclases.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008260155582_perfiles.resx">
-      <DependentUpon>202008260155582_perfiles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009100056064_accesos.resx">
-      <DependentUpon>202009100056064_accesos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102240136405_Garden.resx">
-      <DependentUpon>202102240136405_Garden.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102250030200_gruposEstudianteProfesor.resx">
-      <DependentUpon>202102250030200_gruposEstudianteProfesor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102281531259_parentesco.resx">
-      <DependentUpon>202102281531259_parentesco.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103020214006_estudiantes_jardin.resx">
-      <DependentUpon>202103020214006_estudiantes_jardin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103020216597_estudiantes_personas.resx">
-      <DependentUpon>202103020216597_estudiantes_personas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103020232443_estudiantes_jardin_estado.resx">
-      <DependentUpon>202103020232443_estudiantes_jardin_estado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103030149488_ingreso_persona.resx">
-      <DependentUpon>202103030149488_ingreso_persona.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105182324364_loginPhone.resx">
-      <DependentUpon>202105182324364_loginPhone.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111300212289_Procedures.resx">
+      <DependentUpon>202111300212289_Procedures.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DBO.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Garden.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Garden.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\MSN.resx">

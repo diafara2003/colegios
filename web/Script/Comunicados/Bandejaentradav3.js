@@ -943,7 +943,7 @@ function armar_url_adjuntos() {
 }
 function subirAdjunto() {
 
-    let _url = 'https://api.comunicatecolegios.com';
+    let _url = 'https://www.comunicatecolegios.com';
 
     var formData = new FormData();
     var file = $('#myInput')[0];
@@ -982,7 +982,7 @@ function renderizar_html_adjuntos(_source, isClose) {
         _html += `
         <div class="adjunto-mensaje rounded border p-2 m-1 d-flex">
             <div class="text-adjunto">
-                <a href="https://api.comunicatecolegios.com/adjunto/descargar?id=${a.AjdId}">            
+                <a href="https://www.comunicatecolegios.com/api/adjunto/descargar?id=${a.AjdId}">
                     <img style="width:30px" src="${_get_icono(a.AjdExtension)}" />
                     ${a.AdjNombre}${a.AjdExtension}
                 </a>

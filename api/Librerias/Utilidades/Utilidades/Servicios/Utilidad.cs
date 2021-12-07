@@ -87,11 +87,11 @@ namespace Utilidades.Servicios
 
             //Definir objeto SmtpClient
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = "mail.comunicatecolegios.com";
-            //smtp.Port = 2525;
+            smtp.Host = "comunicatecolegios.com";
+            smtp.Port = 25;
             smtp.EnableSsl = false;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("Notificaciones@comunicatecolegios.com", "Notifica1_");
+            smtp.Credentials = new NetworkCredential("Notificaciones@comunicatecolegios.com", "Comunicate123*");
 
             string output = null;
 

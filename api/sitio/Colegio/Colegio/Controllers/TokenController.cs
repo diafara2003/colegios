@@ -16,7 +16,6 @@ namespace Colegio.Controllers
     public class TokenController : ApiController
     {
         [HttpGet]
-
         public IHttpActionResult EchoUser()
         {
             var identity = Thread.CurrentPrincipal.Identity;

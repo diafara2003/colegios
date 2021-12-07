@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Trasversales.Modelo;
+using Utilidades.Servicios;
 
 namespace Colegio.Controllers
 {
@@ -36,7 +37,7 @@ namespace Colegio.Controllers
 
         [Route("Chat")]
         [HttpGet]
-        public IEnumerable<Mensaje_Custom> GetChat(int id,int bandeja)
+        public IEnumerable<Mensaje_Custom> GetChat(int id, int bandeja)
         {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
@@ -51,7 +52,8 @@ namespace Colegio.Controllers
 
         [Route("marcarleido")]
         [HttpGet]
-        public ResponseDTO MarcarLeido(int id,int bandeja) {
+        public ResponseDTO MarcarLeido(int id, int bandeja)
+        {
             var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             return new BandejaEntradaBI().MarcarLeido(new LeidoDTO()
             {
@@ -96,63 +98,58 @@ namespace Colegio.Controllers
 
         [HttpGet]
         [Route("info/grupo")]
-        public IEnumerable<ObtenerAcudientesgrupos> GetObtenerAcudientesgrupos(int idgrupo) {
+        public IEnumerable<ObtenerAcudientesgrupos> GetObtenerAcudientesgrupos(int idgrupo)
+        {
             var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
 
-            return new MensajesBI().GetObtenerAcudientesgrupos(idgrupo,_empresa.PerIdEmpresa);
+            return new MensajesBI().GetObtenerAcudientesgrupos(idgrupo, _empresa.PerIdEmpresa);
         }
 
         // POST: api/Mensajes
         public ResponseDTO Post(CrearMensajeCustom data)
         {
-            var _response = new Mensaje.Servicios.MensajesBI().Save(data);
+            ResponseCrearMensaje _response = new Mensaje.Servicios.MensajesBI().Save(data);
 
 
-            var _notificaciones = new Mensaje.Servicios.MensajesBI().EnviarNotificacionNuevoMensaje(data.destinatarios, data.mensaje.MenId);
+            string ww = "";
+            if (_response.resultado.codigo > 0)
+            {
 
-            /*
- {
-	"notificacion":{
-		body:'texto de la notificacion',
-		"title":"titulo"
-	},
-	"priority":"high".
-	data:{
-		"mensaje":10
-	},
-	to:""
-}
- */
+                _response.notificaciones.ForEach(c =>
+                {
+                    MessageNotificacionPhone _data = new MessageNotificacionPhone();
 
-            var _data = new MessageNotificacionPhone();
+                    _data.data = new DataMessage();
+                    _data.data.mensaje = data.mensaje.MenId;
+                    _data.notification = new Notificacions();
+                    _data.notification.title = "Nuevo mensaje";
+                    _data.notification.body = data.mensaje.MenAsunto;
+                    _data.priority = "high";
 
-            _data.data = new DataMessage();
-            _data.data.mensaje = data.mensaje.MenId;
-            _data.notification = new Notificacions();
-            _data.notification.title = "Nuevo mensaje";
-            _data.notification.body = data.mensaje.MenAsunto;
-            _data.priority = "high";
+                    _data.to = c.TokenFCM;
 
-            _notificaciones.ForEach(c =>            {
+                    var json = JsonConvert.SerializeObject(_data);
 
-                _data.to = c.TokenFCM;
+                    var client = new RestClient("https://fcm.googleapis.com/fcm/send");
+                    var request = new RestRequest(Method.POST);
+                    request.AddHeader("postman-token", "eb7f9bd7-7cc5-1d7e-e366-5cc07f982bd8");
+                    request.AddHeader("cache-control", "no-cache");
+                    request.AddHeader("authorization", "key=AAAALy133Po:APA91bFoGuTSYeaDpPZMFJr6hhulkKkAqqouGiJ2QzcI13qt37HQBLd36W87FokHYSPxotxPropHQBAKdY6p1zoUXIOcfI7nsqmz_xe8DYcAhHqN7bqGzxlg3OEjSsgqq26zoJsKEY_K");
+                    request.AddHeader("content-type", "application/json");
+                    request.AddParameter("application/json", json, ParameterType.RequestBody);
 
-                var json = JsonConvert.SerializeObject(_data);
+                    IRestResponse response = client.Execute(request);
+                    ww= response.ErrorMessage;
 
-                var client = new RestClient("https://fcm.googleapis.com/fcm/send");
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("postman-token", "eb7f9bd7-7cc5-1d7e-e366-5cc07f982bd8");
-                request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("authorization", "key=AAAALy133Po:APA91bFoGuTSYeaDpPZMFJr6hhulkKkAqqouGiJ2QzcI13qt37HQBLd36W87FokHYSPxotxPropHQBAKdY6p1zoUXIOcfI7nsqmz_xe8DYcAhHqN7bqGzxlg3OEjSsgqq26zoJsKEY_K");
-                request.AddHeader("content-type", "application/json");
-                request.AddParameter("application/json", json, ParameterType.RequestBody);
 
-                IRestResponse response = client.Execute(request);
-            });
+                });
+                string _xml_destinatarios = Utilidad.ObjectToXMLGeneric<List<LoginPhone>>(_response.notificaciones);
 
-            return _response;
+                _response.resultado.respuesta = ww;
+            }
+            return _response.resultado;
         }
 
 
