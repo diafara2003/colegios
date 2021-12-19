@@ -1,0 +1,16 @@
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\Materia.dll
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\Materia.pdb
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Release\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Release\Materia.csprojAssemblyReference.cache
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Release\Materia.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Release\Materia.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Release\Materia.dll
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Release\Materia.pdb

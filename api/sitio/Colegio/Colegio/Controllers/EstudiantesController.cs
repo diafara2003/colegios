@@ -11,10 +11,19 @@ using Trasversales.Modelo;
 
 namespace Colegio.Controllers
 {
-    
+    [RoutePrefix("Estudiantes/acudiente")]
     public class EstudiantesController : ApiController
     {
+        [Route("validarcorreo")]
+        [HttpPost]
+        public Personas GetAcudienteCorreo(BuscarAcudienteCorreoDTO request) {
 
+            var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
+            var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
+
+            return new EstudiantesBL<Estudiantes>().GetAcudienteCorreo(request.email, _empresa.PerIdEmpresa);
+        }
 
         [HttpGet]
         public AgregarEstudianteDTO Get(int id)

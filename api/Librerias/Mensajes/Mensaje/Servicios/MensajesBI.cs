@@ -208,7 +208,7 @@ namespace Mensaje.Servicios
                 _response.notificaciones = (from data in result.AsEnumerable()
                                             select new LoginPhone()
                                             {
-                                                LgId=(int)data["LgId"],
+                                                LgId = (int)data["LgId"],
                                                 UsuarioId = (int)data["UsuarioId"],
                                                 TokenFCM = (string)data["TokenFCM"],
                                             }).ToList();
@@ -303,7 +303,7 @@ namespace Mensaje.Servicios
                                select new AcEnvioCorreoPersonas()
                                {
                                    PerId = (int)data["PerId"],
-                                   CurDescripcion = (string)data["CurDescripcion"],
+                                   CurDescripcion = data["CurDescripcion"] is DBNull ? string.Empty : (string)data["CurDescripcion"],
                                    GraDescripcion = (string)data["GraDescripcion"],
                                    PerApellidos = (string)data["PerApellidos"],
                                    PerNombres = (string)data["PerNombres"],

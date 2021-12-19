@@ -19,7 +19,8 @@
             Sql(BaseDatos.Resources.MSN._msn___AcEnvioCorreoPersonas_);
             Sql(BaseDatos.Resources.MSN._msn___ConsultarMensaje_);
             Sql(BaseDatos.Resources.MSN._msn___CrearMensaje_Bandeja_Entrada_);
-            
+            Sql(BaseDatos.Resources.MSN._msn___ObtenerAcudientesgrupos_);
+
         }
         
         public override void Down()

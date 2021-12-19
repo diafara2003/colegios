@@ -1,0 +1,6 @@
+C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Release\Trasversales.csprojAssemblyReference.cache
+C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Release\Trasversales.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Release\Trasversales.pdb

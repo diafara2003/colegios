@@ -52,7 +52,7 @@ namespace BaseDatos.Contexto
             {
                 SecDescripcion = "Estudiantes",
                 SecIcono = "far fa-envelope",
-                SecRuta = "	../estudiantes/estudiantes.html"
+                SecRuta = "../estudiantes/estudiantes.html"
             });
 
             defaultStandards.Add(new Seccion()

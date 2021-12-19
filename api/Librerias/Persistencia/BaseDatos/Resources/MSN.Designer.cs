@@ -132,6 +132,28 @@ namespace BaseDatos.Resources {
         /// <summary>
         ///   Busca una cadena traducida similar a IF EXISTS ( SELECT * 
         ///            FROM   sysobjects 
+        ///            WHERE  id = object_id(N&apos;[msn].[ObtenerAcudientesgrupos]&apos;) 
+        ///                   and OBJECTPROPERTY(id, N&apos;IsProcedure&apos;) = 1 )
+        ///BEGIN
+        ///    DROP PROCEDURE [msn].[ObtenerAcudientesgrupos]
+        ///END
+        ///go
+        ///-- =============================================
+        ///-- Author:		&lt;Author,,Name&gt;
+        ///-- Create date: &lt;Create Date,,&gt;
+        ///-- Description:	autocomple para envios de correos
+        ///-- =============================================
+        ///CREATE PROCEDURE [msn].[ObtenerAcudiente [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string _msn___ObtenerAcudientesgrupos_ {
+            get {
+                return ResourceManager.GetString("_msn___ObtenerAcudientesgrupos_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a IF EXISTS ( SELECT * 
+        ///            FROM   sysobjects 
         ///            WHERE  id = object_id(N&apos;[msn].ConsultarMensajesChat&apos;) 
         ///                   and OBJECTPROPERTY(id, N&apos;IsProcedure&apos;) = 1 )
         ///BEGIN
@@ -144,9 +166,7 @@ namespace BaseDatos.Resources {
         ///-- Description:	&lt;Description,,&gt;
         ///-- =============================================
         ///CREATE PROCEDURE [msn].[ConsultarMensajesChat]
-        ///	@id int
-        ///AS
-        ///BEGI [resto de la cadena truncado]&quot;;.
+        ///	@id int,@bandeja  [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string _msn__ConsultarMensajesChat {
             get {

@@ -1,0 +1,17 @@
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\Menu.dll.config
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\Menu.dll
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\Menu.pdb
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Menu\Menu\bin\Release\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Menu\Menu\obj\Release\Menu.csprojAssemblyReference.cache
+C:\colegios\colegios\api\Librerias\Menu\Menu\obj\Release\Menu.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Menu\Menu\obj\Release\Menu.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Menu\Menu\obj\Release\Menu.dll
+C:\colegios\colegios\api\Librerias\Menu\Menu\obj\Release\Menu.pdb

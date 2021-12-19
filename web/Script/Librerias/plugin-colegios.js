@@ -23,7 +23,7 @@
     }
 
 
-    let _url = 'https://www.comunicatecolegios.com/api';
+    let _url = 'http://localhost/colegios/api';
 
     try {
         const response = await fetch(`${_url}/${metodo}`, Init);

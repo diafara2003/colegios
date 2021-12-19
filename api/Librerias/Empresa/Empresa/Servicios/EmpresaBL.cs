@@ -130,7 +130,7 @@ namespace Empresa.Servicios
                 return obj;
             }
 
-            
+
             modelo.empresa = base.Add(modelo.empresa);
 
             objCnn.SaveChanges();
@@ -164,6 +164,18 @@ namespace Empresa.Servicios
 
             obj.codigo = modelo.empresa.EmpId;
             obj.respuesta = modelo.persona.PerId.ToString();
+
+
+            objCnn.grupo_envio_autorizado_all.Add(new GruposEnvioAutorizadoAll()
+            {
+
+                GrEnAuAllEmp = modelo.empresa.EmpId,
+                GeEnAuAllTemporada = 1,
+                GrEnAuAllPersonaId = modelo.persona.PerId
+            }); ;
+
+            objCnn.SaveChanges();
+
             return obj;
         }
 
@@ -188,13 +200,13 @@ namespace Empresa.Servicios
                 int id = Convert.ToInt32(modelo.empresa.EmpLogo);
                 var adjunto = objCnn.adjuntos.Where(c => c.AjdId == id).FirstOrDefault();
 
-                if (adjunto!=null)
+                if (adjunto != null)
                 {
                     adjunto.AdjIdEmpresa = modelo.empresa.EmpId;
                     objCnn.Entry(adjunto).State = EntityState.Modified;
                     objCnn.SaveChanges();
                 }
-                
+
             }
 
 

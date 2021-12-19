@@ -1,0 +1,15 @@
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\Salones.dll
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\Salones.pdb
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Release\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Release\Salones.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Release\Salones.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Release\Salones.dll
+C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Release\Salones.pdb

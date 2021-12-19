@@ -174,8 +174,9 @@ async function cargar_datos_empresa() {
 
 
     let _url = window.location.href.toLowerCase().split('views')[0];
-    const url = `${_url}api/Adjuntos${armar_url_adjuntos()}`;
-    empresa.EmpLogo = "https://dreamskindergarten.com/wp-content/uploads/2017/09/logo-dreams-kindergarten.png";
+    const url = `${_url}api/Adjuntos${armar_url_adjuntos(empresa.EmpLogo)}`;
+
+    empresa.EmpLogo = url;
     if (empresa.EmpLogo != null) {
 
         try {
@@ -187,13 +188,13 @@ async function cargar_datos_empresa() {
 
 
 }
-function armar_url_adjuntos() {
+function armar_url_adjuntos(_adjunto) {
     let _url = '';
-    let _usuario = obtener_session().idusuario,
-        _adjunto = 0;
+    let _usuario = obtener_session().idusuario;
+        
 
     _url += '?usuario=' + _usuario;
-    _url += '&adjunto=' + _adjunto;
+    _url += '&id=' + _adjunto;
 
     return _url;
 }

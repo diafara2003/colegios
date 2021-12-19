@@ -58,6 +58,27 @@
         h6 {
             color: #87b4e4 !important
         }
+
+        label {
+            margin-bottom: 0px !important;
+            margin-top: 0.8rem !important;
+        }
+
+        .text-danger {
+            padding: 10px;
+        }
+
+        .border-circle-form {
+            border: 0.07em solid #a19c9c;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 21px;
+            height: 21px;
+            margin: 0px 2px;
+            padding: 15px;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +136,7 @@
                                 </div>
                             </div>
 
-                            <div class="row" >
+                            <div class="row">
                                 <div class="col-6">
                                     <label for="exampleInputEmail1">Nombres  <span class="text-danger">*</span></label>
                                     <input onblur="habilitar_boton_agregar()" maxlength="20" type="text" class="form-control input-sm" id="EstNombres" aria-describedby="emailHelp" placeholder="Nombres">
@@ -193,8 +214,15 @@
 
                                 <div class="col-6">
                                     <div class="p-2">
-                                        <label for="exampleInputEmail1">Correo del acudiente  <span class="text-danger">*</span></label>
-                                        <input onblur="validar_correo_formulario(this)" maxlength="30" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <div class="d-flex align-items-end">
+                                            <div class="w-100">
+                                                <label for="exampleInputEmail1">Correo del acudiente  <span class="text-danger">*</span></label>
+                                                <input onblur="validar_correo_formulario(this)" maxlength="30" type="text" class="form-control input-sm" id="PerEmail_1" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                            </div>
+                                            <div>
+                                                <i onclick="validarCorreoAcudiente(true)" title="Validar si existe el correo" data-toggle="tooltip" style="color: #43AC34;font-size:16px" class="fas fa-user-friends border-circle-form"></i>
+                                            </div>
+                                        </div>
                                     </div>
 
 
@@ -267,9 +295,16 @@
                                 <div class="col-6">
 
                                     <div class="p-2">
-
-                                        <label for="exampleInputEmail1">Correo del acudiente</label>
-                                        <input type="text" class="form-control input-sm" maxlength="30" onblur="validar_correo_formulario(this)" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                        <div class="d-flex align-items-end">
+                                            <div class="w-100">
+                                                <label for="exampleInputEmail1">Correo del acudiente</label>
+                                                <input type="text" class="form-control input-sm" maxlength="30" onblur="validar_correo_formulario(this)" id="PerEmail_2" aria-describedby="emailHelp" placeholder="Correo del acudiente">
+                                            </div>
+                                            <div>
+                                                <i onclick="validarCorreoAcudiente(false)" title="Validar si existe el correo" data-toggle="tooltip" style="color: #43AC34;font-size:16px" class="fas fa-user-friends border-circle-form"></i>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
 
                                 </div>

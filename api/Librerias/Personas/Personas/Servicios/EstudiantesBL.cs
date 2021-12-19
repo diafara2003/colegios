@@ -14,6 +14,11 @@ namespace Persona.Servicios
     public class EstudiantesBL<T> : EntityGenerics<T> where T : class
     {
 
+        public Personas GetAcudienteCorreo(string correo, int empresa) {
+            ColegioContext objCnn = new ColegioContext();
+            return (from p in objCnn.personas where p.PerIdEmpresa==empresa && p.PerEmail.Equals(correo) select p).SingleOrDefault();
+        }
+
         public IEnumerable<ConsultaEstudiantesDTO> Get(int empresa, int temporada)
         {
 
@@ -35,7 +40,7 @@ namespace Persona.Servicios
                            id = g.GrId,
                            nombre = g.GrNombre
                        }
-                   }).OrderBy(c=>c.grupo.id).OrderBy(c=> c.id).ToList();
+                   }).OrderBy(c => c.grupo.id).OrderBy(c => c.id).ToList();
 
             return obj;
 
@@ -114,28 +119,43 @@ namespace Persona.Servicios
             if (modelo.estudiante.EstId == 0)
             {
 
-                
 
-                foreach (var item in modelo.acudientes)
-                {
-                    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ingresado " + item.PerEmail + " ya existe en el sistema." };
-                }
+                //foreach (var item in modelo.acudientes)
+                //{
+                //    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ingresado " + item.PerEmail + " ya existe en el sistema." };
+                //}
 
-                if (objResultado.resultado.codigo == -1) return objResultado;
+                //if (objResultado.resultado.codigo == -1) return objResultado;
 
 
                 modelo.acudientes.ToList().ForEach(c =>
                 {
 
-                    c.PerIdEmpresa = empresa;
-                    c.PerTipoPerfil = 3;
-                    c.PerEstado = true;
-                    c.PerUsuario = c.PerEmail;
-                    c.PerClave = Utilidad.GenerarclaveRandom();
-                    c.PerIngreso = false;
-                    c.PerDocumento = c.PerEmail;
-                    objCnn.personas.Add(c);
+                    if (!new PersonasBI().ExisteCorreo(empresa, c.PerEmail))
+                    {
+                        c.PerIdEmpresa = empresa;
+                        c.PerTipoPerfil = 3;
+                        c.PerEstado = true;
+                        c.PerUsuario = c.PerEmail;
+                        c.PerClave = Utilidad.GenerarclaveRandom();
+                        c.PerIngreso = false;
+                        c.PerDocumento = c.PerEmail;
+                        objCnn.personas.Add(c);
+                    }
+                    else
+                    {
+                        var objAcudiente = (objCnn.personas.Where(p => p.PerEmail == c.PerEmail)).FirstOrDefault();
+                        c.PerId = objAcudiente.PerId;
 
+                        objAcudiente.PerNombres = c.PerNombres;
+                        objAcudiente.PerApellidos = c.PerApellidos;
+                        objAcudiente.PerTelefono = c.PerTelefono;
+
+
+
+                        objCnn.UpdateEntity<Personas>(objAcudiente);
+
+                    }
 
                 });
 
@@ -167,17 +187,19 @@ namespace Persona.Servicios
             else
             {
 
-                foreach (var item in modelo.acudientes)
-                {
-                    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail, item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ya existe en el sistema" };
-                }
+                //foreach (var item in modelo.acudientes)
+                //{
+                //    if (new PersonasBI().ExisteCorreo(empresa, item.PerEmail, item.PerId)) objResultado.resultado = new ResponseDTO() { codigo = -1, respuesta = "El correo ya existe en el sistema" };
+                //}
 
                 if (objResultado.resultado.codigo == -1) return objResultado;
 
-                modelo.acudientes.ToList().ForEach(c => {
+                modelo.acudientes.ToList().ForEach(c =>
+                {
 
 
-                    if (c.PerId == 0) {
+                    if (c.PerId == 0)
+                    {
 
                         c.PerIdEmpresa = empresa;
                         c.PerTipoPerfil = 3;
@@ -191,14 +213,15 @@ namespace Persona.Servicios
 
                         objCnn.SaveChanges();
 
-                       
+
 
                     }
 
-                    else {
+                    else
+                    {
                         c.PerUsuario = c.PerEmail;
                         c.PerDocumento = c.PerEmail;
-                        
+
 
                         objCnn.UpdateEntity<Personas>(c);
                     }

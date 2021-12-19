@@ -61,7 +61,7 @@ namespace Colegio.Controllers
             return response;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Trasversales.Modelo.Adjuntos> Get([FromUri] List<int> adjunto = null, int usuario = 0)
         {

@@ -77,21 +77,20 @@ function cargar_estudiante() {
     $('#ddlgrupo').find(`option[value="${objEstudiante.grupo.id}"]`).attr('selected', 'selected');
 
     /*acudiente */
-    document.getElementById('PerNombres_1').value = objEstudiante.acudientes[0].PerNombres;
-    document.getElementById('PerApellidos_1').value = objEstudiante.acudientes[0].PerApellidos;
-    document.getElementById('PerEmail_1').value = objEstudiante.acudientes[0].PerEmail;
-    document.getElementById('PerTelefono_1').value = objEstudiante.acudientes[0].PerTelefono;
-    $('#PerTipoAcudiente_1').find(`option[value="${objEstudiante.acudientes[0].PerTipoAcudiente}"]`).attr('selected', 'selected');
+    render_acudiente("1", objEstudiante.acudientes[0]);
 
 
-    if (objEstudiante.acudientes.length == 2 && objEstudiante.acudientes[1] != null) {
-        /*acudiente 2*/
-        document.getElementById('PerNombres_2').value = objEstudiante.acudientes[1].PerNombres;
-        document.getElementById('PerApellidos_2').value = objEstudiante.acudientes[1].PerApellidos;
-        document.getElementById('PerEmail_2').value = objEstudiante.acudientes[1].PerEmail;
-        document.getElementById('PerTelefono_2').value = objEstudiante.acudientes[1].PerTelefono;
-        $('#PerTipoAcudiente_2').find(`option[value="${objEstudiante.acudientes[1].PerTipoAcudiente}"]`).attr('selected', 'selected');
-    }
+    if (objEstudiante.acudientes.length == 2 && objEstudiante.acudientes[1] != null)
+        render_acudiente("2", objEstudiante.acudientes[1]);
+
+}
+function render_acudiente(tipo, acudiente) {
+    /*acudiente */
+    document.getElementById(`PerNombres_${tipo}`).value = acudiente.PerNombres;
+    document.getElementById(`PerApellidos_${tipo}`).value = acudiente.PerApellidos;
+    document.getElementById(`PerEmail_${tipo}`).value = acudiente.PerEmail;
+    document.getElementById(`PerTelefono_${tipo}`).value = acudiente.PerTelefono;
+    $(`#PerTipoAcudiente_${tipo}`).find(`option[value="${acudiente.PerTipoAcudiente}"]`).attr('selected', 'selected');
 }
 async function consultar_grupos() {
     const response = await consultarAPI('Grupos', 'GET');
@@ -216,6 +215,17 @@ async function agregar_estudiante() {
 
 
     }
+}
+async function validarCorreoAcudiente(isAcudiente1) {
+    
+    const _acudiente = await consultarAPI('Estudiantes/acudiente/validarcorreo', 'POST', undefined, {
+        email: isAcudiente1 ? document.getElementById('PerEmail_1').value : document.getElementById('PerEmail_2').value
+    });
+
+
+    if (_acudiente != null)
+        render_acudiente(isAcudiente1 ? "1" : "2", _acudiente);
+
 }
 async function enviarCorreo(_type) {
     let _id = 0;

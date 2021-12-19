@@ -1,0 +1,15 @@
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\Grados.dll
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\Grados.pdb
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Grados\Grados\bin\Release\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Release\Grados.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Release\Grados.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Release\Grados.dll
+C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Release\Grados.pdb

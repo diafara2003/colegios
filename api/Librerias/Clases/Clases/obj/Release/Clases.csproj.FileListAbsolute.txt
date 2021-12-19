@@ -1,0 +1,16 @@
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\Clases.dll
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\Clases.pdb
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Release\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Release\Clases.csprojAssemblyReference.cache
+C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Release\Clases.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Release\Clases.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Release\Clases.dll
+C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Release\Clases.pdb

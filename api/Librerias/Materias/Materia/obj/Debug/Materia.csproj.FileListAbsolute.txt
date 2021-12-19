@@ -25,8 +25,8 @@ C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\BaseDatos.dll.conf
 C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\Trasversales.pdb
 C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\EntityFramework.xml
 C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\EntityFramework.SqlServer.xml
-C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.dll
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.pdb
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache

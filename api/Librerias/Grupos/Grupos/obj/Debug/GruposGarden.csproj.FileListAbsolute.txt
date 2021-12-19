@@ -11,8 +11,8 @@ C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\Trasversales.pdb
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\Utilidades.pdb
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\EntityFramework.xml
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\bin\Debug\EntityFramework.SqlServer.xml
-C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\GruposGarden.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\GruposGarden.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\GruposGarden.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\GruposGarden.dll
 C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\GruposGarden.pdb
+C:\colegios\colegios\api\Librerias\Grupos\Grupos\obj\Debug\GruposGarden.csprojAssemblyReference.cache

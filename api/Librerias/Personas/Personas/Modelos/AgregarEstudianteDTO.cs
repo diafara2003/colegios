@@ -18,6 +18,10 @@ namespace Persona.Modelos
     }
 
 
+    public class BuscarAcudienteCorreoDTO {
+        public string email { get; set; }
+    }
+
     public class ResponseAgregarEstudianteDTO {
         public AgregarEstudianteDTO modelo { get; set; }
         public ResponseDTO resultado { get; set; }

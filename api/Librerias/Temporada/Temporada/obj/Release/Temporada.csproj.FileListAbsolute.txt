@@ -1,0 +1,16 @@
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\Temporada.dll
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\Temporada.pdb
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\BaseDatos.dll
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\EntityFramework.dll
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\EntityFramework.SqlServer.dll
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\Trasversales.dll
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\BaseDatos.pdb
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\BaseDatos.dll.config
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\Trasversales.pdb
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\EntityFramework.xml
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\bin\Release\EntityFramework.SqlServer.xml
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Release\Temporada.csprojAssemblyReference.cache
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Release\Temporada.csproj.CoreCompileInputs.cache
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Release\Temporada.csproj.CopyComplete
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Release\Temporada.dll
+C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Release\Temporada.pdb

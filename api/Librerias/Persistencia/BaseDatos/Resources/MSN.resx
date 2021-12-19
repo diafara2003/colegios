@@ -136,4 +136,7 @@
   <data name="_msn___CrearMensaje_Bandeja_Entrada_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sql\procedures\msn\[msn].[crearmensaje_bandeja_entrada].sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
+  <data name="_msn___ObtenerAcudientesgrupos_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sql\procedures\msn\[msn].[obteneracudientesgrupos].sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
 </root>

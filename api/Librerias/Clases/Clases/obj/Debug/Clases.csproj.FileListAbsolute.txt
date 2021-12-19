@@ -25,7 +25,6 @@ C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Debug\BaseDatos.dll.config
 C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Debug\Trasversales.pdb
 C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Debug\EntityFramework.xml
 C:\colegios\colegios\api\Librerias\Clases\Clases\bin\Debug\EntityFramework.SqlServer.xml
-C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Debug\Clases.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Debug\Clases.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Debug\Clases.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Clases\Clases\obj\Debug\Clases.dll
