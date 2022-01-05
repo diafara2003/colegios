@@ -29,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CoreCom
 C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.dll
 C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.pdb
+C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csprojAssemblyReference.cache

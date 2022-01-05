@@ -127,6 +127,7 @@ namespace Colegio.Controllers
                     _data.notification.title = "Nuevo mensaje";
                     _data.notification.body = data.mensaje.MenAsunto;
                     _data.priority = "high";
+                    _data.notification.sound = "default";
 
                     _data.to = c.TokenFCM;
 

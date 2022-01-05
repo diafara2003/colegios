@@ -54,7 +54,7 @@ namespace Colegio.Controllers
           
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         [Route("tokenFCM")]
         public ResponseDTO PostTokenPhone(LoginPhone request)

@@ -29,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csproj.C
 C:\colegios\colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.dll
 C:\colegios\colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.pdb
+C:\colegios\colegios\api\Librerias\Adjuntos\Adjuntos\obj\Debug\Adjuntos.csprojAssemblyReference.cache

@@ -431,9 +431,17 @@ namespace Persona.Servicios
 
                     objCnn.loginPhone.Add(modelo);
 
-                    objCnn.SaveChanges();
+                   
                 }
-              
+                else
+                {
+                    _token.FirstOrDefault().UsuarioId= modelo.UsuarioId;
+                    objCnn.Entry(_token.FirstOrDefault()).State = EntityState.Modified;
+
+                }
+                objCnn.SaveChanges();
+
+
             }
             catch (Exception e)
             {

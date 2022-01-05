@@ -9,4 +9,3 @@ C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\bin\Debug\Trasversa
 C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Debug\Trasversales.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Debug\Trasversales.dll
 C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Debug\Trasversales.pdb
-C:\colegios\colegios\api\Librerias\Trasversales\Trasversales\obj\Debug\Trasversales.csprojAssemblyReference.cache

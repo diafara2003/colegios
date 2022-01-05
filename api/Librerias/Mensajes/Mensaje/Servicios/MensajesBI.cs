@@ -133,7 +133,7 @@ namespace Mensaje.Servicios
             ResponseDTO objResultado = new ResponseDTO();
             try
             {
-                request.mensaje.MenFecha = DateTime.Now;
+                request.mensaje.MenFecha = DateTime.Now.AddHours(1);
                 if (request.mensaje.MenReplicaIdMsn != 0)
                 {
                     request.mensaje.MenBloquearRespuesta = 0;
@@ -163,7 +163,7 @@ namespace Mensaje.Servicios
                 }
                 else
                 {
-                    request.mensaje.MenFecha = DateTime.Now;
+                    request.mensaje.MenFecha = DateTime.Now.AddHours(1); ;
                     objCnn.mensajes.Add(request.mensaje);
                 }
 

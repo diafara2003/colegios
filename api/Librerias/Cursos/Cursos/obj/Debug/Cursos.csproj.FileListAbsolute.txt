@@ -29,4 +29,3 @@ C:\colegios\colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csproj.CoreCom
 C:\colegios\colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.dll
 C:\colegios\colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.pdb
-C:\colegios\colegios\api\Librerias\Cursos\Cursos\obj\Debug\Cursos.csprojAssemblyReference.cache

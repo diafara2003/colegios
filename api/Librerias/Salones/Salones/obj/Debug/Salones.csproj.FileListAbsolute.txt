@@ -25,7 +25,6 @@ C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Debug\BaseDatos.dll.confi
 C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Debug\Trasversales.pdb
 C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Debug\EntityFramework.xml
 C:\colegios\colegios\api\Librerias\Salones\Salones\bin\Debug\EntityFramework.SqlServer.xml
-C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csproj.CoreCompileInputs.cache
 C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.dll
