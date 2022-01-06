@@ -29,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csproj.Core
 C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.dll
 C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.pdb
+C:\colegios\colegios\api\Librerias\Salones\Salones\obj\Debug\Salones.csprojAssemblyReference.cache

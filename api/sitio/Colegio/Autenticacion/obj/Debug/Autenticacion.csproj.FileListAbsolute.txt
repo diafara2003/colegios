@@ -29,4 +29,3 @@ C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csp
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CopyComplete
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.dll
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.pdb
-C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csprojAssemblyReference.cache

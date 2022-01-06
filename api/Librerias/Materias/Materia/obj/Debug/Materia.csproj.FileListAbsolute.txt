@@ -29,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.Cor
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.dll
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.pdb
+C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache

@@ -66,7 +66,7 @@ namespace Colegio.Controllers
 
         }
 
-        
+        [HttpDelete]
         public ResponseDTO Eliminar(int id) {
             new EstudiantesBL<Estudiantes>().DeleteEstudiante(id);
 

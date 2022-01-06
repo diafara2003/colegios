@@ -13,6 +13,7 @@ namespace Colegio.Controllers
 {
     public class ProfesorController : ApiController
     {
+        [HttpGet]
         // GET: api/Profesor
         public IEnumerable<ConsultaProfesorDTO> Get()
         {
@@ -25,6 +26,7 @@ namespace Colegio.Controllers
             return _result;
         }
 
+        [HttpGet]
         // GET: api/Profesor/5
         public ConsultaProfesorDTO Get(int id)
         {
@@ -36,6 +38,7 @@ namespace Colegio.Controllers
         }
 
         // POST: api/Profesor
+        [HttpPost]
         public ResponseDTO Post(ConsultaProfesorDTO value)
         {
             var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
@@ -118,6 +121,7 @@ namespace Colegio.Controllers
 
 
         // DELETE: api/Profesor/5
+        [HttpDelete]
         public ResponseDTO Delete(int id)
         {
             new ProfesoresBL<Personas>().DeleteGrupo(id);

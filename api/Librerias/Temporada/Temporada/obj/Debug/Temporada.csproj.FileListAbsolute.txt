@@ -29,4 +29,3 @@ C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.cspro
 C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.dll
 C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.pdb
-C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csprojAssemblyReference.cache
