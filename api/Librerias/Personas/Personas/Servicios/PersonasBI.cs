@@ -7,6 +7,7 @@ using Trasversales.Modelo;
 using System.Data;
 using Persona.Modelos;
 using Utilidades.Servicios;
+using System.Web;
 
 namespace Persona.Servicios
 {
@@ -45,9 +46,9 @@ namespace Persona.Servicios
             ColegioContext objCnn = new ColegioContext();
 
             if (id == 0)
-                objSeccion = (from data in objCnn.personas where data.PerIdEmpresa == empresa select data).OrderBy(c => c.PerApellidos);
+                objSeccion = (from data in objCnn.personas where data.PerIdEmpresa == empresa && data.PerEstado select data).OrderBy(c => c.PerApellidos);
             else
-                objSeccion = (from data in objCnn.personas where data.PerId == id select data).OrderBy(c => c.PerApellidos);
+                objSeccion = (from data in objCnn.personas where data.PerId == id && data.PerEstado select data).OrderBy(c => c.PerApellidos);
             return objSeccion;
         }
 
@@ -74,7 +75,15 @@ namespace Persona.Servicios
             return objSeccion;
         }
 
+        public Personas RecuperarUsuario(string usuario ,int empresa)
+        {
+            IEnumerable<Personas> objSeccion = new List<Personas>();
+            ColegioContext objCnn = new ColegioContext();
 
+            
+            return (from data in objCnn.personas where data.PerUsuario ==usuario && data.PerEstado && data.PerIdEmpresa==empresa select data).Single();
+            
+        }
 
         public IEnumerable<CustomPersonasDTO> GetAll(int empresa, int tipo = 0)
         {
@@ -210,7 +219,7 @@ namespace Persona.Servicios
             Personas _persona = new Personas();
 
             _persona = (from data in objCnn.personas
-                        where data.PerDocumento == documento && data.PerClave == password
+                        where data.PerUsuario == documento && data.PerClave == password
                         select data).FirstOrDefault();
 
 
@@ -347,7 +356,7 @@ namespace Persona.Servicios
         }
 
 
-        public ResponseDTO EnviarCorreo(int id)
+        public ResponseDTO EnviarCorreo(string asunto,int id,string ruta,string rutaIconos)
         {
             ResponseDTO obj = new ResponseDTO();
 
@@ -355,6 +364,9 @@ namespace Persona.Servicios
 
 
             var _persona = objCnn.personas.Find(id);
+
+
+            var _empresa = objCnn.empresas.Find(_persona.PerIdEmpresa);
 
             List<string> correos = new List<string>();
 
@@ -373,9 +385,9 @@ namespace Persona.Servicios
                 objCnn.SaveChanges();
 
             }
-
-
-            Utilidad.EnviarMensajeCorreo(correos, _persona.PerClave);
+            
+            var adjunto = objCnn.adjuntos.Find(int.Parse(_empresa.EmpLogo));
+            Utilidad.EnviarMensajeCorreo(asunto,ruta, correos, _persona, _empresa, adjunto, rutaIconos);
 
 
             obj.codigo = 1;
@@ -383,7 +395,7 @@ namespace Persona.Servicios
 
             return obj;
         }
-        public ResponseDTO RestablecerContrasena(int id)
+        public ResponseDTO RestablecerContrasena(string asunto,int id,string ruta,string rutaLogo)
         {
             ResponseDTO obj = new ResponseDTO();
 
@@ -404,7 +416,11 @@ namespace Persona.Servicios
 
             correos.Add(_persona.PerEmail);
 
-            Utilidad.EnviarMensajeCorreo(correos, _persona.PerClave);
+            var _empresa = objCnn.empresas.Find(_persona.PerIdEmpresa);
+
+            var adjunto = objCnn.adjuntos.Find(int.Parse(_empresa.EmpLogo));
+
+            Utilidad.EnviarMensajeCorreo(asunto,ruta, correos, _persona,_empresa, adjunto, rutaLogo);
 
             objCnn.Entry(_persona).State = EntityState.Modified;
             objCnn.SaveChanges();

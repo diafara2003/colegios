@@ -60,6 +60,10 @@
       <Project>{CECED400-2FAA-4086-B5BF-57F55A3941B5}</Project>
       <Name>BaseDatos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Trasversales\Trasversales\Trasversales.csproj">
+      <Project>{7DD3AD82-D326-43DD-BB52-BD504BF84390}</Project>
+      <Name>Trasversales</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

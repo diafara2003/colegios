@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-language" content="es">
@@ -23,7 +24,6 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet' />
     <title>Grupos</title>
     <style>
-
         .boton {
             width: 60px;
             height: 60px;
@@ -39,35 +39,35 @@
             float: left;
             cursor: pointer;
         }
-
-            .boton:hover {
-                opacity: 0.80;
-                filter: alpha (opacity=30);
-            }
-
-            .boton a {
-                color: #fff;
-                text-decoration: none;
-                padding: 5px 5px 5px 0;
-            }
-
+        
+        .boton:hover {
+            opacity: 0.80;
+            filter: alpha (opacity=30);
+        }
+        
+        .boton a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 5px 5px 0;
+        }
+        
         .border-top {
             border-top: 2px solid #000 !important;
         }
-
+        
         h6 {
             color: #87b4e4 !important
         }
-
+        
         label {
             margin-bottom: 0px !important;
             margin-top: 0.8rem !important;
         }
-
+        
         .text-danger {
             padding: 10px;
         }
-
+        
         .border-circle-form {
             border: 0.07em solid #a19c9c;
             border-radius: 50%;
@@ -81,6 +81,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container-md  mt-2 ">
@@ -168,17 +169,17 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleInputEmail1">Aseguradora </label>
-                                    <input maxlength="11" onkeypress="return only_number(event)" onblur="habilitar_boton_agregar()" type="text" class="form-control input-sm" id="EstAseguradora" placeholder="Identificación">
+                                    <label for="exampleInputEmail1">Nombre EPS </label>
+                                    <input maxlength="80"  onblur="habilitar_boton_agregar()" type="text" class="form-control input-sm" id="EstAseguradora" placeholder="Nombre EPS">
                                 </div>
 
                                 <div class="col-12">
                                     <label for="exampleInputEmail1">Alergias </label>
-                                    <textarea maxlength="50" class="form-control" id="EstAlergias" rows="3"></textarea>
+                                    <textarea maxlength="50" class="form-control" id="EstAlergias" rows="4"></textarea>
                                 </div>
                                 <div class="col-12">
                                     <label for="exampleInputEmail1">Medicamentos </label>
-                                    <textarea class="form-control" maxlength="50" id="EstMedicamentos" rows="3"></textarea>
+                                    <textarea class="form-control" maxlength="50" id="EstMedicamentos" rows="4"></textarea>
                                 </div>
                                 <!--<div class="col-12">
                                     <label for="exampleInputEmail1">Comentarios adicionales</label>
@@ -253,9 +254,11 @@
                                             <option value="-1">Seleccione un Parentesco</option>
                                             <option value="ma">Mamá</option>
                                             <option value="pa">Papá</option>
-                                            <option value="abu">Abuelito</option>
-                                            <option value="aba">Abuelita</option>
+                                            <option value="abu">Abuelo</option>
+                                            <option value="aba">Abuela</option>
                                             <option value="T">Tío</option>
+                                            <option value="HH">Hermano</option>
+                                            <option value="HM">Hermana</option>
                                         </select>
                                     </div>
 
@@ -304,7 +307,7 @@
                                                 <i onclick="validarCorreoAcudiente(false)" title="Validar si existe el correo" data-toggle="tooltip" style="color: #43AC34;font-size:16px" class="fas fa-user-friends border-circle-form"></i>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
 
                                 </div>
@@ -334,9 +337,11 @@
                                             <option value="-1">Seleccione un Parentesco</option>
                                             <option value="ma">Mamá</option>
                                             <option value="pa">Papá</option>
-                                            <option value="abu">Abuelito</option>
-                                            <option value="aba">Abuelita</option>
+                                            <option value="abu">Abuelo</option>
+                                            <option value="aba">Abuela</option>
                                             <option value="T">Tío</option>
+                                            <option value="HH">Hermano</option>
+                                            <option value="HM">Hermana</option>
                                         </select>
                                     </div>
 
@@ -376,7 +381,7 @@
                                 </div>
 
                                 <div class="col-12 pl-3">
-                                    <span class="text-danger">Por favor llene los campos marcados con asteristo*</span>
+                                    <span class="text-danger">Por favor llene los campos marcados con asterisco*</span>
                                 </div>
                             </div>
                         </div>
@@ -399,4 +404,5 @@
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
     <script src="../../Script/Estudiantes/agregar.js"></script>
 </body>
+
 </html>

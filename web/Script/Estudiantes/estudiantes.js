@@ -1,7 +1,15 @@
 ﻿let _data_estudiante = [], idEdit = 0, _data_grupos = [];
 const _template_grupos = '';
 
+function filtroGrupo() {
+    let filtered = [];
+    let _value = $('#DdlGrupofiltro').find('option:selected').val();
 
+    if (_value == -1) filtered = _data_estudiante;
+    else filtered = _data_estudiante.filter(c => c.grupo != null && c.grupo != undefined && c.grupo.id == _value);
+
+    renderizar_estudiantes(filtered);
+}
 function buscar_estudiantes(_this) {
     let _text = _this.value;
     let filtered = [];
@@ -11,8 +19,9 @@ function buscar_estudiantes(_this) {
     }
     else {
         filtered = _data_estudiante.filter(
-            x => x.nombres.toString().toLowerCase().includes(_text)
-                || x.apellidos.toString().toLowerCase().includes(_text)
+            x => x.nombres.toString().toLowerCase().indexOf(_text.toLowerCase()) != -1
+                || x.apellidos.toString().toLowerCase().indexOf(_text.toLowerCase()) != -1
+
         );
     }
     renderizar_estudiantes(filtered);
@@ -25,6 +34,13 @@ async function consultar_grupos() {
     const response = await consultarAPI('Grupos', 'GET');
 
     _data_grupos = response;
+
+
+    let _html = `<option value="-1" selected>--Todos los grupos--</li> `
+    _data_grupos.forEach(c => _html += `<option value="${c.IdGrupo}" >${c.Nombre}</li> `);
+
+
+    $('#DdlGrupofiltro').append(_html);
 }
 function _renderizar_estado(activo) {
     return `<select class="form-control input-sm estado" onchange="actualizar(this)">

@@ -34,6 +34,18 @@
             .list-group li {
                 cursor: pointer;
             }
+
+        th {
+            position: sticky;
+            top: 0px;
+            z-index: 99;
+            background-color: white;
+        }
+
+        .input-group-append button {
+            padding: 0px 13px;
+            height: 32px;
+        }
     </style>
 </head>
 <body>
@@ -50,11 +62,31 @@
         <div class="row">
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
-                <div class="text-right">
-                    <button type="button" onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear profesor</button>
+
+                <div class="d-md-flex justify-content-between d-block">
+
+                    <div class="input-group col-md-4 col-12">
+                        <label class="mt-2 mr-1">Buscar profesor</label>
+                        <input onkeyup="buscar_profesor(this)" style="height: 32px;" class="form-control py-2" type="search" placeholder="buscar profesor" id="example-search-input">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="input-group col-md-4 col-12">
+                        <label class="mt-2 mr-1">Grupos</label>
+                        <select id="DdlGrupofiltro" class="form-control input-sm grupo" onchange="filtroGrupo(this)"></select>
+                    </div>
+
+                    <div class="col-12 col-md-4 text-right">
+                        <div class="w-100">
+                            <button type="button" onclick="abrir_modal_agregar()" class="btn btn-primary btn-sm"><i class="fas fa-user-check mr-1"></i>Crear profesor</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2">
-                    <table class="table table-hover table-sm mt-4">
+                <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2" style="overflow:auto;max-height:calc(100vh - 104px)">
+                    <table class="table table-hover table-sm">
 
                         <thead>
                             <tr>

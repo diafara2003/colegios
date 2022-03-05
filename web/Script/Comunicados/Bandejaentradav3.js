@@ -84,7 +84,9 @@ async function buscar_personas() {
     $('#cargando').css('display', 'none');
 
 }
+
 function renderizar_modal_destinatarios(item, showIcon, tipo, index) {
+    if (item == undefined) return '';
     if (item.PerApellidos == null) item.PerApellidos = "";
 
     return `
@@ -95,7 +97,7 @@ function renderizar_modal_destinatarios(item, showIcon, tipo, index) {
                     ${(_sesion.tipo != 3 ? `<div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>` :
             `<div>
                         <div class="pl-2" style="color:${item.GrEnColorRGB}">${item.PerNombres} ${item.PerApellidos}</div>
-                        <div class="pl-2 text-muted" style="color:${item.GrEnColorRGB}">${item.CurDescripcion}</div>
+                        <div class="pl-2 text-muted" style="overflow: auto;white-space: pre-wrap;word-break: break-word;color:${item.GrEnColorRGB}">${item.CurDescripcion}</div>
                     <div>`)}
                     ${(showIcon ? `
                         <div class="pl-2" onclick="ver_detalles(this,${item.PerId},${item.tipo})">
@@ -133,6 +135,8 @@ async function ver_detalles(_this, id, tipo) {
         if (tipo == -20) {
             const _info_grupos = await consultarAPI(`Mensajes/info/grupo?idgrupo=${id}`, 'GET');
 
+            if (_info_grupos.length == 0) $(`#destinatario_detalle_${id}`).find(`.bx-loader`).remove();
+
             let _parend_checked = false;
 
             if ($(_this).closest('.align-items-center').find('input[type="checkbox"]').first().is(':checked') || $('#check_-40').is(':checked'))
@@ -158,7 +162,7 @@ function renderizar_detalle(item, _readonly_grupos) {
             <div class="d-flex align-items-center mt-1 hover-item p-1 ml-3">
                 <div><input onclick="status_check_planta(this)" tipo="profesores" profesores="${item.PerId}" type="checkbox" ${(_readonly_grupos ? ' checked="checked" ' : '')} id="checkDetail_${item.PerId}" /></div>
                 <div class="photo-user" style="color:white;border:1px solid ${item.GrEnColorRGB};background:${item.GrEnColorRGB}">${iniciales_usuario(item.PerApellidos, item.PerNombres)}</div>
-                <div class="d-block pl-2">
+                <div class="d-block pl-2" style="width:100%">
                     <div class="">${item.PerNombres} ${item.PerApellidos}</div>
                     <div class="text-muted">${item.CurDescripcion}</div>
                 </div>
@@ -237,7 +241,7 @@ function renderizar_info_grupo(item, _readonly_grupos) {
                 <div class="d-block pl-2">
                     <div class="">
                         ${item.PerNombresA2} ${item.PerApellidosA2}
-                        <span class="text-muted">(${item.TipoA1})</span>
+                        <span class="text-muted">(${item.TipoA2})</span>
                     </div>
                     <div class="text-muted">${item.EstNombres} ${item.EstApellidos}</div>
                 </div>
@@ -358,7 +362,7 @@ function renderizar_html_seleccionado(persona, _id_deleted, color, _plus) {
                         </div>
                     </div>
                   ${(_plus ? '' : `
-                    <div style="display:block">
+                    <div style="display:block;max-width:227px">
                         <span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>
                         ${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small>${persona.CurDescripcion}</small>`}
                     </div>`)}
@@ -388,6 +392,7 @@ function blur_input_busqueda(_this) {
     $('#search-general').removeClass('focus-search');
 }
 async function cargar_bandeja(tipo, _element) {
+    volver();
     document.getElementById('tbodyDatos').innerHTML = '';
     $('.active').removeClass('active');
     $(_element).closest('.menu-op').addClass('active');
@@ -542,7 +547,7 @@ async function consultar_mensaje(_this, _id, _idBandeja, _is_rta_ok) {
     if (readonly) $('.btn-responder').addClass('d-none');
 
     $('#mostrarMensaje').css('max-height', 'calc(100vh - 145px)');
-
+    let modoRad = false;
     const response = await consultarAPI(`Mensajes/?id=${_id}&bandeja=${_idBandeja}`, 'GET');
 
 
@@ -943,7 +948,7 @@ function armar_url_adjuntos() {
 }
 function subirAdjunto() {
 
-    let _url = 'https://www.comunicatecolegios.com';
+    let _url = 'https://www.comunicatecolegios.com/api';
 
     var formData = new FormData();
     var file = $('#myInput')[0];
@@ -1115,7 +1120,16 @@ function cerrar_modal_destinatario() {
 
     $('#modalDestinatario').removeClass('d-block').addClass('d-none');
 }
+function armar_url_adjuntos(_adjunto) {
+    let _url = '';
+    let _usuario = obtener_session().idusuario;
+        
 
+    _url += '?usuario=' + _usuario;
+    _url += '&id=' + _adjunto;
+
+    return _url;
+}
 
 (async function () {
 
@@ -1139,6 +1153,23 @@ function cerrar_modal_destinatario() {
         $('.btn-bloquear-respuesta').remove();
 
     if (_sesion.tipo != 0) $('.fa-chevron-down').remove();
+
+
+
+    let _id_emp = obtener_session().empresa;
+    const empresa = await consultarAPI('Empresa/' + _id_emp, 'GET');
+    let _url = window.location.href.toLowerCase().split('views')[0];
+    const url = `${_url}api/Adjuntos${armar_url_adjuntos(empresa.EmpLogo)}`;
+
+    empresa.EmpLogo = url;
+    if (empresa.EmpLogo != null) {
+
+        try {
+            document.getElementById('MenuImgLogoColegio').src = empresa.EmpLogo;//`${_url}api/adjuntos/${empresa.EmpLogo}`;
+        } catch (e) { }
+    } else {
+        document.getElementById('MenuImgLogoColegio').src = '';
+    }
 
 })();
 

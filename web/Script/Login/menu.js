@@ -33,15 +33,32 @@ function cerrar_mensaje() {
     swal.close()
 }
 function cargar_opciones() {
-    consultarAPI('menu', 'GET', response => renderizar_menu(response));
+   
+        consultarAPI('menu', 'GET', response => renderizar_menu(response));
 }
 function renderizar_menu(response) {
-    _menu_op = response;
+
+    
+
+    let _usuario = obtener_usuario_sesion();
+
+    if (_usuario.PerTipoPerfil == 0) {
+        $('.MenuPerfil').remove();
+    }
+
+
+        _menu_op = response;
+
+    
+    if (obtener_usuario_sesion().PerTipoPerfil != 0)
+        _menu_op = response.filter(c => c.SecDescripcion.indexOf("Mensajería") != -1);
+
+
     let _html = '<h3 class="nav__subtitle">Opciones</h3>',
         _opciones_estandar = '';
 
-    for (let i = 0; i < response.length; i++) {
-        const element = response[i];
+    for (let i = 0; i < _menu_op.length; i++) {
+        const element = _menu_op[i];
 
         if (element == null) continue;
 
@@ -163,6 +180,10 @@ function bandeja_desktop() {
 }
 function cargar_usuario() {
     let _usuario = obtener_usuario_sesion();
+
+    if (_usuario.PerTipoPerfil == 0)
+        $('#userInfo').text(`Administrador`);
+        else 
     $('#userInfo').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
 }
 async function cargar_datos_empresa() {
@@ -191,7 +212,7 @@ async function cargar_datos_empresa() {
 function armar_url_adjuntos(_adjunto) {
     let _url = '';
     let _usuario = obtener_session().idusuario;
-        
+
 
     _url += '?usuario=' + _usuario;
     _url += '&id=' + _adjunto;

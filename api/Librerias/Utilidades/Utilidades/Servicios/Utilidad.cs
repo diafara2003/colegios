@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
+using Trasversales.Modelo;
 
 namespace Utilidades.Servicios
 {
@@ -56,21 +58,61 @@ namespace Utilidades.Servicios
             return finalString;
         }
 
-        static string CreaeBody(string clave)
+        static AlternateView CreaeBody(string ruta, Personas usuario, Adjuntos adjunto,string rutaLogo)
         {
 
             string body = string.Empty;
 
-            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/TemplateMail/Education.html")))
+            using (StreamReader reader = new StreamReader(ruta))
             {
                 body = reader.ReadToEnd();
             }
-            body = body.Replace("{clave}", clave);
 
-            return body;
+            string nombre = usuario.PerNombres;
+
+            if (!string.IsNullOrEmpty(usuario.PerApellidos)) nombre = usuario.PerNombres + " " + usuario.PerApellidos;
+            body = body.Replace("{nombre}", nombre);
+            body = body.Replace("{clave}", usuario.PerClave);
+            body = body.Replace("{usuario}", usuario.PerUsuario);
+
+
+            string contentID1 = Guid.NewGuid().ToString().Replace("-", "");
+            string contentID2 = Guid.NewGuid().ToString().Replace("-", "");
+            string contentID3 = Guid.NewGuid().ToString().Replace("-", "");
+            body = body.Replace("{logo}", contentID1);            
+            body = body.Replace("{ios}", contentID2);
+            body = body.Replace("{android}", contentID3);
+            
+            
+
+            
+
+            AlternateView AV =
+        AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
+
+
+
+            LinkedResource Img = new LinkedResource(adjunto.AdjIdRuta, MediaTypeNames.Image.Jpeg);
+            Img.ContentId = contentID1;
+            Img.TransferEncoding = TransferEncoding.Base64;
+            AV.LinkedResources.Add(Img);
+            
+
+
+            LinkedResource iosImage = new LinkedResource(rutaLogo + @"\\ios.png", MediaTypeNames.Image.Jpeg);
+            iosImage.ContentId = contentID2;
+            iosImage.TransferEncoding = TransferEncoding.Base64;
+            AV.LinkedResources.Add(iosImage);
+
+            LinkedResource addroidImage = new LinkedResource(rutaLogo + @"\\android.png", MediaTypeNames.Image.Jpeg);
+            addroidImage.ContentId = contentID3;
+            iosImage.TransferEncoding = TransferEncoding.Base64;
+            AV.LinkedResources.Add(addroidImage);
+
+            return AV;
         }
 
-        public static string EnviarMensajeCorreo(List<string> correos, string clave)
+        public static string EnviarMensajeCorreo(string asunto,string ruta, List<string> correos, Personas usuario, Empresas empresa, Adjuntos adjunto,string rutaLogos)
         {
             //Creando objeto MailMessage
             MailMessage email = new MailMessage();
@@ -80,11 +122,11 @@ namespace Utilidades.Servicios
 
 
             email.From = new MailAddress("Notificaciones@comunicatecolegios.com");
-            email.Subject = "Registro de padre";
-            email.Body = CreaeBody(clave);
+            email.Subject = asunto;//"Registro de padre";
+            //  email.Body = CreaeBody(ruta, usuario);
             email.IsBodyHtml = true;
             email.Priority = MailPriority.Normal;
-
+            email.AlternateViews.Add(CreaeBody(ruta, usuario, adjunto, rutaLogos));
             //Definir objeto SmtpClient
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "comunicatecolegios.com";

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Web;
 using System.Web.Http;
 using Trasversales.Modelo;
 
@@ -17,14 +18,35 @@ namespace Colegio.Controllers
         [HttpGet]
         [Route("EnviarCorreo")]
         public ResponseDTO GetEnviarCorreo(int id) {
-            return new PersonasBI().EnviarCorreo(id);
+            string ruta = HttpContext.Current.Server.MapPath("~/TemplateMail/Education.html");
+            string ruta_icono = HttpContext.Current.Server.MapPath("~/img");
+
+
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+            var empresa = new Empresa.Servicios.EmpresaBL().Get(_persona.PerIdEmpresa).Single();
+
+            return new PersonasBI().EnviarCorreo(empresa.empresa.EmpNombre, id,ruta, ruta_icono);
         }
 
         [HttpGet]
         [Route("Restablecer")]
         public ResponseDTO GetRestablecer(int id)
         {
-            return new PersonasBI().RestablecerContrasena(id);
+            
+            string ruta = HttpContext.Current.Server.MapPath("~/TemplateMail/Education.html");
+            string ruta_icono = HttpContext.Current.Server.MapPath("~/img");
+
+
+            var identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+
+            var _persona = new Persona.Servicios.PersonasBI().Get(id: identity).FirstOrDefault();
+
+            var empresa = new Empresa.Servicios.EmpresaBL().Get(_persona.PerIdEmpresa).Single();
+
+            return new PersonasBI().RestablecerContrasena(empresa.empresa.EmpNombre,id, ruta, ruta_icono);
         }
 
         [HttpGet]
@@ -94,6 +116,10 @@ namespace Colegio.Controllers
             }
             else
             {
+
+                var persona = new PersonasBI().Select<Personas>(request.PerId);
+                request.PerUsuario = persona.PerUsuario;
+
                 new PersonasBI().UpdateEnvio<Personas>(request);
                 return new ResponseDTO() { codigo = 1, respuesta = "" };
             }

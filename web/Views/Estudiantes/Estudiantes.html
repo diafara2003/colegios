@@ -23,24 +23,32 @@
     <link href="../../Style/estandar.css" rel="stylesheet" />
     <title>Grupos</title>
     <style>
+
+        th {
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            background-color: white;
+        }
+
         .modal-dialog {
             min-width: 800px;
         }
-        
+
         .list-group {
             max-height: 150px;
             overflow: auto;
         }
-        
-        .list-group li {
-            cursor: pointer;
-        }
-        
+
+            .list-group li {
+                cursor: pointer;
+            }
+
         .input-group-append button {
             padding: 0px 13px;
             height: 32px;
         }
-        
+
         select {
             height: 29px !important;
             width: 150px !important;
@@ -62,7 +70,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-11 bg-white rounded">
                 <div class="d-md-flex justify-content-between d-block">
 
-                    <div class="input-group col-md-6 col-12">
+                    <div class="input-group col-md-4 col-12">
                         <label class="mt-2 mr-1">Buscar estudiante</label>
                         <input onkeyup="buscar_estudiantes(this)" style="height: 32px;" class="form-control py-2" type="search" placeholder="buscar estudiante" id="example-search-input">
                         <span class="input-group-append">
@@ -70,6 +78,11 @@
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
+                    </div>
+
+                    <div class="input-group col-md-4 col-12">
+                        <label class="mt-2 mr-1">Grupos</label>
+                        <select id="DdlGrupofiltro" class="form-control input-sm grupo" onchange="filtroGrupo(this)"></select>
                     </div>
 
                     <div class="col-12 col-md-4 text-right">
@@ -81,7 +94,7 @@
 
 
 
-                <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2">
+                <div class="col-12 order-lg-1 order-md-2 order-sm-2 order-2" style="overflow: auto;max-height: calc(100vh - 93px)">
                     <table class="table table-hover table-sm mt-4">
 
                         <thead>

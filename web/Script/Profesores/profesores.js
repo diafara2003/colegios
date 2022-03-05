@@ -2,6 +2,39 @@
 
 
 
+function filtroGrupo() {
+    let filtered = [];
+    let _value = $('#DdlGrupofiltro').find('option:selected').val();
+
+    if (_value == -1) filtered = _data_profesores;
+    else {
+        filtered = [];
+
+        _data_profesores.forEach(c => {
+
+            if (c.grupos != null && c.grupos != undefined && c.grupos.find(c => c.id == _value) != null)
+                filtered.push(c);
+        });
+    }
+
+    renderizar_profesores(filtered);
+}
+function buscar_profesor(_this) {
+    let _text = _this.value;
+    let filtered = [];
+
+    if (_text == '') {
+        filtered = _data_profesores;
+    }
+    else {
+        filtered = _data_profesores.filter(
+            x => x.nombre.toString().toLowerCase().indexOf(_text.toLowerCase()) != -1
+                || x.apellido.toString().toLowerCase().indexOf(_text.toLowerCase()) != -1
+
+        );
+    }
+    renderizar_profesores(filtered);
+}
 function abrir_modal_agregar() {
 
 
@@ -20,6 +53,14 @@ async function consultar_grupos() {
     const response = await consultarAPI('Grupos', 'GET');
 
     _data_grupos = response;
+
+
+    let _html = `<option value="-1" selected>--Todos los grupos--</li> `
+    _data_grupos.forEach(c => _html += `<option value="${c.IdGrupo}" >${c.Nombre}</li> `);
+
+
+    $('#DdlGrupofiltro').append(_html);
+
     renderizar_grupos(response);
 
 
@@ -229,7 +270,7 @@ async function editar_registro() {
     if (validar(_objeto)) {
         const _item = _data_profesores.find(c => c.id == idEdit);
 
-        const _result= await consultarAPI(`Profesor/${idEdit}`, 'POST', undefined, _objeto);
+        const _result = await consultarAPI(`Profesor/${idEdit}`, 'POST', undefined, _objeto);
 
         if (_result.codigo == -1) {
             alertify.error(_result.respuesta);

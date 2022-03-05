@@ -67,6 +67,11 @@ img {
     height: auto;
 }
 
+#MenuImgLogoColegio{
+	    width: 187px!important;
+	    height: 50px;
+}
+
 i, h4, .nav__name, .nav__dropdown-item {
     color: var(--primary);
 }
