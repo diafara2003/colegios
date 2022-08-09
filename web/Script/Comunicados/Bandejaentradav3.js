@@ -62,7 +62,7 @@ async function buscar_personas() {
     _data_source_ac = data;
 
 
-    if (_sesion.tipo == 0) {
+    if (_sesion.tipo == 0 || _sesion.tipo == 1) {
         $('#RegistroPrincipal').append(renderizar_modal_destinatarios(data.find(c => c.tipo == -40), false, 'colegio'));
 
 
@@ -364,7 +364,7 @@ function renderizar_html_seleccionado(persona, _id_deleted, color, _plus) {
                   ${(_plus ? '' : `
                     <div style="display:block;max-width:227px">
                         <span class="wellItemText-212">${persona.PerNombres} ${persona.PerApellidos}</span>
-                        ${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small>${persona.CurDescripcion}</small>`}
+                        ${persona.CurDescripcion == undefined || persona.CurDescripcion == '' ? '' : `<small style="overflow:hidden;text-overflow:ellipsis;width:213px">${persona.CurDescripcion}</small>`}
                     </div>`)}
                     
                 </span>

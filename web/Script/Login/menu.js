@@ -33,12 +33,12 @@ function cerrar_mensaje() {
     swal.close()
 }
 function cargar_opciones() {
-   
-        consultarAPI('menu', 'GET', response => renderizar_menu(response));
+
+    consultarAPI('menu', 'GET', response => renderizar_menu(response));
 }
 function renderizar_menu(response) {
 
-    
+
 
     let _usuario = obtener_usuario_sesion();
 
@@ -47,20 +47,32 @@ function renderizar_menu(response) {
     }
 
 
-        _menu_op = response;
+    _menu_op = response;
 
-    
+
     if (obtener_usuario_sesion().PerTipoPerfil != 0)
         _menu_op = response.filter(c => c.SecDescripcion.indexOf("Mensajería") != -1);
 
 
-    let _html = '<h3 class="nav__subtitle">Opciones</h3>',
+    let _html = `<h3 style="border-top:1px solid #ebebeb;padding-top:10px" class="nav__subtitle">Opciones</h3>`,
         _opciones_estandar = '';
+
+
+    //_html += `<a href="#" class="nav__link" onclick=ver_opcion(this,'../GruposEnvio/GruposEnviojardin.html')>
+    //                    <i class='fas fa-users nav__icon'></i>
+    //                    <span class="nav__name">Grupos</span>
+    //                  </a> `;
+    //_html += `<a href="#" class="nav__link" onclick=ver_opcion(this,'../GruposEnvio/GruposEnvioColores.html')>
+    //                    <i class='fas fa-users nav__icon'></i>
+    //                    <span class="nav__name">Grupos</span>
+    //                  </a> `;
 
     for (let i = 0; i < _menu_op.length; i++) {
         const element = _menu_op[i];
 
         if (element == null) continue;
+
+        if (element.SecDescripcion == 'Actualizar Datos') continue;
 
 
         if (element.opcion.length > 0) {
@@ -183,8 +195,8 @@ function cargar_usuario() {
 
     if (_usuario.PerTipoPerfil == 0)
         $('#userInfo').text(`Administrador`);
-        else 
-    $('#userInfo').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
+    else
+        $('#userInfo').text(`${nombres(_usuario.PerNombres, _usuario.PerApellidos)}`);
 }
 async function cargar_datos_empresa() {
     let _id_emp = obtener_session().empresa;
@@ -201,7 +213,7 @@ async function cargar_datos_empresa() {
     if (empresa.EmpLogo != null) {
 
         try {
-            document.getElementById('MenuImgLogoColegio').src = empresa.EmpLogo;//`${_url}api/adjuntos/${empresa.EmpLogo}`;
+            document.getElementById('MenuLogoColegio').src = empresa.EmpLogo;//`${_url}api/adjuntos/${empresa.EmpLogo}`;
         } catch (e) { }
     } else {
         document.getElementById('imglogoColegio').src = '';

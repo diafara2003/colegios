@@ -13,7 +13,6 @@ C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CoreCompile
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.CopyComplete
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.dll
 C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.pdb
-C:\Colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Persona.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\Persona.pdb
 C:\colegios\colegios\api\Librerias\Personas\Personas\bin\Debug\BaseDatos.dll
@@ -32,3 +31,6 @@ C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.Co
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.dll
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.pdb
 C:\colegios\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csprojAssemblyReference.cache
+C:\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.dll
+C:\colegios\api\Librerias\Personas\Personas\bin\Debug\Utilidades.pdb
+C:\colegios\api\Librerias\Personas\Personas\obj\Debug\Persona.csproj.AssemblyReference.cache

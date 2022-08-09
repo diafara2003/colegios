@@ -13,7 +13,6 @@ C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CoreCompileI
 C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.CopyComplete
 C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.dll
 C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.pdb
-C:\Colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache
 C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\Materia.dll
 C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\Materia.pdb
 C:\colegios\colegios\api\Librerias\Materias\Materia\bin\Debug\BaseDatos.dll
@@ -30,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.Cop
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.dll
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.pdb
 C:\colegios\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csprojAssemblyReference.cache
+C:\colegios\api\Librerias\Materias\Materia\obj\Debug\Materia.csproj.AssemblyReference.cache

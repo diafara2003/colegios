@@ -166,7 +166,7 @@ i, h4, .nav__name, .nav__dropdown-item {
 
 .nav__logo {
     font-weight: var(--font-semi-bold);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .nav__list,

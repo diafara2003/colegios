@@ -11,7 +11,6 @@ C:\Colegios\api\Librerias\Empresa\Empresa\bin\Debug\Trasversales.pdb
 C:\Colegios\api\Librerias\Empresa\Empresa\bin\Debug\Utilidades.pdb
 C:\Colegios\api\Librerias\Empresa\Empresa\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Empresa\Empresa\bin\Debug\EntityFramework.SqlServer.xml
-C:\Colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.csproj.CopyComplete
 C:\Colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.dll
@@ -34,3 +33,4 @@ C:\colegios\colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.csproj.Copy
 C:\colegios\colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.dll
 C:\colegios\colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.pdb
 C:\colegios\colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.csprojAssemblyReference.cache
+C:\colegios\api\Librerias\Empresa\Empresa\obj\Debug\Empresa.csproj.AssemblyReference.cache

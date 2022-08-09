@@ -3,7 +3,6 @@ C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\Utilidades.pdb
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.dll
 C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.pdb
-C:\Colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\BaseDatos.dll
 C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\EntityFramework.dll
 C:\Colegios\api\Librerias\Utilidades\Utilidades\bin\Debug\EntityFramework.SqlServer.dll
@@ -30,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.cs
 C:\colegios\colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csproj.CopyComplete
 C:\colegios\colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.dll
 C:\colegios\colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.pdb
+C:\colegios\api\Librerias\Utilidades\Utilidades\obj\Debug\Utilidades.csproj.AssemblyReference.cache

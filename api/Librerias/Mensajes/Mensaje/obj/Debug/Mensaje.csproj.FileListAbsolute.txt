@@ -11,7 +11,6 @@ C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Trasversales.pdb
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\Utilidades.pdb
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Mensajes\Mensaje\bin\Debug\EntityFramework.SqlServer.xml
-C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.CopyComplete
 C:\Colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.dll
@@ -34,3 +33,4 @@ C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.Cop
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.dll
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.pdb
 C:\colegios\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csprojAssemblyReference.cache
+C:\colegios\api\Librerias\Mensajes\Mensaje\obj\Debug\Mensaje.csproj.AssemblyReference.cache

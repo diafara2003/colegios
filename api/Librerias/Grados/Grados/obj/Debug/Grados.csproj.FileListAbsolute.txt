@@ -9,7 +9,6 @@ C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\BaseDatos.dll.config
 C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\Trasversales.pdb
 C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Grados\Grados\bin\Debug\EntityFramework.SqlServer.xml
-C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CopyComplete
 C:\Colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.dll
@@ -30,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.CopyCom
 C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.dll
 C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.pdb
 C:\colegios\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csprojAssemblyReference.cache
+C:\colegios\api\Librerias\Grados\Grados\obj\Debug\Grados.csproj.AssemblyReference.cache

@@ -43,33 +43,32 @@ namespace Empresa.Servicios
         public IEnumerable<EmpresaCustomDTO> Get(int id = 0)
         {
             ColegioContext objCnn = new ColegioContext();
-            IEnumerable<EmpresaCustomDTO> objresultado = new List<EmpresaCustomDTO>();
+            List<EmpresaCustomDTO> objresultado = new List<EmpresaCustomDTO>();
 
             if (id == 0)
             {
-                objresultado = (from e in objCnn.empresas
-                                join p in objCnn.personas on e.EmpId equals p.PerIdEmpresa
-                                where e.EmpNit == p.PerDocumento
-                                && p.PerNombres.Equals(e.EmpNombre)
-                                select new EmpresaCustomDTO()
-                                {
-                                    empresa = e,
-                                    persona = p
-                                });
+                var emp = (from e in objCnn.empresas select e).ToList();
+
+                emp.ForEach(c =>
+                {
+                    var p = objCnn.personas.Where(C => C.PerTipoPerfil == 0 && C.PerIdEmpresa == c.EmpId).Single();
+                    objresultado.Add(new EmpresaCustomDTO()
+                    {
+                        empresa = c,
+                        persona = p
+                    });
+                });
             }
             else
             {
+                var e = objCnn.empresas.Find(id);
+                var p = objCnn.personas.Where(C => C.PerTipoPerfil == 0 && C.PerIdEmpresa == id).Single();
 
-                objresultado = (from e in objCnn.empresas
-                                join p in objCnn.personas on e.EmpId equals p.PerIdEmpresa
-                                where e.EmpNit == p.PerDocumento
-                                && p.PerNombres.Equals(e.EmpNombre)
-                                && e.EmpId == id
-                                select new EmpresaCustomDTO()
-                                {
-                                    empresa = e,
-                                    persona = p
-                                });
+                objresultado.Add(new EmpresaCustomDTO()
+                {
+                    empresa = e,
+                    persona = p
+                });
             }
 
 

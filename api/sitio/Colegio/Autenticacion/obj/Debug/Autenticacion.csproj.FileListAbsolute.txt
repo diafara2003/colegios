@@ -13,7 +13,6 @@ C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CoreC
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.dll
 C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.pdb
-C:\Colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csprojAssemblyReference.cache
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Autenticacion.dll
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\bin\Debug\Autenticacion.pdb
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\bin\Debug\BaseDatos.dll
@@ -29,3 +28,4 @@ C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csp
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.CopyComplete
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.dll
 C:\colegios\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.pdb
+C:\colegios\api\sitio\Colegio\Autenticacion\obj\Debug\Autenticacion.csproj.AssemblyReference.cache

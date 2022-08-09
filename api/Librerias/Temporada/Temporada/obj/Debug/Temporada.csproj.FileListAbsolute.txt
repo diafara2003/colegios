@@ -9,7 +9,6 @@ C:\Colegios\api\Librerias\Temporada\Temporada\bin\Debug\BaseDatos.dll.config
 C:\Colegios\api\Librerias\Temporada\Temporada\bin\Debug\Trasversales.pdb
 C:\Colegios\api\Librerias\Temporada\Temporada\bin\Debug\EntityFramework.xml
 C:\Colegios\api\Librerias\Temporada\Temporada\bin\Debug\EntityFramework.SqlServer.xml
-C:\Colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csprojAssemblyReference.cache
 C:\Colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csproj.CoreCompileInputs.cache
 C:\Colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csproj.CopyComplete
 C:\Colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.dll
@@ -30,3 +29,4 @@ C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.cspro
 C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.dll
 C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.pdb
 C:\colegios\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csprojAssemblyReference.cache
+C:\colegios\api\Librerias\Temporada\Temporada\obj\Debug\Temporada.csproj.AssemblyReference.cache

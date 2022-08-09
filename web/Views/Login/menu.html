@@ -26,7 +26,7 @@
     <header class="header">
         <div class="header__container">
             <h4 href="#" class="header__logo name-empresa"></h4>
-			<img id="MenuImgLogoColegio" src="" alt="logo"/>
+
             <div class="d-flex align-items-center">
                 <div>
                     <h4 class="mr-2" id="userInfo"></h4>
@@ -54,16 +54,18 @@
                     <span class="nav__logo-name name-empresa"></span>
                 </a>
 
+                <img id="MenuLogoColegio" style="width: 200px" src="" alt="logo" />
+
                 <div class="nav__list" id="lstOpciones">
                     <div class="nav__items" id="opciones_menu">
                     </div>
 
                     <div class="nav__items">
-                        <h3 class="nav__subtitle">Perfil</h3>
+                        <!-- <h3 class="nav__subtitle">Perfil</h3>
                         <a href="#"  class="nav__link active MenuPerfil" onclick="actualizar_datos(this)">
                             <i class='fas fa-user-circle nav__icon'></i>
                             <span class="nav__name">Actualizar datos</span>
-                        </a>
+                        </a> -->
                         <a href="#" class="nav__link active" onclick="cambiar_clave(this)">
                             <i class='fas fa-user-lock nav__icon'></i>
                             <span class="nav__name">Cambiar clave</span>
@@ -104,10 +106,10 @@
     <script src="../../Script/Librerias/sweetalert2@9.js"></script>
     <script src="../../Script/Login/menu.js"></script>
     <script>
-        document.addEventListener('gesturestart', function(e) {
+        document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
         });
-        document.addEventListener('touchmove', function(event) {
+        document.addEventListener('touchmove', function (event) {
             event = event.originalEvent || event;
             if (event.scale > 1) {
                 event.preventDefault();

@@ -94,7 +94,6 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\BaseDatos.dll.config
 C:\Colegios\api\sitio\Colegio\Colegio\bin\EntityFramework.xml
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Utilidades.pdb
-C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csprojAssemblyReference.cache
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreCompileInputs.cache
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\Colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
@@ -106,7 +105,6 @@ C:\Colegios\api\sitio\Colegio\Colegio\bin\DocumentFormat.OpenXml.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\Excel.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ExcelNumberFormat.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ICSharpCode.SharpZipLib.dll
-C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IO.FileSystem.Primitives.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\System.IO.Packaging.dll
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ClosedXML.pdb
 C:\Colegios\api\sitio\Colegio\Colegio\bin\ClosedXML.xml
@@ -237,3 +235,11 @@ C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CoreComp
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.CopyComplete
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.dll
 C:\colegios\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.pdb
+C:\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.dll
+C:\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.dll
+C:\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Cors.dll
+C:\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.dll
+C:\colegios\api\sitio\Colegio\Colegio\bin\GruposGarden.pdb
+C:\colegios\api\sitio\Colegio\Colegio\bin\RestSharp.xml
+C:\colegios\api\sitio\Colegio\Colegio\bin\System.Web.Http.Cors.xml
+C:\colegios\api\sitio\Colegio\Colegio\obj\Debug\Colegio.csproj.AssemblyReference.cache
