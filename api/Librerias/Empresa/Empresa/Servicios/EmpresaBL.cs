@@ -100,6 +100,7 @@ namespace Empresa.Servicios
             objPersona.PerApellidos = string.Empty;
             objPersona.PerEstado = true;
             objPersona.PerDocumento = modelo.EmpNit;
+            objPersona.PerUsuario = modelo.EmpNit;
             objPersona.PerTipoPerfil = 1;
 
             if (string.IsNullOrEmpty(objPersona.PerClave))
@@ -148,11 +149,10 @@ namespace Empresa.Servicios
 
             }
 
-
-
             modelo.persona.PerDocumento = modelo.empresa.EmpNit;
             modelo.persona.PerNombres = modelo.empresa.EmpNombre;
             modelo.persona.PerIdEmpresa = modelo.empresa.EmpId;
+            modelo.persona.PerUsuario = modelo.empresa.EmpNit;
 
             objCnn.personas.Add(modelo.persona);
 
@@ -190,6 +190,8 @@ namespace Empresa.Servicios
             modelo.persona.PerDocumento = modelo.empresa.EmpNit;
             modelo.persona.PerNombres = modelo.empresa.EmpNombre;
             modelo.persona.PerIdEmpresa = modelo.empresa.EmpId;
+            modelo.persona.PerUsuario = modelo.empresa.EmpNit;
+            modelo.persona.PerDireccion = modelo.empresa.EmpDireccion;
 
             objCnn.Entry(modelo.persona).State = EntityState.Modified;
 
@@ -207,8 +209,6 @@ namespace Empresa.Servicios
                 }
 
             }
-
-
 
             objCnn.SaveChanges();
 

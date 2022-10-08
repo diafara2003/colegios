@@ -120,5 +120,8 @@ namespace BaseDatos.Contexto
         public DbSet<GruposProfesor> grupos_profesor { get; set; }
         public DbSet<EstudianteJardin> estudiante_jardin { get; set; }
         public DbSet<LoginPhone> loginPhone { get; set; }
+
+        public DbSet<DocumentosColegio> documentacion_colegio { get; set; }
+        public DbSet<DocumentosEstudiante> documentacion_estudiante { get; set; }
     }
 }

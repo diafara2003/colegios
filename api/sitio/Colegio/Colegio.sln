@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colegio", "Colegio\Colegio.csproj", "{407E2C1F-4FF1-4745-89EA-BF5D740813E5}"
 EndProject
@@ -95,6 +95,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grupos", "Grupos", "{4B8B44B6-E803-4363-819E-D57520FD160A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GruposGarden", "..\..\Librerias\Grupos\Grupos\GruposGarden.csproj", "{2E60D410-9AD5-4C02-96F3-AB4AF4413C76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentos", "Documentos", "{2A8931B3-FC78-4B61-B456-3880538D27EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -214,6 +216,7 @@ Global
 		{081CF1BC-F228-4064-80D1-B53F47DB9DA9} = {59A3D6A1-E784-4C57-BAD4-0540F23DE4C8}
 		{4B8B44B6-E803-4363-819E-D57520FD160A} = {173BBF70-E026-461F-9993-A926E381F775}
 		{2E60D410-9AD5-4C02-96F3-AB4AF4413C76} = {4B8B44B6-E803-4363-819E-D57520FD160A}
+		{2A8931B3-FC78-4B61-B456-3880538D27EC} = {173BBF70-E026-461F-9993-A926E381F775}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E548D9F-83CB-4288-A7F1-CF745BE21F23}

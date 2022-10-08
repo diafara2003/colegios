@@ -54,6 +54,8 @@
     <Compile Include="Modelo\CordinadorArea.cs" />
     <Compile Include="Modelo\CursoEstudiantes.cs" />
     <Compile Include="Modelo\Cursos.cs" />
+    <Compile Include="Modelo\DocumentosColegio.cs" />
+    <Compile Include="Modelo\DocumentosEstudiante.cs" />
     <Compile Include="Modelo\Empresas.cs" />
     <Compile Include="Modelo\EstadoMensaje.cs" />
     <Compile Include="Modelo\EstudianteJardin.cs" />

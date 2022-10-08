@@ -216,6 +216,7 @@
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\GradosController.cs" />
     <Compile Include="Controllers\GrupoEnvioController.cs" />
+    <Compile Include="Controllers\DocumentosController.cs" />
     <Compile Include="Controllers\GruposController.cs" />
     <Compile Include="Controllers\MateriasController.cs" />
     <Compile Include="Controllers\MensajesController.cs" />

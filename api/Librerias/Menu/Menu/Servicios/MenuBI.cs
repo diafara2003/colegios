@@ -111,6 +111,22 @@ namespace Menu.Servicios
 
 
             objSeccion.Add(op_Estudiantes);
+
+
+
+            SeccionCustom op_Documentos = (from data in objCnn.seccion
+                                            where data.SecDescripcion.Equals("Documentación")
+                                            select new SeccionCustom()
+                                            {
+                                                SeccionId = data.SeccionId,
+                                                SecDescripcion = data.SecDescripcion,
+                                                SecIcono = data.SecIcono,
+                                                SecRuta = data.SecRuta,
+                                                opcion = (from query in objCnn.opcion where query.OpSeccionId == data.SeccionId select query)
+                                            }).FirstOrDefault();
+
+
+            objSeccion.Add(op_Documentos);
             return objSeccion
                             .GroupBy(p => p.SeccionId)
                             .Select(g => g.First())

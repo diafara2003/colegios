@@ -38,3 +38,4 @@ C:\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.csproj.Asse
 C:\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.NuevoHosting.resources
 C:\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.Procedures.resources
 C:\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Resources.Garden.resources
+C:\colegios\api\Librerias\Persistencia\BaseDatos\obj\Debug\BaseDatos.Migrations.DocumentosAdjuntos1.resources

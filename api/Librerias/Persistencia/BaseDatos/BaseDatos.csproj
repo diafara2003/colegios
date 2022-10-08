@@ -65,6 +65,10 @@
     <Compile Include="Migrations\202111300212289_Procedures.designer.cs">
       <DependentUpon>202111300212289_Procedures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210081312131_DocumentosAdjuntos1.cs" />
+    <Compile Include="Migrations\202210081312131_DocumentosAdjuntos1.designer.cs">
+      <DependentUpon>202210081312131_DocumentosAdjuntos1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelos\ProcedureDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111300212289_Procedures.resx">
       <DependentUpon>202111300212289_Procedures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210081312131_DocumentosAdjuntos1.resx">
+      <DependentUpon>202210081312131_DocumentosAdjuntos1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DBO.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="es">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="comunicacion de colegios" />
+    <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
+    <title>Inicio</title>
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link href="../../Style/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <title>documentacion</title>
+
+    <style>
+        th {
+            position: sticky;
+            top: 0px;
+            z-index: 99;
+            background-color: white;
+        }
+
+        .fa-trash {
+            color: var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid  mt-2 ">
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <header class="card-header">Configuración de documentación</header>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="d-flex justify-content-start justify-content-lg-center w-100">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-11 bg-white rounded">
+                    <div>
+                        <form autocomplete="off" class="form-horizontal " onsubmit="return false">
+                            <div class="input-group input-group-sm">
+
+                                <input type="text" maxlength="200" class="form-control" id="txtdocumento" placeholder="Nombre del documento a ingresar">
+                                <button type="submit" class="btn btn-primary btn-sm" onclick="agregarDocumento()">
+                                    <i class="fas fa-plus mr-1"></i>Crear documento
+                                </button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <div class="mt-2"
+                         style="overflow:auto;max-height:calc(100vh - 100px)">
+                        <div class="list-group" id="LstAdjuntos">
+                            <div class="w-100 text-center">
+
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/documentos/documentoscolegio.js"></script>
+</body>
+</html>

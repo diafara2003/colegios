@@ -1,0 +1,16 @@
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\Documentacion.dll
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\Documentacion.pdb
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\BaseDatos.dll
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\EntityFramework.dll
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\EntityFramework.SqlServer.dll
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\Trasversales.dll
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\BaseDatos.pdb
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\BaseDatos.dll.config
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\Trasversales.pdb
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\EntityFramework.xml
+C:\colegios\api\Librerias\Documentacion\Documentacion\bin\Debug\EntityFramework.SqlServer.xml
+C:\colegios\api\Librerias\Documentacion\Documentacion\obj\Debug\Documentacion.csproj.AssemblyReference.cache
+C:\colegios\api\Librerias\Documentacion\Documentacion\obj\Debug\Documentacion.csproj.CoreCompileInputs.cache
+C:\colegios\api\Librerias\Documentacion\Documentacion\obj\Debug\Documentacion.csproj.CopyComplete
+C:\colegios\api\Librerias\Documentacion\Documentacion\obj\Debug\Documentacion.dll
+C:\colegios\api\Librerias\Documentacion\Documentacion\obj\Debug\Documentacion.pdb
