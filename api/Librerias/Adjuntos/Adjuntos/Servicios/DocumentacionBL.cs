@@ -1,9 +1,12 @@
 ﻿
+using Adjuntos.Modelos;
 using BaseDatos.Contexto;
 using Documentacion.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BaseDatos.Modelos;
+using System.Data;
 
 namespace Documentacion.Servicios
 {
@@ -55,6 +58,30 @@ namespace Documentacion.Servicios
                 objCnn.SaveChanges();
             }
 
+        }
+
+        public List<DocumentosPendientesEstudianteDTO> GetDocumentosEstudiantes(int empresa)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            List<DocumentosPendientesEstudianteDTO> objResponse = new List<DocumentosPendientesEstudianteDTO>();
+
+
+            ProcedureDTO ProcedureDTO = new ProcedureDTO();
+
+            ProcedureDTO.commandText = "DocRequeridoColegio";
+            ProcedureDTO.parametros.Add("emp", empresa);
+
+
+            DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
+
+            return (from r in result.AsEnumerable()
+                    select new DocumentosPendientesEstudianteDTO
+                    {
+                        nombreEstudiante = (string)r["EstNombres"],
+                        nombreGuupo= (string)r["GrNombre"],
+                        totalDocumentosSubidos= (int)r["totDocSubidos"],
+                        totalDocumentos = (int)r["totDoc"]
+                    }).ToList();
         }
 
     }

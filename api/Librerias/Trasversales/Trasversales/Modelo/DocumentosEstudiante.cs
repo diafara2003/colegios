@@ -12,5 +12,6 @@ namespace Trasversales.Modelo
         public int DocEstIdDoc { get; set; }
         public int DocEstIdEmpresa { get; set; }
         public int DocEstIdAdj { get; set; }
+        public int DocEstIdPersona { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Documentacion.Modelos;
+﻿using Adjuntos.Modelos;
+using Documentacion.Modelos;
 using Documentacion.Servicios;
 using Grupo.Servicios;
 using GruposGarden.Modelos;
@@ -36,6 +37,26 @@ namespace Colegio.Controllers
             {
 
                 return new List<DocumentacionDTO>();
+            }
+
+        }
+
+
+        [HttpGet]
+        [Route("estudiantes/validacion")]
+        public List<DocumentosPendientesEstudianteDTO> GetDocumentosSubidos()
+        {
+            var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
+            try
+            {
+                return new DocumentacionBL().GetDocumentosEstudiantes(_empresa.PerIdEmpresa);
+
+            }
+            catch (Exception)
+            {
+
+                return new List<DocumentosPendientesEstudianteDTO>();
             }
 
         }
