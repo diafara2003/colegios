@@ -38,7 +38,7 @@ function renderizarEstudiante(est) {
                                         </div>
                                     </div>
                                     <div class="m-widget4__ext">
-                                        <a href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
+                                        <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
                                             Documentos
                                         </a>
                                     </div>
@@ -59,6 +59,12 @@ function buscarKeyPress() {
         else $(this).addClass('d-none');
 
     })
+}
+function abrirDocumentacion(id) {
+    debugger;
+    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html` ) ;
+    $('.m-portlet--full-height').addClass('d-none');
+    $('#frameDoc').removeClass('d-none');
 }
 
 
