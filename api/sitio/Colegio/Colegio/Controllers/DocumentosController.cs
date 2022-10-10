@@ -1,4 +1,5 @@
 ﻿using Adjuntos.Modelos;
+using Adjuntos.Servicios;
 using Documentacion.Modelos;
 using Documentacion.Servicios;
 using Grupo.Servicios;
@@ -61,6 +62,18 @@ namespace Colegio.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("estudiante")]
+        public List<DocumentosEstudianteDTO> GetDocumentosEstudiante(int idestudiante)
+        {
+            var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
+
+            
+            return new AdjuntosEstudianteBL().GetDocumentosEstudiante(idestudiante, _empresa.PerIdEmpresa);
+
+        }
 
         [Route("nuevo")]
         // POST: api/Grupos

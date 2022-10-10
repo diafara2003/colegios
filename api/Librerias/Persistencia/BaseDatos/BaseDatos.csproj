@@ -130,9 +130,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SQL\Procedures\dbo\[dbo].DocReqEstudiante.sql" />
     <Content Include="SQL\Procedures\dbo\[dbo].[AsignarMateriasClase].sql" />
     <Content Include="SQL\Procedures\dbo\[dbo].[AsignarMaterriasCurso].sql" />
     <Content Include="SQL\Procedures\dbo\[dbo].[ConsultarClasesMateria].sql" />
+    <Content Include="SQL\Procedures\dbo\[dbo].[DocRequeridoColegio].sql" />
     <Content Include="SQL\Procedures\Garden\Gargen.[GetGrupos].sql" />
     <Content Include="SQL\Procedures\msn\msn.BandejaClases.sql" />
     <Content Include="SQL\Procedures\msn\msn.CategoriasMensajesRecibido.sql" />

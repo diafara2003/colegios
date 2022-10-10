@@ -16,44 +16,36 @@
     <title>Inicio</title>
     <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/document-list.css" rel="stylesheet" />
     <title>documentacion</title>
 </head>
 <body>
-    <div class="container-fluid  mt-2 ">
-     
-        <div id="main-content" class="file_manager">
-            <div class="container">
-                <div class="row clearfix">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="card">
-                            <div class="file">
-                                <a href="javascript:void(0);">
-                                    <div class="hover">
-                                        <button type="button" class="btn btn-icon btn-info">
-                                            <i class="fa fa-download"></i>
-                                        </button>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-file text-info"></i>
-                                    </div>
-                                    <div class="file-name">
-                                        <p class="m-b-5 text-muted">Document_2017.doc</p>
-                                        <small>Size: 42KB <span class="date text-muted">Nov 02, 2017</span></small>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                  
-                </div>
+    <div class="container " style="background: #f4f7f6">
+        <div class="d-flex justify-content-center">
+            <div class="col-8">
+                <div class="input-group input-group-sm">
 
+                    <input type="text" maxlength="30" onkeyup="buscarKeyPress()" class="form-control" id="txtdocumento" placeholder="Buscar documento requerido">
+                    <div class="custom-control custom-switch ml-1">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch" />
+                        <label class="custom-control-label" for="customSwitch">mostrar faltantes</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr />
+        <div id="main-content" class="file_manager">
+
+            <div class="row clearfix" id="CardAdjunto">
+                <div class="w-100 text-center">
+
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </div>
             </div>
         </div>
-
-       
     </div>
 
 
@@ -65,5 +57,6 @@
     <script src="../../Script/Librerias/jquery.floatThead.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="../../Script/Librerias/plugin-colegios.js"></script>
+    <script src="../../Script/documentos/docEstudiante.js"></script>
 </body>
 </html>

@@ -62,9 +62,9 @@
         border-top: 1px solid #f7f7f7
     }
 
-        .file_manager .file .file-name small .date {
+        /*.file_manager .file .file-name small .date {
             float: right
-        }
+        }*/
 
 .folder {
     padding: 20px;

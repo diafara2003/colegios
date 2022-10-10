@@ -28,13 +28,13 @@ from	[dbo].[DocumentosColegio]
 where	DocIdEmpresa=@emp
 
 declare @tot int= (select COUNT(1) from #TblDocRequerida)
-select GrNombre,EstApellidos+' '+ EstNombres  as EstNombres,count(DocEstIdPersona) as totDocSubidos,
+select GruEstEstudiante,GrNombre,EstApellidos+' '+ EstNombres  as EstNombres,count(DocEstIdPersona) as totDocSubidos,
 @tot as totDoc
 from	[Gargen].[EstudianteJardin]
 inner join [Gargen].[GruposEstudiantes] on EstId=GruEstEstudiante
 inner join #tblGrupos on GruEstGrupo=GrId
 left join [dbo].[DocumentosEstudiante] on EstId=DocEstIdPersona
-group by GrNombre,EstNombres,GrId,EstApellidos
+group by GruEstEstudiante,GrNombre,EstNombres,GrId,EstApellidos
 order by GrId
 drop table #tblGrupos,#TblDocRequerida
 END

@@ -49,9 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelos\DocumentacionDTO.cs" />
+    <Compile Include="Modelos\DocumentosEstudianteDTO.cs" />
     <Compile Include="Modelos\DocumentosPendientesEstudianteDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\AdjuntosBL.cs" />
+    <Compile Include="Servicios\AdjuntosEstudianteBL.cs" />
     <Compile Include="Servicios\DocumentacionBL.cs" />
   </ItemGroup>
   <ItemGroup>

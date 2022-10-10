@@ -49,20 +49,22 @@ function renderizarEstudiante(est) {
 function buscarKeyPress() {
     const value = document.getElementById('txtdocumento').value.toLowerCase();
 
+    if (value == '') $('.m-widget4--progress').removeClass('d-none');
+    else {
+        $('.m-widget4--progress').each(function () {
+            const grupo = $(this).attr('data-grupo').toLowerCase();
+            const nombre = $(this).attr('data-nombre').toLowerCase();
 
-    $('.m-widget4--progress').each(function () {
-        const grupo = $(this).attr('data-grupo').toLowerCase();
-        const nombre = $(this).attr('data-nombre').toLowerCase();
+            if (grupo.includes(value) || nombre.includes(value))
+                $(this).removeClass('d-none');
+            else $(this).addClass('d-none');
 
-        if (grupo.includes(value) || nombre.includes(value))
-            $(this).removeClass('d-none');
-        else $(this).addClass('d-none');
-
-    })
+        });
+    }
 }
 function abrirDocumentacion(id) {
-    debugger;
-    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html` ) ;
+
+    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html?id=${id}`);
     $('.m-portlet--full-height').addClass('d-none');
     $('#frameDoc').removeClass('d-none');
 }

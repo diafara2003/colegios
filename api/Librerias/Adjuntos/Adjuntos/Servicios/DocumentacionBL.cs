@@ -80,7 +80,8 @@ namespace Documentacion.Servicios
                         nombreEstudiante = (string)r["EstNombres"],
                         nombreGuupo= (string)r["GrNombre"],
                         totalDocumentosSubidos= (int)r["totDocSubidos"],
-                        totalDocumentos = (int)r["totDoc"]
+                        totalDocumentos = (int)r["totDoc"],
+                        codigo = (int)r["GruEstEstudiante"],
                     }).ToList();
         }
 
