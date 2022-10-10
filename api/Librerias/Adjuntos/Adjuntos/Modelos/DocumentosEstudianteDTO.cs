@@ -7,6 +7,9 @@ namespace Adjuntos.Modelos
         public string nombreDocReq { get; set; }
         public string nombreAdj { get; set; }
         public string extension { get; set; }
+        public int idDocReq { get; set; }
 
     }
+
+
 }

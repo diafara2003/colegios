@@ -1,6 +1,10 @@
-﻿
+﻿const readonly = Get_query_string('readonly');
 async function consultardocumentos() {
-    const id = Get_query_string('id');
+    let id = Get_query_string('id');
+
+    if (id == undefined || id == null)
+        id = obtener_usuario_sesion().PerId;
+
     renderizar_documentos(await consultarAPI(`documentoscolegio/estudiante?idestudiante=${id}`, 'GET'));
 
 }
@@ -11,16 +15,21 @@ function renderizar_documentos(source) {
 
 }
 function adjuntoHTML(data) {
-    return `  <div class="col-lg-3 col-md-4 col-sm-12 doc-render" data-nombre="${data.nombreDocReq}">
+    return `  <div class="col-lg-3 col-md-4 col-sm-12 doc-render" data-id="${data.id}" data-nombre="${data.nombreDocReq}">
                         <div class="card">
                             <div class="file">
-                                <a href="javascript:void(0);">
-                                    ${data.id == 0 ? ''
-                                        :`  <div class="hover">
-                                        <button type="button" class="btn btn-icon btn-info">
-                                            <i class="fa fa-download"></i>
-                                        </button>
-                                    </div>`}
+                                
+                                    ${data.id == 0
+            ? (readonly == "true" ? '' : `<div class="hover">
+                                            <button type="button" class="btn btn-icon btn-info" onclick="subirdocumento(${data.idDocReq})">
+                                                <i class="fa fa-upload"></i>
+                                            </button>
+                                        </div>`)
+            : `  <div class="hover">
+                                            <button type="button" class="btn btn-icon btn-info" onclick="descargardocumento(${data.id})">
+                                                <i class="fa fa-download"></i>
+                                            </button>
+                                        </div>`}
                                   
                                     <div class="icon">
                                         <i class="fa fa-file text-info"></i>
@@ -38,38 +47,16 @@ function adjuntoHTML(data) {
                         </div>
                     </div>`;
 }
-function descargar(id) {
-
-    var Init = {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            //'Authorization': `Bearer ${localStorage.getItem('sesion')}`
-        },
-        //mode: 'cors',
-        //cache: 'default'
-    };
-
-
-    Init.headers.Authorization = `Bearer ${localStorage.getItem('sesion')}`
-
-    let _url = window.location.href.toLowerCase().split('views')[0]
-    fetch(`${_url}api/adjunto/descargar?id=${id}`, Init)
-        .then(res => {
-
-        })
-        .catch(error => {
-            if (!error)
-                error(error);
-        });
-
+function descargardocumento(id) {
+    let _url = window.location.href.toLowerCase().split('views')[0];
+    $('#adescarga').attr('href', `${_url}api/adjunto/descargar?id=${id}`)
+    $('#adescarga').click();
 }
 function buscarKeyPress() {
     const value = document.getElementById('txtdocumento').value.toLowerCase();
 
     if (value == '') $('.doc-render').removeClass('d-none')
-    else { 
+    else {
         $('.doc-render').each(function () {
             const nombre = $(this).attr('data-nombre').toLowerCase();
 
@@ -79,6 +66,60 @@ function buscarKeyPress() {
 
         })
     }
+}
+function verFaltantes() {
+    const value = $('#customSwitch');
+
+    if (value.is(':checked')) {
+        $(`.doc-render`).each(function () {
+            const id = parseInt($(this).attr('data-id'));
+
+            if (id != 0) $(this).addClass('none');
+
+        })
+    } else {
+        $(`.doc-render`).each(function () {
+            const id = $(this).attr('data-id');
+
+            if (id != 0) $(this).removeClass('none');
+
+        })
+    }
+}
+function subirAdjunto(nameinputFile) {
+
+    let _url = window.location.href.toLowerCase().split('views')[0];
+
+    let formData = new FormData();
+    let file = $(`#${nameinputFile}`)[0];
+    formData.append('file', file.files[0]);
+    formData.append('iddocreq', $(`#${nameinputFile}`).attr('data-req'));
+
+    $.ajax({
+        url: `${_url}api/documentoscolegio/estudiante/subir}`,
+        type: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('sesion')}`,
+            'Accept': 'application/json',
+        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (_response) {
+            window.location.reload();
+        },
+        error: function () {
+            alert("Faild please try upload again");
+        }
+    });
+}
+function subirdocumento(id) {
+    $('#subirAdjunto').attr('data-req', id);
+    $('#subirAdjunto').click();
+}
+function regresar() {
+    if (window.parent.cerrarFrame)
+        window.parent.cerrarFrame();
 }
 
 consultardocumentos();

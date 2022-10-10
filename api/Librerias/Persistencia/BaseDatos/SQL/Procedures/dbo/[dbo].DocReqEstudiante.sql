@@ -4,7 +4,7 @@ IF EXISTS ( SELECT *
             WHERE  id = object_id(N'[dbo].[DocReqEstudiante]') 
                    and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
 BEGIN
-    DROP PROCEDURE [dbo].DocRequeridoColegio
+    DROP PROCEDURE [dbo].DocReqEstudiante
 END
 go 
 -- =============================================
@@ -21,6 +21,7 @@ SELECT
     ISNULL(AjdId,0) AjdId,
 	ISNULL(AjdExtension,'') AjdExtension,
 	ISNULL(AdjNombre,'') AdjNombre,
+    DocId,
 	DocTexto
     FROM   [dbo].[DocumentosColegio] 
     LEFT JOIN DocumentosEstudiante on DocEstIdDoc=DocId

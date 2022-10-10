@@ -24,12 +24,15 @@
 <body>
     <div class="container " style="background: #f4f7f6">
         <div class="d-flex justify-content-center">
-            <div class="col-8">
+            <div class="col-8 pt-2">
                 <div class="input-group input-group-sm">
-
-                    <input type="text" maxlength="30" onkeyup="buscarKeyPress()" class="form-control" id="txtdocumento" placeholder="Buscar documento requerido">
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="regresar()">
+                        <i class="fa fa-arrow-left mr-2"></i>Regresar
+                    </button>
+                    <input type="text" maxlength="30" onkeyup="buscarKeyPress()" class="form-control ml-2" id="txtdocumento" placeholder="Buscar documento requerido">
                     <div class="custom-control custom-switch ml-1">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch" />
+
+                        <input type="checkbox" class="custom-control-input" onclick="verFaltantes()" id="customSwitch" />
                         <label class="custom-control-label" for="customSwitch">mostrar faltantes</label>
                     </div>
                 </div>
@@ -40,12 +43,19 @@
         <div id="main-content" class="file_manager">
 
             <div class="row clearfix" id="CardAdjunto">
+     
+
                 <div class="w-100 text-center">
 
                     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="d-none">
+        <input type="file" id="txtfile" onblur="subirAdjunto('txtfile')" />
+        <a href="#" id="adescarga"></a>
     </div>
 
 

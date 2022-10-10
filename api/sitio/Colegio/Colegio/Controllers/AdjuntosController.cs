@@ -82,8 +82,7 @@ namespace Colegio.Controllers
             }
 
 
-            AdjuntoDTO _rutas = save_file(_empresa_desc).FirstOrDefault();
-
+            AdjuntoDTO _rutas = new Colegio.Helper.Adjuntos().save_file(_empresa_desc).FirstOrDefault();
 
             return new Adjuntos.Servicios.AdjuntosBL().Save(new Trasversales.Modelo.Adjuntos()
             {
@@ -94,45 +93,9 @@ namespace Colegio.Controllers
                 AjdExtension = Path.GetExtension(_rutas.ruta),
 
             });
-
-
-
         }
 
-        private List<AdjuntoDTO> save_file(string nombre_empresa)
-        {
-            HttpResponseMessage result = null;
-            var httpRequest = HttpContext.Current.Request;
-            List<AdjuntoDTO> savedFilePath = new List<AdjuntoDTO>();
-
-            string rootPath = HttpContext.Current.Server.MapPath("~/UploadedFiles/" + nombre_empresa + "/");
-
-            if (!Directory.Exists(rootPath))
-            {
-                Directory.CreateDirectory(rootPath);
-            }
-
-            if (httpRequest.Files.Count > 0)
-            {
-
-                foreach (string file in httpRequest.Files)
-                {
-                    var postedFile = httpRequest.Files[file];
-                    string newFileName = Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
-                    var filePath = rootPath + newFileName;
-                    postedFile.SaveAs(filePath);
-                    savedFilePath.Add(new AdjuntoDTO()
-                    {
-                        nombre = postedFile.FileName,
-                        ruta = filePath
-                    });
-                }
-            }
-
-
-            return savedFilePath;
-        }
-
+       
         [Route("eliminar")]
         [HttpPost]
         public bool TrunkAdjunto(AdjuntoD id)

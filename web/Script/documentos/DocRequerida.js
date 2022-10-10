@@ -64,9 +64,14 @@ function buscarKeyPress() {
 }
 function abrirDocumentacion(id) {
 
-    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html?id=${id}`);
+    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html?id=${id}&readonly=true`);
     $('.m-portlet--full-height').addClass('d-none');
     $('#frameDoc').removeClass('d-none');
+}
+function cerrarFrame() {
+    $('#framedocumentacion').attr('src', ``);
+    $('.m-portlet--full-height').removeClass('d-none');
+    $('#frameDoc').addClass('d-none');
 }
 
 
