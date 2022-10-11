@@ -42,10 +42,10 @@ function renderizarEstudiante(est) {
                                         <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
                                             Documentos
                                         </a>
-  <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
+  <a  href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
                                             Contrato escolar
                                         </a>
-  <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-success">
+  <a  href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-success">
                                             Pagaré
                                         </a>
                                     </div>

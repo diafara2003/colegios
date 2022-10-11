@@ -47,16 +47,16 @@ function renderizar_menu(response) {
     }
 
     _menu_op = response;
-    
+
     if (obtener_usuario_sesion().PerTipoPerfil != 0) {
         _menu_op = [];
         _menu_op.push({ ...response.find(c => c.SecDescripcion.indexOf("Mensajería") != -1) });
         _menu_op.push({ ...response.find(c => c.SecDescripcion.indexOf("Documentos") != -1) });
     }
 
-    //if (obtener_usuario_sesion().PerTipoPerfil == 0) {
-    //    _menu_op = response.filter(c => c.SecDescripcion.indexOf("Documentacion hijos") != -1);
-    //}
+    else if (obtener_usuario_sesion().PerTipoPerfil == 0) {
+        _menu_op = response.filter(c => c.SecDescripcion.indexOf("Documentos") == -1);
+    }
 
     let _html = `<h3 style="border-top:1px solid #ebebeb;padding-top:10px" class="nav__subtitle">Opciones</h3>`,
         _opciones_estandar = '';

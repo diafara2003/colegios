@@ -1,5 +1,5 @@
 ﻿const readonly = Get_query_string('readonly');
-const idEstudiante = 0;
+const idEstudiante = Get_query_string('id');
 async function consultardocumentos() {
     let id = Get_query_string('id');
 
@@ -123,5 +123,14 @@ function regresar() {
     if (window.parent.cerrarFrame)
         window.parent.cerrarFrame();
 }
+async function consultarInfoEstudiante() {
+    renderizarEstudiante(await consultarAPI(`Estudiantes/acudiente?id=${idEstudiante}`, 'GET'));
+
+}
+function renderizarEstudiante(est) {
+    document.getElementById('nombreEstudiante').textContent = `${est.estudiante.EstNombres} ${est.estudiante.EstApellidos}`
+    document.getElementById('nombreGradoEstudiante').textContent = `${est.grupo.nombre}`
+}
 
 consultardocumentos();
+consultarInfoEstudiante();
