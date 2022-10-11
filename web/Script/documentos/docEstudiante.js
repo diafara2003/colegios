@@ -1,4 +1,5 @@
 ﻿const readonly = Get_query_string('readonly');
+const idEstudiante = 0;
 async function consultardocumentos() {
     let id = Get_query_string('id');
 
@@ -93,6 +94,7 @@ function subirAdjunto(nameinputFile) {
     let formData = new FormData();
     let file = $(`#${nameinputFile}`)[0];
     formData.append('file', file.files[0]);
+    formData.append('idestudiante', idEstudiante);
     formData.append('iddocreq', $(`#${nameinputFile}`).attr('data-req'));
 
     $.ajax({

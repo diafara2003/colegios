@@ -143,6 +143,18 @@ namespace Menu.Servicios
                                              }).FirstOrDefault();
             objSeccion.Add(op_docRequerida);
 
+            SeccionCustom op_docHijos = (from data in objCnn.seccion
+                                             where data.SecDescripcion.Equals("Documentos")
+                                             select new SeccionCustom()
+                                             {
+                                                 SeccionId = data.SeccionId,
+                                                 SecDescripcion = data.SecDescripcion,
+                                                 SecIcono = data.SecIcono,
+                                                 SecRuta = data.SecRuta,
+                                                 opcion = (from query in objCnn.opcion where query.OpSeccionId == data.SeccionId select query)
+                                             }).FirstOrDefault();
+            objSeccion.Add(op_docHijos);
+
 
             return objSeccion
                             .GroupBy(p => p.SeccionId)

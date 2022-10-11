@@ -85,5 +85,32 @@ namespace Documentacion.Servicios
                     }).ToList();
         }
 
+
+        public List<DocumentosPendientesEstudianteDTO> GetDocumentosHijos(int empresa,int acudiente)
+        {
+            ColegioContext objCnn = new ColegioContext();
+            List<DocumentosPendientesEstudianteDTO> objResponse = new List<DocumentosPendientesEstudianteDTO>();
+
+
+            ProcedureDTO ProcedureDTO = new ProcedureDTO();
+
+            ProcedureDTO.commandText = "EstadoDocHijos";
+            ProcedureDTO.parametros.Add("emp", empresa);
+            ProcedureDTO.parametros.Add("acudiente", acudiente);
+
+
+            DataTable result = objCnn.ExecuteStoreQuery(ProcedureDTO);
+
+            return (from r in result.AsEnumerable()
+                    select new DocumentosPendientesEstudianteDTO
+                    {
+                        nombreEstudiante = (string)r["EstNombres"],
+                        nombreGuupo = (string)r["GrNombre"],
+                        totalDocumentosSubidos = (int)r["totDocSubidos"],
+                        totalDocumentos = (int)r["totDoc"],
+                        codigo = (int)r["GruEstEstudiante"],
+                    }).ToList();
+        }
+
     }
 }

@@ -50,11 +50,13 @@
 }
 
     .file .icon i {
-        display: table-cell;
+        display: flex;
         font-size: 30px;
         vertical-align: middle;
         color: #777;
-        line-height: 100px
+        line-height: 100px;
+        justify-content: center;
+        align-items: center;
     }
 
 .file_manager .file .file-name {

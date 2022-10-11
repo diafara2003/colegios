@@ -14,9 +14,10 @@ namespace Persona.Servicios
     public class EstudiantesBL<T> : EntityGenerics<T> where T : class
     {
 
-        public Personas GetAcudienteCorreo(string correo, int empresa) {
+        public Personas GetAcudienteCorreo(string correo, int empresa)
+        {
             ColegioContext objCnn = new ColegioContext();
-            return (from p in objCnn.personas where p.PerIdEmpresa==empresa && p.PerEmail.Equals(correo) select p).SingleOrDefault();
+            return (from p in objCnn.personas where p.PerIdEmpresa == empresa && p.PerEmail.Equals(correo) select p).SingleOrDefault();
         }
 
         public IEnumerable<ConsultaEstudiantesDTO> Get(int empresa, int temporada)
@@ -29,6 +30,34 @@ namespace Persona.Servicios
                    join gp in objCnn.grupos_estudiantes on e.EstId equals gp.GruEstEstudiante
                    join g in objCnn.grupos on gp.GruEstGrupo equals g.GrId
                    where e.EstEmpresa == empresa
+                   select new ConsultaEstudiantesDTO()
+                   {
+                       id = e.EstId,
+                       nombres = e.EstNombres,
+                       apellidos = e.EstApellidos,
+                       estado = e.EstEstado,
+                       grupo = new CustomGrupo()
+                       {
+                           id = g.GrId,
+                           nombre = g.GrNombre
+                       }
+                   }).OrderBy(c => c.grupo.id).OrderBy(c => c.id).ToList();
+
+            return obj;
+
+        }
+
+        public IEnumerable<ConsultaEstudiantesDTO> GetHijos(int empresa, int temporada, int acudiente)
+        {
+
+            List<ConsultaEstudiantesDTO> obj = new List<ConsultaEstudiantesDTO>();
+            ColegioContext objCnn = new ColegioContext();
+
+            obj = (from e in objCnn.estudiante_jardin
+                   join gp in objCnn.grupos_estudiantes on e.EstId equals gp.GruEstEstudiante
+                   join g in objCnn.grupos on gp.GruEstGrupo equals g.GrId
+                   where e.EstEmpresa == empresa &&
+                   (e.Acudiente1 == acudiente || e.Acudiente2 == acudiente)
                    select new ConsultaEstudiantesDTO()
                    {
                        id = e.EstId,

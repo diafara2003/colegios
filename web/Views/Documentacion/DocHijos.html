@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="es">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="comunicacion de colegios" />
+    <meta name="author" content="Jhonnatan Andres Urueña Diaz" />
+    <title>Inicio</title>
+
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Style/bootstrap.css">
+    <link href="../../Style/estandar.css" rel="stylesheet" />
+    <link href="../../Style/document-list.css" rel="stylesheet" />
+    <link href="../../Style/list-user.css" rel="stylesheet" />
+    <title>documentacion</title>
+    <style>
+        .list-group-item:hover {
+            background: #ebebeb;
+            cursor: pointer;
+        }
+
+        .actived {
+            background: #f4f7f6 !important;
+        }
+
+        .m-widget4__ext {
+            display: flex !important;
+            width: 295px;
+        }
+
+            .m-widget4__ext .btn-sm {
+                margin: 0 5px;
+            }
+    </style>
+</head>
+<body style="background: white">
+    <div class="container-fluid " style="background: white">
+
+        <div class="col-md-12 p-0">
+
+
+
+            <!--begin:: Widgets/User Progress -->
+            <div class="m-portlet m-portlet--full-height ">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Documentación
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-portlet__body" style="overflow: auto; height: calc(100vh - 115px)">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="m_widget4_tab1_content">
+                            <div class="w-100 text-center">
+
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end:: Widgets/User Progress -->
+
+
+            <div class="d-none" id="frameDoc">
+                <iframe width="100%" style="height: calc(100vh - 20px);" allowfullscreen="true" frameborder="0" src="" id="framedocumentacion"></iframe>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <div class="row d-none">
+            <div class="col-4">
+                <div id="DivHijos" style="margin-top:22px">
+                    <div class="list-group" id="ulHijos">
+
+                        <div class="w-100 text-center">
+
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+
+                <div class="d-flex justify-content-lg-between mt-4 align-content-center">
+                    <div style="/* line-height: 11px; */ /* width: 264px; */ display: flex; justify-content: center; align-items: center; margin-top: -20px; " class="pt-4 order-2">
+                        <h5 class="fw-bold" id="hijoNombreSelected"></h5>
+                        <strong class="text-muted p-0 m-0" style="font-size: 11px; line-height: 23px; margin-left: 5px !important;" id="hijogradoSelected"></strong>
+                    </div>
+                    <ul class="nav nav-tabs order-1" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active">Documentos réqueridos <span class="text-info">50%</span></a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="#">
+                                Contrato escolar
+                                <i class="fa fa-check  text-success" aria-hidden="true"></i>
+
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="#">
+                                Pagaré
+                                <i class="fa fa-times text-danger" aria-hidden="true"></i>
+
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-12 ">
+                    <div class=" mt-2">
+
+                        <hr />
+                        <div id="CardAdjunto" class="clearfix row mt-2">
+                            <div class="w-100 text-center">
+
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
+    <script src="../../Script/Librerias/bootstrap.min.js"></script>
+    <script src="../../Script/Librerias/moment.js"></script>
+    <script src="../../Script/Librerias/jquery.easy-autocomplete.min.js"></script>
+    <script src="../../Script/Librerias/jquery.floatThead.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="../../Script/Librerias/plugin-colegios.js"></script>
+
+    <script src="../../Script/documentos/docHijos.js"></script>
+</body>
+</html>

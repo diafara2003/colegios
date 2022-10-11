@@ -112,7 +112,7 @@ namespace Colegio.Controllers
             int identity = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
             var _infoEmpresa = new PersonasBI().Get(id: identity).FirstOrDefault();
             int _empresa = _infoEmpresa.PerIdEmpresa;
-            int idEstudiante = Convert.ToInt32(identity);
+            int idEstudiante = Convert.ToInt32(HttpContext.Current.Request.Form["idestudiante"].ToString());
 
             var _empresa_desc = new Menu.Servicios.MenuBI().GetEmpresa(_empresa).EmpNombre;
 

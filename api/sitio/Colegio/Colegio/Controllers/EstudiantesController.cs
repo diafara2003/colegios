@@ -1,4 +1,6 @@
-﻿using Persona.Modelos;
+﻿using Adjuntos.Modelos;
+using Documentacion.Servicios;
+using Persona.Modelos;
 using Persona.Servicios;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,8 @@ namespace Colegio.Controllers
     {
         [Route("validarcorreo")]
         [HttpPost]
-        public Personas GetAcudienteCorreo(BuscarAcudienteCorreoDTO request) {
+        public Personas GetAcudienteCorreo(BuscarAcudienteCorreoDTO request)
+        {
 
             var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
             var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
@@ -49,6 +52,19 @@ namespace Colegio.Controllers
             return _result;
         }
 
+        [HttpGet]
+        [Route("hijos")]
+        public IEnumerable<DocumentosPendientesEstudianteDTO> GetHijos()
+        {
+            var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempId;
+            var usuario = Convert.ToInt32(Thread.CurrentPrincipal.Identity.Name);
+            var _empresa = new Persona.Servicios.PersonasBI().Get(id: usuario).FirstOrDefault();
+
+            var _result = new DocumentacionBL().GetDocumentosHijos(_empresa.PerIdEmpresa,  _empresa.PerId);
+
+            return _result;
+        }
+
         [HttpPost]
         public ResponseAgregarEstudianteDTO Post(AgregarEstudianteDTO request)
         {
@@ -61,13 +77,15 @@ namespace Colegio.Controllers
         }
 
         [HttpPut]
-        public ResponseDTO Update(ActualizarGrupoEstudianteDTO request) {
+        public ResponseDTO Update(ActualizarGrupoEstudianteDTO request)
+        {
             return new EstudiantesBL<Estudiantes>().Update(request);
 
         }
 
         [HttpDelete]
-        public ResponseDTO Eliminar(int id) {
+        public ResponseDTO Eliminar(int id)
+        {
             new EstudiantesBL<Estudiantes>().DeleteEstudiante(id);
 
             return new ResponseDTO();

@@ -1,6 +1,7 @@
-﻿async function consultar() {
-    renderizarDatos(await consultarAPI('documentoscolegio/estudiantes/validacion', 'GET'));
-
+﻿let hijos = [];
+async function consultarHijos() {
+    hijos = await consultarAPI('Estudiantes/acudiente/hijos', 'GET');
+    renderizarDatos(hijos);
 }
 function renderizarDatos(source) {
     let html = ''
@@ -41,30 +42,21 @@ function renderizarEstudiante(est) {
                                         <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
                                             Documentos
                                         </a>
+  <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
+                                            Contrato escolar
+                                        </a>
+  <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-success">
+                                            Pagaré
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 `;
 }
-function buscarKeyPress() {
-    const value = document.getElementById('txtdocumento').value.toLowerCase();
 
-    if (value == '') $('.m-widget4--progress').removeClass('d-none');
-    else {
-        $('.m-widget4--progress').each(function () {
-            const grupo = $(this).attr('data-grupo').toLowerCase();
-            const nombre = $(this).attr('data-nombre').toLowerCase();
-
-            if (grupo.includes(value) || nombre.includes(value))
-                $(this).removeClass('d-none');
-            else $(this).addClass('d-none');
-
-        });
-    }
-}
 function abrirDocumentacion(id) {
 
-    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html?id=${id}&readonly=true`);
+    $('#framedocumentacion').attr('src', `${window.location.href.toLowerCase().split('documentacion')[0]}documentacion/DocEstudiante.html?id=${id}`);
     $('.m-portlet--full-height').addClass('d-none');
     $('#frameDoc').removeClass('d-none');
 }
@@ -73,6 +65,4 @@ function cerrarFrame() {
     $('.m-portlet--full-height').removeClass('d-none');
     $('#frameDoc').addClass('d-none');
 }
-
-
-consultar();
+consultarHijos();
