@@ -124,7 +124,7 @@ namespace Colegio.Controllers
 
 
             AdjuntoDTO _rutas = new Helper.Adjuntos()
-                .save_file($"{_empresa_desc}/temporada_${temporada}/{_estudiante.estudiante.EstNombres}{_estudiante.estudiante.EstApellidos}")
+                .save_file($"{_empresa_desc}/temporada_{temporada}/{_estudiante.estudiante.EstNombres}{_estudiante.estudiante.EstApellidos}")
                 .FirstOrDefault();
 
 
