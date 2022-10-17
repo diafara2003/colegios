@@ -113,6 +113,7 @@ namespace Colegio.Controllers
             var _infoEmpresa = new PersonasBI().Get(id: identity).FirstOrDefault();
             int _empresa = _infoEmpresa.PerIdEmpresa;
             int idEstudiante = Convert.ToInt32(HttpContext.Current.Request.Form["idestudiante"].ToString());
+            var temporada = new Temporadas.Servicios.TemporadaBI().Get().Where(c => c.TempEstado == 1).FirstOrDefault().TempAno;
 
             var _empresa_desc = new Menu.Servicios.MenuBI().GetEmpresa(_empresa).EmpNombre;
 
@@ -123,7 +124,7 @@ namespace Colegio.Controllers
 
 
             AdjuntoDTO _rutas = new Helper.Adjuntos()
-                .save_file($"{_empresa_desc}/{_estudiante.estudiante.EstNombres}{_estudiante.estudiante.EstApellidos}")
+                .save_file($"{_empresa_desc}/temporada_${temporada}/{_estudiante.estudiante.EstNombres}{_estudiante.estudiante.EstApellidos}")
                 .FirstOrDefault();
 
 

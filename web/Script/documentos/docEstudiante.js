@@ -70,25 +70,25 @@ function buscarKeyPress() {
 }
 function verFaltantes() {
     const value = $('#customSwitch');
-
+    debugger;
     if (value.is(':checked')) {
         $(`.doc-render`).each(function () {
             const id = parseInt($(this).attr('data-id'));
 
-            if (id != 0) $(this).addClass('none');
+            if (id > 0) $(this).addClass('d-none');
 
         })
     } else {
         $(`.doc-render`).each(function () {
             const id = $(this).attr('data-id');
 
-            if (id != 0) $(this).removeClass('none');
+            if (id > 0) $(this).removeClass('d-none');
 
         })
     }
 }
 function subirAdjunto(nameinputFile) {
-
+    debugger;
     let _url = window.location.href.toLowerCase().split('views')[0];
 
     let formData = new FormData();
@@ -98,7 +98,7 @@ function subirAdjunto(nameinputFile) {
     formData.append('iddocreq', $(`#${nameinputFile}`).attr('data-req'));
 
     $.ajax({
-        url: `${_url}api/documentoscolegio/estudiante/subir}`,
+        url: `${_url}api/documentoscolegio/estudiante/subir`,
         type: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('sesion')}`,
@@ -116,6 +116,7 @@ function subirAdjunto(nameinputFile) {
     });
 }
 function subirdocumento(id) {
+    
     $('#subirAdjunto').attr('data-req', id);
     $('#subirAdjunto').click();
 }

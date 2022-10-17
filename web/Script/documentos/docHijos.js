@@ -61,8 +61,6 @@ function abrirDocumentacion(id) {
     $('#frameDoc').removeClass('d-none');
 }
 function cerrarFrame() {
-    $('#framedocumentacion').attr('src', ``);
-    $('.m-portlet--full-height').removeClass('d-none');
-    $('#frameDoc').addClass('d-none');
+    window.location.reload();
 }
 consultarHijos();
