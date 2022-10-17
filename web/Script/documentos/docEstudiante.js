@@ -1,4 +1,5 @@
 ﻿const readonly = Get_query_string('readonly');
+
 const idEstudiante = Get_query_string('id');
 async function consultardocumentos() {
     let id = Get_query_string('id');
@@ -19,19 +20,9 @@ function adjuntoHTML(data) {
     return `  <div class="col-lg-3 col-md-4 col-sm-12 doc-render" data-id="${data.id}" data-nombre="${data.nombreDocReq}">
                         <div class="card">
                             <div class="file">
-                                
-                                    ${data.id == 0
-            ? (readonly == "true" ? '' : `<div class="hover">
-                                            <button type="button" class="btn btn-icon btn-info" onclick="subirdocumento(${data.idDocReq})">
-                                                <i class="fa fa-upload"></i>
-                                            </button>
-                                        </div>`)
-            : `  <div class="hover">
-                                            <button type="button" class="btn btn-icon btn-info" onclick="descargardocumento(${data.id})">
-                                                <i class="fa fa-download"></i>
-                                            </button>
-                                        </div>`}
-                                  
+                                    ${data.id == 0 ?
+            (readonly == "true" ? '' : `<div class="hover">${htmlUpload(data)}</div>`)
+            : (readonly == null) ? (`<div class="hover">${htmlUpload(data)}${htmldownload(data)}</div>`) : ` <div class="hover">${htmldownload(data)}</div>`}
                                     <div class="icon">
                                         <i class="fa fa-file text-info"></i>
                                     </div>
@@ -48,10 +39,21 @@ function adjuntoHTML(data) {
                         </div>
                     </div>`;
 }
+function htmlUpload(data) {
+    return `<button type="button" title="subir archivo ${data.nombreDocReq}" class="btn btn-icon btn-info" onclick="subirdocumento(${data.idDocReq})">
+               <i class="fa fa-upload"></i>
+           </button>`;
+}
+function htmldownload(data) {
+    return `<button title="descargar archivo ${data.nombreDocReq}" type="button" class="btn btn-icon btn-info" onclick="descargardocumento(${data.id})">
+                <i class="fa fa-download"></i>
+           </button>`;
+}
 function descargardocumento(id) {
     let _url = window.location.href.toLowerCase().split('views')[0];
     $('#adescarga').attr('href', `${_url}api/adjunto/descargar?id=${id}`)
-    $('#adescarga').click();
+    $('#adescarga').attr('download', `sss`)
+    document.getElementById('adescarga').click();
 }
 function buscarKeyPress() {
     const value = document.getElementById('txtdocumento').value.toLowerCase();
@@ -88,7 +90,7 @@ function verFaltantes() {
     }
 }
 function subirAdjunto(nameinputFile) {
-    debugger;
+
     let _url = window.location.href.toLowerCase().split('views')[0];
 
     let formData = new FormData();
@@ -116,7 +118,7 @@ function subirAdjunto(nameinputFile) {
     });
 }
 function subirdocumento(id) {
-    
+
     $('#subirAdjunto').attr('data-req', id);
     $('#subirAdjunto').click();
 }
