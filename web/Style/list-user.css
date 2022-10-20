@@ -1870,7 +1870,7 @@
 
     .m-widget4 .m-widget4__item .m-widget4__ext {
         display: table-cell;
-        vertical-align: middle
+        vertical-align: bottom;
     }
 
         .m-widget4 .m-widget4__item .m-widget4__ext .m-widget4__number {

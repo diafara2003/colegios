@@ -14,6 +14,8 @@ function renderizar_documentos(source) {
     let html = ''
     source.forEach(c => html += adjuntoHTML(c));
     document.getElementById('CardAdjunto').innerHTML = html;
+    const docs = source.filter(c => c.id > 0).length;
+    document.getElementById('docPendientes').textContent = `${docs}/${source.length}`
 
 }
 function adjuntoHTML(data) {
@@ -133,6 +135,8 @@ async function consultarInfoEstudiante() {
 function renderizarEstudiante(est) {
     document.getElementById('nombreEstudiante').textContent = `${est.estudiante.EstNombres} ${est.estudiante.EstApellidos}`
     document.getElementById('nombreGradoEstudiante').textContent = `${est.grupo.nombre}`
+
+
 }
 
 consultardocumentos();

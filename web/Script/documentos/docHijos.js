@@ -25,28 +25,10 @@ function renderizarEstudiante(est) {
                                             ${est.nombreGuupo}
                                         </span>
                                     </div>
-                                    <div class="m-widget4__progress">
-                                        <div class="m-widget4__progress-wrapper">
-                                            <span class="m-widget17__progress-number">
-                                                ${porcentaje}%
-                                            </span>
-                                            <span class="m-widget17__progress-label">
-                                                completado
-                                            </span>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width:${porcentaje}%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="m-widget4__ext">
-                                        <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
-                                            Documentos
-                                        </a>
-  <a  href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary">
-                                            Contrato escolar
-                                        </a>
-  <a  href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-success">
-                                            Pagaré
+                                        <a onclick="abrirDocumentacion(${est.codigo})" href="#" class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-primary">
+                                            Ver documentación
                                         </a>
                                     </div>
                                 </div>

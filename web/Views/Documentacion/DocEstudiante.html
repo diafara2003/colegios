@@ -19,10 +19,39 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/document-list.css" rel="stylesheet" />
+    <link href="../../Style/list-user.css" rel="stylesheet" />
     <title>documentacion</title>
+    <style>
+
+
+        body {
+            background: white !important;
+        }
+
+        .m-widget4__ext {
+            display: flex !important;
+            width: 295px;
+        }
+
+            .m-widget4__ext .btn-sm {
+                margin: 0 5px;
+            }
+
+        .list-group-item {
+            cursor: pointer;
+        }
+
+        .actived {
+            background: #f4f7f6;
+        }
+
+        .list-group-item {
+            padding: 0.3rem 1.25rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="container " style="background: #f4f7f6">
+    <div class="container-fluid mt-2">
         <div class="d-flex justify-content-center">
             <div class="col-8 pt-2">
                 <div class="input-group input-group-sm">
@@ -41,20 +70,67 @@
         </div>
         <hr />
         <div class="d-flex justify-content-center">
-            <h5 id="nombreEstudiante"></h5>
-            <p class="text-muted p-0 m-0 pl-2" style="font-size:11px !important;margin-top:6px !important" id="nombreGradoEstudiante"></p>
+            <div class="m-widget4">
+                <div class="m-widget4__item">
+                    <div class="m-widget4__img m-widget4__img--pic">
+                        <img src="../../Img/kid.png" alt="">
+                    </div>
+                    <div class="m-widget4__info" style="line-height: 12px;">
+                        <span class="m-widget4__title" id="nombreEstudiante">
+                        </span>
+                        <br>
+                        <span class="m-widget4__sub" id="nombreGradoEstudiante">
+                        </span>
+                    </div>
+
+
+                </div>
+            </div>
+
         </div>
-        <div id="main-content" class="file_manager">
+        <div class="row p-1 pt-3" style="background: #f4f7f6">
+            <div class="col-2">
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item d-flex justify-content-between align-items-start actived">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Documentos</div>
+                            <small class="text-muted" id="docPendientes"> </small>
+                        </div>
 
-            <div class="row clearfix" id="CardAdjunto">
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Contrato escolar</div>
+                            <small class="text-muted">pendiente</small>
+                        </div>
+
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Pagaré</div>
+                            <small class="text-muted">pendiente</small>
+                        </div>
+
+                    </li>
+
+                </ol>
+            </div>
+            <div class="col-10">
+                <div id="main-content" class="file_manager">
+
+                    <div class="row clearfix" id="CardAdjunto">
 
 
-                <div class="w-100 text-center">
+                        <div class="w-100 text-center">
 
-                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <div class="d-none">
