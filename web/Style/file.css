@@ -1,0 +1,20 @@
+﻿.border {
+    cursor: pointer;
+}
+
+    .border:hover {
+        background: #ebebeb;
+    }
+
+    .border img {
+        width: 40px;
+    }
+
+
+    .border h6 {
+        padding-left: 10px;
+    }
+
+.docu-active {
+    background: #ebebeb;
+}

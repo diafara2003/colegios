@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../../Style/bootstrap.css">
     <link href="../../Style/document-list.css" rel="stylesheet" />
     <link href="../../Style/list-user.css" rel="stylesheet" />
+    <link href="../../Style/file.css" rel="stylesheet" />
     <title>documentacion</title>
     <style>
 
@@ -47,6 +48,42 @@
 
         .list-group-item {
             padding: 0.3rem 1.25rem;
+        }
+
+        .hover .icon {
+            padding: 0 5px;
+        }
+
+        .modal-fullscreen {
+            width: 100vw;
+            max-width: none;
+            height: 100%;
+            margin: 0;
+        }
+
+            .modal-fullscreen .modal-content {
+                height: 100%;
+                border: 0;
+                border-radius: 0;
+            }
+
+        @media (min-width: 576px) {
+
+            .modal-dialog {
+                max-width: 100%;
+                margin: 10px;
+            }
+        }
+
+        .modal-content {
+            height: calc(100vh - 22px);
+        }
+
+
+        .btn-close {
+            outline: none;
+            background: white;
+            border: none;
         }
     </style>
 </head>
@@ -139,7 +176,54 @@
     </div>
 
 
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Visor de documentos</h5>
+                    <button type="button" onclick="cerrarmodal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-3 " id="arvivosModal">
 
+
+
+
+
+
+
+                        </div>
+                        <div class="col-9">
+                            <div style="overflow: auto; max-height: calc(100vh - 112px)">
+                                <div id="dvImage" class="OcultaImagen" style="display:none">
+                                    <div style="border-bottom:1px solid #2881ba;margin-bottom:10px">
+                                        <h4 style="color:var(--bs-primary)"> Visualización </h4>
+                                    </div>
+                                    <img id="ImgMostrar" src="" /><hr />
+                                </div>
+                                <div class="OcultaPdf" id="dvPdf" style="display:none">
+                                    <div style="border-bottom:1px solid #2881ba;margin-bottom:10px">
+                                        <h4 style="color:var(--bs-primary)"> Visualización </h4>
+                                    </div>
+                                    <embed style="height: calc(100vh - 142px); width: calc(100vw - 330px) "
+                                           id="FrmMostrar"
+                                           type="application/pdf"
+                                           src="data:application/pdf;base64,pdf"></embed>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    
     <script src="../../Script/Librerias/jquery-3.5.0.min.js"></script>
     <script src="../../Script/Librerias/bootstrap.min.js"></script>
     <script src="../../Script/Librerias/moment.js"></script>
