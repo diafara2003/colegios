@@ -26,20 +26,32 @@ namespace Colegio.Controllers
         {
 
             Trasversales.Modelo.Adjuntos _adjunto = new Adjuntos.Servicios.AdjuntosBL().Get(id: id).FirstOrDefault();
+          
+
+            HttpResponseMessage result = null;
+            byte[] archivo = null;
+            System.IO.FileStream fs = null;
+            fs = System.IO.File.Open(_adjunto.AdjIdRuta, System.IO.FileMode.Open);
+            byte[] btFile = new byte[fs.Length];
+            fs.Read(btFile, 0, Convert.ToInt32(fs.Length));
+            fs.Close();
+            archivo = btFile;
 
 
-            //converting Pdf file into bytes array  
-            var dataBytes = File.ReadAllBytes(_adjunto.AdjIdRuta);
-            //adding bytes to memory stream   
-            var dataStream = new MemoryStream(dataBytes);
+            result = Request.CreateResponse(HttpStatusCode.OK);
+            result.Content = new ByteArrayContent(archivo);
 
-            HttpResponseMessage httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
-            httpResponseMessage.Content = new StreamContent(dataStream);
-            httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-            httpResponseMessage.Content.Headers.ContentDisposition.FileName = _adjunto.AdjNombre + _adjunto.AjdExtension;
-            httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
 
-            return httpResponseMessage;
+            result = Request.CreateResponse(HttpStatusCode.OK);
+            result.Content = new ByteArrayContent(archivo);
+            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("inline");
+            result.Content.Headers.ContentDisposition.FileName = _adjunto.AdjNombre+_adjunto.AjdExtension;
+            if (_adjunto.AjdExtension.Contains("pdf"))
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+            else
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+
+            return result;
         }
 
         [AllowAnonymous]
@@ -95,7 +107,7 @@ namespace Colegio.Controllers
             });
         }
 
-       
+
         [Route("eliminar")]
         [HttpPost]
         public bool TrunkAdjunto(AdjuntoD id)

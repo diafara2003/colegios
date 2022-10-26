@@ -1,5 +1,6 @@
 ﻿const readonly = Get_query_string('readonly');
 let files = [];
+let estudiante = {};
 const idEstudiante = Get_query_string('id');
 async function consultardocumentos() {
     let id = Get_query_string('id');
@@ -61,6 +62,8 @@ function htmlvisor(data) {
 }
 function visualizarArvhivo() {
     renderizarAdjuntosModal();
+    document.getElementById('dvImage').style.display = "none";
+    document.getElementById('dvPdf').style.display = "none";
     var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
 
     myModal.show();
@@ -155,6 +158,7 @@ async function consultarInfoEstudiante() {
 
 }
 function renderizarEstudiante(est) {
+    estudiante = est.estudiante;
     document.getElementById('nombreEstudiante').textContent = `${est.estudiante.EstNombres} ${est.estudiante.EstApellidos}`
     document.getElementById('nombreGradoEstudiante').textContent = `${est.grupo.nombre}`
 
@@ -174,8 +178,10 @@ async function VisualizarArchivo(id, index,_this) {
 
     });
 
+    const nombrefile = `${estudiante.EstNombres} ${estudiante.EstApellidos} ${files[index].nombreDocReq}${files[index].extension}`;
+
     if (iconoDocumento(files[index]) == '../../Img/icon/download.svg') {
-        await downloadFile(id, false);
+        await downloadFile(id, false, nombrefile);
 
 
         return;
@@ -185,7 +191,7 @@ async function VisualizarArchivo(id, index,_this) {
     if (tipo != '.pdf') {
 
         //$('#ImgMostrar').attr('src', VerArchivo() window.location.href.split('#')[0].split('V3')[0] + "V3/ADPRO/api/UploadFile/Descargar?tipo=" + Tipo + "&OrigenID=" + OrigenID + "&OrigenID2=" + OrigenID_2 + "&idarchivo=" + item.ArchivoID);
-        MostrarArchivos('ImgMostrar', id);
+        MostrarArchivos('ImgMostrar', nombrefile);
         document.getElementById('dvImage').style.display = "table";
         document.getElementById('dvPdf').style.display = "none";
 
@@ -198,17 +204,17 @@ async function VisualizarArchivo(id, index,_this) {
         document.getElementById('dvImage').style.display = "none";
     }
 }
-async function MostrarArchivos(idObj, id) {
+async function MostrarArchivos(idObj, id,name) {
 
-    const objectURL = await downloadFile(id, true);
+    const objectURL = await downloadFile(id, true,name);
 
     document.getElementById(idObj).setAttribute("src", objectURL);
 }
-async function downloadFile(id, visualizar) {
+async function downloadFile(id, visualizar,name) {
 
     if (visualizar == undefined) visualizar = false;
 
-    const base_URL = `http://localhost/colegios/api/adjunto/descargar?id=${id}`;
+    const base_URL = `https://localhost/colegios/api/adjunto/descargar?id=${id}`;
 
     let Init = {
         method: 'GET',
@@ -226,7 +232,7 @@ async function downloadFile(id, visualizar) {
         const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
         const matches = filenameRegex.exec((disposition ? disposition : ''));
         if (matches != null && matches[1]) {
-            filename = matches[1].replace(/['"]/g, '');
+            filename = name;
         }
 
         const blob = await response.blob();
@@ -236,7 +242,7 @@ async function downloadFile(id, visualizar) {
 
             const a = document.createElement('a');
             a.href = url;
-            a.download = filename;
+            a.download = name;
             document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
             a.click();
             a.remove();  //aft
